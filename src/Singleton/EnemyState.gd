@@ -6,8 +6,8 @@ var EnemyList = {
 		"state" : {
 			"attack" : 30,
 			"def" : 40, 
-			"max_hp" : 25,
-			"current_hp" : 25,
+			"max_hp" : 2500,
+			"current_hp" : 2500,
 			"speed" : 0,
 			"level" : 1,
 		},

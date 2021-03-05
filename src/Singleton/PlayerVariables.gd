@@ -23,8 +23,8 @@ var current_equipment = {
 
 var state = {
 	"nickname" : "스페셜땡스루",
-	"min_attack" : 5, 
-	"max_attack" : 12, 
+	"min_attack" : 50, 
+	"max_attack" : 120, 
 	"current_hp" : 1, 
 	"max_hp" : 1, 
 	"current_mp" : 1,
