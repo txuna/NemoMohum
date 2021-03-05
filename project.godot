@@ -22,6 +22,8 @@ config/icon="res://icon.png"
 
 PlayerVariables="*res://src/Singleton/PlayerVariables.gd"
 Items="*res://src/Singleton/Items.gd"
+Skills="*res://src/Singleton/Skills.gd"
+EnemyState="*res://src/Singleton/EnemyState.gd"
 
 [display]
 

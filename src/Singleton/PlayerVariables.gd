@@ -23,8 +23,8 @@ var current_equipment = {
 
 var state = {
 	"nickname" : "스페셜땡스루",
-	"min_attack" : 0, 
-	"max_attack" : 1, 
+	"min_attack" : 5, 
+	"max_attack" : 12, 
 	"current_hp" : 1, 
 	"max_hp" : 1, 
 	"current_mp" : 1,
@@ -66,8 +66,26 @@ func exist_key_check(dict, key):
 	else:
 		return false
 	
-func get_item():
-	pass
+func get_item(item:Dictionary):
+	# 무기의 경우 이미 가지고 있다면
+	if inventory["equipment"].has(item["code"]):
+		return
+	# 소지템 한도 체크
+	#if inventory[item["type"]].size() > MAX_PLAYER_ITEM_NUMBEROF:
+	#	return
+		
+	#var item_name = get_node("/root/Items").Items[item["code"]]["item_name"]
+	var numberof = item["numberof"]
+	if inventory[item["type"]].has(item["code"]) == false:
+		inventory[item["type"]][item["code"]] = item
+	else:
+		inventory[item["type"]][item["code"]]["numberof"] += numberof
+	#add_message_to_chatbox("아이템을 얻었습니다 : " + str(item_name) + " " + str(numberof) + "개")	
+	
+func get_spoil(spoil):
+	var item = spoil.get_item()
+	get_item(item)
+	spoil.queue_free()
 	
 func get_current_equipment():
 	return current_equipment

@@ -1,0 +1,59 @@
+extends Area2D
+
+const RIGHT = false
+const LEFT = true
+
+const SKILL_ATTACK = true 
+const NORMAL_ATTACK = false
+
+
+onready var sprite = $Sprite
+onready var animation_player = $AnimationPlayer
+var skill = null
+var player_state = null
+var skill_direction = null
+
+var enemy_number:int = 0
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	player_state = get_node("/root/PlayerVariables").state
+
+# 여기서 type은 기본 공격이냐 스킬공격이냐 결정짓는 파라미터 true: skill attack \ false : normal attack
+func set_skill(code:int, type:bool):
+	if type == SKILL_ATTACK:
+		skill = get_node("/root/Skills").Skills[code]
+		
+	elif type == NORMAL_ATTACK:
+		skill = get_node("/root/Skills").BasicSkills[code]
+	
+	animation_player.play("shot")
+
+func set_direction(direction):
+	if direction == RIGHT:
+		skill_direction = 1
+	else:
+		skill_direction = -1
+	
+	sprite.flip_h = direction
+
+
+# Enemy와의 접촉
+func _on_BaseSkill_body_entered(body: Node) -> void:
+	if body.is_in_group("enemies"):
+		enemy_number+=1
+		# hit effect 를 몬스터 객체에 넣기
+		for i in range(skill["hit_number"]):
+			var crit
+			var damage = int(rand_range(player_state["min_attack"], player_state["max_attack"]))
+			damage = int(damage * skill["damage_percent"] / 100)
+			var temp = rand_range(0, 100)
+			if temp <= player_state["crit"]:
+				crit = true
+				damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
+			else:
+				crit = false
+			body.take_damage(damage, crit, i)
+		if enemy_number >= skill["enemy_number"]:
+			queue_free()
+			return

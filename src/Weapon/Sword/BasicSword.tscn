@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/art/weapon/sword/basic_sword.png" type="Texture" id=2]
 [ext_resource path="res://src/Weapon/Sword/BasicSword.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "left_attack"
 length = 0.5
 tracks/0/type = "value"
@@ -32,8 +32,7 @@ tracks/1/keys = {
 "values": [ 0.0, -40.1217, -66.0953, -90.6585, -111.364, -132.389 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "right_attack"
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -70,5 +69,5 @@ texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="1"]
 playback_speed = 3.0
-anims/left_attack = SubResource( 2 )
-anims/right_attack = SubResource( 1 )
+anims/left_attack = SubResource( 1 )
+anims/right_attack = SubResource( 2 )

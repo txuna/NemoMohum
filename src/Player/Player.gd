@@ -16,6 +16,10 @@ var is_delay = false
 
 var player_variable = null
 var items = null
+var skills = null
+
+const SKILL_ATTACK = true 
+const NORMAL_ATTACK = false
 
 onready var player_skill_position = $SkillSpawnPosition
 onready var player_weapon_position = $WeaponSpawnPosition
@@ -35,15 +39,15 @@ func _ready():
 	#player_variable.set_player_node_path(self.get_path())
 	items = get_node("/root/Items").Items
 	set_camera_limit()
-	wear_equipment(0xA000)
+	wear_equipment(0xA002)
 	
 func _physics_process(delta):
 	get_input()
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 			jumping = false
-	check_collision()
-
+	move_and_check_collision()
+ 
 func get_input():
 	velocity.x = 0
 	var right = Input.is_action_pressed('RIGHT')
@@ -57,7 +61,7 @@ func get_input():
 	if not is_attack:
 		player_move(left, right)
 		
-	if attack and not is_delay:
+	if attack and not is_delay and not is_attack:
 		# 기본공격이랑 스킬도 같이 표현
 		attack()
 
@@ -68,12 +72,17 @@ func player_move(left, right):
 	if left:
 		set_direction(LEFT)
 		velocity.x -= run_speed
+	#velocity.x = lerp(velocity.x, 0, 0.3)
 	
-	
-func check_collision():
+func move_and_check_collision():
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	for count in get_slide_count():
 		var collision = get_slide_collision(count)
+		if collision.collider.is_in_group("enemies"):
+			pass
+			
+		elif collision.collider.is_in_group("spoils"):
+			player_variable.get_spoil(collision.collider)
 		
 	
 # 좌유 방향에 따라 플레이어의 scale과 무기 위치를 세팅한다.
@@ -123,6 +132,7 @@ func wear_weapon(item):
 		player_variable.set_current_euipment("weapon", null)
 	
 	player_variable.set_current_equipment("weapon", item["item_scene"])
+	current_weapon["item"].set_direction(get_weapon_direction())
 	current_weapon["item"].position = player_weapon_position.position
 	current_weapon["item"].get_node("AnimationPlayer").connect("animation_finished", self, "_on_attack_motion_finished")
 	add_child(current_weapon["item"])
@@ -145,21 +155,34 @@ func skill_attack(current_weapon:Dictionary, code:int):
 	
 func normal_attack(current_weapon:Dictionary):
 	var weapon_type = current_weapon["item"].get_weapon_type()
+	var skill_code = null
 	# 각 각의 맞는 weapon_type을 기반으로 기본공격 스킬 생성
 	if weapon_type == "Sword":
-		pass
+		skill_code = 0xE000
 		
 	elif weapon_type == "Bow":
-		pass
+		skill_code = 0xE001
 		
 	elif weapon_type == "Gun":
-		pass
+		skill_code = 0xE002
 		
 	else:
 		return
-	set_ready_attack(current_weapon)
+	set_ready_attack(current_weapon, NORMAL_ATTACK, skill_code)
 	
-func set_ready_attack(current_weapon:Dictionary):
+func set_ready_attack(current_weapon:Dictionary, skill_type:bool, skill_code:int):
+	var skills = null
+	if skill_type == NORMAL_ATTACK:
+		skills = get_node("/root/Skills").BasicSkills
+	elif skill_type == SKILL_ATTACK:
+		skills = get_node("/root/SKills").Skills
+	
+	var skill_instance = skills[skill_code]["skill_scene"].instance()
+	skill_instance.position = player_skill_position.global_position
+	get_parent().add_child(skill_instance)
+	skill_instance.set_direction(get_weapon_direction())
+	skill_instance.set_skill(skill_code, skill_type)
+	
 	is_attack = true
 	is_delay = true
 	player_attack_delay.start()

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Skill/BaseSkill.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/skill/basic_sword_attack/basic_sword_attack.png" type="Texture" id=2]
+[ext_resource path="res://src/Skill/BasicSword/BasicSword.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 78.3531, 61.7393 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "shot"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.796078 ), Color( 1, 1, 1, 0.796078 ), Color( 1, 1, 1, 0.443137 ), Color( 1, 1, 1, 0.180392 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="BasicSword" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" parent="." index="2"]
+anims/shot = SubResource( 2 )
+
+[node name="AliveTimer" parent="." index="3"]
+wait_time = 0.3
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
