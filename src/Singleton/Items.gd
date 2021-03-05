@@ -76,5 +76,15 @@ var Items = {
 		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
+	},
+	0xC000 : {
+		"code" : 0xC000, 
+		"item_name" : '장미 잎',
+		"affect_player" : false,
+		"type" : "etc",
+		"image" : load("res://assets/art/spoil/etc/leap.png"),	
+		"description" : "장미 잎이다. 고급 약재로 쓰인다.",
+		"can_buy" : false,
+		"sell" : 5,
 	}
 }
