@@ -201,7 +201,10 @@ func get_weapon_direction():
 func _on_attack_motion_finished(anim_name:String):
 	set_weapon_direction(get_weapon_direction())
 	is_attack = false
-
+	
+func _on_enemy_death(enemy_exp, enemy_coin):
+	player_variable.get_exp(enemy_exp)
+	player_variable.get_coin(enemy_coin)
 
 func _on_AttackDelay_timeout() -> void:
 	is_delay = false

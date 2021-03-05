@@ -24,6 +24,7 @@ PlayerVariables="*res://src/Singleton/PlayerVariables.gd"
 Items="*res://src/Singleton/Items.gd"
 Skills="*res://src/Singleton/Skills.gd"
 EnemyState="*res://src/Singleton/EnemyState.gd"
+DamageImage="*res://src/Singleton/DamageImage.gd"
 
 [display]
 

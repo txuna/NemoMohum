@@ -12,7 +12,7 @@ func _ready() -> void:
 func show_damage(health):
 	var current_hp = health_bar.value
 	health_bar.value -= health
-	update_tween.interpolate_property(health_bar, "value", current_hp, health_bar.value, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	update_tween.interpolate_property(health_bar, "value", current_hp, health_bar.value, 0.2, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	update_tween.start()
 	yield(update_tween, "tween_all_completed")
 

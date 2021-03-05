@@ -65,6 +65,13 @@ func exist_key_check(dict, key):
 		return true
 	else:
 		return false
+		
+		
+func get_coin(enemy_coin):
+	state["coin"] += enemy_coin
+	
+func get_exp(enemy_exp):
+	pass
 	
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
