@@ -11,12 +11,12 @@ var velocity = Vector2()
 var jumping = false
 
 var invincible = false # 현재 플레이어가 무적상태인가 
-var is_attack = false # 현재 플레이어가 공격쿨타임에 있는가 
-var is_delay = false
+var is_attack = false # 플레이어의 공격 모션이 끝났는가
+var is_delay = false # 공격 딜레이
 
-var player_variable = null
-var items = null
-var skills = null
+var player_variable = null #플레이어의 상태
+var items = null # 아이템 리스트 
+var skills = null # 스킬 리스트 
 
 const SKILL_ATTACK = true 
 const NORMAL_ATTACK = false
@@ -54,16 +54,21 @@ func get_input():
 	var left = Input.is_action_pressed('LEFT')
 	var jump = Input.is_action_just_pressed('JUMP')
 	var attack = Input.is_action_just_pressed("ATTACK")
+	var inventory = Input.is_action_just_pressed("open_inventory")
 
 	if jump and is_on_floor():
 		jumping = true
 		velocity.y = jump_speed
 	if not is_attack:
-		player_move(left, right)
+		if left or right:
+			player_move(left, right)
+		elif inventory:
+			open_inventory()
 		
 	if attack and not is_delay and not is_attack:
 		# 기본공격이랑 스킬도 같이 표현
 		attack()
+
 
 func player_move(left, right):
 	if right:
@@ -83,8 +88,16 @@ func move_and_check_collision():
 			
 		elif collision.collider.is_in_group("spoils"):
 			player_variable.get_spoil(collision.collider)
-		
-	
+
+func open_inventory():
+	var inventory_instance = player_variable.get_inventory_node()
+	if inventory_instance != null:
+		inventory_instance.queue_free()
+		return 
+	inventory_instance = preload("res://src/GUI/Inventory.tscn").instance()
+	inventory_instance.connect("use_item", self, "use_item")
+	get_node("/root/Main").add_child(inventory_instance)
+
 # 좌유 방향에 따라 플레이어의 scale과 무기 위치를 세팅한다.
 func set_direction(direction):
 	player_sprite.flip_h = direction
@@ -129,7 +142,7 @@ func wear_weapon(item):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	if current_weapon["item"] != null:
 		current_weapon["item"].queue_free()
-		player_variable.set_current_euipment("weapon", null)
+		player_variable.set_current_equipment("weapon", null)
 	
 	player_variable.set_current_equipment("weapon", item["item_scene"])
 	current_weapon["item"].set_direction(get_weapon_direction())
@@ -197,6 +210,25 @@ func get_weapon_direction():
 		return RIGHT
 	else:
 		return LEFT
+		
+# code기반으로 타입을 얻는다. 
+func use_item(code, numberof):
+	var item = items[code]
+	var item_type = item["type"]
+	if item_type == "equipment":
+		wear_equipment(code)
+	# wear!
+	elif item_type == "consumption":
+		# 해당 아이템이 존재하는치 체크 
+		if not player_variable.check_inventory_item_numberof(item_type, code):
+			return
+		# 아이템을 사용하는 코드 
+		player_variable.use_item(item_type, code, numberof, -1, item["affect_player"])
+		pass
+		
+	elif item_type == "etc":
+		return
+	return
 
 func _on_attack_motion_finished(anim_name:String):
 	set_weapon_direction(get_weapon_direction())
