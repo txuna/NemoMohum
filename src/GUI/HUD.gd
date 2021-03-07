@@ -44,6 +44,7 @@ func change_progressbar(value, bar, textvalue, max_value_name, value_name):
 	bar.max_value = player_state[max_value_name] 
 	bar.value += value 
 	update_tween.interpolate_property(bar, "value", current_value, bar.value, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	update_tween.start()
 	yield(update_tween, "tween_all_completed")
 	
 func setup_hud():
