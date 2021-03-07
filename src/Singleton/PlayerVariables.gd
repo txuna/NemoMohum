@@ -35,6 +35,8 @@ var state = {
 	"level" : 1,
 	"current_exp" : 0, 
 	"max_exp" : 1,
+	"upgrade_point" : 1000,
+	"def" : 100
 }
 
 var inventory = {
@@ -103,6 +105,17 @@ func use_item(type, code, numberof, mark, affect_player):
 		pass
 	change_inventory_item_number(type, code, numberof, mark)
 		
+func get_state_node():
+	var state_instance = get_node_or_null("/root/Main/State")
+	return state_instance
+		
+func update_state():
+	var state_instance = get_state_node()
+	if state_instance == null:
+		return 
+	else:
+		state_instance.update_state()
+		
 # 인벤토리가 열려있는지 체크 및 반환
 func get_inventory_node():
 	var inventory_instance = get_node_or_null("/root/Main/Inventory")
@@ -115,6 +128,7 @@ func update_inventory():
 		return 
 	else:
 		inventory_instance.load_slot_from_inventory()
+		
 		
 func get_coin(enemy_coin):
 	state["coin"] += enemy_coin
@@ -156,9 +170,41 @@ func set_player_node_path(path):
 func get_player_node_path():
 	return player_node_path
 
+func check_upgrade_point():
+	if state["upgrade_point"] <= 0:
+		return false
+	return true
+	
+func change_upgrade_point(value):
+	state["upgrade_point"] += value
 
-
-
+func increase_max_hp():
+	var value = 50
+	state["max_hp"] += value
+	
+func increase_max_mp():
+	var value = 40
+	state["max_mp"] += value
+	
+func increase_crit():
+	var value = 0.35
+	if (state["crit"] + value) > 100:
+		return
+	state["crit"] += value
+	
+func increase_crit_damage():
+	var value = 1
+	state["crit_damage"] += value
+	
+func increase_def():
+	var value = 17
+	state["def"] += value
+	
+func increase_attack():
+	var min_value = 4
+	var max_value = 9
+	state["min_attack"] += min_value 
+	state["max_attack"] += max_value
 
 
 

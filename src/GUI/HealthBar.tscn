@@ -1,23 +1,24 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/art/healthbar/lifebar_bg.png" type="Texture" id=1]
-[ext_resource path="res://assets/art/healthbar/lifebar_fill.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/healthbar/healthbar_over.png" type="Texture" id=1]
+[ext_resource path="res://assets/art/healthbar/bar_background.png" type="Texture" id=2]
 [ext_resource path="res://src/GUI/HealthBar.gd" type="Script" id=3]
 
 [node name="HealthBar" type="Control"]
 margin_right = 398.0
-margin_bottom = 62.0
+margin_bottom = 27.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Bar" type="TextureProgress" parent="."]
-margin_right = 396.0
-margin_bottom = 53.0
+margin_top = 0.840897
+margin_right = 256.0
+margin_bottom = 80.8409
 rect_scale = Vector2( 1, 0.5 )
-texture_under = ExtResource( 1 )
-texture_progress = ExtResource( 2 )
+texture_under = ExtResource( 2 )
+texture_progress = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

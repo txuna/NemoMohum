@@ -48,14 +48,14 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 			var crit
 			var damage = int(rand_range(player_state["min_attack"], player_state["max_attack"]))
 			damage = int(damage * skill["damage_percent"] / 100)
-			var temp = rand_range(0, 100)
-			if temp <= player_state["crit"]:
+			var temp = rand_range(0, 10000)
+			if temp <= (player_state["crit"] * 100):
 				crit = true
 				damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
 			else:
 				crit = false
 			body.take_damage(damage, crit, i)
 		if enemy_number >= skill["enemy_number"]:
-			queue_free()
+			$CollisionShape2D.disabled = true
 			return
 			

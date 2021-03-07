@@ -55,6 +55,7 @@ func get_input():
 	var jump = Input.is_action_just_pressed('JUMP')
 	var attack = Input.is_action_just_pressed("ATTACK")
 	var inventory = Input.is_action_just_pressed("open_inventory")
+	var state = Input.is_action_just_pressed("open_state")
 
 	if jump and is_on_floor():
 		jumping = true
@@ -64,6 +65,9 @@ func get_input():
 			player_move(left, right)
 		elif inventory:
 			open_inventory()
+		elif state:
+			open_state()
+		
 		
 	if attack and not is_delay and not is_attack:
 		# 기본공격이랑 스킬도 같이 표현
@@ -88,6 +92,15 @@ func move_and_check_collision():
 			
 		elif collision.collider.is_in_group("spoils"):
 			player_variable.get_spoil(collision.collider)
+
+func open_state():
+	var state_instance = player_variable.get_state_node()
+	if state_instance != null:
+		state_instance.queue_free()
+		return 
+	state_instance = preload("res://src/GUI/State.tscn").instance()
+	state_instance.connect("upgrade_state", self, "upgrade_state")
+	get_node("/root/Main").add_child(state_instance)
 
 func open_inventory():
 	var inventory_instance = player_variable.get_inventory_node()
@@ -210,6 +223,30 @@ func get_weapon_direction():
 		return RIGHT
 	else:
 		return LEFT
+		
+func upgrade_state(state_type):
+	if not player_variable.check_upgrade_point():
+		return
+	if state_type == "attack":
+		player_variable.increase_attack()
+		
+	elif state_type == "def":
+		player_variable.increase_def()
+		
+	elif state_type == "crit":
+		player_variable.increase_crit()
+		
+	elif state_type == "crit_damage":
+		player_variable.increase_crit_damage()
+		
+	elif state_type == "hp":
+		player_variable.increase_max_hp()
+		
+	elif state_type == "mp":
+		player_variable.increase_max_mp()
+		
+	player_variable.change_upgrade_point(-1)
+	player_variable.update_state()
 		
 # code기반으로 타입을 얻는다. 
 func use_item(code, numberof):

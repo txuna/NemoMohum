@@ -38,6 +38,11 @@ animations = [ {
 "name": "stand",
 "speed": 5.0
 }, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
 "frames": [ ExtResource( 3 ) ],
 "loop": true,
 "name": "hit",
@@ -46,11 +51,6 @@ animations = [ {
 "frames": [ ExtResource( 10 ), ExtResource( 6 ), ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "die",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
-"loop": true,
-"name": "walk",
 "speed": 5.0
 } ]
 
@@ -83,10 +83,10 @@ position = Vector2( -2.82843, -276.295 )
 position = Vector2( -9.52438, -31.748 )
 
 [node name="HealthBar" parent="." index="7"]
-margin_left = -189.466
-margin_top = -222.469
-margin_right = -189.466
-margin_bottom = -222.469
+margin_left = -139.699
+margin_top = -218.689
+margin_right = -139.699
+margin_bottom = -218.689
 
 [node name="SpoilPosition" parent="." index="8"]
 position = Vector2( 0, -254.644 )
