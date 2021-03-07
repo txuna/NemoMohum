@@ -23,8 +23,8 @@ var current_equipment = {
 
 var state = {
 	"nickname" : "스페셜땡스루",
-	"min_attack" : 50, 
-	"max_attack" : 120, 
+	"min_attack" : 5, 
+	"max_attack" : 12, 
 	"current_hp" : 50, 
 	"max_hp" : 100, 
 	"current_mp" : 50,
@@ -133,12 +133,25 @@ func update_inventory():
 func get_coin(coin):
 	state["coin"] += coin
 	update_inventory()
+
+
+func get_hud_node():
+	var hud_instance = get_node_or_null("/root/Main/HUD")
+	return hud_instance
+
+func update_hud(value, type):
+	var hud_instance = get_hud_node()
+	if hud_instance == null:
+		return 
+	else:
+		hud_instance.update_hud(value, type)
 	
 func get_exp(exp_value):
 	calc_exp(exp_value)
 	#state["current_exp"] += exp_value
 	#get_node("/root/Main/HUD").update_hud(exp_value, "exp")
 	
+
 func player_level_up():
 	state["upgrade_point"] += 5
 	state["level"] += 1
@@ -146,8 +159,8 @@ func player_level_up():
 	state["current_exp"] = 0
 	state["current_hp"] = state["max_hp"]
 	state["current_mp"] = state["max_mp"]
-	get_node("/root/Main/HUD").update_hud(state["max_hp"], "hp")
-	get_node("/root/Main/HUD").update_hud(state["max_mp"], "mp")
+	update_hud(state["max_hp"], "hp")
+	update_hud(state["max_mp"], "mp")
 	update_state()
 	
 	
@@ -162,7 +175,7 @@ func calc_exp(exp_value):
 			continue
 		else:
 			state["current_exp"] += exp_value
-			get_node("/root/Main/HUD").update_hud(exp_value, "exp")
+			update_hud(exp_value, "exp")
 			update_state()
 			break
 		return
@@ -212,11 +225,13 @@ func change_upgrade_point(value):
 func increase_max_hp():
 	var value = 40
 	state["max_hp"] += value
+	update_hud(0, "hp")
 	return true
 	
 func increase_max_mp():
 	var value = 30
 	state["max_mp"] += value
+	update_hud(0, "mp")
 	return true
 	
 func increase_crit():
@@ -232,7 +247,7 @@ func increase_crit_damage():
 	return true
 	
 func increase_def():
-	var value = 18
+	var value = 11
 	state["def"] += value
 	return true
 	

@@ -43,7 +43,6 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 	if body.is_in_group("enemies"):
 		enemy_number+=1
 		# hit effect 를 몬스터 객체에 넣기
-		
 		for i in range(skill["hit_number"]):
 			var crit
 			var damage = int(rand_range(player_state["min_attack"], player_state["max_attack"]))

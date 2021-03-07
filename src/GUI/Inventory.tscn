@@ -4,11 +4,11 @@
 [ext_resource path="res://assets/fonts/독립기념관체.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/GUI/Inventory.gd" type="Script" id=5]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 48
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 24
 font_data = ExtResource( 4 )
 
@@ -16,7 +16,7 @@ font_data = ExtResource( 4 )
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1400, 530 )
+position = Vector2( 1403.78, 482.806 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 1 )
 
@@ -25,7 +25,7 @@ margin_left = -236.0
 margin_top = -493.0
 margin_right = -86.0
 margin_bottom = -373.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "장비"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -36,7 +36,7 @@ margin_left = -78.0
 margin_top = -493.0
 margin_right = 72.0
 margin_bottom = -373.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "소비"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -47,7 +47,7 @@ margin_left = 84.0
 margin_top = -493.0
 margin_right = 234.0
 margin_bottom = -373.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "기타"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,7 +82,7 @@ margin_left = 16.0
 margin_top = 25.0
 margin_right = 164.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "아이템 이름"
 __meta__ = {
@@ -94,7 +94,7 @@ margin_left = 190.0
 margin_top = 25.0
 margin_right = 338.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -105,7 +105,7 @@ margin_left = 17.5714
 margin_top = 107.863
 margin_right = 165.571
 margin_bottom = 146.863
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "아이템 설명"
 __meta__ = {
@@ -117,7 +117,7 @@ margin_left = 190.0
 margin_top = 107.0
 margin_right = 338.0
 margin_bottom = 146.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -128,7 +128,7 @@ margin_left = 27.1426
 margin_top = 194.926
 margin_right = 83.1426
 margin_bottom = 233.926
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "효과"
 __meta__ = {
@@ -140,7 +140,7 @@ margin_left = 190.0
 margin_top = 195.0
 margin_right = 427.0
 margin_bottom = 276.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true
 __meta__ = {
