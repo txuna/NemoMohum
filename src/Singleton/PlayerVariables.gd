@@ -130,14 +130,44 @@ func update_inventory():
 		inventory_instance.load_slot_from_inventory()
 		
 		
-func get_coin(enemy_coin):
-	state["coin"] += enemy_coin
+func get_coin(coin):
+	state["coin"] += coin
 	update_inventory()
 	
-func get_exp(enemy_exp):
-	state["current_exp"] += enemy_exp
-	get_node("/root/Main/HUD").update_hud(enemy_exp, "exp")
+func get_exp(exp_value):
+	calc_exp(exp_value)
+	#state["current_exp"] += exp_value
+	#get_node("/root/Main/HUD").update_hud(exp_value, "exp")
 	
+func player_level_up():
+	state["upgrade_point"] += 5
+	state["level"] += 1
+	state["max_exp"] += int(state["max_exp"] * 1.2)
+	state["current_exp"] = 0
+	state["current_hp"] = state["max_hp"]
+	state["current_mp"] = state["max_mp"]
+	get_node("/root/Main/HUD").update_hud(state["max_hp"], "hp")
+	get_node("/root/Main/HUD").update_hud(state["max_mp"], "mp")
+	update_state()
+	
+	
+	
+func calc_exp(exp_value):
+	#add_message_to_chatbox("경험치를 얻었습니다 : " + str(enemy_exp))
+	while true:
+		var temp = (state["max_exp"] - state["current_exp"])
+		if exp_value - temp >= 0:
+			exp_value -= temp
+			player_level_up()
+			continue
+		else:
+			state["current_exp"] += exp_value
+			get_node("/root/Main/HUD").update_hud(exp_value, "exp")
+			update_state()
+			break
+		return
+		
+		
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
 	if inventory["equipment"].has(item["code"]):

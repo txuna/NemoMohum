@@ -38,6 +38,7 @@ func update_hud(value, type):
 	change_progressbar(value, bar, textvalue, max_name, value_name)
 	
 func change_progressbar(value, bar, textvalue, max_value_name, value_name):
+	level.text = str(player_state["level"])
 	expvalue.text = "[" + str(player_state[value_name]) + "/" + str(player_state[max_value_name]) + "]"
 	textvalue.text = "[" + str(player_state[value_name]) + "/" + str(player_state[max_value_name]) + "]"
 	var current_value = bar.value 
