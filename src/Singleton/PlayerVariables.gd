@@ -25,16 +25,16 @@ var state = {
 	"nickname" : "스페셜땡스루",
 	"min_attack" : 50, 
 	"max_attack" : 120, 
-	"current_hp" : 1, 
-	"max_hp" : 1, 
-	"current_mp" : 1,
-	"max_mp" : 1,
+	"current_hp" : 50, 
+	"max_hp" : 100, 
+	"current_mp" : 50,
+	"max_mp" : 100,
 	"crit" : 1, 
 	"crit_damage" : 1, 
 	"coin" : 0,
 	"level" : 1,
 	"current_exp" : 0, 
-	"max_exp" : 1,
+	"max_exp" : 1000,
 	"upgrade_point" : 1000,
 	"def" : 100
 }
@@ -135,7 +135,8 @@ func get_coin(enemy_coin):
 	update_inventory()
 	
 func get_exp(enemy_exp):
-	pass
+	state["current_exp"] += enemy_exp
+	get_node("/root/Main/HUD").update_hud(enemy_exp, "exp")
 	
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
@@ -179,32 +180,38 @@ func change_upgrade_point(value):
 	state["upgrade_point"] += value
 
 func increase_max_hp():
-	var value = 50
+	var value = 40
 	state["max_hp"] += value
+	return true
 	
 func increase_max_mp():
-	var value = 40
+	var value = 30
 	state["max_mp"] += value
+	return true
 	
 func increase_crit():
-	var value = 0.35
+	var value = 0.37
 	if (state["crit"] + value) > 100:
-		return
+		return false
 	state["crit"] += value
+	return true
 	
 func increase_crit_damage():
 	var value = 1
 	state["crit_damage"] += value
+	return true
 	
 func increase_def():
-	var value = 17
+	var value = 18
 	state["def"] += value
+	return true
 	
 func increase_attack():
 	var min_value = 4
 	var max_value = 9
 	state["min_attack"] += min_value 
 	state["max_attack"] += max_value
+	return true
 
 
 

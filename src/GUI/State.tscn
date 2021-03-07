@@ -12,7 +12,7 @@ font_data = ExtResource( 3 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1000, 530 )
+position = Vector2( 860, 530 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 1 )
 
@@ -37,8 +37,8 @@ __meta__ = {
 }
 
 [node name="Value" type="Label" parent="Sprite/AttackContainer"]
-margin_left = 195.0
-margin_right = 276.0
+margin_left = 150.0
+margin_right = 231.0
 margin_bottom = 39.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )

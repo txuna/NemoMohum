@@ -33,11 +33,6 @@ region = Rect2( 6144, 0, 2048, 2048 )
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 5 ) ],
-"loop": true,
-"name": "stand",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "walk",
@@ -52,6 +47,11 @@ animations = [ {
 "loop": true,
 "name": "die",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "stand",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
@@ -65,7 +65,7 @@ position = Vector2( 1.05945, -96.4112 )
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 5 )
 animation = "die"
-frame = 3
+frame = 2
 speed_scale = 2.0
 playing = true
 

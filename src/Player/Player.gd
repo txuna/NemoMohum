@@ -225,28 +225,30 @@ func get_weapon_direction():
 		return LEFT
 		
 func upgrade_state(state_type):
+	var value
 	if not player_variable.check_upgrade_point():
 		return
 	if state_type == "attack":
-		player_variable.increase_attack()
+		value = player_variable.increase_attack()
 		
 	elif state_type == "def":
-		player_variable.increase_def()
+		value = player_variable.increase_def()
 		
 	elif state_type == "crit":
-		player_variable.increase_crit()
+		value = player_variable.increase_crit()
 		
 	elif state_type == "crit_damage":
-		player_variable.increase_crit_damage()
+		value = player_variable.increase_crit_damage()
 		
 	elif state_type == "hp":
-		player_variable.increase_max_hp()
+		value = player_variable.increase_max_hp()
 		
 	elif state_type == "mp":
-		player_variable.increase_max_mp()
+		value = player_variable.increase_max_mp()
 		
-	player_variable.change_upgrade_point(-1)
-	player_variable.update_state()
+	if value == true:
+		player_variable.change_upgrade_point(-1)
+		player_variable.update_state()
 		
 # code기반으로 타입을 얻는다. 
 func use_item(code, numberof):

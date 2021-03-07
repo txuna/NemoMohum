@@ -13,7 +13,7 @@ var EnemyList = {
 		},
 		"spoil" : {
 			"coin" : 10,
-			"exp" : 10,
+			"exp" : 500,
 			"item" : [
 				{
 					"code" : 0xB000,
