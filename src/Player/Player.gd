@@ -104,6 +104,8 @@ func open_shop():
 		return 
 		
 	shop_node = preload("res://src/GUI/Shop.tscn").instance()
+	shop_node.connect("sell_item", self, "_on_sell_item")
+	shop_node.connect("buy_item", self, "_on_buy_item")
 	get_node("/root/Main").add_child(shop_node)
 	shop_node.open_shop(0x9000)
 
@@ -295,3 +297,40 @@ func _on_enemy_death(enemy_exp, enemy_coin):
 
 func _on_AttackDelay_timeout() -> void:
 	is_delay = false
+	
+# 현재 장착중인 무기는 판매가 금지된다. 
+func _on_sell_item(item):
+	var item_type = item["type"]
+	var item_code = item["code"]
+	var numberof = item["numberof"]
+	var item_price = items[item_code]["sell"]
+
+	#해당 아이템이 착용중이라면
+	if player_variable.check_already_wear_equipment(item["code"]):
+		return	
+
+	if not player_variable.check_inventory_item_numberof(item_type, item_code):
+		return
+		
+	player_variable.use_item(item_type, item_code, numberof, -1, false)
+	player_variable.get_coin(item_price)
+	
+	
+func _on_buy_item(item):
+	var item_price = items[item["code"]]["buy"]
+	if not player_variable.check_player_coin(item_price):
+		return
+	# 해당 아이템이 이미 있다면
+	if player_variable.check_already_has_equipment(item["code"]):
+		return
+	player_variable.get_coin(-item_price)
+	player_variable.get_item(item)
+	
+	
+	
+	
+	
+	
+	
+	
+	

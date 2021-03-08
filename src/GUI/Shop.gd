@@ -20,6 +20,9 @@ var npc_items = null
 var current_inven_type = "equipment"
 var player_state = null
 
+signal sell_item
+signal buy_item
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	items = get_node("/root/Items").Items
@@ -129,11 +132,13 @@ func make_sell_container(index, code)->TextureRect:
 	
 	
 func init_buy_container():
+	item_buy_dict = {}
 	var containers = BuyContainer.get_children()
 	for container in containers:
 		container.queue_free()
 	
 func init_sell_container():
+	item_sell_dict = {}
 	var containers = SellContainer.get_children()
 	for container in containers:
 		container.queue_free()
@@ -179,10 +184,22 @@ func update_shop():
 
 
 func _on_sell_item(index):
-	pass
+	var item_code = item_sell_dict[index]["code"]
+	var item = {
+		"code" : item_sell_dict[index]["code"],
+		"numberof" : 1,
+		"type" : items[item_code]["type"]
+	}
+	emit_signal("sell_item", item)
 	
 func _on_buy_item(index):
-	pass
+	var item_code = item_buy_dict[index]["code"]
+	var item = {
+		"code" : item_code,
+		"numberof" : 1,
+		"type" : items[item_code]["type"]
+	}
+	emit_signal("buy_item", item)
 
 
 func _on_Exit_pressed() -> void:

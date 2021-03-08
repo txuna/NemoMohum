@@ -31,7 +31,7 @@ var state = {
 	"max_mp" : 100,
 	"crit" : 1, 
 	"crit_damage" : 1, 
-	"coin" : 0,
+	"coin" : 3000,
 	"level" : 1,
 	"current_exp" : 0, 
 	"max_exp" : 1000,
@@ -199,11 +199,36 @@ func calc_exp(exp_value):
 			update_state()
 			break
 		return
+
+func check_player_coin(coin_value):
+	if (state["coin"] - coin_value) >= 0:
+		return true 
+	else:
+		return false
 		
+# 장착중인 무기를 판매하려는것과 구매하려는 것이 현재 무기 인벤에 존재하는지
+func check_already_wear_equipment(new_item_code):
+	for equipment in current_equipment:
+		if current_equipment[equipment]["item"] == null:
+			continue
+		else:
+			# 현재 착용중인 장비라면 
+			var equipment_code = current_equipment[equipment]["item"].get_weapon_code()
+			if equipment_code == new_item_code:
+				return true
+				
+	return false
+	
+# 장비창에 현재 해당 아이템이 있는지
+func check_already_has_equipment(item_code):
+	if inventory["equipment"].has(item_code):
+		return true
+	else:
+		return false
 		
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
-	if inventory["equipment"].has(item["code"]):
+	if check_already_has_equipment(item["code"]):
 		return
 		
 	#var item_name = get_node("/root/Items").Items[item["code"]]["item_name"]
