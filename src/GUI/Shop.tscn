@@ -1,19 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/art/shop/shop_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/shop/shop_slot2.png" type="Texture" id=2]
 [ext_resource path="res://assets/art/spoil/consumption/blue_potion.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/독립기념관체.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/GUI/Shop.gd" type="Script" id=5]
-[ext_resource path="res://assets/art/weapon/bow/basic_bow_icon.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/inventory/inventory_slot.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/weapon/gun/basic_gun.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 512, 512 )
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 36
@@ -25,7 +26,7 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxTexture" id=5]
 texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 1024, 1024 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 36
@@ -34,11 +35,15 @@ font_data = ExtResource( 4 )
 [sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 4 )
 
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 4 )
+
 [node name="Shop" type="CanvasLayer"]
 script = ExtResource( 5 )
 
 [node name="shop_background" type="Sprite" parent="."]
-position = Vector2( 944.751, 551.04 )
+position = Vector2( 942.231, 493.084 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 1 )
 
@@ -80,6 +85,16 @@ margin_top = 15.0
 margin_right = 145.0
 margin_bottom = 145.0
 custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="shop_background/BuyScrollContainer/VBoxContainer/TextureRect/Panel"]
+margin_right = 512.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -146,6 +161,16 @@ margin_top = 15.0
 margin_right = 145.0
 margin_bottom = 145.0
 custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="shop_background/SellScrollContainer/VBoxContainer/TextureRect/Panel"]
+margin_right = 512.0
+margin_bottom = 512.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 7 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -234,6 +259,36 @@ margin_right = 240.0
 margin_bottom = -257.0
 custom_fonts/font = SubResource( 7 )
 text = "기타"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinContainer" type="HBoxContainer" parent="shop_background"]
+margin_left = 301.358
+margin_top = -299.004
+margin_right = 411.358
+margin_bottom = -259.004
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinValue" type="Label" parent="shop_background/CoinContainer"]
+margin_right = 47.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "120"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CoinName" type="Label" parent="shop_background/CoinContainer"]
+margin_left = 51.0
+margin_right = 110.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Coin"
 __meta__ = {
 "_edit_use_anchors_": false
 }

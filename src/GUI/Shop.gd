@@ -4,7 +4,7 @@ extends CanvasLayer
 onready var ExitButton = $shop_background/Exit
 onready var BuyContainer = $shop_background/BuyScrollContainer/VBoxContainer
 onready var SellContainer = $shop_background/SellScrollContainer/VBoxContainer
-
+onready var coin_value = $shop_background/CoinContainer/CoinValue
 
 var item_sell_dict = {
 	
@@ -18,12 +18,13 @@ var player_inventory = null
 var items = null
 var npc_items = null
 var current_inven_type = "equipment"
+var player_state = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	items = get_node("/root/Items").Items
 	player_inventory = get_node("/root/PlayerVariables").inventory
-
+	player_state = get_node("/root/PlayerVariables").state
 
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
@@ -38,7 +39,21 @@ func make_panel(code)->Panel:
 	panel.rect_position = Vector2(15, 15)
 	panel.rect_size = Vector2(130, 130)
 	panel.rect_min_size = Vector2(130, 130)
-	panel.get_stylebox("panel", "").set_texture(items[code]["item_image"])
+	panel.get_stylebox("panel", "").set_texture(load("res://assets/art/inventory/inventory_slot.png"))
+	
+	var texture_rect = TextureRect.new() 
+	texture_rect.expand = true 
+	texture_rect.texture = items[code]["item_image"]
+	#texture_rect.rect_position.x =0
+	#texture_rect.rect_position.y = 0
+	#texture_rect.rect_size.x = 512
+	#texture_rect.rect_size.y = 512 
+	#texture_rect.rect_scale.x = 0.25
+	#texture_rect.rect_scale.y = 0.25
+	texture_rect.rect_position = Vector2(0, 0)
+	texture_rect.rect_size = Vector2(512, 512)
+	texture_rect.rect_scale = Vector2(0.25, 0.25)
+	panel.add_child(texture_rect)
 	return panel
 	
 	
@@ -146,16 +161,21 @@ func show_buy_interface():
 		BuyContainer.add_child(buy_container)
 		index+=1
 
+func update_coin():
+	coin_value.text = str(player_state["coin"])
+
 # 처음 상점을 열때 
 func open_shop(npc_code:int):
 	npc_items = get_node("/root/Npcs").ShopKeepers[npc_code]
 	show_buy_interface()
 	show_sell_interface()
+	update_coin()
 	
 # 해당 상점의 내용물을 Update할 때
 func update_shop():
 	show_buy_interface()
 	show_sell_interface()
+	update_coin()
 
 
 func _on_sell_item(index):

@@ -172,11 +172,13 @@ func wear_weapon(item):
 		current_weapon["item"].queue_free()
 		player_variable.set_current_equipment("weapon", null)
 	
+	
 	player_variable.set_current_equipment("weapon", item["item_scene"])
 	current_weapon["item"].set_direction(get_weapon_direction())
 	current_weapon["item"].position = player_weapon_position.position
 	current_weapon["item"].get_node("AnimationPlayer").connect("animation_finished", self, "_on_attack_motion_finished")
 	add_child(current_weapon["item"])
+	$AttackDelay.wait_time = current_weapon["item"].get_attack_delay()
 	
 # 기본공격의 코드는 0xE000 딕셔너리로 무기마다의 기본공격 체크 
 func attack(code=false):

@@ -15,6 +15,9 @@ func _ready() -> void:
 	player_variable = get_node("/root/PlayerVariables")
 	plus_weapon_state_to_player()
 
+func get_attack_delay():
+	return weapon_info["attack_delay"]
+
 func plus_weapon_state_to_player():
 	player_variable.increase_state_from_effect(weapon_info["effect"], 1)
 

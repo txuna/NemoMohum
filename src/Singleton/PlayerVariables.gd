@@ -106,6 +106,7 @@ func change_inventory_item_number(type, code, numberof, mark):
 				"numberof" : numberof
 			}
 	update_inventory()
+	update_shop()
 	
 func use_item(type, code, numberof, mark, affect_player):
 	if affect_player == true:
@@ -136,11 +137,24 @@ func update_inventory():
 		return 
 	else:
 		inventory_instance.load_slot_from_inventory()
+			
+		
+func get_shop_node():
+	var shop_node = get_node_or_null("/root/Main/Shop")
+	return shop_node
+	
+func update_shop():
+	var shop_node = get_shop_node()
+	if shop_node == null:
+		return
+	else:
+		shop_node.update_shop()
 		
 		
 func get_coin(coin):
 	state["coin"] += coin
 	update_inventory()
+	update_shop()
 
 
 func get_hud_node():
@@ -156,8 +170,6 @@ func update_hud(value, type):
 	
 func get_exp(exp_value):
 	calc_exp(exp_value)
-	#state["current_exp"] += exp_value
-	#get_node("/root/Main/HUD").update_hud(exp_value, "exp")
 	
 
 func player_level_up():

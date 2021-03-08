@@ -15,9 +15,9 @@ var Items = {
 		"type" : "equipment",
 		"detail_type" : "weapon",
 		"weapon_type" : "Sword",
-		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
+		"attack_delay" : 0.35,
 	},
 	0xA001:{
 		"item_name" : "나뭇가지",
@@ -33,9 +33,9 @@ var Items = {
 		"type" : "equipment",
 		"detail_type" : "weapon",
 		"weapon_type" : "Sword",
-		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
+		"attack_delay" : 0.43,
 	},
 	0xA002:{
 		"item_name" : "기본 활",
@@ -51,9 +51,9 @@ var Items = {
 		"type" : "equipment",
 		"detail_type" : "weapon",
 		"weapon_type" : "Bow",
-		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
+		"attack_delay" : 0.5,
 	},
 	0xA003:{
 		"item_name" : "기본 총",
@@ -70,9 +70,9 @@ var Items = {
 		"type" : "equipment",
 		"detail_type" : "weapon",
 		"weapon_type" : "Gun",
-		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
+		"attack_delay" : 0.25,
 	},
 	0xB000 : {
 		"code" : 0xB000, 
@@ -84,7 +84,6 @@ var Items = {
 		"type" : "consumption",
 		"item_image" : load("res://assets/art/spoil/consumption/red_potion.png"),	
 		"item_description" : "배고플때 먹는 포션이다.\n체력을 100올려준다.",
-		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
 	},
@@ -98,7 +97,6 @@ var Items = {
 		"type" : "consumption",
 		"item_image" : load("res://assets/art/spoil/consumption/blue_potion.png"),	
 		"item_description" : "목마를때 마시는 포션이다.\n마나를 100올려준다.",
-		"can_buy" : true,
 		"buy" : 50,
 		"sell" : 25,
 	},
@@ -109,7 +107,7 @@ var Items = {
 		"type" : "etc",
 		"item_image" : load("res://assets/art/spoil/etc/leap.png"),	
 		"item_description" : "장미 잎이다. 고급 약재로 쓰인다.",
-		"can_buy" : false,
+		"buy" : 10,
 		"sell" : 5,
 	}
 }
