@@ -55,5 +55,5 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 				crit = false
 			body.take_damage(damage, crit, i)
 		if enemy_number >= skill["enemy_number"]:
-			return
+			queue_free()
 			

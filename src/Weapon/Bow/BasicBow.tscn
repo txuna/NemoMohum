@@ -4,7 +4,7 @@
 [ext_resource path="res://assets/art/weapon/bow/basic_bow.png" type="Texture" id=2]
 [ext_resource path="res://src/Weapon/Bow/BasicBow.gd" type="Script" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "left_attack"
 length = 0.5
 tracks/0/type = "value"
@@ -20,8 +20,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "right_attack"
+[sub_resource type="Animation" id=2]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -43,8 +42,7 @@ script = ExtResource( 3 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 hframes = 5
-frame = 4
 
 [node name="AnimationPlayer" parent="." index="1"]
-anims/left_attack = SubResource( 2 )
-anims/right_attack = SubResource( 1 )
+anims/left_attack = SubResource( 1 )
+anims/right_attack = SubResource( 2 )

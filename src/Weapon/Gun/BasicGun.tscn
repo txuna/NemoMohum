@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Weapon/Weapon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/weapon/gun/basic_gun.png" type="Texture" id=2]
+[ext_resource path="res://src/Weapon/Gun/BasicGun.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=2]
+resource_name = "left_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 10.7769, 23.5255, 19.6266, 11.6157, 0.0 ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "right_attack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -4.5251, -13.3202, -26.8042, -14.2093, 0.0 ]
+}
+
+[node name="BasicGun" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 33.7273, -18.5511 )
+scale = Vector2( 0.075, 0.075 )
+texture = ExtResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+playback_speed = 2.0
+anims/left_attack = SubResource( 2 )
+anims/right_attack = SubResource( 1 )

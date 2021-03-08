@@ -31,7 +31,7 @@ var BasicSkills = {
 		"hit_number" : 1,
 		"enemy_number" : 1,
 		"damage_percent" : 100,		
-		"skill_scene" : "",
+		"skill_scene" :preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
 		"skill_effect" : "",
 		"skill_hit_effect" : "",
 		"mp" : 0,
