@@ -26,7 +26,7 @@ var state = {
 	"min_attack" : 5, 
 	"max_attack" : 12, 
 	"current_hp" : 50, 
-	"max_hp" : 100, 
+	"max_hp" : 1000, 
 	"current_mp" : 50,
 	"max_mp" : 100,
 	"crit" : 1, 
@@ -48,12 +48,16 @@ var inventory = {
 		0xA001:{
 			"code" : 0xA001,
 			"numberof" : 1,
+		},
+		0xA002:{
+			"code" : 0xA002,
+			"numberof" : 1,
 		}
 	},
 	"consumption" : {
 		0xB000:{
 			"code" : 0xB000,
-			"numberof" : 1,
+			"numberof" : 20,
 		},
 	},
 	"etc" : {
@@ -101,8 +105,8 @@ func change_inventory_item_number(type, code, numberof, mark):
 	
 func use_item(type, code, numberof, mark, affect_player):
 	if affect_player == true:
-		# do effect
-		pass
+		 var effect = get_node("/root/Items").Items[code]["effect"]
+		 increase_state_from_effect(effect, 1)
 	change_inventory_item_number(type, code, numberof, mark)
 		
 func get_state_node():
@@ -258,7 +262,27 @@ func increase_attack():
 	state["max_attack"] += max_value
 	return true
 
+# 여기서 mask는 무기를 착용함과 뻄에 있어서 되돌릴 때 쓰는 값이다.
+func increase_state_from_effect(effects, mask):
+	for effect in effects:
+			state[effect] += (effects[effect] * mask)
+			check_overflow_state()
+			if effect == "current_hp" or effect == "max_hp":
+				update_hud((effects[effect] * mask), "hp")
+			elif effect == "current_mp" or effect == "max_mp":
+				update_hud((effects[effect] * mask), "mp")
+	update_state()
+	
 
+func check_overflow_state():
+	if state["current_hp"] >= state["max_hp"]:
+		state["current_hp"] = state["max_hp"]
+	
+	if state["current_mp"] >= state["max_mp"]:
+		state["current_mp"] = state["max_mp"]
+		
+	if state["crit"] >= 100:
+		state["crit"] = 100
 
 
 

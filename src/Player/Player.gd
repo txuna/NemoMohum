@@ -39,7 +39,7 @@ func _ready():
 	#player_variable.set_player_node_path(self.get_path())
 	items = get_node("/root/Items").Items
 	set_camera_limit()
-	wear_equipment(0xA002)
+	#wear_equipment(0xA002)
 	
 func _physics_process(delta):
 	get_input()
@@ -154,6 +154,7 @@ func set_weapon_direction(direction):
 func wear_weapon(item):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	if current_weapon["item"] != null:
+		current_weapon["item"].minus_weapon_state_to_player()
 		current_weapon["item"].queue_free()
 		player_variable.set_current_equipment("weapon", null)
 	
@@ -263,7 +264,6 @@ func use_item(code, numberof):
 			return
 		# 아이템을 사용하는 코드 
 		player_variable.use_item(item_type, code, numberof, -1, item["affect_player"])
-		pass
 		
 	elif item_type == "etc":
 		return

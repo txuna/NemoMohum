@@ -26,8 +26,8 @@ var Items = {
 		"item_scene" : preload("res://src/Weapon/Sword/BranchSword.tscn"),
 		"affect_player" : true,
 		"effect" : {
-			"min_attack" : 1,
-			"max_attack" : 3,
+			"min_attack" : 5,
+			"max_attack" : 12,
 		},
 		"type" : "equipment",
 		"detail_type" : "weapon",
@@ -41,7 +41,7 @@ var Items = {
 		"item_description" : "가장 싼 나무 활.",
 		"code" : 0xA002, 
 		"item_icon" : "",
-		"item_image" : load("res://assets/art/weapon/bow/basic_bow.png"),
+		"item_image" : load("res://assets/art/weapon/bow/basic_bow_icon.png"),
 		"item_scene" : preload("res://src/Weapon/Bow/BasicBow.tscn"),
 		"affect_player" : true,
 		"effect" : {
