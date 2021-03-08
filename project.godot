@@ -26,6 +26,7 @@ Items="*res://src/Singleton/Items.gd"
 Skills="*res://src/Singleton/Skills.gd"
 EnemyState="*res://src/Singleton/EnemyState.gd"
 DamageImage="*res://src/Singleton/DamageImage.gd"
+Npcs="*res://src/Singleton/Npcs.gd"
 
 [display]
 
@@ -64,6 +65,11 @@ open_inventory={
 open_state={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":85,"unicode":0,"echo":false,"script":null)
+ ]
+}
+open_shop={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":74,"unicode":0,"echo":false,"script":null)
  ]
 }
 

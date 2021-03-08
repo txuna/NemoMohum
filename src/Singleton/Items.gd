@@ -15,6 +15,9 @@ var Items = {
 		"type" : "equipment",
 		"detail_type" : "weapon",
 		"weapon_type" : "Sword",
+		"can_buy" : true,
+		"buy" : 50,
+		"sell" : 25,
 	},
 	0xA001:{
 		"item_name" : "나뭇가지",

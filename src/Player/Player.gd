@@ -56,6 +56,7 @@ func get_input():
 	var attack = Input.is_action_just_pressed("ATTACK")
 	var inventory = Input.is_action_just_pressed("open_inventory")
 	var state = Input.is_action_just_pressed("open_state")
+	var shop = Input.is_action_just_pressed("open_shop")
 
 	if jump and is_on_floor():
 		jumping = true
@@ -67,6 +68,8 @@ func get_input():
 			open_inventory()
 		elif state:
 			open_state()
+		elif shop:
+			open_shop()
 		
 		
 	if attack and not is_delay and not is_attack:
@@ -92,6 +95,17 @@ func move_and_check_collision():
 			
 		elif collision.collider.is_in_group("spoils"):
 			player_variable.get_spoil(collision.collider)
+
+
+func open_shop():
+	var shop_node = get_node_or_null("/root/Main/Shop")
+	if shop_node != null:
+		shop_node.queue_free()
+		return 
+		
+	shop_node = preload("res://src/GUI/Shop.tscn").instance()
+	get_node("/root/Main").add_child(shop_node)
+	shop_node.open_shop(0x9000)
 
 func open_state():
 	var state_instance = player_variable.get_state_node()
