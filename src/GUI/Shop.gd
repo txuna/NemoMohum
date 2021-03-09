@@ -6,6 +6,11 @@ onready var BuyContainer = $shop_background/BuyScrollContainer/VBoxContainer
 onready var SellContainer = $shop_background/SellScrollContainer/VBoxContainer
 onready var coin_value = $shop_background/CoinContainer/CoinValue
 
+onready var NpcImage = $shop_background/NpcImage
+onready var PlayerImage = $shop_background/PlayerImage
+onready var ItemDetailContainer = $shop_background/ItemDetailContainer
+
+
 var item_sell_dict = {
 	
 }
@@ -29,6 +34,10 @@ func _ready() -> void:
 	player_inventory = get_node("/root/PlayerVariables").inventory
 	player_state = get_node("/root/PlayerVariables").state
 
+func set_character_image(npc_code):
+	NpcImage.texture =  get_node("/root/Npcs").Npcs[npc_code]["image"]
+	PlayerImage.texture = player_state["image"]
+
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
@@ -47,12 +56,6 @@ func make_panel(code)->Panel:
 	var texture_rect = TextureRect.new() 
 	texture_rect.expand = true 
 	texture_rect.texture = items[code]["item_image"]
-	#texture_rect.rect_position.x =0
-	#texture_rect.rect_position.y = 0
-	#texture_rect.rect_size.x = 512
-	#texture_rect.rect_size.y = 512 
-	#texture_rect.rect_scale.x = 0.25
-	#texture_rect.rect_scale.y = 0.25
 	texture_rect.rect_position = Vector2(0, 0)
 	texture_rect.rect_size = Vector2(512, 512)
 	texture_rect.rect_scale = Vector2(0.25, 0.25)
@@ -108,6 +111,9 @@ func make_button(index, type)->Button:
 	
 func make_buy_container(index, code)->TextureRect:
 	var texture_rect = TextureRect.new()
+	texture_rect.connect("mouse_entered", self, "show_detail", [index, "buy"])
+	texture_rect.connect("mouse_exited", self, "close_detail")
+	
 	texture_rect.texture = load("res://assets/art/shop/shop_slot2.png")
 	texture_rect.add_child(make_panel(code))
 	texture_rect.add_child(make_name_label(code))
@@ -119,6 +125,9 @@ func make_buy_container(index, code)->TextureRect:
 func make_sell_container(index, code)->TextureRect:
 	var texture_rect = TextureRect.new()
 	texture_rect.texture = load("res://assets/art/shop/shop_slot2.png")
+	texture_rect.connect("mouse_entered", self, "show_detail", [index, "sell"])
+	texture_rect.connect("mouse_exited", self, "close_detail")
+	
 	texture_rect.add_child(make_panel(code))
 	texture_rect.add_child(make_name_label(code))
 	
@@ -172,6 +181,7 @@ func update_coin():
 # 처음 상점을 열때 
 func open_shop(npc_code:int):
 	npc_items = get_node("/root/Npcs").ShopKeepers[npc_code]
+	set_character_image(npc_code)
 	show_buy_interface()
 	show_sell_interface()
 	update_coin()
@@ -182,6 +192,27 @@ func update_shop():
 	show_sell_interface()
 	update_coin()
 
+func show_detail(index, type):
+	ItemDetailContainer.visible = true
+	var item_code
+	if type == "buy":
+		item_code = item_buy_dict[index]["code"]
+		
+	elif type == "sell":
+		item_code = item_sell_dict[index]["code"]
+
+	var item = items[item_code]
+	ItemDetailContainer.get_node("Panel/ItemName").text = item["item_name"]
+	ItemDetailContainer.get_node("Panel/ItemDescription").text = item["item_description"]
+	if item["affect_player"] == true:
+		ItemDetailContainer.get_node("Panel/ItemEffect").text = ""
+		for effect in item["effect"]:
+			ItemDetailContainer.get_node("Panel/ItemEffect").text += (str(effect) + "->" + str(item["effect"][effect])) + "\n" 
+	else:
+		ItemDetailContainer.get_node("Panel/ItemEffect").text = "효과없음"
+
+func close_detail():
+	ItemDetailContainer.visible = false
 
 func _on_sell_item(index):
 	var item_code = item_sell_dict[index]["code"]

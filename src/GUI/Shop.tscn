@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/art/shop/shop_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/shop/shop_slot2.png" type="Texture" id=2]
@@ -37,6 +37,14 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=8]
 size = 32
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 24
 font_data = ExtResource( 4 )
 
 [node name="Shop" type="CanvasLayer"]
@@ -289,6 +297,113 @@ margin_bottom = 39.0
 custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Coin"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NpcImage" type="TextureRect" parent="shop_background"]
+margin_left = -495.0
+margin_top = -495.0
+margin_right = -270.0
+margin_bottom = -255.0
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerImage" type="TextureRect" parent="shop_background"]
+margin_left = -240.599
+margin_top = -495.99
+margin_right = -15.5988
+margin_bottom = -255.99
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemDetailContainer" type="Control" parent="shop_background"]
+visible = false
+margin_left = -337.097
+margin_top = -78.9831
+margin_right = 271.903
+margin_bottom = 161.017
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="shop_background/ItemDetailContainer"]
+anchor_left = 0.169
+anchor_right = 0.169
+margin_left = -0.0169373
+margin_top = -1.84186
+margin_right = 509.983
+margin_bottom = 238.158
+custom_styles/panel = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
+margin_left = 33.6739
+margin_top = 32.4267
+margin_right = 73.6739
+margin_bottom = 46.4267
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "아이템 이름 : "
+
+[node name="ItemName" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
+margin_left = 172.581
+margin_top = 33.6039
+margin_right = 300.581
+margin_bottom = 63.6039
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+autowrap = true
+
+[node name="Description" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
+margin_left = 38.3826
+margin_top = 74.8052
+margin_right = 166.383
+margin_bottom = 104.805
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "아이템 설명 : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemDescription" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
+margin_left = 179.644
+margin_top = 74.8052
+margin_right = 307.644
+margin_bottom = 104.805
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Effect" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
+margin_left = 36.7972
+margin_top = 150.018
+margin_right = 189.797
+margin_bottom = 180.018
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "아이템 효과 : "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemEffect" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
+margin_left = 184.155
+margin_top = 148.841
+margin_right = 337.155
+margin_bottom = 178.841
+custom_fonts/font = SubResource( 10 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

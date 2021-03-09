@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 31.204
-height = 69.7549
+height = 61.1049
 
 [node name="Mia" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -15,5 +15,5 @@ script = ExtResource( 2 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -3.30356, 0.471931 )
+position = Vector2( -2.96985, -2.53146 )
 shape = SubResource( 1 )

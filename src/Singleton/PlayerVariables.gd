@@ -36,7 +36,8 @@ var state = {
 	"current_exp" : 0, 
 	"max_exp" : 1000,
 	"upgrade_point" : 1000,
-	"def" : 100
+	"def" : 100,
+	"image" : load("res://assets/art/player/player1.png")
 }
 
 var inventory = {
@@ -55,6 +56,10 @@ var inventory = {
 		},
 		0xA003:{
 			"code" : 0xA003,
+			"numberof" : 1,
+		},
+		0xA004:{
+			"code" : 0xA004,
 			"numberof" : 1,
 		}
 	},
