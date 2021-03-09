@@ -36,7 +36,7 @@ func set_camera_limit():
 
 func _ready():
 	player_variable = get_node("/root/PlayerVariables")
-	#player_variable.set_player_node_path(self.get_path())
+	player_variable.set_player_node_path(self.get_path())
 	items = get_node("/root/Items").Items
 	set_camera_limit()
 	#wear_equipment(0xA002)
@@ -56,7 +56,6 @@ func get_input():
 	var attack = Input.is_action_just_pressed("ATTACK")
 	var inventory = Input.is_action_just_pressed("open_inventory")
 	var state = Input.is_action_just_pressed("open_state")
-	var shop = Input.is_action_just_pressed("open_shop")
 
 	if jump and is_on_floor():
 		jumping = true
@@ -68,9 +67,7 @@ func get_input():
 			open_inventory()
 		elif state:
 			open_state()
-		elif shop:
-			open_shop()
-		
+
 		
 	if attack and not is_delay and not is_attack:
 		# 기본공격이랑 스킬도 같이 표현
@@ -96,18 +93,6 @@ func move_and_check_collision():
 		elif collision.collider.is_in_group("spoils"):
 			player_variable.get_spoil(collision.collider)
 
-
-func open_shop():
-	var shop_node = get_node_or_null("/root/Main/Shop")
-	if shop_node != null:
-		shop_node.queue_free()
-		return 
-		
-	shop_node = preload("res://src/GUI/Shop.tscn").instance()
-	shop_node.connect("sell_item", self, "_on_sell_item")
-	shop_node.connect("buy_item", self, "_on_buy_item")
-	get_node("/root/Main").add_child(shop_node)
-	shop_node.open_shop(0x9000)
 
 func open_state():
 	var state_instance = player_variable.get_state_node()

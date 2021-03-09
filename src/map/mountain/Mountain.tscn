@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/art/map/mountain/mountain.png" type="Texture" id=1]
 [ext_resource path="res://src/map/Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/art/map/mountain/mountain_tileset.png" type="Texture" id=3]
+[ext_resource path="res://src/Npc/Mia.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/map/mountain/Mountain.gd" type="Script" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -120,3 +121,6 @@ position = Vector2( 183.848, 212.132 )
 
 [node name="EnemySpawnPosition" parent="." index="3"]
 position = Vector2( 751.564, 566.148 )
+
+[node name="Mia" parent="." index="4" instance=ExtResource( 4 )]
+position = Vector2( 1084.97, 766.09 )

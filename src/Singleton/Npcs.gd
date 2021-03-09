@@ -3,10 +3,10 @@ extends Node
 var Npcs = {
 	0x9000 : {
 		"code" : 0x9000,
-		"name" : "장로스탄",
+		"name" : "미아",
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
-		"image" : "",
+		"image" : load("res://assets/art/npc/mia/mia.png"),
 	}
 }
 
