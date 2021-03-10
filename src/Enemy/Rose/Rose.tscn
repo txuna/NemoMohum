@@ -44,7 +44,7 @@ position = Vector2( -1.94055, -67.4112 )
 scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 5 )
 animation = "die"
-frame = 2
+frame = 1
 speed_scale = 2.0
 playing = true
 

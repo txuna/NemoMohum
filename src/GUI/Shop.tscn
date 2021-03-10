@@ -350,10 +350,10 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "아이템 이름 : "
 
 [node name="ItemName" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
-margin_left = 172.581
-margin_top = 33.6039
-margin_right = 300.581
-margin_bottom = 63.6039
+margin_left = 173.0
+margin_top = 34.0
+margin_right = 453.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true
@@ -371,10 +371,10 @@ __meta__ = {
 }
 
 [node name="ItemDescription" type="Label" parent="shop_background/ItemDetailContainer/Panel"]
-margin_left = 179.644
-margin_top = 74.8052
-margin_right = 307.644
-margin_bottom = 104.805
+margin_left = 180.0
+margin_top = 75.0
+margin_right = 436.0
+margin_bottom = 105.0
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true

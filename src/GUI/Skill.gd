@@ -105,7 +105,7 @@ func make_skill_level_label(code)->HBoxContainer:
 func make_upgrade_button(code)->Button:
 	var button = Button.new()
 	button.text = "업그레이드"
-	button.set("custom_fonts/font", make_dynamic_font(36))
+	button.set("custom_fonts/font", make_dynamic_font(24))
 	button.rect_position = Vector2(315, 100)
 	button.rect_size = Vector2(118, 45)
 	button.connect("pressed", self, "_on_upgrade_skill", [code])

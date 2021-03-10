@@ -6,13 +6,12 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 31.204
-height = 61.1049
+height = 92.5291
 
 [node name="Mia" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]

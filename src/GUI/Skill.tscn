@@ -37,7 +37,7 @@ font_data = ExtResource( 3 )
 script = ExtResource( 1 )
 
 [node name="skill_background" type="Sprite" parent="."]
-position = Vector2( 1201.63, 613.585 )
+position = Vector2( 420.399, 481.134 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 2 )
 
