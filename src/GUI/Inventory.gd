@@ -47,7 +47,7 @@ func make_slot(index:int, code:int)->Panel:
 	
 	var texture_rect = TextureRect.new()
 	texture_rect.expand =true
-	texture_rect.texture = load(items[code]["item_image"])
+	texture_rect.texture = items[code]["item_image"]
 	texture_rect.rect_position.x =14
 	texture_rect.rect_position.y = 5
 	texture_rect.rect_size.x = 512

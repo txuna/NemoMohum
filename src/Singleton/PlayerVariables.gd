@@ -37,7 +37,7 @@ var state = {
 	"max_exp" : 1000,
 	"upgrade_point" : 1000,
 	"def" : 100,
-	"image" : "res://assets/art/player/player_new.png",
+	"image" : load("res://assets/art/player/player_new.png"),
 	"skill_point" : 12,
 }
 

@@ -49,8 +49,8 @@ func make_label(text:String,
 	return label
 
 func set_character_image(npc_code):
-	NpcImage.texture =  load(get_node("/root/Npcs").Npcs[npc_code]["image"])
-	PlayerImage.texture = load(player_state["image"])
+	NpcImage.texture =  get_node("/root/Npcs").Npcs[npc_code]["image"]
+	PlayerImage.texture = player_state["image"]
 
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정

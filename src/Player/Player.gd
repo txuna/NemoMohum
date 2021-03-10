@@ -47,7 +47,8 @@ func _physics_process(delta):
 	if jumping and is_on_floor():
 			jumping = false
 	move_and_check_collision()
- 
+
+
 func get_input():
 	velocity.x = 0
 	var right = Input.is_action_pressed('RIGHT')
@@ -75,7 +76,7 @@ func get_input():
 	if attack and not is_delay and not is_attack:
 		# 기본공격이랑 스킬도 같이 표현
 		attack()
-
+	
 
 func player_move(left, right):
 	if right:

@@ -68,7 +68,7 @@ func make_panel(code)->Panel:
 	var texture_rect = TextureRect.new()
 	texture_rect.expand = true
 	texture_rect.rect_size = Vector2(128, 128)
-	texture_rect.texture = load(skill_list[code]["image"])
+	texture_rect.texture = skill_list[code]["image"]
 	
 	panel.add_child(texture_rect)
 	return panel
