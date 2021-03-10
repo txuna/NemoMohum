@@ -6,7 +6,7 @@ var Npcs = {
 		"name" : "미아",
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
-		"image" : load("res://assets/art/npc/mia/mia.png"),
+		"image" : "res://assets/art/npc/mia/mia1.png",
 	}
 }
 

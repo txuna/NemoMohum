@@ -1,12 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/art/shop/shop_background.png" type="Texture" id=1]
 [ext_resource path="res://assets/art/shop/shop_slot2.png" type="Texture" id=2]
-[ext_resource path="res://assets/art/spoil/consumption/blue_potion.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/독립기념관체.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://src/GUI/Shop.gd" type="Script" id=5]
 [ext_resource path="res://assets/art/inventory/inventory_slot.png" type="Texture" id=6]
-[ext_resource path="res://assets/art/weapon/gun/basic_gun.png" type="Texture" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -98,10 +96,10 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="shop_background/BuyScrollContainer/VBoxContainer/TextureRect/Panel"]
+margin_top = -1.48315
 margin_right = 512.0
-margin_bottom = 512.0
+margin_bottom = 510.517
 rect_scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -177,7 +175,6 @@ __meta__ = {
 margin_right = 512.0
 margin_bottom = 512.0
 rect_scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 7 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false

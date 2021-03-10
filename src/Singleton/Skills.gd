@@ -58,6 +58,6 @@ var Skills = {
 			"damage_percent" : 30,
 		},
 		"type" : "Gun",
-		"image" : load("res://assets/art/player/player.png"),
+		"image" : "res://assets/art/player/player.png",
 	}
 }

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/Weapon/Weapon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Weapon/Gun/BasicRifle.gd" type="Script" id=2]
-[ext_resource path="res://assets/art/weapon/gun/basic_rifle.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/weapon/gun/riple1.png" type="Texture" id=3]
 
 [sub_resource type="Animation" id=2]
 resource_name = "left_attack"
@@ -64,8 +64,8 @@ tracks/1/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 31.4645, -11.2373 )
-scale = Vector2( 0.075, 0.075 )
+position = Vector2( 26.1671, -10.7076 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="1"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Weapon/Weapon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/weapon/gun/basic_gun.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/weapon/gun/basic_gun1.png" type="Texture" id=2]
 [ext_resource path="res://src/Weapon/Gun/BasicGun.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -40,7 +40,7 @@ script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
 position = Vector2( 33.7273, -18.5511 )
-scale = Vector2( 0.075, 0.075 )
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="1"]
