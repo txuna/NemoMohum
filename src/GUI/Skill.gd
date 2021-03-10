@@ -9,6 +9,8 @@ var current_skill_type = "Gun"
 var skill_list = null
 var player_state = null
 
+signal upgrade_skill
+
 onready var SkillContainer = $skill_background/ScrollContainer/VBoxContainer
 onready var skill_point = $skill_background/skill_point
 # Called when the node enters the scene tree for the first time.
@@ -28,8 +30,8 @@ func update_skill_point():
 func open_skill():
 	update_skill()
 
-func _on_upgrade_skill(index:int):
-	print("PRESSED")
+func _on_upgrade_skill(code:int):
+	emit_signal("upgrade_skill", code)
 	update_skill()
 	update_skill_point()
 
