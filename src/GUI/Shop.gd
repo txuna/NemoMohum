@@ -34,6 +34,20 @@ func _ready() -> void:
 	player_inventory = get_node("/root/PlayerVariables").inventory
 	player_state = get_node("/root/PlayerVariables").state
 
+
+func make_label(text:String, 
+				position_x:int, position_y:int, 
+				size_x:int, size_y:int, 
+				font_size:int)->Label:
+					
+	var label = Label.new()
+	label.text = text
+	label.rect_position = Vector2(position_x, position_y)
+	label.rect_size = Vector2(size_x, size_y)
+	label.set("custom_fonts/font", make_dynamic_font(font_size))
+	label.set("custom_colors/font_color",Color(0,0,0))
+	return label
+
 func set_character_image(npc_code):
 	NpcImage.texture =  get_node("/root/Npcs").Npcs[npc_code]["image"]
 	PlayerImage.texture = player_state["image"]
@@ -64,31 +78,19 @@ func make_panel(code)->Panel:
 	
 	
 func make_name_label(code)->Label:
-	var name_label = Label.new() 
-	name_label.text = items[code]["item_name"]
-	name_label.set("custom_fonts/font", make_dynamic_font(36))
-	name_label.set("custom_colors/font_color",Color(0,0,0))
-	name_label.rect_position = Vector2(160, 18)
-	name_label.rect_size = Vector2(270, 45)
+	var name_label = make_label(items[code]["item_name"], 160, 18, 270, 45, 36)
 	return name_label
 	
 	
 # type : sell, buy
 func make_price_label(type, code)->Label:
-	var coin_label = Label.new()
-	coin_label.text = str(items[code][type]) + " Coin"
-	coin_label.set("custom_fonts/font", make_dynamic_font(36))
-	coin_label.set("custom_colors/font_color",Color(0,0,0))
-	coin_label.rect_position = Vector2(160, 96)
-	coin_label.rect_size = Vector2(145, 45)
+	var coin_label = make_label(str(items[code][type]) + " Coin", 160, 96, 125, 45, 36)
 	return coin_label
 	
 func make_numberof_label(code)->Label:
 	var item_type = items[code]["type"]
-	var numberof_label = Label.new() 
-	numberof_label.text = "(" + str(player_inventory[item_type][code]["numberof"]) + ")"
-	numberof_label.set("custom_fonts/font", make_dynamic_font(36))
-	numberof_label.set("custom_colors/font_color",Color(0,0,0))
+	var numberof_label = make_label("(" + str(player_inventory[item_type][code]["numberof"]) + ")", 
+									0, 0, 0, 0, 36)
 	return numberof_label		
 	
 	

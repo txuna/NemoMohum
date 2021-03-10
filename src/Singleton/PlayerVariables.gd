@@ -37,7 +37,8 @@ var state = {
 	"max_exp" : 1000,
 	"upgrade_point" : 1000,
 	"def" : 100,
-	"image" : load("res://assets/art/player/player1.png")
+	"image" : load("res://assets/art/player/player1.png"),
+	"skill_point" : 12,
 }
 
 var inventory = {
@@ -118,6 +119,17 @@ func use_item(type, code, numberof, mark, affect_player):
 		 var effect = get_node("/root/Items").Items[code]["effect"]
 		 increase_state_from_effect(effect, 1)
 	change_inventory_item_number(type, code, numberof, mark)
+		
+func get_skill_node():
+	var skill_instance = get_node_or_null("/root/Main/Skill")
+	return skill_instance
+	
+func update_skill():
+	var skill_instance = get_skill_node()
+	if skill_instance == null:
+		return 
+	else:
+		skill_instance.update_skill()		
 		
 func get_state_node():
 	var state_instance = get_node_or_null("/root/Main/State")

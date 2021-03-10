@@ -56,6 +56,7 @@ func get_input():
 	var attack = Input.is_action_just_pressed("ATTACK")
 	var inventory = Input.is_action_just_pressed("open_inventory")
 	var state = Input.is_action_just_pressed("open_state")
+	var skill = Input.is_action_just_pressed("open_skill")
 
 	if jump and is_on_floor():
 		jumping = true
@@ -67,6 +68,8 @@ func get_input():
 			open_inventory()
 		elif state:
 			open_state()
+		elif skill:
+			open_skill()
 
 		
 	if attack and not is_delay and not is_attack:
@@ -93,6 +96,14 @@ func move_and_check_collision():
 		elif collision.collider.is_in_group("spoils"):
 			player_variable.get_spoil(collision.collider)
 
+func open_skill():
+	var skill_instance = player_variable.get_skill_node()
+	if skill_instance != null:
+		skill_instance.queue_free()
+		return 
+	skill_instance = preload("res://src/GUI/Skill.tscn").instance()
+	skill_instance.connect("upgrade_skill", self, "upgrade_skill")
+	get_node("/root/Main").add_child(skill_instance)
 
 func open_state():
 	var state_instance = player_variable.get_state_node()
@@ -311,10 +322,8 @@ func _on_buy_item(item):
 	player_variable.get_coin(-item_price)
 	player_variable.get_item(item)
 	
-	
-	
-	
-	
+func upgrade_skill(code):
+	pass
 	
 	
 	

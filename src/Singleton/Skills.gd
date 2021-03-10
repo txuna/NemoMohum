@@ -53,10 +53,11 @@ var Skills = {
 		"mp" : 0,
 		"accquire" : false, 
 		"precedence_skill_code" : [],
-		"level" : 0, 
+		"skill_level" : 0, 
 		"level_effect" : {
 			"damage_percent" : 30,
 		},
 		"type" : "Gun",
+		"image" : load("res://assets/art/player/player.png"),
 	}
 }

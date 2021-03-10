@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/GUI/Skill.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/skill_gui/skill_background.png" type="Texture" id=2]
@@ -22,6 +22,14 @@ size = 24
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -52,48 +60,55 @@ margin_bottom = 160.0
 texture = ExtResource( 4 )
 
 [node name="Panel" type="Panel" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect"]
-margin_left = 17.0
-margin_top = 16.0
-margin_right = 144.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 143.0
 margin_bottom = 143.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect/Panel"]
-margin_left = -0.623535
-margin_top = 0.623627
-margin_right = 125.376
-margin_bottom = 127.624
+margin_right = 128.0
+margin_bottom = 128.0
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="skill_name" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect"]
 margin_left = 160.0
-margin_top = 18.0
-margin_right = 430.0
-margin_bottom = 63.0
+margin_top = 16.0
+margin_right = 432.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 text = "폭발 총알"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect"]
-margin_left = 163.871
-margin_top = 100.859
-margin_right = 272.871
-margin_bottom = 139.859
+[node name="HBoxContainer" type="HBoxContainer" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect"]
+margin_left = 160.0
+margin_top = 100.0
+margin_right = 272.0
+margin_bottom = 140.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect/HBoxContainer"]
+margin_right = 73.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 3 )
 text = "Level"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="skill_level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect"]
-margin_left = 257.669
-margin_top = 100.506
-margin_right = 328.669
-margin_bottom = 139.506
+[node name="skill_level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect/HBoxContainer"]
+margin_left = 77.0
+margin_right = 112.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 4 )
 text = "32"
 __meta__ = {
@@ -101,9 +116,9 @@ __meta__ = {
 }
 
 [node name="upgrade_skill" type="Button" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect"]
-margin_left = 314.0
+margin_left = 315.0
 margin_top = 97.0
-margin_right = 431.0
+margin_right = 433.0
 margin_bottom = 142.0
 custom_fonts/font = SubResource( 5 )
 text = "업그레이드"
@@ -142,3 +157,27 @@ margin_bottom = 74.0
 size_flags_horizontal = 3
 custom_fonts/font = SubResource( 1 )
 text = "Bow"
+
+[node name="Label" type="Label" parent="skill_background"]
+margin_left = -215.071
+margin_top = 418.828
+margin_right = -67.0709
+margin_bottom = 457.828
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "스킬 포인트"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="skill_point" type="Label" parent="skill_background"]
+margin_left = -48.2427
+margin_top = 418.451
+margin_right = -8.24268
+margin_bottom = 457.451
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "32"
+__meta__ = {
+"_edit_use_anchors_": false
+}
