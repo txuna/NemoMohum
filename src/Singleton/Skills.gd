@@ -61,3 +61,24 @@ var Skills = {
 		"image" : load("res://assets/art/player/player.png"),
 	}
 }
+
+func check_accquire_skill(code):
+	if Skills[code]["accquire"] == true:
+		return true
+	else:
+		return false
+
+func check_precedence(code):
+	for skill_code in Skills[code]["precedence_skill_code"]:
+		if check_accquire_skill(code):
+			continue
+		else:
+			return false
+			
+	return true
+
+func upgrade_skill(code):
+	Skills[code]["skill_level"] +=1
+	Skills[code]["accquire"] = true
+	for level_effect in Skills[code]["level_effect"]:
+		Skills[code][level_effect] += Skills[code]["level_effect"][level_effect]

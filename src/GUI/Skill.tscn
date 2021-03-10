@@ -5,8 +5,12 @@
 [ext_resource path="res://assets/fonts/독립기념관체.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/art/skill_gui/skill_slot.png" type="Texture" id=4]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=1]
 size = 40
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -14,14 +18,10 @@ size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
 size = 24
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -81,7 +81,7 @@ margin_left = 160.0
 margin_top = 16.0
 margin_right = 432.0
 margin_bottom = 64.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 text = "폭발 총알"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -99,7 +99,7 @@ __meta__ = {
 [node name="level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect/HBoxContainer"]
 margin_right = 73.0
 margin_bottom = 39.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 text = "Level"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -109,7 +109,7 @@ __meta__ = {
 margin_left = 77.0
 margin_right = 112.0
 margin_bottom = 39.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "32"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -120,7 +120,7 @@ margin_left = 315.0
 margin_top = 97.0
 margin_right = 433.0
 margin_bottom = 142.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "업그레이드"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -139,7 +139,7 @@ __meta__ = {
 margin_right = 156.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 5 )
 text = "Gun"
 
 [node name="Button2" type="Button" parent="skill_background/HBoxContainer"]
@@ -147,7 +147,7 @@ margin_left = 160.0
 margin_right = 316.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 5 )
 text = "Swrod"
 
 [node name="Button3" type="Button" parent="skill_background/HBoxContainer"]
@@ -155,7 +155,7 @@ margin_left = 320.0
 margin_right = 476.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 5 )
 text = "Bow"
 
 [node name="Label" type="Label" parent="skill_background"]
@@ -181,3 +181,6 @@ text = "32"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="skill_background/HBoxContainer/Button" to="." method="_on_change_skill_type" binds= [ "Gun" ]]
+[connection signal="pressed" from="skill_background/HBoxContainer/Button2" to="." method="_on_change_skill_type" binds= [ "Sword" ]]
+[connection signal="pressed" from="skill_background/HBoxContainer/Button3" to="." method="_on_change_skill_type" binds= [ "Bow" ]]

@@ -4,7 +4,7 @@
 [ext_resource path="res://src/Weapon/Gun/BasicRifle.gd" type="Script" id=2]
 [ext_resource path="res://assets/art/weapon/gun/riple1.png" type="Texture" id=3]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=1]
 resource_name = "left_attack"
 length = 0.4
 tracks/0/type = "value"
@@ -32,8 +32,7 @@ tracks/1/keys = {
 "values": [ 0.0, 8.0052, 17.1631, 9.85082, 0.0 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "right_attack"
+[sub_resource type="Animation" id=2]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
@@ -70,5 +69,5 @@ texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="1"]
 playback_speed = 2.5
-anims/left_attack = SubResource( 2 )
-anims/right_attack = SubResource( 1 )
+anims/left_attack = SubResource( 1 )
+anims/right_attack = SubResource( 2 )

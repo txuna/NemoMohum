@@ -29,6 +29,7 @@ func update_skill_point():
 
 func open_skill():
 	update_skill()
+	update_skill_point()
 
 func _on_upgrade_skill(code:int):
 	emit_signal("upgrade_skill", code)
@@ -119,3 +120,8 @@ func make_dynamic_font(font_size:int)->DynamicFont:
 	dynamic_font.font_data = load("res://assets/fonts/독립기념관체.ttf")
 	dynamic_font.size = font_size
 	return dynamic_font
+
+
+func _on_change_skill_type(extra_arg_0: String) -> void:
+	current_skill_type = extra_arg_0
+	update_skill()

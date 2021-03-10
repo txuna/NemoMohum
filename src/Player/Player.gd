@@ -324,8 +324,17 @@ func _on_buy_item(item):
 	player_variable.get_item(item)
 	
 func upgrade_skill(code):
-	pass
-	
-	
+	var skills = get_node("/root/Skills")
+	if not player_variable.check_skill_point():
+		return
+		
+	# 배울려는 스킬의 선행스킬을 찍었는지 
+	if not skills.check_precedence(code):
+		return
+			
+	# 스킬을 배운다. 
+	skills.upgrade_skill(code)
+	player_variable.change_skill_point(-1)
+	player_variable.update_skill()
 	
 	

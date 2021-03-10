@@ -69,7 +69,7 @@ func make_panel(code)->Panel:
 	
 	var texture_rect = TextureRect.new() 
 	texture_rect.expand = true 
-	texture_rect.texture = load(items[code]["item_image"])
+	texture_rect.texture = items[code]["item_image"]
 	texture_rect.rect_position = Vector2(0, 0)
 	texture_rect.rect_size = Vector2(512, 512)
 	texture_rect.rect_scale = Vector2(0.25, 0.25)

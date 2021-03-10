@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 
 func set_npc(npc_code):
 	npc = get_node("/root/Npcs").Npcs[npc_code]
-	sprite.texture = load(npc["image"])
+	sprite.texture = npc["image"]
 
 func _on_BaseNpc_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:

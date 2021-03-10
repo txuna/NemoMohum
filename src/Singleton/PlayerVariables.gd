@@ -120,6 +120,14 @@ func use_item(type, code, numberof, mark, affect_player):
 		 increase_state_from_effect(effect, 1)
 	change_inventory_item_number(type, code, numberof, mark)
 		
+func check_skill_point():
+	if state["skill_point"] <= 0:
+		return false
+	return true
+	
+func change_skill_point(value):
+	state["skill_point"] += value	
+		
 func get_skill_node():
 	var skill_instance = get_node_or_null("/root/Main/Skill")
 	return skill_instance

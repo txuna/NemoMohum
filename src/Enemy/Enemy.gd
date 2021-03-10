@@ -131,7 +131,7 @@ func give_spoil():
 		if percentage <= enemy_item["percentage"]:
 			var item = items[enemy_item["code"]]
 			var spoil_instance = preload("res://src/Spoil/Spoil.tscn").instance()
-			spoil_instance.get_node("Sprite").texture = load(item["item_image"])
+			spoil_instance.get_node("Sprite").texture = item["item_image"]
 			spoil_instance.position = SpoilPosition.global_position
 			spoil_instance.position.x = SpoilPosition.global_position.x + index
 			get_parent().call_deferred("add_child", spoil_instance)
