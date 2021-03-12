@@ -1,5 +1,7 @@
 extends Node
 
+const DEF_VALUE = 1000
+
 var current_equipment = {
 	"weapon" : {
 		"item" : null,
@@ -25,9 +27,9 @@ var state = {
 	"nickname" : "스페셜땡스루",
 	"min_attack" : 5, 
 	"max_attack" : 12, 
-	"current_hp" : 50, 
+	"current_hp" : 1000, 
 	"max_hp" : 1000, 
-	"current_mp" : 50,
+	"current_mp" : 100,
 	"max_mp" : 100,
 	"crit" : 1, 
 	"crit_damage" : 1, 
@@ -208,7 +210,10 @@ func player_level_up():
 	update_hud(state["max_mp"], "mp")
 	update_state()
 	
-	
+func calc_def(damage):
+	var def_percent = float(state["def"]) / (float(state["def"]) + DEF_VALUE) * 100.0
+	return int(float(damage) * (1.0 - (def_percent / 100.0)))
+		
 	
 func calc_exp(exp_value):
 	#add_message_to_chatbox("경험치를 얻었습니다 : " + str(enemy_exp))

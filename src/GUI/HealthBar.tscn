@@ -5,8 +5,8 @@
 [ext_resource path="res://src/GUI/HealthBar.gd" type="Script" id=3]
 
 [node name="HealthBar" type="Control"]
-margin_right = 398.0
-margin_bottom = 27.0
+margin_right = 258.0
+margin_bottom = 40.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false

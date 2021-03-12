@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const DAMAGE_SKIN = preload("res://src/GUI/DamageSkin.tscn")
+
 export (int) var run_speed = 300
 export (int) var jump_speed = -700
 export (int) var gravity = 1200
@@ -25,6 +27,9 @@ onready var player_skill_position = $SkillSpawnPosition
 onready var player_weapon_position = $WeaponSpawnPosition
 onready var player_sprite = $Sprite
 onready var player_attack_delay = $AttackDelay
+onready var InvincibleTimer = $InvincibleTimer
+onready var damage_position = $DamagePosition
+
 
 func set_camera_limit():
 	var map_limits = get_parent().get_node("TileMap").get_used_rect()
@@ -92,7 +97,9 @@ func move_and_check_collision():
 	for count in get_slide_count():
 		var collision = get_slide_collision(count)
 		if collision.collider.is_in_group("enemies"):
-			pass
+			if invincible == true:
+				return
+			take_damage(collision.collider.collision_attack())
 			
 		elif collision.collider.is_in_group("spoils"):
 			player_variable.get_spoil(collision.collider)
@@ -178,7 +185,23 @@ func wear_weapon(item):
 	current_weapon["item"].get_node("AnimationPlayer").connect("animation_finished", self, "_on_attack_motion_finished")
 	add_child(current_weapon["item"])
 	$AttackDelay.wait_time = current_weapon["item"].get_attack_delay()
+
+func take_damage(damage):
+	damage = player_variable.calc_def(damage)
+	var temp = {
+		"current_hp" : damage
+	}
+	show_damage(damage)
+	player_variable.increase_state_from_effect(temp, -1)
+	invincible = true
+	InvincibleTimer.start()
 	
+func show_damage(damage):
+	var damage_skin = DAMAGE_SKIN.instance()
+	damage_skin.position = damage_position.position
+	add_child(damage_skin)
+	damage_skin.show_value(damage, false, false)		
+
 # 기본공격의 코드는 0xE000 딕셔너리로 무기마다의 기본공격 체크 
 func attack(code=false):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
@@ -338,3 +361,7 @@ func upgrade_skill(code):
 	player_variable.update_skill()
 	
 	
+
+
+func _on_InvincibleTimer_timeout() -> void:
+	invincible = false
