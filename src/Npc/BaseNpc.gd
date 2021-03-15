@@ -3,6 +3,7 @@ extends KinematicBody2D
 const GRAVITY = 800
 var velocity = Vector2.ZERO
 
+onready var npc_name = $NpcName
 onready var sprite = $Sprite
 var npc = null
 var player_variable = null
@@ -18,11 +19,25 @@ func _physics_process(delta: float) -> void:
 func set_npc(npc_code):
 	npc = get_node("/root/Npcs").Npcs[npc_code]
 	sprite.texture = npc["image"]
+	npc_name.text = npc["name"]
 
 func _on_BaseNpc_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		if npc["type"] == "shopkeeper":
 			open_shop(npc["code"])
+			
+		elif npc["type"] == "quest": #대화상자 오픈
+			open_chatbox(npc["code"])
+
+func open_chatbox(npc_code:int):
+	var chatbox_node = get_node_or_null("/root/Main/Chatbox")
+	if chatbox_node != null:
+		chatbox_node.queue_free()
+
+	chatbox_node = preload("res://src/GUI/Chatbox.tscn").instance()
+	get_node("/root/Main").add_child(chatbox_node)
+	chatbox_node.load_possible_quest(npc_code)
+	
 
 func open_shop(npc_code):
 	var shop_node = get_node_or_null("/root/Main/Shop")

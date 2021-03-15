@@ -31,6 +31,10 @@ onready var InvincibleTimer = $InvincibleTimer
 onready var damage_position = $DamagePosition
 
 
+# 퀘스트 목록을 기반으로 플레이어가 생성될 떄마다 다시 불러오기?
+func load_subject():
+	pass
+
 func set_camera_limit():
 	var map_limits = get_parent().get_node("TileMap").get_used_rect()
 	var map_cellsize = get_parent().get_node("TileMap").cell_size
@@ -102,7 +106,7 @@ func move_and_check_collision():
 			take_damage(collision.collider.collision_attack())
 			
 		elif collision.collider.is_in_group("spoils"):
-			player_variable.get_spoil(collision.collider)
+			get_spoil(collision.collider)
 
 func open_skill():
 	var skill_instance = player_variable.get_skill_node()
@@ -307,11 +311,17 @@ func use_item(code, numberof):
 		return
 	return
 
+func get_spoil(spoil):
+	#submit.notify()
+	player_variable.get_spoil(spoil)
+
 func _on_attack_motion_finished(anim_name:String):
 	set_weapon_direction(get_weapon_direction())
 	is_attack = false
 	
+
 func _on_enemy_death(enemy_exp, enemy_coin):
+	#submit.notify()
 	player_variable.get_exp(enemy_exp)
 	player_variable.get_coin(enemy_coin)
 

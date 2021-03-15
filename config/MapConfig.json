@@ -1,0 +1,45 @@
+{
+    "0x8000": {
+        "map_code": 32768,
+        "player_spawn_position": {
+            "x": 180,
+            "y": 200
+        },
+        "npc_spawn_position": [{
+            "0x9000": {
+                "npc_code": 36864,
+                "spawn_position": {
+                    "x": 1080,
+                    "y": 760
+                }
+            },
+            "0x9001": {
+                "npc_code": 36865,
+                "spawn_position": {
+                    "x": 1300,
+                    "y": 760
+                }
+            }
+        }],
+        "enemy_code": [{
+                "enemy_code": 61441,
+                "spawn_position": [{
+                        "x": 750,
+                        "y": 600
+                    },
+                    {
+                        "x": 770,
+                        "y": 600
+                    }
+                ]
+            },
+            {
+                "enemy_code": 61442,
+                "spawn_position": [{
+                    "x": 740,
+                    "y": 600
+                }]
+            }
+        ]
+    }
+}

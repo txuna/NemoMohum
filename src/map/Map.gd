@@ -1,16 +1,21 @@
 extends Node2D
 
-const ROSE = preload("res://src/Enemy/Rose/Rose.tscn")
 const ROBOT = preload("res://src/Enemy/robot/Robot.tscn")
 const TOY_ROBOT = preload("res://src/Enemy/toyrobot/ToyRobot.tscn")
 var player = null
 
 onready var EnemySpawnPosition = $EnemySpawnPosition
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	player = preload("res://src/Player/Player.tscn").instance() 
 	player.global_position = $PlayerSpawnPosition.position
 	add_child(player)
+	
+func set_map(map_code:int):
+	pass
+	
+func spawn_npc():
+	pass
 
 func spawn_enemy():
 	for i in range(10):

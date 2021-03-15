@@ -17,3 +17,10 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2( -2.96985, -2.53146 )
 shape = SubResource( 1 )
+
+[node name="NpcName" parent="." index="2"]
+margin_left = -65.0
+margin_top = 82.0
+margin_right = 67.0
+margin_bottom = 112.0
+align = 1

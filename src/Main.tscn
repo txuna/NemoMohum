@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://src/map/mountain/Mountain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/GUI/HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Main.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
-
-[node name="Mountain" parent="." instance=ExtResource( 1 )]
+script = ExtResource( 3 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]

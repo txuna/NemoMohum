@@ -7,6 +7,13 @@ var Npcs = {
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
 		"image" : load("res://assets/art/npc/mia/mia1.png"),
+	},
+	0x9001:{
+		"code" : 0x9001,
+		"name" : "스탄",
+		"description" : "커닝시티 갤주",
+		"type" : "quest",
+		"image" : load("res://assets/art/npc/stan/stan.png"),
 	}
 }
 

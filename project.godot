@@ -13,9 +13,21 @@ _global_script_classes=[ {
 "class": "EnemyState",
 "language": "GDScript",
 "path": "res://src/Singleton/EnemyState.gd"
+}, {
+"base": "Reference",
+"class": "Kinematic",
+"language": "GDScript",
+"path": "res://src/Player/base_player.gd"
+}, {
+"base": "Reference",
+"class": "QuestList",
+"language": "GDScript",
+"path": "res://src/quest/QuestList.gd"
 } ]
 _global_script_class_icons={
-"EnemyState": ""
+"EnemyState": "",
+"Kinematic": "",
+"QuestList": ""
 }
 
 [application]
