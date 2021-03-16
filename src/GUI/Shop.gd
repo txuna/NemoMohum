@@ -49,7 +49,8 @@ func make_label(text:String,
 	return label
 
 func set_character_image(npc_code):
-	NpcImage.texture =  get_node("/root/Npcs").Npcs[npc_code]["image"]
+	NpcImage.texture = Npcs.new().NpcList[npc_code]["image"]
+	#NpcImage.texture =  get_node("/root/Npcs").Npcs[npc_code]["image"]
 	PlayerImage.texture = player_state["image"]
 
 func make_dynamic_font(font_size)->DynamicFont:
@@ -182,7 +183,7 @@ func update_coin():
 
 # 처음 상점을 열때 
 func open_shop(npc_code:int):
-	npc_items = get_node("/root/Npcs").ShopKeepers[npc_code]
+	npc_items = Npcs.new().ShopKeepers[npc_code]
 	set_character_image(npc_code)
 	show_buy_interface()
 	show_sell_interface()

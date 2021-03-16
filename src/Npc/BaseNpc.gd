@@ -17,7 +17,8 @@ func _physics_process(delta: float) -> void:
 
 
 func set_npc(npc_code):
-	npc = get_node("/root/Npcs").Npcs[npc_code]
+	npc = Npcs.new().NpcList[npc_code]
+	#npc = get_node("/root/Npcs").Npcs[npc_code]
 	sprite.texture = npc["image"]
 	npc_name.text = npc["name"]
 
@@ -27,16 +28,16 @@ func _on_BaseNpc_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			open_shop(npc["code"])
 			
 		elif npc["type"] == "quest": #대화상자 오픈
-			open_chatbox(npc["code"])
+			open_chatbox(npc["code"], npc["base_msg"], npc["name"])
 
-func open_chatbox(npc_code:int):
+func open_chatbox(npc_code:int, base_msg:String, name:String):
 	var chatbox_node = get_node_or_null("/root/Main/Chatbox")
 	if chatbox_node != null:
 		chatbox_node.queue_free()
 
 	chatbox_node = preload("res://src/GUI/Chatbox.tscn").instance()
 	get_node("/root/Main").add_child(chatbox_node)
-	chatbox_node.load_possible_quest(npc_code)
+	chatbox_node.load_possible_quest(npc_code, base_msg, name)
 	
 
 func open_shop(npc_code):

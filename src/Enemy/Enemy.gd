@@ -160,11 +160,6 @@ func give_spoil():
 			index += 40
 
 
-func _on_Player_entered_attack_range(body: Node) -> void:
-	if is_attack:
-		return
-	skill_attack()
-
 func skill_attack():
 	is_attack = true
 	AttackDelay.start()

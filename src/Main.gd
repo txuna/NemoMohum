@@ -2,13 +2,14 @@ extends Node
 
 
 const Mountain = preload("res://src/map/mountain/Mountain.tscn")
+#const QuestManager = preload("res://src/quest/QuestManager.tscn")
+
 
 func _ready() -> void:
 	game_manager()
 
 func game_manager():
 	load_map()
-	#var quest_list = QuestList.new()
 
 
 func load_map():

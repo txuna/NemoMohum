@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/Enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/enemy/robot/walk3.png" type="Texture" id=2]
@@ -123,6 +123,9 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 39.6508, 78.7668 )
 
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 35.5995, 78.0449 )
+
 [node name="Robot" instance=ExtResource( 1 )]
 script = ExtResource( 8 )
 
@@ -160,3 +163,7 @@ margin_bottom = -175.258
 
 [node name="SpoilPosition" parent="." index="8"]
 position = Vector2( -0.786469, -259.515 )
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( 0.445404, -78.8445 )
+shape = SubResource( 7 )

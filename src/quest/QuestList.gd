@@ -41,7 +41,6 @@ var QuestList = {
 				]
 			}
 		},
-		"basic_msg" : "날씨 좋다~~~~~~",
 		"quest_not_started_msg" : "배가고프다 나뭇잎좀 구해다줘",
 		"quest_progress_msg" : "아직 못구함?",
 		"quest_complete_msg" : "ㄳㄳ",

@@ -98,6 +98,7 @@ func player_move(left, right):
 	
 func move_and_check_collision():
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+	"""
 	for count in get_slide_count():
 		var collision = get_slide_collision(count)
 		if collision.collider.is_in_group("enemies"):
@@ -107,6 +108,7 @@ func move_and_check_collision():
 			
 		elif collision.collider.is_in_group("spoils"):
 			get_spoil(collision.collider)
+	"""
 
 func open_skill():
 	var skill_instance = player_variable.get_skill_node()
@@ -370,8 +372,15 @@ func upgrade_skill(code):
 	player_variable.change_skill_point(-1)
 	player_variable.update_skill()
 	
-	
-
-
 func _on_InvincibleTimer_timeout() -> void:
 	invincible = false
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body.is_in_group("enemies"):
+		if invincible == true:
+			return
+		take_damage(body.collision_attack())
+			
+	elif body.is_in_group("spoils"):
+		get_spoil(body)

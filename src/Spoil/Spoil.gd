@@ -21,6 +21,8 @@ func _ready() -> void:
 	item_info["type"] = items[item_code]["type"]
 
 func _physics_process(delta: float) -> void:
+	if is_on_floor():
+		return
 	velocity.y += GRAVITY
 	move_and_slide(velocity, Vector2.UP)
 
