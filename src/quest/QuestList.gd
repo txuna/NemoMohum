@@ -41,9 +41,9 @@ var QuestList = {
 				]
 			}
 		},
-		"quest_not_started_msg" : "배가고프다 나뭇잎좀 구해다줘",
-		"quest_progress_msg" : "아직 못구함?",
-		"quest_complete_msg" : "ㄳㄳ",
+		"quest_not_started_msg" : ["배고프다....", "너 누구냐....?", "나 나뭇잎 10개만....", "구해다 주면 보상 주겠다...."],
+		"quest_progress_msg" : ["아직 못구함?"],
+		"quest_complete_msg" : ["ㄳㄳ"],
 		"quest_summary_msg" : "배가 고픈듯하다. 죽을 쑤기 위한 나뭇잎 10개를 구해다 주자.",
 		"npc_code" : 0x9001,
 		"condition" : {

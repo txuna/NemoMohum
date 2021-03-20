@@ -8,14 +8,19 @@ const WAS_COMPLETE = 3 #이미 완료된거
 var quest_manager = null
 var player_state = null
 
-onready var QuestContainer = $TextureRect/QuestScrollContainer/QuestListContainer
+var msg_y = null
+
+onready var QuestContainer = $QuestScrollContainer/QuestListContainer
 onready var BaseMsg = $TextureRect/MsgContainer/BaseMsg
+onready var ButtonContainer = $TextureRect/MsgContainer/HBoxContainer 
 onready var Name = $TextureRect/Name
+onready var OkButton = $TextureRect/MsgContainer/HBoxContainer/Button
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	quest_manager = get_node("/root/Main/QuestManager")
 	player_state = get_node("/root/PlayerVariables").state
+	OkButton.disabled = true
 
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
@@ -24,8 +29,8 @@ func make_dynamic_font(font_size)->DynamicFont:
 	dynamic_font.size = font_size
 	return dynamic_font
 
-func make_label(quest, count:int)->Label:
-	var label = Label.new()
+func make_label(quest, count:int)->Button:
+	var label = Button.new()
 	label.set("custom_fonts/font", make_dynamic_font(24))
 	label.set("custom_colors/font_color",Color(0,0,0))
 	label.text = str(count) + ") " + quest["quest_name"]
@@ -52,7 +57,50 @@ func load_possible_quest(npc_code:int, base_msg:String, name:String):
 		## 최종적으로 불러와지는 퀘스트
 		var label = make_label(quest, count)
 		QuestContainer.add_child(label)
+		label.connect("gui_input", self, "_on_quest_click", [quest_code])
 		count+=1
+		
+func _on_quest_click(event:InputEvent, quest_code:int):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		# 퀘스트 목록 삭제 
+		for quest in QuestContainer.get_children():
+			quest.queue_free()
+		BaseMsg.text = ""
+		msg_y = load_quest_msg(quest_code)
+		OkButton.disabled = false
+		OkButton.connect("pressed", self, "_on_next_msg")
+	else:
+		return
+
+# 퀘스트 메시지 로드 
+# 기본 메시지 일때는 [확인] 버튼
+# 다음 메시지가 있을 때는 [다음] 버튼 
+# 퀘스트 마지막 메시지라면 [거젏하기], [수락하기] - yield로 다음 메시지 보여주고 버튼 생성하고 다음 버튼 누르면 반복문 안에 있는 yield로 다시 돌아가고
+func load_quest_msg(quest_code):
+	var quest:Dictionary = quest_manager.get_quest(quest_code)
+	var quest_state:int = quest["quest_state"]
+	var type:String
+	#var msg:String
+
+	if quest_state == NOT_START:
+		type = "quest_not_started_msg"
+		
+	elif quest_state == PROGRESS:
+		type = "quest_progress_msg"
+		
+	elif quest_state == CAN_COMPLETE:
+		type = "quest_complete_msg"
+		
+	for msg in quest[type]:
+		BaseMsg.text = msg
+		yield()
+		
+	print("GOOD")
+	queue_free()
+		
+func _on_next_msg():
+	if msg_y is GDScriptFunctionState && msg_y.is_valid():
+		msg_y = msg_y.resume()
 
 func check_requirement_quest(quest)->bool:
 	for requirement_quest_code in quest["condition"]["quest_list"]:
@@ -64,3 +112,4 @@ func check_requirement_quest(quest)->bool:
 
 func _on_Exit_pressed() -> void:
 	queue_free()
+

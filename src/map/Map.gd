@@ -38,10 +38,12 @@ func spawn_player():
 	add_child(player)
 	
 func spawn_npc():
-	var npcs = Npcs.new().NpcList
+	var npcs = NpcScene.new().NpcScene
+	#var npcs = Npcs.new().NpcList
 	for npc_data in map_config["npc_spawn_position"]:
 		var npc_code = npc_data["npc_code"]
-		var npc = load(npcs[int(npc_code)]["scene"]).instance()
+		var npc = npcs[int(npc_code)].instance()
+		#var npc = load(npcs[int(npc_code)]["scene"]).instance() #장면이라 preload로 바꿔야 하는데
 		var x = npc_data["spawn_position"]["x"]
 		var y = npc_data["spawn_position"]["y"]
 		npc.global_position = Vector2(x, y)

@@ -7,7 +7,6 @@ var NpcList = {
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
 		"image" : load("res://assets/art/npc/mia/mia1.png"),
-		"scene" : "res://src/Npc/Mia.tscn",
 		"base_msg" : "내가 관상을 볼줄 알어.... 넌 글렀어 임마...",
 	},
 	0x9001:{
@@ -16,7 +15,6 @@ var NpcList = {
 		"description" : "커닝시티 갤주",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/stan/stan.png"),
-		"scene" : "res://src/Npc/Stan.tscn",
 		"base_msg" : "내가 관상을 볼줄 알어.... 넌 글렀어 임마...",
 	}
 }
