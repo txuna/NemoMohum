@@ -94,8 +94,9 @@ func load_quest_msg(quest_code):
 	for msg in quest[type]:
 		BaseMsg.text = msg
 		yield()
-		
-	print("GOOD")
+	
+	# 끝났을 떄 Quest_manager에서 해당 퀘스트가 시작전이라면 진행중으로, 완료가 가능하다면 완료로 설정 후 보상 받음 	
+	print("해당 퀘스트가 진행 목록에 추가 됩니다.")
 	queue_free()
 		
 func _on_next_msg():
