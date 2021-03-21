@@ -3,7 +3,7 @@ class_name Npcs
 var NpcList = {
 	0x9000 : {
 		"code" : 0x9000,
-		"name" : "미아",
+		"name" : "헤네시스 죽박이 미아",
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
 		"image" : load("res://assets/art/npc/mia/mia1.png"),
@@ -11,7 +11,7 @@ var NpcList = {
 	},
 	0x9001:{
 		"code" : 0x9001,
-		"name" : "스탄",
+		"name" : "헤네시스 할아버지 장로스탄 친구의 아들",
 		"description" : "커닝시티 갤주",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/stan/stan.png"),

@@ -97,8 +97,7 @@ func load_quest_msg(quest_code):
 	
 	# 끝났을 떄 Quest_manager에서 해당 퀘스트가 시작전이라면 진행중으로, CAN_COMPLETE로 되어 있다면 완료로 설정 후 보상 받음
 	#quest_state은 현재 퀘스트 상태 
-	quest_manager.set_quest_state(quest_state)	
-	print("해당 퀘스트가 진행 목록에 추가 됩니다.")
+	quest_manager.set_quest_state(quest_code, quest_state)	
 	queue_free()
 		
 func _on_next_msg():

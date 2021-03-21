@@ -37,10 +37,10 @@ var state = {
 	"level" : 1,
 	"current_exp" : 0, 
 	"max_exp" : 1000,
-	"upgrade_point" : 1000,
+	"upgrade_point" : 0,
 	"def" : 100,
 	"image" : load("res://assets/art/player/player_new.png"),
-	"skill_point" : 12,
+	"skill_point" : 0,
 }
 
 var inventory = {
@@ -165,6 +165,16 @@ func update_inventory():
 	else:
 		inventory_instance.load_slot_from_inventory()
 			
+func get_questbox_node():
+	var questbox_node = get_node_or_null("/root/Main/QuestListBox")
+	return questbox_node
+
+func update_questbox():
+	var questbox_node = get_questbox_node()
+	if questbox_node == null:
+		return 
+	else:
+		questbox_node.load_quest_list()		
 		
 func get_shop_node():
 	var shop_node = get_node_or_null("/root/Main/Shop")
@@ -201,6 +211,7 @@ func get_exp(exp_value):
 
 func player_level_up():
 	state["upgrade_point"] += 5
+	state["skill_point"] += 5
 	state["level"] += 1
 	state["max_exp"] += int(state["max_exp"] * 1.2)
 	state["current_exp"] = 0

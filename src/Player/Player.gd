@@ -67,6 +67,7 @@ func get_input():
 	var inventory = Input.is_action_just_pressed("open_inventory")
 	var state = Input.is_action_just_pressed("open_state")
 	var skill = Input.is_action_just_pressed("open_skill")
+	var questbox = Input.is_action_just_pressed("open_questbox")
 
 	if jump and is_on_floor():
 		jumping = true
@@ -80,6 +81,8 @@ func get_input():
 			open_state()
 		elif skill:
 			open_skill()
+		elif questbox:
+			open_questbox()
 
 		
 	if attack and not is_delay and not is_attack:
@@ -98,6 +101,7 @@ func player_move(left, right):
 	
 func move_and_check_collision():
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+	#이 부분은 Area2D의 signal로 담당
 	"""
 	for count in get_slide_count():
 		var collision = get_slide_collision(count)
@@ -109,6 +113,15 @@ func move_and_check_collision():
 		elif collision.collider.is_in_group("spoils"):
 			get_spoil(collision.collider)
 	"""
+	
+func open_questbox():
+	var questbox_node = player_variable.get_questbox_node()
+	if questbox_node != null:
+		questbox_node.queue_free()
+		return 
+	questbox_node = preload("res://src/GUI/QuestListBox.tscn").instance()
+	get_node("/root/Main").add_child(questbox_node)
+	
 
 func open_skill():
 	var skill_instance = player_variable.get_skill_node()

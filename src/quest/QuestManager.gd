@@ -42,3 +42,23 @@ func set_quest_state(quest_code, current_state):
 	elif current_state == CAN_COMPLETE:
 		quest["quest_state"] = WAS_COMPLETE
 		_on_remove_quest_in_progress(quest_code)
+
+func get_quest_name(quest_code):
+	return get_quest(quest_code)["quest_name"]
+	
+func get_quest_state(quest_code):
+	return get_quest(quest_code)["quest_state"]
+
+func get_quest_in_progress():
+	return quest_in_progress
+
+func get_quest_summary(quest_code):
+	return get_quest(quest_code)["quest_summary_msg"]
+
+
+
+
+
+
+
+
