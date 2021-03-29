@@ -39,11 +39,9 @@ func spawn_player():
 	
 func spawn_npc():
 	var npcs = NpcScene.new().NpcScene
-	#var npcs = Npcs.new().NpcList
 	for npc_data in map_config["npc_spawn_position"]:
 		var npc_code = npc_data["npc_code"]
 		var npc = npcs[int(npc_code)].instance()
-		#var npc = load(npcs[int(npc_code)]["scene"]).instance() #장면이라 preload로 바꿔야 하는데
 		var x = npc_data["spawn_position"]["x"]
 		var y = npc_data["spawn_position"]["y"]
 		npc.global_position = Vector2(x, y)
@@ -54,6 +52,7 @@ func spawn_enemy():
 		var enemy = TOY_ROBOT.instance()
 		enemy.global_position = EnemySpawnPosition.position
 		enemy.connect("EnemyDeath", player, "_on_enemy_death")
+		#enemy.connect("EnemyDeath", get_node("/root/Main/QuestManager"), "_on_notification")
 		get_tree().call_group("enemies", "connect", enemy)
 		add_child(enemy)
 

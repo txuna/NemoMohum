@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
-		return
+		set_physics_process(false)
 	velocity.y += GRAVITY
 	move_and_slide(velocity, Vector2.UP)
 

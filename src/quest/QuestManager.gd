@@ -8,7 +8,11 @@ const PROGRESS = 1
 const CAN_COMPLETE = 2
 const WAS_COMPLETE = 3 #이미 완료된거
 
-var quest_in_progress = []
+const NPC = 1
+const ENEMY = 2
+const ITEM = 3
+
+var quest_in_progress = [] #quest_code list
 var quest_list = null
 
 
@@ -21,10 +25,47 @@ func _on_add_quest_in_progress(quest_code):
 func _on_remove_quest_in_progress(quest_code):
 	quest_in_progress.erase(quest_code)
 
-# 퀘스트의 상태를 완료상태라면 CAN_COMPLETE로 변경
-func _on_notification():
-	pass
 
+# 완료가능 상태인지 체크한다. 
+func check_quest(quest_code):
+	var quest = get_quest(quest_code)
+	for goal_key in quest["quest_goal"]:
+		var goals = quest["quest_goal"][goal_key]
+		for goal in goals:
+			if goal["player_count"] < goal["numberof"]:
+				#퀘스트 미달
+				return 
+				
+	quest["quest_state"] = CAN_COMPLETE
+
+# 퀘스트의 상태를 완료상태라면 CAN_COMPLETE로 변경
+# code :  NPC의 코드 몬스터의 코드 아이템의 코드가 될 수 있다. 
+# type : NPC, ENENY, ITEM 3가지로 나눠진다. 
+# numberof : 수량
+func _on_notification(type:int, code:int, numberof:int=0):
+	print("NOTIFICATION")
+	var type_str = null
+	if type == NPC:
+		type_str = "talk_to"
+
+		
+	elif type == ENEMY:
+		type_str = "enemy"
+
+		
+	elif type == ITEM:
+		type_str = "item"
+
+		
+	for quest_code in quest_in_progress:
+		var quest_goals = get_quest(quest_code)["quest_goal"][type_str]
+		for goal in quest_goals:
+			if goal["code"] == code:
+				goal["player_count"] += numberof
+				check_quest(quest_code)
+				# CAN_COMPLETE인지 확인
+				
+		
 func get_npc_quest(npc_code):
 	return quest_list.NpcQuest[npc_code]
 

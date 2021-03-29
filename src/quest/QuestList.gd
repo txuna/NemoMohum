@@ -12,15 +12,21 @@ var QuestList = {
 		"quest_goal" : {
 			"item" : [
 				{
-					"item_code" : 0xC000,
+					"code" : 0xC000,
 					"numberof" : 10,
+					"player_count" : 0, #플레이어의 진행상태
 				}
 			],
-			"kill_enemy" : [
+			"enemy" : [
 				{
-					"enemy_code" : 0xF000,
+					"code" : 0xF000,
 					"numberof" : 10,
+					"player_count" : 0,
 				}
+			],
+			# 특장 NPC에게 대화걸기
+			"talk_to" : [
+				# 성공여부는 false and true
 			]
 		},
 		"quest_reward" : {

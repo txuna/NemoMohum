@@ -124,7 +124,7 @@ func enemy_death():
 	EnemyCollision.set_deferred("disabled", true)
 	EnemySprite.animation = "die"
 	EnemyPlayer.play("die")
-	yield(EnemyPlayer, "animation_finished")
+	yield(EnemyPlayer, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
 	queue_free()
 
 func show_damage(damage, crit, index):
@@ -158,7 +158,8 @@ func give_spoil():
 			get_tree().call_group("spoils", "connect", spoil_instance)
 			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"])
 			index += 40
-
+		
+		
 
 func skill_attack():
 	is_attack = true

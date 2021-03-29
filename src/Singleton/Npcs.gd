@@ -6,7 +6,7 @@ var NpcList = {
 		"name" : "헤네시스 죽박이 미아",
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
-		"image" : load("res://assets/art/npc/mia/mia1.png"),
+		"image" : load("res://assets/art/npc/mia/mia.png"),
 		"base_msg" : "내가 관상을 볼줄 알어.... 넌 글렀어 임마...",
 	},
 	0x9001:{
@@ -14,7 +14,7 @@ var NpcList = {
 		"name" : "헤네시스 할아버지 장로스탄 친구의 아들",
 		"description" : "커닝시티 갤주",
 		"type" : "quest",
-		"image" : load("res://assets/art/npc/stan/stan.png"),
+		"image" : load("res://assets/art/npc/stan/stan1.png"),
 		"base_msg" : "내가 관상을 볼줄 알어.... 넌 글렀어 임마...",
 	}
 }

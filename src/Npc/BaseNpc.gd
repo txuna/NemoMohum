@@ -12,8 +12,11 @@ func _ready() -> void:
 	player_variable = get_node("/root/PlayerVariables")
 
 func _physics_process(delta: float) -> void:
+	if is_on_floor():
+		set_physics_process(false)
 	velocity.y += GRAVITY
 	move_and_slide(velocity, Vector2.UP)
+
 
 
 func set_npc(npc_code):

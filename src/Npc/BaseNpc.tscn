@@ -10,7 +10,7 @@ font_data = ExtResource( 2 )
 [node name="BaseNpc" type="KinematicBody2D"]
 input_pickable = true
 collision_layer = 32
-collision_mask = 12
+collision_mask = 4
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
