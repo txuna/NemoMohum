@@ -62,9 +62,11 @@ func _on_notification(type:int, code:int, numberof:int=0):
 				check_quest(quest_code)
 				# CAN_COMPLETE인지 확인		
 	
+# NPC code를 기반으로 해당 NPC가 어떠한 퀘스트들을 가지지는지를 반환
 func get_npc_quest(npc_code):
 	return quest_list.NpcQuest[npc_code]
 
+# 퀘스트 코드를 기반으로 해당 퀘스트 객체 반환
 func get_quest(quest_code):
 	return quest_list.QuestList[quest_code]
 
@@ -97,7 +99,7 @@ func get_quest_summary(quest_code):
 	return get_quest(quest_code)["quest_summary_msg"]
 
 
-# 현재 진행상태를 확인 
+# 현재 진행상태를 확인
 func get_quest_progress(quest_code)->Array:
 	var quest_goals = get_quest(quest_code)["quest_goal"]
 	var status = [

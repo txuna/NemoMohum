@@ -69,6 +69,13 @@ var QuestList = {
 					"player_count" : 0, #플레이어의 진행상태
 				}
 			],
+			"enemy" : [
+
+			],
+			# 특장 NPC에게 대화걸기
+			"talk_to" : [
+				# 성공여부는 false and true
+			]
 		},
 		"quest_reward" : {
 			"state" : {
