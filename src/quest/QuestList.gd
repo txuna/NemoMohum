@@ -57,9 +57,50 @@ var QuestList = {
 			"quest_list" : [],
 		},
 		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
+	},
+	0xD001 : {
+		"quest_code" : 0xD001, 
+		"quest_name" : "빨간포션 공짜로 매입",
+		"quest_goal" : {
+			"item" : [
+				{
+					"code" : 0xB000,
+					"numberof" : 10,
+					"player_count" : 0, #플레이어의 진행상태
+				}
+			],
+		},
+		"quest_reward" : {
+			"state" : {
+				"coin" : 300, 
+				"current_exp" : 2000, 
+			},
+			"item" : {
+				"consumption" : [
+					{
+						"item_code" : 0xB000, 
+						"numberof" : 2,
+					},
+					{
+						"item_code" : 0xB001,
+						"numberof" : 3,
+					}
+				]
+			}
+		},
+		"quest_not_started_msg" : ["빨간포션 사요", "? ㅎㅇㅎㅇㅎ 10개만요ㅋㅋ"],
+		"quest_progress_msg" : ["아직 못구함?" ,"실력 ㅆㅎㅌㅊ"],
+		"quest_complete_msg" : ["ㄳㄳ"],
+		"quest_summary_msg" : "빨간포션이 급히 필요해보이는 듯하다 얼른 10개를 구해다 주자",
+		"npc_code" : 0x9001,
+		"condition" : {
+			"level" : 0, 
+			"quest_list" : [],
+		},
+		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
 	}
 }
 
 var NpcQuest = {
-	0x9001 : [0xD000],
+	0x9001 : [0xD000, 0xD001],
 }
