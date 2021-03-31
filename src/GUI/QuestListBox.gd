@@ -2,7 +2,7 @@ extends CanvasLayer
 
 onready var QuestListContainer = $TextureRect/QuestScrollContainer/QuestContainer
 onready var QuestDetail = $TextureRect/QuestDetail
-
+onready var ProgessContainer = $TextureRect/ProgressContainer
 
 const NOT_START = 0
 const PROGRESS = 1
@@ -10,11 +10,13 @@ const CAN_COMPLETE = 2
 const WAS_COMPLETE = 3 #이미 완료된거
 
 var quest_manager = null
+var current_quest_code
 
 # Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
 	quest_manager = get_node("/root/Main/QuestManager")
+	
 	open_quest_list()
 	
 
@@ -34,7 +36,6 @@ func load_quest_list():
 	for quest_code in quest_code_in_progress:
 		var hbox = make_hbox(quest_code)
 		QuestListContainer.add_child(hbox)
-	
 	
 func make_dynamic_font()->DynamicFont:
 	# font 설정
@@ -70,7 +71,42 @@ func make_hbox(quest_code:int)->HBoxContainer:
 	
 func show_detail_quest(event:InputEvent, quest_code:int):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		current_quest_code = quest_code
 		QuestDetail.text = quest_manager.get_quest_summary(quest_code)
+		update_progress_state(quest_code)
+	
+func update_progress_state(quest_code):
+	init_progess_container()
+		# 진행 상태 표시
+	var status = quest_manager.get_quest_progress(quest_code)
+	for element in status:
+		var progress_text = ""
+		if element["code"] >= 0xF000 and element["code"] <= 0xFFFF:
+			var name = EnemyState.new().EnemyList[element["code"]]["enemy_name"]
+			progress_text += name + " => "
+				
+		elif element["code"] >= 0xA000 and element["code"] <= 0xCFFF:
+			var name = get_node("/root/Items").Items[element["code"]]["item_name"]
+			progress_text += name + " => "
+				
+		progress_text += "[" + str(element["player_count"]) + " / "
+		progress_text += str(element["goal_count"]) + "]"
+		var label = make_label(progress_text)
+		ProgessContainer.get_node("Container").add_child(label)
+	ProgessContainer.visible = true	
+	
+	
+func init_progess_container():
+	for child in ProgessContainer.get_node("Container").get_children():
+		child.queue_free()
 	
 func give_up_quest():
 	pass
+
+
+
+
+
+
+
+

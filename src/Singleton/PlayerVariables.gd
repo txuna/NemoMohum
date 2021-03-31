@@ -151,6 +151,7 @@ func update_state():
 		return 
 	else:
 		state_instance.update_state()
+
 		
 # 인벤토리가 열려있는지 체크 및 반환
 func get_inventory_node():

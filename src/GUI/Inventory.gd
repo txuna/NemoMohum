@@ -9,7 +9,7 @@ onready var slot_grid = $Sprite/ScrollContainer/GridContainer
 onready var item_name = $Sprite/DetailContainer/ItemName
 onready var item_description = $Sprite/DetailContainer/ItemDescription
 onready var item_effect = $Sprite/DetailContainer/ItemEffect
-
+onready var coin_value = $Sprite/CoinValue
 # 인벤토리 클릭시 어떤 것인지 알 수 있도록 아이템코드 등록
 # code + type + slot 
 var inventory_slot_dict = {}
@@ -70,7 +70,11 @@ func make_slot(index:int, code:int)->Panel:
 	
 	return slot
 	
+func load_coin():
+	coin_value.text = str(player_variables.state["coin"])
+	
 func load_slot_from_inventory():
+	load_coin()
 	init_slot()
 	var index:int = 0
 	var player_inventory = player_variables.inventory

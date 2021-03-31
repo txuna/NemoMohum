@@ -34,6 +34,7 @@ func check_quest(quest_code):
 		for goal in goals:
 			if goal["player_count"] < goal["numberof"]:
 				#퀘스트 미달
+				quest["quest_state"] = PROGRESS
 				return 
 				
 	quest["quest_state"] = CAN_COMPLETE
@@ -77,8 +78,11 @@ func set_quest_state(quest_code, current_state):
 		
 	elif current_state == CAN_COMPLETE:
 		quest["quest_state"] = WAS_COMPLETE
-		# 플레이어에게 보상을전달한다.
+		# 플레이어에게 보상을전달한다. 그리고 퀘스트 아이템 제거 + 제거할 떄 수량 체크
 		_on_remove_quest_in_progress(quest_code)
+
+func give_reward_to_player(quest_code):
+	pass
 
 func get_quest_name(quest_code):
 	return get_quest(quest_code)["quest_name"]
@@ -93,6 +97,21 @@ func get_quest_summary(quest_code):
 	return get_quest(quest_code)["quest_summary_msg"]
 
 
+# 현재 진행상태를 확인 
+func get_quest_progress(quest_code)->Array:
+	var quest_goals = get_quest(quest_code)["quest_goal"]
+	var status = [
+		
+	]
+	for quest_goal_key in quest_goals:
+		for goal in quest_goals[quest_goal_key]:
+			var dict = {
+				"player_count" : goal["player_count"],
+				"goal_count" : goal["numberof"],
+				"code" : goal["code"],
+			}
+			status.append(dict)
+	return status
 
 
 

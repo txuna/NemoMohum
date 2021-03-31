@@ -415,5 +415,20 @@ func get_spoil(spoil):
 	player_variable.get_spoil(spoil)
 	send_notifination_to_quest(ITEM, item["code"], item["numberof"])
 		
+# quest list box update
 func send_notifination_to_quest(type:int, code:int, numberof:int):
 	emit_signal("NOTIFY", type, code , numberof)
+	player_variable.update_questbox()
+	
+
+
+
+
+
+
+
+
+
+
+
+
