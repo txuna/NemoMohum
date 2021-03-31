@@ -2,6 +2,7 @@ class_name EnemyState
 
 var EnemyList = {
 	0xF001 : {
+		"enemy_code" : 0xF001,
 		"enemy_name" : "robot",
 		#"scene" : preload("res://src/Enemy/robot/Robot.tscn"),
 		"state" : {
@@ -35,6 +36,7 @@ var EnemyList = {
 		}
 	},
 	0xF002 : {
+		"enemy_code" : 0xF002,
 		"enemy_name" : "toy robot",
 		#"scene" : preload("res://src/Enemy/toyrobot/ToyRobot.tscn"),
 		"state" : {

@@ -43,29 +43,24 @@ func check_quest(quest_code):
 # type : NPC, ENENY, ITEM 3가지로 나눠진다. 
 # numberof : 수량
 func _on_notification(type:int, code:int, numberof:int=0):
-	print("NOTIFICATION")
-	var type_str = null
+	var type_str:String
 	if type == NPC:
 		type_str = "talk_to"
-
 		
 	elif type == ENEMY:
 		type_str = "enemy"
-
 		
 	elif type == ITEM:
 		type_str = "item"
 
-		
 	for quest_code in quest_in_progress:
 		var quest_goals = get_quest(quest_code)["quest_goal"][type_str]
 		for goal in quest_goals:
 			if goal["code"] == code:
 				goal["player_count"] += numberof
 				check_quest(quest_code)
-				# CAN_COMPLETE인지 확인
-				
-		
+				# CAN_COMPLETE인지 확인		
+	
 func get_npc_quest(npc_code):
 	return quest_list.NpcQuest[npc_code]
 
@@ -82,6 +77,7 @@ func set_quest_state(quest_code, current_state):
 		
 	elif current_state == CAN_COMPLETE:
 		quest["quest_state"] = WAS_COMPLETE
+		# 플레이어에게 보상을전달한다.
 		_on_remove_quest_in_progress(quest_code)
 
 func get_quest_name(quest_code):

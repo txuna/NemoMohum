@@ -11,7 +11,7 @@ var NpcList = {
 	},
 	0x9001:{
 		"code" : 0x9001,
-		"name" : "헤네시스 할아버지 장로스탄 친구의 아들",
+		"name" : "장로스탄",
 		"description" : "커닝시티 갤주",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/stan/stan1.png"),

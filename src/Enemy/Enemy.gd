@@ -120,7 +120,7 @@ func calc_def(damage):
 func enemy_death():
 	is_enemy_death = true
 	give_spoil()
-	emit_signal("EnemyDeath", give_exp(), give_coin())
+	emit_signal("EnemyDeath", give_exp(), give_coin(), enemy_info["enemy_code"])
 	EnemyCollision.set_deferred("disabled", true)
 	EnemySprite.animation = "die"
 	EnemyPlayer.play("die")

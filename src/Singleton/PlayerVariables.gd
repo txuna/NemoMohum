@@ -186,7 +186,7 @@ func update_shop():
 		return
 	else:
 		shop_node.update_shop()
-		
+
 		
 func get_coin(coin):
 	state["coin"] += coin
@@ -260,13 +260,15 @@ func check_already_wear_equipment(new_item_code):
 				
 	return false
 	
+	
 # 장비창에 현재 해당 아이템이 있는지
 func check_already_has_equipment(item_code):
 	if inventory["equipment"].has(item_code):
 		return true
 	else:
 		return false
-		
+	
+## SIGNAL 
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
 	if check_already_has_equipment(item["code"]):

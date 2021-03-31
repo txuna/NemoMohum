@@ -12,14 +12,14 @@ font_data = ExtResource( 2 )
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 size = 24
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -74,7 +74,7 @@ margin_left = 887.758
 margin_top = 27.7837
 margin_right = 1039.76
 margin_bottom = 72.7837
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "나가기"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -85,8 +85,8 @@ margin_left = 561.0
 margin_top = 229.0
 margin_right = 1046.0
 margin_bottom = 813.0
-custom_fonts/mono_font = SubResource( 5 )
-custom_fonts/normal_font = SubResource( 6 )
+custom_fonts/mono_font = SubResource( 4 )
+custom_fonts/normal_font = SubResource( 5 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false

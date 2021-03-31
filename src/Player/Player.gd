@@ -9,6 +9,10 @@ export (int) var gravity = 1200
 const LEFT = true
 const RIGHT = false
 
+const NPC = 1
+const ENEMY = 2
+const ITEM = 3
+
 var velocity = Vector2()
 var jumping = false
 
@@ -29,6 +33,8 @@ onready var player_sprite = $Sprite
 onready var player_attack_delay = $AttackDelay
 onready var InvincibleTimer = $InvincibleTimer
 onready var damage_position = $DamagePosition
+
+signal NOTIFY
 
 
 # 퀘스트 목록을 기반으로 플레이어가 생성될 떄마다 다시 불러오기?
@@ -307,12 +313,16 @@ func upgrade_state(state_type):
 	if value == true:
 		player_variable.change_upgrade_point(-1)
 		player_variable.update_state()
-		
-# code기반으로 타입을 얻는다. 
+
+#################################################### 알림 구간? 
+# code기반으로 타입을 얻는다.
 func use_item(code, numberof):
 	var item = items[code]
 	var item_type = item["type"]
 	if item_type == "equipment":
+	#해당 아이템이 착용중이라면
+		if player_variable.check_already_wear_equipment(item["code"]):
+			return	
 		wear_equipment(code)
 	# wear!
 	elif item_type == "consumption":
@@ -321,22 +331,22 @@ func use_item(code, numberof):
 			return
 		# 아이템을 사용하는 코드 
 		player_variable.use_item(item_type, code, numberof, -1, item["affect_player"])
-		
+		send_notifination_to_quest(ITEM, code, numberof * -1)
 	elif item_type == "etc":
 		return
+		
 	return
 
-func get_spoil(spoil):
-	#submit.notify()
-	player_variable.get_spoil(spoil)
 
 func _on_attack_motion_finished(anim_name:String):
 	set_weapon_direction(get_weapon_direction())
 	is_attack = false
 	
 
-func _on_enemy_death(enemy_exp, enemy_coin):
+func _on_enemy_death(enemy_exp, enemy_coin, enemy_code):
 	#submit.notify()
+	#emit_signal("NOTIFY", 2, enemy_code, 1)
+	send_notifination_to_quest(ENEMY, enemy_code, 1)
 	player_variable.get_exp(enemy_exp)
 	player_variable.get_coin(enemy_coin)
 
@@ -356,10 +366,10 @@ func _on_sell_item(item):
 
 	if not player_variable.check_inventory_item_numberof(item_type, item_code):
 		return
-		
+
 	player_variable.use_item(item_type, item_code, numberof, -1, false)
 	player_variable.get_coin(item_price)
-	
+	send_notifination_to_quest(ITEM, item_code, numberof * -1)
 	
 func _on_buy_item(item):
 	var item_price = items[item["code"]]["buy"]
@@ -370,6 +380,7 @@ func _on_buy_item(item):
 		return
 	player_variable.get_coin(-item_price)
 	player_variable.get_item(item)
+	send_notifination_to_quest(ITEM, item["code"], 1)
 	
 func upgrade_skill(code):
 	var skills = get_node("/root/Skills")
@@ -397,3 +408,12 @@ func _on_Area2D_body_entered(body: Node) -> void:
 			
 	elif body.is_in_group("spoils"):
 		get_spoil(body)
+		
+	
+func get_spoil(spoil):
+	var item = spoil.get_item()
+	player_variable.get_spoil(spoil)
+	send_notifination_to_quest(ITEM, item["code"], item["numberof"])
+		
+func send_notifination_to_quest(type:int, code:int, numberof:int):
+	emit_signal("NOTIFY", type, code , numberof)

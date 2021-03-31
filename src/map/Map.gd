@@ -32,6 +32,7 @@ func set_map():
 	
 func spawn_player():
 	player = preload("res://src/Player/Player.tscn").instance() 
+	player.connect("NOTIFY", get_node("/root/Main/QuestManager"), "_on_notification")
 	var x = map_config["player_spawn_position"]["x"]
 	var y = map_config["player_spawn_position"]["y"]
 	player.global_position = Vector2(x, y)

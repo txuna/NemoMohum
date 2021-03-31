@@ -104,6 +104,7 @@ func _on_next_msg():
 	if msg_y is GDScriptFunctionState && msg_y.is_valid():
 		msg_y = msg_y.resume()
 
+# 선행 퀘 및 조건 체크
 func check_requirement_quest(quest)->bool:
 	for requirement_quest_code in quest["condition"]["quest_list"]:
 		var requirement_quest = quest_manager.get_quest(requirement_quest_code)
