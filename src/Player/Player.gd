@@ -441,10 +441,12 @@ func give_item_to_quest(need_items:Array):
 		player_variable.use_item(item_type, item_code, numberof, -1, false) 
 		send_notifination_to_quest(ITEM, item_code, numberof * -1)
 
-# 퀘스트를 수락할 시 퀘스트 매니저에 SIgnal 전송 (기존 아이템 검사) 
+# 퀘스트를 수락할 시 퀘스트 매니저에 Signal 전송 (기존 아이템 검사) 
 func send_signal_abount_inventory_item():
-	pass
-
+	for type in player_variable.inventory:
+		for item_code in player_variable.inventory[type]:
+			var numberof = player_variable.inventory[type][item_code]["numberof"]
+			send_notifination_to_quest(ITEM, item_code, numberof * 1)
 
 
 

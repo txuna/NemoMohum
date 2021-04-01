@@ -71,13 +71,22 @@ func get_npc_quest(npc_code):
 func get_quest(quest_code):
 	return quest_list.QuestList[quest_code]
 
+func check_player_item():
+	var player_node_path = get_node("/root/PlayerVariables").get_player_node_path()
+	var player_node = get_node_or_null(player_node_path)
+	if player_node == null:
+		return false
+	player_node.send_signal_abount_inventory_item()
+	
 # 시작전이면 진행으로 
 # CAN_COMPLETE로 되어있다면 WAS_COMPLETE로 
 func set_quest_state(quest_code, current_state):
 	var quest = get_quest(quest_code)
 	if current_state == NOT_START:
+		#퀘스트 수락 / 플레이어의 인벤토리 검사 함수 호출
 		quest["quest_state"] = PROGRESS
 		_on_add_quest_in_progress(quest_code)
+		check_player_item()
 		
 	elif current_state == CAN_COMPLETE:
 		var is_player = give_reward_to_player(quest_code)
