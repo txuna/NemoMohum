@@ -15,6 +15,7 @@ const ITEM = 3
 var quest_in_progress = [] #quest_code list
 var quest_list = null
 
+signal REWARD
 
 func _ready() -> void:
 	quest_list = QuestList.new()
@@ -79,12 +80,22 @@ func set_quest_state(quest_code, current_state):
 		_on_add_quest_in_progress(quest_code)
 		
 	elif current_state == CAN_COMPLETE:
+		var is_player = give_reward_to_player(quest_code)
+		if not is_player:
+			return
 		quest["quest_state"] = WAS_COMPLETE
-		# 플레이어에게 보상을전달한다. 그리고 퀘스트 아이템 제거 + 제거할 떄 수량 체크
 		_on_remove_quest_in_progress(quest_code)
-
-func give_reward_to_player(quest_code):
-	pass
+		
+# 플에이어에게 보상을 제공하고 플레이어의 퀘스트 아이템을 가져간다. 
+func give_reward_to_player(quest_code)->bool:
+	var quest = get_quest(quest_code)
+	var player_node_path = get_node("/root/PlayerVariables").get_player_node_path()
+	var player_node = get_node_or_null(player_node_path)
+	if player_node == null:
+		return false
+	player_node.give_item_to_quest(quest["quest_goal"]["item"])
+	player_node.get_quest_reward(quest["quest_reward"])
+	return true
 
 func get_quest_name(quest_code):
 	return get_quest(quest_code)["quest_name"]

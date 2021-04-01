@@ -37,12 +37,14 @@ var QuestList = {
 			"item" : {
 				"consumption" : [
 					{
-						"item_code" : 0xB000, 
+						"code" : 0xB000, 
 						"numberof" : 2,
+						"type" : "consumption",
 					},
 					{
-						"item_code" : 0xB001,
+						"code" : 0xB001,
 						"numberof" : 3,
+						"type" : "consumption",
 					}
 				]
 			}
@@ -85,12 +87,14 @@ var QuestList = {
 			"item" : {
 				"consumption" : [
 					{
-						"item_code" : 0xB000, 
+						"code" : 0xB000, 
 						"numberof" : 2,
+						"type" : "consumption",
 					},
 					{
-						"item_code" : 0xB001,
+						"code" : 0xB001,
 						"numberof" : 3,
+						"type" : "consumption",
 					}
 				]
 			}

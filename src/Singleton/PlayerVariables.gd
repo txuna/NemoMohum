@@ -283,10 +283,9 @@ func get_item(item:Dictionary):
 	#add_message_to_chatbox("아이템을 얻었습니다 : " + str(item_name) + " " + str(numberof) + "개")	
 	update_inventory()
 	
-func get_spoil(spoil):
-	var item = spoil.get_item()
+func get_spoil(item):
 	get_item(item)
-	spoil.queue_free()
+	#spoil.queue_free()
 	
 func get_current_equipment():
 	return current_equipment

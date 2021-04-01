@@ -407,25 +407,43 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		take_damage(body.collision_attack())
 			
 	elif body.is_in_group("spoils"):
-		get_spoil(body)
+		var item = body.get_item()
+		body.queue_free()
+		get_spoil(item)
 		
 	
-func get_spoil(spoil):
-	var item = spoil.get_item()
-	player_variable.get_spoil(spoil)
+func get_spoil(item):
+	player_variable.get_spoil(item)
 	send_notifination_to_quest(ITEM, item["code"], item["numberof"])
 		
 # quest list box update
 func send_notifination_to_quest(type:int, code:int, numberof:int):
 	emit_signal("NOTIFY", type, code , numberof)
 	player_variable.update_questbox()
-	
 
+func get_quest_reward(reward:Dictionary):
+	var reward_exp = reward["state"]["current_exp"]
+	var reward_coin = reward["state"]["coin"]
+	var items = reward["item"]
+	for type_key in items:
+		for item in items[type_key]:
+			get_spoil(item)
+			
+	player_variable.get_exp(reward_exp)
+	player_variable.get_coin(reward_coin)
 
+# Quest 아이템들을 NPC에게 넘김
+func give_item_to_quest(need_items:Array):
+	for item in need_items:
+		var item_code = item["code"]
+		var numberof = item["numberof"]
+		var item_type = items[item_code]["type"]
+		player_variable.use_item(item_type, item_code, numberof, -1, false) 
+		send_notifination_to_quest(ITEM, item_code, numberof * -1)
 
-
-
-
+# 퀘스트를 수락할 시 퀘스트 매니저에 SIgnal 전송 (기존 아이템 검사) 
+func send_signal_abount_inventory_item():
+	pass
 
 
 
