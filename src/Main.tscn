@@ -1,12 +1,6 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://src/quest/QuestManager.tscn" type="PackedScene" id=1]
-[ext_resource path="res://src/GUI/HUD.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/Main.gd" type="Script" id=3]
 
 [node name="Main" type="Node"]
 script = ExtResource( 3 )
-
-[node name="HUD" parent="." instance=ExtResource( 2 )]
-
-[node name="QuestManager" parent="." instance=ExtResource( 1 )]
