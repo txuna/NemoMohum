@@ -15,11 +15,6 @@ _global_script_classes=[ {
 "path": "res://src/Singleton/EnemyState.gd"
 }, {
 "base": "Reference",
-"class": "Kinematic",
-"language": "GDScript",
-"path": "res://src/Player/base_player.gd"
-}, {
-"base": "Reference",
 "class": "NpcScene",
 "language": "GDScript",
 "path": "res://src/Npc/NpcScene.gd"
@@ -41,7 +36,6 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "EnemyState": "",
-"Kinematic": "",
 "NpcScene": "",
 "Npcs": "",
 "QuestList": "",

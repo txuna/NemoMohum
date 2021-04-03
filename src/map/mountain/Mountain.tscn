@@ -106,8 +106,8 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 [node name="Mountain" instance=ExtResource( 2 )]
 script = ExtResource( 5 )
 
-[node name="Background2" type="Sprite" parent="ParallaxBackground" index="0"]
-position = Vector2( 962.661, 345.991 )
+[node name="Background" parent="ParallaxBackground" index="0"]
+position = Vector2( 958.837, 347.897 )
 texture = ExtResource( 1 )
 
 [node name="TileMap" parent="." index="1"]

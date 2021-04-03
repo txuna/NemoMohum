@@ -1,7 +1,6 @@
 extends Node2D
 
-const ROBOT = preload("res://src/Enemy/robot/Robot.tscn")
-const TOY_ROBOT = preload("res://src/Enemy/toyrobot/ToyRobot.tscn")
+const FROG = preload("res://src/Enemy/frog/Frog.tscn")
 
 const MAP_CONFIG = "res://config/MapConfig.json"
 var player = null
@@ -49,11 +48,10 @@ func spawn_npc():
 		add_child(npc)
 
 func spawn_enemy():
-	for i in range(10):
-		var enemy = TOY_ROBOT.instance()
+	for i in range(1):
+		var enemy = FROG.instance()
 		enemy.global_position = EnemySpawnPosition.position
 		enemy.connect("EnemyDeath", player, "_on_enemy_death")
-		#enemy.connect("EnemyDeath", get_node("/root/Main/QuestManager"), "_on_notification")
 		get_tree().call_group("enemies", "connect", enemy)
 		add_child(enemy)
 

@@ -19,7 +19,7 @@ var QuestList = {
 			],
 			"enemy" : [
 				{
-					"code" : 0xF002,
+					"code" : 0xF003,
 					"numberof" : 10,
 					"player_count" : 0,
 				}

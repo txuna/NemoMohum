@@ -27,7 +27,6 @@ onready var EnemySprite = $EnemySprite
 onready var HealthBar = $HealthBar
 onready var EnemyDamagePosition = $DamageSkin
 onready var SpoilPosition = $SpoilPosition
-onready var EnemyPlayer = $EnemySprite/AnimationPlayer
 onready var AttackPosition = $AttackPosition
 onready var AttackDelay = $AttackDelay
 
@@ -77,11 +76,11 @@ func _on_Timer_timeout() -> void:
 func choice_stand_or_move():
 	current_state = stand_list[randi() % stand_list.size()]
 	if current_state == STAND:
-		EnemySprite.animation = "stand"
-		EnemyPlayer.play("stand")
+		#EnemySprite.animation = "stand"
+		EnemySprite.play("stand")
 	else:
-		EnemySprite.animation = "walk"
-		EnemyPlayer.play("walk")
+		#EnemySprite.animation = "walk"
+		EnemySprite.play("walk")
 	
 # 오른쪽으로 갈지 왼쪽으로 갈지 결정
 func get_direction():
@@ -104,8 +103,8 @@ func take_damage(player_damage, crit, index):
 	if enemy_info["state"]["current_hp"] - damage <= 0:
 		enemy_death()
 	else:
-		EnemySprite.animation = "hit"
-		EnemyPlayer.play("hit")
+		#EnemySprite.animation = "hit"
+		EnemySprite.play("hit")
 		enemy_info["state"]["current_hp"] -= damage
 		
 	var particle = preload("res://src/Effect/HitEffect.tscn").instance()
@@ -122,9 +121,9 @@ func enemy_death():
 	give_spoil()
 	emit_signal("EnemyDeath", give_exp(), give_coin(), enemy_info["enemy_code"])
 	EnemyCollision.set_deferred("disabled", true)
-	EnemySprite.animation = "die"
-	EnemyPlayer.play("die")
-	yield(EnemyPlayer, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
+	#EnemySprite.animation = "die"
+	EnemySprite.play("die")
+	yield(EnemySprite, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
 	queue_free()
 
 func show_damage(damage, crit, index):
