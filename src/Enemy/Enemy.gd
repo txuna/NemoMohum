@@ -29,6 +29,7 @@ onready var EnemyDamagePosition = $DamageSkin
 onready var SpoilPosition = $SpoilPosition
 onready var AttackPosition = $AttackPosition
 onready var AttackDelay = $AttackDelay
+onready var EnemyInfo = $EnemyInfo
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -36,6 +37,7 @@ func _ready() -> void:
 	set_direction()
 	choice_stand_or_move()
 	#
+	
 
 func _physics_process(delta: float) -> void:
 	if is_enemy_death:
@@ -47,12 +49,16 @@ func _physics_process(delta: float) -> void:
 		velocity.x = 0
 	velocity = move_and_slide(velocity, Vector2.UP)
 
+func show_enemy_info():
+	EnemyInfo.text = "Lv." + str(enemy_info["state"]["level"]) + " " + enemy_info["enemy_name"]
+
 # Enemy의 정보를 저장한다. 
 func set_enemy_info(enemy_code:int):
 	enemy_info = EnemyState.new().get_enemy_info(enemy_code)
 	
 	#enemy_info = get_node("/root/EnemyState").EnemyList[enemy_code].duplicate()
 	HealthBar.set_health(enemy_info["state"]["max_hp"])
+	show_enemy_info()
 	
 # Enemy의 방향을 결정짓는다
 func set_direction():
