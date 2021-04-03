@@ -13,7 +13,7 @@ func game_manager():
 	load_title()
 	#load_map()
 
-func _on_start_game():
+func _on_game_start():
 	get_node("/root/Main/Title").queue_free()
 	var quest_manager = QuestManager.instance()
 	var hud = Hud.instance()
@@ -25,7 +25,7 @@ func _on_start_game():
 
 func load_title():
 	var title = Title.instance()
-	title.connect("game_start", self, "_on_start_game")
+	title.connect("game_start", self, "_on_game_start")
 	add_child(title)
 
 func load_map():
