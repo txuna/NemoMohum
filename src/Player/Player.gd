@@ -23,6 +23,7 @@ var is_delay = false # 공격 딜레이
 var player_variable = null #플레이어의 상태
 var items = null # 아이템 리스트 
 var skills = null # 스킬 리스트 
+var is_death = false
 
 const SKILL_ATTACK = true 
 const NORMAL_ATTACK = false
@@ -66,6 +67,8 @@ func _physics_process(delta):
 
 func get_input():
 	velocity.x = 0
+	if is_death:
+		return
 	var right = Input.is_action_pressed('RIGHT')
 	var left = Input.is_action_pressed('LEFT')
 	var jump = Input.is_action_just_pressed('JUMP')
@@ -225,6 +228,9 @@ func take_damage(damage):
 	player_variable.increase_state_from_effect(temp, -1)
 	invincible = true
 	InvincibleTimer.start()
+	if player_variable.get_current_hp() <= 0:
+		is_death = true 
+		player_animated_sprite.play("die")
 	
 func show_damage(damage):
 	var damage_skin = DAMAGE_SKIN.instance()
@@ -406,6 +412,8 @@ func _on_InvincibleTimer_timeout() -> void:
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
+	if is_death:
+		return
 	if body.is_in_group("enemies"):
 		if invincible == true:
 			return
@@ -452,8 +460,3 @@ func send_signal_abount_inventory_item():
 		for item_code in player_variable.inventory[type]:
 			var numberof = player_variable.inventory[type][item_code]["numberof"]
 			send_notifination_to_quest(ITEM, item_code, numberof * 1)
-
-
-
-
-

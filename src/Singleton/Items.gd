@@ -120,5 +120,15 @@ var Items = {
 		"item_description" : "개구리 다리다. 구워먹으면 맛있다.",
 		"buy" : 10,
 		"sell" : 5,
+	},
+	0xC002 : {
+		"code" : 0xC002, 
+		"item_name" : '토끼 고기',
+		"affect_player" : false,
+		"type" : "etc",
+		"item_image" : load("res://assets/art/spoil/etc/hare_meat.png"),	
+		"item_description" : "무장봉 토끼 고기다. 질기지만 맛있다.",
+		"buy" : 10,
+		"sell" : 5,
 	}
 }

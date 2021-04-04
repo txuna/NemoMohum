@@ -27,7 +27,7 @@ var state = {
 	"nickname" : "스페셜땡스루",
 	"min_attack" : 5, 
 	"max_attack" : 12, 
-	"current_hp" : 1000, 
+	"current_hp" : 100, 
 	"max_hp" : 1000, 
 	"current_mp" : 100,
 	"max_mp" : 100,
@@ -353,6 +353,8 @@ func increase_state_from_effect(effects, mask):
 				update_hud((effects[effect] * mask), "mp")
 	update_state()
 	
+func get_current_hp():
+	return state["current_hp"]
 
 func check_overflow_state():
 	if state["current_hp"] >= state["max_hp"]:
