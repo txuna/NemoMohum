@@ -61,12 +61,12 @@ tracks/1/keys = {
 }
 
 [node name="BranchSword" instance=ExtResource( 1 )]
-rotation = 0.872665
 scale = Vector2( -1, 1 )
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( -26.6633, -82.121 )
+position = Vector2( -20.3637, -55.6627 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
 
 [node name="AnimationPlayer" parent="." index="1"]

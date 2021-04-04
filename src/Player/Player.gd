@@ -29,7 +29,7 @@ const NORMAL_ATTACK = false
 
 onready var player_skill_position = $SkillSpawnPosition
 onready var player_weapon_position = $WeaponSpawnPosition
-onready var player_sprite = $Sprite
+onready var player_animated_sprite = $AnimatedSprite
 onready var player_attack_delay = $AttackDelay
 onready var InvincibleTimer = $InvincibleTimer
 onready var damage_position = $DamagePosition
@@ -94,16 +94,19 @@ func get_input():
 	if attack and not is_delay and not is_attack:
 		# 기본공격이랑 스킬도 같이 표현
 		attack()
+	else:
+		player_animated_sprite.play("idle")
 	
 
 func player_move(left, right):
 	if right:
 		set_direction(RIGHT)
 		velocity.x += run_speed 
+		
 	if left:
 		set_direction(LEFT)
 		velocity.x -= run_speed
-	#velocity.x = lerp(velocity.x, 0, 0.3)
+	player_animated_sprite.play("walk")
 	
 func move_and_check_collision():
 	velocity = move_and_slide(velocity, Vector2(0, -1))
@@ -158,11 +161,13 @@ func open_inventory():
 
 # 좌유 방향에 따라 플레이어의 scale과 무기 위치를 세팅한다.
 func set_direction(direction):
-	player_sprite.flip_h = direction
+	player_animated_sprite.flip_h = direction
 	if direction == LEFT:
+		player_animated_sprite.position = Vector2(13, 1.2)
 		if sign(player_weapon_position.position.x) == 1:
 			set_position_of_player()
 	elif direction == RIGHT:
+		player_animated_sprite.position = Vector2(-20, 1.2)
 		if sign(player_weapon_position.position.x) == -1:
 			set_position_of_player()
 			

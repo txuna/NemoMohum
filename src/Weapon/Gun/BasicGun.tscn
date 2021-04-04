@@ -39,8 +39,8 @@ tracks/0/keys = {
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 33.7273, -18.5511 )
-scale = Vector2( 0.8, 0.8 )
+position = Vector2( 32.5368, -18.1542 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="1"]
