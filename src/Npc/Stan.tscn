@@ -2,20 +2,20 @@
 
 [ext_resource path="res://src/Npc/Stan.gd" type="Script" id=1]
 [ext_resource path="res://src/Npc/BaseNpc.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/art/npc/stan/stan1.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/npc/stan/stan2.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 39.9302, 79.2612 )
+extents = Vector2( 30.7508, 46.4662 )
 
 [node name="Stan" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 
 [node name="Sprite" parent="." index="0"]
-scale = Vector2( 0.8, 0.8 )
+scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -1.8481, 2.89234 )
+position = Vector2( 15.3954, -0.0806828 )
 shape = SubResource( 1 )
 
 [node name="NpcName" parent="." index="2"]

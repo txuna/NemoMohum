@@ -6,7 +6,7 @@ var NpcList = {
 		"name" : "헤네시스 죽박이 미아",
 		"description" : "잡화상점",
 		"type" : "shopkeeper",
-		"image" : load("res://assets/art/npc/mia/mia.png"),
+		"image" : load("res://assets/art/npc/mia/mia3.png"),
 		"base_msg" : "내가 관상을 볼줄 알어.... 넌 글렀어 임마...",
 	},
 	0x9001:{
@@ -14,12 +14,12 @@ var NpcList = {
 		"name" : "장로스탄",
 		"description" : "커닝시티 갤주",
 		"type" : "quest",
-		"image" : load("res://assets/art/npc/stan/stan1.png"),
+		"image" : load("res://assets/art/npc/stan/stan2.png"),
 		"base_msg" : "내가 관상을 볼줄 알어.... 넌 글렀어 임마...",
 	}
 }
 
-
+# 판매 물품
 var ShopKeepers = {
 	0x9000 : [
 		{
@@ -28,8 +28,5 @@ var ShopKeepers = {
 		{
 			"code" : 0xB001
 		},
-		{
-			"code" : 0xA000
-		}
 	],
 }

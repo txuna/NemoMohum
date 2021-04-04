@@ -45,10 +45,6 @@ var state = {
 
 var inventory = {
 	"equipment" : {
-		0xA000:{
-			"code" : 0xA000,
-			"numberof" : 1,
-		},
 		0xA001:{
 			"code" : 0xA001,
 			"numberof" : 1,
