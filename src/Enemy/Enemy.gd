@@ -134,7 +134,6 @@ func enemy_death():
 	#queue_free()
 
 func respawn():
-	print("RESPAWN")
 	is_enemy_death = false
 	visible = true
 	EnemyCollision.set_deferred("disabled", false)
