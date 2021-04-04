@@ -46,5 +46,10 @@ margin_bottom = 14.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="respawn"]
