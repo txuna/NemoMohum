@@ -5,6 +5,7 @@ var velocity = Vector2.ZERO
 
 onready var npc_name = $NpcName
 onready var sprite = $Sprite
+
 var npc = null
 var player_variable = null
 # Called when the node enters the scene tree for the first time.
@@ -23,7 +24,7 @@ func set_npc(npc_code):
 	npc = Npcs.new().NpcList[npc_code]
 	#npc = get_node("/root/Npcs").Npcs[npc_code]
 	sprite.texture = npc["image"]
-	npc_name.text = npc["name"]
+	npc_name.text = npc["name"] + "\n" + npc["description"]
 
 func _on_BaseNpc_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:

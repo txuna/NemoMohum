@@ -23,3 +23,9 @@ margin_left = -0.374588
 margin_top = 54.6882
 margin_right = 39.6254
 margin_bottom = 84.6882
+
+[node name="NpcDescription" parent="." index="3"]
+margin_left = -1.57491
+margin_top = 78.7451
+margin_right = 38.4251
+margin_bottom = 92.7451
