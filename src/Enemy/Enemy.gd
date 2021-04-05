@@ -56,7 +56,6 @@ func show_enemy_info():
 func set_enemy_info(enemy_code:int):
 	enemy_info = EnemyState.new().get_enemy_info(enemy_code)
 	
-	#enemy_info = get_node("/root/EnemyState").EnemyList[enemy_code].duplicate()
 	HealthBar.set_health(enemy_info["state"]["max_hp"])
 	show_enemy_info()
 	
@@ -83,7 +82,7 @@ func choice_stand_or_move():
 	current_state = stand_list[randi() % stand_list.size()]
 	if current_state == STAND:
 		#EnemySprite.animation = "stand"
-		EnemySprite.play("stand")
+		EnemySprite.play("idle")
 	else:
 		#EnemySprite.animation = "walk"
 		EnemySprite.play("walk")
@@ -172,8 +171,6 @@ func give_spoil():
 			get_tree().call_group("spoils", "connect", spoil_instance)
 			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"])
 			index += 40
-		
-
 		
 
 func skill_attack():

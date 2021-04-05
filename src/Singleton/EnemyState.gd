@@ -14,7 +14,7 @@ var EnemyList = {
 		},
 		"spoil" : {
 			"coin" : 10,
-			"exp" : 50000,
+			"exp" : 570,
 			"item" : [
 				{
 					"code" : 0xB000,
@@ -36,6 +36,72 @@ var EnemyList = {
 					"numberof" : 1,
 					"percentage" : 100,
 				}
+			]
+		}
+	},
+	0xF004 : {
+		"enemy_code" : 0xF004,
+		"enemy_name" : "Rabbit",
+		"state" : {
+			"attack" : 60,
+			"def" : 30, 
+			"max_hp" : 250,
+			"current_hp" : 250,
+			"speed" : 70,
+			"level" : 3,
+		},
+		"spoil" : {
+			"coin" : 15,
+			"exp" : 2000,
+			"item" : [
+				{
+					"code" : 0xB000,
+					"numberof" : 1,
+					"percentage" : 100, 
+				},
+				{
+					"code" : 0xB001,
+					"numberof" : 1,
+					"percentage" : 100, 
+				},
+				{
+					"code" : 0xC002,
+					"numberof" : 1,
+					"percentage" : 100,
+				},
+			]
+		}
+	},
+	0xF005 : {
+		"enemy_code" : 0xF005,
+		"enemy_name" : "Squirrel",
+		"state" : {
+			"attack" : 20,
+			"def" : 70, 
+			"max_hp" : 250,
+			"current_hp" : 250,
+			"speed" : 90,
+			"level" : 5,
+		},
+		"spoil" : {
+			"coin" : 15,
+			"exp" : 2000,
+			"item" : [
+				{
+					"code" : 0xB000,
+					"numberof" : 1,
+					"percentage" : 100, 
+				},
+				{
+					"code" : 0xB001,
+					"numberof" : 1,
+					"percentage" : 100, 
+				},
+				{
+					"code" : 0xC003,
+					"numberof" : 1,
+					"percentage" : 100,
+				},
 			]
 		}
 	},

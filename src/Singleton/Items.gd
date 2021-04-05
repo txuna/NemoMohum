@@ -130,5 +130,15 @@ var Items = {
 		"item_description" : "무장봉 토끼 고기다. 질기지만 맛있다.",
 		"buy" : 10,
 		"sell" : 5,
+	},
+	0xC003 : {
+		"code" : 0xC003, 
+		"item_name" : '도토리',
+		"affect_player" : false,
+		"type" : "etc",
+		"item_image" : load("res://assets/art/spoil/etc/acorn.png"),	
+		"item_description" : "다람쥐가 먹다 남긴 도토리다.\n나는 도토리묵을 좋아한다.",
+		"buy" : 10,
+		"sell" : 5,
 	}
 }

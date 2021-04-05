@@ -18,9 +18,4 @@ format = 1
 
 [node name="EnemySpawnPosition" type="Position2D" parent="."]
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 1.5
-autostart = true
-
 [node name="Enemies" type="Node2D" parent="."]
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
