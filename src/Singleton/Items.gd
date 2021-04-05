@@ -178,5 +178,15 @@ var Items = {
 		"item_description" : "겨울잠을 끝마친 뱀의 가죽이다.\n고기를 가죽으로 감싸서\n불구덩이에 넣고 굽자.",
 		"buy" : 10,
 		"sell" : 5,
+	},
+	0xC006 : {
+		"code" : 0xC006, 
+		"item_name" : '소울스톤',
+		"affect_player" : false,
+		"type" : "etc",
+		"item_image" : load("res://assets/art/spoil/etc/soul_stone.png"),	
+		"item_description" : "무장봉 영혼석이다....\n가치있는 곳에 쓰여야할것 같다.",
+		"buy" : 10,
+		"sell" : 5,
 	}
 }
