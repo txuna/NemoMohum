@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/Weapon/Weapon.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/art/weapon/sword/basic_sword.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/weapon/sword/iron_sword.png" type="Texture" id=2]
 [ext_resource path="res://src/Weapon/Sword/BasicSword.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
@@ -63,8 +63,7 @@ tracks/1/keys = {
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]
-position = Vector2( 6.48239, -44.6041 )
-scale = Vector2( 0.1, 0.1 )
+position = Vector2( 4.48013, -30.5883 )
 texture = ExtResource( 2 )
 
 [node name="AnimationPlayer" parent="." index="1"]

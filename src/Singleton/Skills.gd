@@ -28,8 +28,8 @@ var BasicSkills = {
 	0xE002 : {
 		"skill_name" : "Basic Gun Attack",
 		"skill_code" : 0xE002,
-		"hit_number" : 3,
-		"enemy_number" : 5,
+		"hit_number" : 1,
+		"enemy_number" : 1,
 		"damage_percent" : 100,		
 		"skill_scene" :preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
 		"skill_effect" : "",

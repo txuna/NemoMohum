@@ -23,6 +23,9 @@ var NpcList = {
 var ShopKeepers = {
 	0x9000 : [
 		{
+			"code" : 0xA000
+		},
+		{
 			"code" : 0xB000
 		},
 		{

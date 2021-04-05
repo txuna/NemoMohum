@@ -27,7 +27,7 @@ var state = {
 	"nickname" : "스페셜땡스루",
 	"min_attack" : 5, 
 	"max_attack" : 12, 
-	"current_hp" : 100, 
+	"current_hp" : 1000, 
 	"max_hp" : 1000, 
 	"current_mp" : 100,
 	"max_mp" : 100,

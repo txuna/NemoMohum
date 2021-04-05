@@ -41,19 +41,22 @@ func set_direction(direction):
 # Enemy와의 접촉
 func _on_BaseSkill_body_entered(body: Node) -> void:
 	if body.is_in_group("enemies"):
-		enemy_number+=1
+		#enemy_number+=1
 		# hit effect 를 몬스터 객체에 넣기
-		for i in range(skill["hit_number"]):
-			var crit
-			var damage = int(rand_range(player_state["min_attack"], player_state["max_attack"]))
-			damage = int(damage * skill["damage_percent"] / 100)
-			var temp = rand_range(0, 10000)
-			if temp <= (player_state["crit"] * 100):
-				crit = true
-				damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
-			else:
-				crit = false
-			body.take_damage(damage, crit, i)
-		if enemy_number >= skill["enemy_number"]:
-			queue_free()
-			
+		if enemy_number < skill["enemy_number"]:
+			for i in range(skill["hit_number"]):
+				var crit
+				var damage = int(rand_range(player_state["min_attack"], player_state["max_attack"]))
+				damage = int(damage * skill["damage_percent"] / 100)
+				var temp = rand_range(0, 10000)
+				if temp <= (player_state["crit"] * 100):
+					crit = true
+					damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
+				else:
+					crit = false
+				body.take_damage(damage, crit, i)
+			enemy_number+=1
+			if enemy_number >= skill["enemy_number"]:
+				queue_free()
+		#else:
+		#	queue_free()

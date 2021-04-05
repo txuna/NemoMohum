@@ -1,6 +1,24 @@
 extends Node
 
 var Items = {
+	0xA000:{
+		"item_name" : "철검",
+		"item_description" : "철로 만든 검이 맞을까...?",
+		"code" : 0xA000, 
+		"item_image" : load("res://assets/art/weapon/sword/iron_sword.png"),
+		"item_scene" : preload("res://src/Weapon/Sword/BasicSword.tscn"),
+		"affect_player" : true,
+		"effect" : {
+			"min_attack" : 5,
+			"max_attack" : 12,
+		},
+		"type" : "equipment",
+		"detail_type" : "weapon",
+		"weapon_type" : "Sword",
+		"buy" : 50,
+		"sell" : 25,
+		"attack_delay" : 0.43,
+	},
 	0xA001:{
 		"item_name" : "나뭇가지",
 		"item_description" : "이장님댁 감나무 나뭇가지이다.",
@@ -46,15 +64,15 @@ var Items = {
 		"item_scene" : preload("res://src/Weapon/Gun/BasicGun.tscn"),
 		"affect_player" : true,
 		"effect" : {
-			"min_attack" : 3,
-			"max_attack" : 7,
+			"min_attack" : 12,
+			"max_attack" : 18,
 		},
 		"type" : "equipment",
 		"detail_type" : "weapon",
 		"weapon_type" : "Gun",
 		"buy" : 50,
 		"sell" : 25,
-		"attack_delay" : 0.25,
+		"attack_delay" : 0.35,
 	},
 	0xA004:{
 		"item_name" : "기본 라이플",
@@ -65,8 +83,8 @@ var Items = {
 		"item_scene" : preload("res://src/Weapon/Gun/BasicRifle.tscn"),
 		"affect_player" : true,
 		"effect" : {
-			"min_attack" : 3,
-			"max_attack" : 8,
+			"min_attack" : 5,
+			"max_attack" : 11,
 		},
 		"type" : "equipment",
 		"detail_type" : "weapon",
