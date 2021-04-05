@@ -113,5 +113,10 @@ var QuestList = {
 }
 
 var NpcQuest = {
-	0x9001 : [0xD000, 0xD001],
+	0x9001 : [0xD000, 0xD001], #stan
+	0x9002 : [], #kale
+	0x9003 : [], #alex
+	0x9004 : [], #juho
+	0x9005 : [], #muyaho
+	0x9006 : [], #american
 }
