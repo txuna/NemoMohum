@@ -127,7 +127,7 @@ script = ExtResource( 5 )
 position = Vector2( 120.916, 105.923 )
 frames = SubResource( 8 )
 animation = "idle"
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -139,6 +139,9 @@ position = Vector2( 111.849, 121.288 )
 
 [node name="DamageSkin" parent="." index="4"]
 position = Vector2( 120.136, -19.3552 )
+
+[node name="HitEffectPosition" parent="." index="5"]
+position = Vector2( 118.42, 114.491 )
 
 [node name="SpoilPosition" parent="." index="7"]
 position = Vector2( 119.468, -53.3936 )

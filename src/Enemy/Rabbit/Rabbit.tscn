@@ -157,7 +157,6 @@ script = ExtResource( 2 )
 position = Vector2( 120.301, 107.31 )
 frames = SubResource( 5 )
 animation = "idle"
-frame = 3
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -166,6 +165,9 @@ shape = SubResource( 41 )
 
 [node name="DamageSkin" parent="." index="4"]
 position = Vector2( 123.083, -33.2978 )
+
+[node name="HitEffectPosition" parent="." index="5"]
+position = Vector2( 122.053, 89.9808 )
 
 [node name="HealthBar" parent="." index="6"]
 margin_left = -1.18921

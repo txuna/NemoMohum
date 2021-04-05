@@ -149,7 +149,7 @@ position = Vector2( 964.714, 686.401 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 2
+frame = 1
 speed_scale = 1.5
 playing = true
 
@@ -158,12 +158,6 @@ position = Vector2( 171.591, 643.993 )
 
 [node name="EnemySpawnPosition" parent="." index="4"]
 position = Vector2( 750, 600 )
-
-[node name="Stan" parent="." index="6" instance=ExtResource( 4 )]
-position = Vector2( 1161.79, 799.894 )
-
-[node name="Mia" parent="." index="7" instance=ExtResource( 6 )]
-position = Vector2( 1660.8, 541.772 )
 
 [node name="Frog" parent="Enemies" index="0" instance=ExtResource( 7 )]
 position = Vector2( 442.977, 935.907 )
@@ -179,3 +173,15 @@ position = Vector2( 506.423, 745.862 )
 
 [node name="Squirrel" parent="Enemies" index="4" instance=ExtResource( 10 )]
 position = Vector2( 2126.98, -110.309 )
+
+[node name="Frog4" parent="Enemies" index="5" instance=ExtResource( 7 )]
+position = Vector2( 1098.83, -159.354 )
+
+[node name="Squirrel2" parent="Enemies" index="6" instance=ExtResource( 10 )]
+position = Vector2( 3272.7, 214.057 )
+
+[node name="Stan" parent="." index="6" instance=ExtResource( 4 )]
+position = Vector2( 1161.79, 799.894 )
+
+[node name="Mia" parent="." index="7" instance=ExtResource( 6 )]
+position = Vector2( 1660.8, 541.772 )
