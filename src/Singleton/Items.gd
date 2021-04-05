@@ -140,5 +140,15 @@ var Items = {
 		"item_description" : "다람쥐가 먹다 남긴 도토리다.\n나는 도토리묵을 좋아한다.",
 		"buy" : 10,
 		"sell" : 5,
+	},
+	0xC004 : {
+		"code" : 0xC004, 
+		"item_name" : '멧돼지의 뿔',
+		"affect_player" : false,
+		"type" : "etc",
+		"item_image" : load("res://assets/art/spoil/etc/acorn.png"),	
+		"item_description" : "야생 멧돼지의 뿔이다.\n집안의 가보로 쓰인다.",
+		"buy" : 10,
+		"sell" : 5,
 	}
 }
