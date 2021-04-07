@@ -2,6 +2,8 @@ extends Node
 
 
 const Mountain = preload("res://src/map/mountain/Mountain.tscn")
+const Jungle = preload("res://src/map/Jungle/Jungle.tscn")
+
 const Title = preload("res://src/GUI/Title.tscn")
 const QuestManager = preload("res://src/quest/QuestManager.tscn")
 const Hud = preload("res://src/GUI/HUD.tscn")
@@ -29,5 +31,7 @@ func load_title():
 	add_child(title)
 
 func load_map():
-	var mountain = Mountain.instance()
-	call_deferred("add_child", mountain)
+	var jungle = Jungle.instance()
+	call_deferred("add_child", jungle)
+	#var mountain = Mountain.instance()
+	#call_deferred("add_child", mountain)

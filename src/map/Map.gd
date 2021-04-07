@@ -2,9 +2,6 @@ extends Node2D
 
 var player = null
 
-var map_config = {}
-
-
 onready var EnemySpawnPosition = $EnemySpawnPosition
 onready var PlayerSpawnPosition = $PlayerSpawnPosition
 
@@ -14,7 +11,6 @@ func _ready() -> void:
 
 func set_map():
 	spawn_player()
-	#spawn_npc()	
 	
 func spawn_player():
 	player = preload("res://src/Player/Player.tscn").instance() 
