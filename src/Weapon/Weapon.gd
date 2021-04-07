@@ -33,3 +33,5 @@ func get_weapon_code():
 	
 func get_weapon_type():
 	return weapon_info["weapon_type"]
+
+

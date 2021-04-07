@@ -60,6 +60,10 @@ var inventory = {
 		0xA004:{
 			"code" : 0xA004,
 			"numberof" : 1,
+		},
+		0xA005: {
+			"code" : 0xA005,
+			"numberof" : 1,
 		}
 	},
 	"consumption" : {
