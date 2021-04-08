@@ -15,7 +15,6 @@ const ITEM = 3
 var quest_in_progress = [] #quest_code list
 var quest_list = null
 
-signal REWARD
 
 func _ready() -> void:
 	quest_list = QuestList.new()

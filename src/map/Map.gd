@@ -2,6 +2,8 @@ extends Node2D
 
 var player = null
 
+signal change_map
+
 onready var EnemySpawnPosition = $EnemySpawnPosition
 onready var PlayerSpawnPosition = $PlayerSpawnPosition
 

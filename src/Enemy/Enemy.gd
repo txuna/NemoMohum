@@ -81,10 +81,8 @@ func _on_Timer_timeout() -> void:
 func choice_stand_or_move():
 	current_state = stand_list[randi() % stand_list.size()]
 	if current_state == STAND:
-		#EnemySprite.animation = "stand"
 		EnemySprite.play("idle")
 	else:
-		#EnemySprite.animation = "walk"
 		EnemySprite.play("walk")
 	
 # 오른쪽으로 갈지 왼쪽으로 갈지 결정
@@ -108,7 +106,6 @@ func take_damage(player_damage, crit, index):
 	if enemy_info["state"]["current_hp"] - damage <= 0:
 		enemy_death()
 	else:
-		#EnemySprite.animation = "hit"
 		EnemySprite.play("hit")
 		enemy_info["state"]["current_hp"] -= damage
 		
@@ -171,7 +168,6 @@ func give_spoil():
 			get_tree().call_group("spoils", "connect", spoil_instance)
 			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"])
 			index += 40
-		
 
 func skill_attack():
 	is_attack = true
