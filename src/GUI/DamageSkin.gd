@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var DamageContainer = $DamageContainer
+onready var tween = $Tween
 
 export var travel = Vector2(0, -80)
 export var duration = 2
@@ -15,7 +16,11 @@ func float_image(string_damage:String, damage_image_dict:Dictionary):
 		var texture_rect = TextureRect.new()
 		texture_rect.texture = damage_image_dict[int(damage_number)]
 		DamageContainer.add_child(texture_rect)
-
+		
+	tween.interpolate_property(DamageContainer, "rect_position", Vector2(0,0), Vector2(30, -50), 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	yield(tween, "tween_all_completed") #tween_all_completed 시그널을 받으면 다시 실행
+	queue_free()
 
 func show_value(damage, crit=false, enemy=true):
 	var damage_image_dict = null
