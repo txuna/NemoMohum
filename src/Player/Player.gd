@@ -3,7 +3,7 @@ extends KinematicBody2D
 const DAMAGE_SKIN = preload("res://src/GUI/DamageSkin.tscn")
 
 export (int) var run_speed = 300
-export (int) var jump_speed = -700
+export (int) var jump_speed = 700
 export (int) var gravity = 1200
 
 const LEFT = true
@@ -55,6 +55,7 @@ func _ready():
 	player_variable.set_player_node_path(self.get_path())
 	items = get_node("/root/Items").Items
 	set_camera_limit()
+	setup_player()
 	#wear_equipment(0xA002)
 	
 func _physics_process(delta):
@@ -78,6 +79,25 @@ func get_input():
 	var skill = Input.is_action_just_pressed("open_skill")
 	var questbox = Input.is_action_just_pressed("open_questbox")
 
+	if left or right:
+		player_move(left, right)
+	if inventory:
+		open_inventory()
+	if state:
+		open_state()	
+	if skill:
+		open_skill()	
+	if questbox:
+		open_questbox()
+		
+	if jump and is_on_floor():
+		velocity.y -= jump_speed
+		player_animated_sprite.play("jump")
+
+	if attack and not is_delay and not is_attack:
+		attack()
+		
+	"""
 	if jump and is_on_floor():
 		jumping = true
 		velocity.y = jump_speed
@@ -99,9 +119,12 @@ func get_input():
 		attack()
 	else:
 		player_animated_sprite.play("idle")
-	
+	"""
 
-func player_move(left, right):
+func player_move(left, right):	
+	if is_on_floor() and not is_attack:
+		player_animated_sprite.play("walk")
+		
 	if right:
 		set_direction(RIGHT)
 		velocity.x += run_speed 
@@ -109,7 +132,7 @@ func player_move(left, right):
 	if left:
 		set_direction(LEFT)
 		velocity.x -= run_speed
-	player_animated_sprite.play("walk")
+	
 	
 func move_and_check_collision():
 	velocity = move_and_slide(velocity, Vector2(0, -1))
@@ -125,6 +148,15 @@ func move_and_check_collision():
 		elif collision.collider.is_in_group("spoils"):
 			get_spoil(collision.collider)
 	"""
+	
+# 플레이어가 소환될 때 장착중이였던 무기들 다시 착용
+func setup_player():
+	var item = player_variable.get_current_equipment()["weapon"]["item"]
+	if item == null:
+		return 
+		
+	var item_code = item.get_weapon_code()
+	wear_equipment(item_code)
 	
 func open_questbox():
 	var questbox_node = player_variable.get_questbox_node()
@@ -191,7 +223,7 @@ func wear_equipment(code:int):
 	
 	if detail_type == "weapon":
 		wear_weapon(item)
-		pass
+		
 	elif detail_type == "shirt":
 		pass
 	
@@ -460,3 +492,10 @@ func send_signal_abount_inventory_item():
 		for item_code in player_variable.inventory[type]:
 			var numberof = player_variable.inventory[type][item_code]["numberof"]
 			send_notifination_to_quest(ITEM, item_code, numberof * 1)
+
+
+func _on_AnimatedSprite_animation_finished() -> void:
+	if is_on_floor() and not is_attack:
+		player_animated_sprite.play("idle")
+	else:
+		player_animated_sprite.play("jump")

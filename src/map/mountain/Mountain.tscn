@@ -345,7 +345,8 @@ position = Vector2( 3319.28, -165.797 )
 scale = Vector2( 3, 3 )
 frames = SubResource( 14 )
 animation = "idle"
-frame = 1
+frame = 2
+speed_scale = 1.5
 playing = true
 
 [node name="PlayerSpawnPosition" parent="." index="3"]
