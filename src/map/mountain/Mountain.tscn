@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/art/map/mountain/retro.png" type="Texture" id=1]
 [ext_resource path="res://src/map/Map.tscn" type="PackedScene" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://assets/art/map/mountain/grass1.png" type="Texture" id=20]
 [ext_resource path="res://assets/art/map/mountain/house4.png" type="Texture" id=21]
 [ext_resource path="res://assets/art/map/mountain/tree3.png" type="Texture" id=22]
+[ext_resource path="res://assets/art/map/mountain/house5.png" type="Texture" id=23]
+[ext_resource path="res://assets/art/map/mountain/firecamp.png" type="Texture" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -144,6 +146,29 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 24 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=14]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+} ]
+
 [sub_resource type="RectangleShape2D" id=10]
 extents = Vector2( 16.5168, 23.6981 )
 
@@ -166,6 +191,7 @@ position = Vector2( 970.655, 686.401 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
 animation = "idle"
+frame = 2
 speed_scale = 1.5
 playing = true
 
@@ -308,6 +334,19 @@ texture = ExtResource( 21 )
 position = Vector2( 3962.04, -459.403 )
 scale = Vector2( 3, 3 )
 texture = ExtResource( 22 )
+
+[node name="house6" type="Sprite" parent="obj" index="29"]
+position = Vector2( 3587.73, 686.057 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 23 )
+
+[node name="firecamp" type="AnimatedSprite" parent="obj" index="30"]
+position = Vector2( 3319.28, -165.797 )
+scale = Vector2( 3, 3 )
+frames = SubResource( 14 )
+animation = "idle"
+frame = 1
+playing = true
 
 [node name="PlayerSpawnPosition" parent="." index="3"]
 position = Vector2( 171.591, 643.993 )
