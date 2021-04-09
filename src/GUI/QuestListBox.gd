@@ -40,7 +40,7 @@ func load_quest_list():
 func make_dynamic_font()->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
-	dynamic_font.font_data = load("res://assets/fonts/font.ttf")
+	dynamic_font.font_data = load("res://assets/fonts/NanumSquareRoundB.ttf")
 	dynamic_font.size = 32
 	return dynamic_font	
 

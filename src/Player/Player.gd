@@ -59,7 +59,7 @@ func _ready():
 
 	
 func _physics_process(delta):
-	#get_input()
+	get_input()
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 			jumping = false

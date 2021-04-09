@@ -2,36 +2,36 @@
 
 [ext_resource path="res://src/GUI/Skill.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/skill_gui/skill_background.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://assets/art/skill_gui/skill_slot.png" type="Texture" id=4]
-[ext_resource path="res://assets/fonts/font.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 24
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=7]
 size = 32
-font_data = ExtResource( 5 )
+font_data = ExtResource( 3 )
 
 [node name="Skill" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -97,8 +97,9 @@ __meta__ = {
 }
 
 [node name="level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect/HBoxContainer"]
-margin_right = 73.0
-margin_bottom = 39.0
+margin_top = 1.0
+margin_right = 79.0
+margin_bottom = 38.0
 custom_fonts/font = SubResource( 2 )
 text = "Level"
 __meta__ = {
@@ -106,9 +107,10 @@ __meta__ = {
 }
 
 [node name="skill_level" type="Label" parent="skill_background/ScrollContainer/VBoxContainer/TextureRect/HBoxContainer"]
-margin_left = 77.0
-margin_right = 112.0
-margin_bottom = 39.0
+margin_left = 83.0
+margin_top = 1.0
+margin_right = 123.0
+margin_bottom = 38.0
 custom_fonts/font = SubResource( 3 )
 text = "32"
 __meta__ = {

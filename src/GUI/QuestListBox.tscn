@@ -1,31 +1,31 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/art/shop/shop_background.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/GUI/QuestListBox.gd" type="Script" id=3]
-[ext_resource path="res://assets/fonts/font.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 32
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 24
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 32
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [node name="QuestListBox" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -51,24 +51,24 @@ __meta__ = {
 }
 
 [node name="QuestContainer" type="VBoxContainer" parent="TextureRect/QuestScrollContainer"]
-margin_right = 320.0
-margin_bottom = 39.0
+margin_right = 338.0
+margin_bottom = 37.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/QuestScrollContainer/QuestContainer"]
-margin_right = 320.0
-margin_bottom = 39.0
+margin_right = 338.0
+margin_bottom = 37.0
 
 [node name="Label" type="Label" parent="TextureRect/QuestScrollContainer/QuestContainer/HBoxContainer"]
-margin_right = 104.0
-margin_bottom = 39.0
+margin_right = 113.0
+margin_bottom = 37.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "[미완료]"
 
 [node name="Label2" type="Label" parent="TextureRect/QuestScrollContainer/QuestContainer/HBoxContainer"]
-margin_left = 108.0
-margin_right = 320.0
-margin_bottom = 39.0
+margin_left = 117.0
+margin_right = 338.0
+margin_bottom = 37.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "나뭇잎을 구해줘!"

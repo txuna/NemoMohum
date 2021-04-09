@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/art/quest/chatbox.png" type="Texture" id=1]
 [ext_resource path="res://src/GUI/Chatbox.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/font.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 24
@@ -13,20 +13,21 @@ size = 24
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=3]
+size = 48
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 24
+size = 48
 font_data = ExtResource( 3 )
 
 [node name="Chatbox" type="CanvasLayer"]
 script = ExtResource( 2 )
 
 [node name="QuestScrollContainer" type="ScrollContainer" parent="."]
-margin_left = 483.002
-margin_top = 704.376
-margin_right = 1511.0
-margin_bottom = 774.376
+margin_left = 482.002
+margin_top = 703.376
+margin_right = 1510.0
+margin_bottom = 773.376
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,7 +65,9 @@ margin_bottom = 223.0
 [node name="BaseMsg" type="Label" parent="TextureRect/MsgContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_bottom = -46.0
+margin_top = -2.0
+margin_right = -239.0
+margin_bottom = -71.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -74,24 +77,27 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MsgContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 112.0
+margin_left = 4.24268
+margin_top = 81.5945
+margin_right = 4.24268
+margin_bottom = -3.40552
 alignment = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Button" type="Button" parent="TextureRect/MsgContainer/HBoxContainer"]
-margin_left = 1015.0
+margin_left = 955.0
 margin_right = 1055.0
-margin_bottom = 38.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 3 )
 text = "확인"
 
 [node name="Exit" type="Button" parent="TextureRect"]
-margin_left = 970.154
-margin_top = 16.4814
-margin_right = 1093.15
-margin_bottom = 52.4814
+margin_left = 852.774
+margin_top = 18.6027
+margin_right = 1086.77
+margin_bottom = 83.6027
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 text = "대화 끝내기"
