@@ -79,7 +79,7 @@ func load_coin():
 	coin_value.text = str(player_variables.state["coin"])
 	
 func load_slot_from_inventory():
-	use_button.disabled = true
+	
 	load_coin()
 	init_slot()
 	var index:int = 0
@@ -131,6 +131,7 @@ func _on_use_item(index):
 
 func _on_change_inven_type(extra_arg_0: String) -> void:
 	current_inven_type = extra_arg_0
+	use_button.disabled = true
 	load_slot_from_inventory()
 
 

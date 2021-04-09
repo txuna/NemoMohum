@@ -146,30 +146,30 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="AtlasTexture" id=11]
+[sub_resource type="AtlasTexture" id=10]
 flags = 4
 atlas = ExtResource( 24 )
 region = Rect2( 0, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=12]
+[sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 24 )
 region = Rect2( 128, 0, 128, 128 )
 
-[sub_resource type="AtlasTexture" id=13]
+[sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 24 )
 region = Rect2( 256, 0, 128, 128 )
 
-[sub_resource type="SpriteFrames" id=14]
+[sub_resource type="SpriteFrames" id=13]
 animations = [ {
-"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 16.5168, 23.6981 )
 
 [node name="Mountain" instance=ExtResource( 2 )]
@@ -191,7 +191,7 @@ position = Vector2( 970.655, 686.401 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 9 )
 animation = "idle"
-frame = 2
+frame = 1
 speed_scale = 1.5
 playing = true
 
@@ -343,9 +343,9 @@ texture = ExtResource( 23 )
 [node name="firecamp" type="AnimatedSprite" parent="obj" index="30"]
 position = Vector2( 3319.28, -165.797 )
 scale = Vector2( 3, 3 )
-frames = SubResource( 14 )
+frames = SubResource( 13 )
 animation = "idle"
-frame = 2
+frame = 1
 speed_scale = 1.5
 playing = true
 
@@ -406,5 +406,5 @@ texture = ExtResource( 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="1"]
 position = Vector2( 0.374146, 8.04434 )
-shape = SubResource( 10 )
+shape = SubResource( 14 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
