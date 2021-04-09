@@ -4,14 +4,19 @@ signal use_item
 
 var items = null
 var player_variables = null
+
 var current_inven_type = "consumption" #equipment, etc, consumption
+var current_index:int
+
 onready var slot_grid = $Sprite/ScrollContainer/GridContainer
 onready var item_name = $Sprite/DetailContainer/ItemName
 onready var item_description = $Sprite/DetailContainer/ItemDescription
 onready var item_effect = $Sprite/DetailContainer/ItemEffect
 onready var coin_value = $Sprite/CoinValue
+onready var use_button = $Sprite/UseButton
 # 인벤토리 클릭시 어떤 것인지 알 수 있도록 아이템코드 등록
 # code + type + slot 
+
 var inventory_slot_dict = {}
 
 
@@ -24,7 +29,7 @@ func _ready() -> void:
 func make_dynamic_font()->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
-	dynamic_font.font_data = load("res://assets/fonts/독립기념관체.ttf")
+	dynamic_font.font_data = load("res://assets/fonts/font.ttf")
 	dynamic_font.size = 20
 	return dynamic_font
 	
@@ -74,6 +79,7 @@ func load_coin():
 	coin_value.text = str(player_variables.state["coin"])
 	
 func load_slot_from_inventory():
+	use_button.disabled = true
 	load_coin()
 	init_slot()
 	var index:int = 0
@@ -96,8 +102,15 @@ func _on_Slot_gui_input(event: InputEvent, extra_arg_0: int) -> void:
 		show_item_detail(extra_arg_0)
 		# 퀵슬롯 등록
 		if current_inven_type == "consumption":
-			pass
+			use_button.disabled = false
+			current_index = extra_arg_0
 			#_on_open_quick_slot(extra_arg_0)
+	
+		elif current_inven_type == "equipment":
+			use_button.disabled = false
+			current_index = extra_arg_0
+		else:
+			return
 	
 func show_item_detail(index):
 	var code = inventory_slot_dict[index]["code"]
@@ -119,3 +132,7 @@ func _on_use_item(index):
 func _on_change_inven_type(extra_arg_0: String) -> void:
 	current_inven_type = extra_arg_0
 	load_slot_from_inventory()
+
+
+func _on_UseButton_pressed() -> void:
+	_on_use_item(current_index)

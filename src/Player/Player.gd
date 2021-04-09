@@ -56,15 +56,39 @@ func _ready():
 	items = get_node("/root/Items").Items
 	set_camera_limit()
 	setup_player()
-	#wear_equipment(0xA002)
+
 	
 func _physics_process(delta):
-	get_input()
+	#get_input()
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 			jumping = false
-	move_and_check_collision()
+	velocity = move_and_slide(velocity, Vector2(0, -1))
 
+func _on_player_action(type:String):
+	velocity.x = 0
+	if type == "Right":
+		player_move(false, true)
+	if type == "Left":
+		player_move(true, false)
+	if type == "Inventory":
+		open_inventory()
+	if type == "State":
+		open_state()
+	if type == "Skill":
+		open_skill()
+	if type == "Quest":
+		open_questbox()
+	if type == "Jump" and is_on_floor():
+		velocity.y -= jump_speed
+		player_animated_sprite.play("jump")
+		
+	if type == "Attack" and not is_delay and not is_attack:
+		attack()
+	
+	if type == "Stop":
+		player_move(false, false)
+	
 
 func get_input():
 	velocity.x = 0
@@ -97,30 +121,6 @@ func get_input():
 	if attack and not is_delay and not is_attack:
 		attack()
 		
-	"""
-	if jump and is_on_floor():
-		jumping = true
-		velocity.y = jump_speed
-	if not is_attack:
-		if left or right:
-			player_move(left, right)
-		elif inventory:
-			open_inventory()
-		elif state:
-			open_state()
-		elif skill:
-			open_skill()
-		elif questbox:
-			open_questbox()
-
-		
-	if attack and not is_delay and not is_attack:
-		# 기본공격이랑 스킬도 같이 표현
-		attack()
-	else:
-		player_animated_sprite.play("idle")
-	"""
-
 func player_move(left, right):	
 	if is_on_floor() and not is_attack:
 		player_animated_sprite.play("walk")
@@ -129,25 +129,10 @@ func player_move(left, right):
 		set_direction(RIGHT)
 		velocity.x += run_speed 
 		
-	if left:
+	elif left:
 		set_direction(LEFT)
 		velocity.x -= run_speed
-	
-	
-func move_and_check_collision():
-	velocity = move_and_slide(velocity, Vector2(0, -1))
-	#이 부분은 Area2D의 signal로 담당
-	"""
-	for count in get_slide_count():
-		var collision = get_slide_collision(count)
-		if collision.collider.is_in_group("enemies"):
-			if invincible == true:
-				return
-			take_damage(collision.collider.collision_attack())
-			
-		elif collision.collider.is_in_group("spoils"):
-			get_spoil(collision.collider)
-	"""
+
 	
 # 플레이어가 소환될 때 장착중이였던 무기들 다시 착용
 func setup_player():

@@ -1,20 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/art/inventory/inventory_background.png" type="Texture" id=1]
-[ext_resource path="res://assets/fonts/독립기념관체.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/fonts/font.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://src/GUI/Inventory.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 72
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 24
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
-font_data = ExtResource( 4 )
+font_data = ExtResource( 2 )
 
 [node name="Inventory" type="CanvasLayer"]
 script = ExtResource( 5 )
@@ -58,16 +62,28 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Sprite"]
-margin_left = -223.903
-margin_top = -357.049
-margin_right = 231.097
-margin_bottom = 118.951
+margin_left = -221.0
+margin_top = -356.0
+margin_right = 234.0
+margin_bottom = -23.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="Sprite/ScrollContainer"]
 columns = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UseButton" type="Button" parent="Sprite"]
+margin_left = -122.0
+margin_top = -12.0
+margin_right = 129.0
+margin_bottom = 111.0
+custom_fonts/font = SubResource( 4 )
+disabled = true
+text = "USE"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -176,3 +192,4 @@ __meta__ = {
 [connection signal="pressed" from="Sprite/Button" to="." method="_on_change_inven_type" binds= [ "equipment" ]]
 [connection signal="pressed" from="Sprite/Button2" to="." method="_on_change_inven_type" binds= [ "consumption" ]]
 [connection signal="pressed" from="Sprite/Button3" to="." method="_on_change_inven_type" binds= [ "etc" ]]
+[connection signal="pressed" from="Sprite/UseButton" to="." method="_on_UseButton_pressed"]

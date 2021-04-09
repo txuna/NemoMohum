@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/art/mobile/attack.png" type="Texture" id=1]
+[ext_resource path="res://src/GUI/MobileTouch.gd" type="Script" id=2]
+[ext_resource path="res://assets/art/mobile/jump.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/mobile/left.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/mobile/state.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/mobile/inventory.png" type="Texture" id=6]
+[ext_resource path="res://assets/art/mobile/right.png" type="Texture" id=7]
+[ext_resource path="res://assets/art/mobile/skill.png" type="Texture" id=8]
+[ext_resource path="res://assets/art/mobile/quest.png" type="Texture" id=9]
+
+[node name="MobileTouch" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="Inventory" type="TouchScreenButton" parent="."]
+position = Vector2( 29.6504, 32 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 6 )
+
+[node name="Skill" type="TouchScreenButton" parent="."]
+position = Vector2( 244.124, 26.4648 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 8 )
+
+[node name="State" type="TouchScreenButton" parent="."]
+position = Vector2( 478.141, 24.0731 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 5 )
+
+[node name="Quest" type="TouchScreenButton" parent="."]
+position = Vector2( 690.729, 36.9401 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 9 )
+
+[node name="Right" type="TouchScreenButton" parent="."]
+position = Vector2( 1631.06, 762.033 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 7 )
+
+[node name="Left" type="TouchScreenButton" parent="."]
+position = Vector2( 1452.36, 758.651 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 4 )
+
+[node name="Jump" type="TouchScreenButton" parent="."]
+position = Vector2( 251.333, 782.925 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 3 )
+
+[node name="Attack" type="TouchScreenButton" parent="."]
+position = Vector2( 50.892, 782.968 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 1 )
+[connection signal="pressed" from="Inventory" to="." method="_on_Inventory_pressed"]
+[connection signal="pressed" from="Skill" to="." method="_on_Skill_pressed"]
+[connection signal="pressed" from="State" to="." method="_on_State_pressed"]
+[connection signal="pressed" from="Quest" to="." method="_on_Quest_pressed"]
+[connection signal="pressed" from="Right" to="." method="_on_Right_pressed"]
+[connection signal="released" from="Right" to="." method="_on_Right_released"]
+[connection signal="pressed" from="Left" to="." method="_on_Left_pressed"]
+[connection signal="released" from="Left" to="." method="_on_Left_released"]
+[connection signal="pressed" from="Jump" to="." method="_on_Jump_pressed"]
+[connection signal="pressed" from="Attack" to="." method="_on_Attack_pressed"]

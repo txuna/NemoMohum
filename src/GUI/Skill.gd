@@ -117,7 +117,7 @@ func make_upgrade_button(code)->Button:
 func make_dynamic_font(font_size:int)->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
-	dynamic_font.font_data = load("res://assets/fonts/독립기념관체.ttf")
+	dynamic_font.font_data = load("res://assets/fonts/font.ttf")
 	dynamic_font.size = font_size
 	return dynamic_font
 

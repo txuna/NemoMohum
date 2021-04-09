@@ -17,6 +17,7 @@ func set_map():
 func spawn_player():
 	player = preload("res://src/Player/Player.tscn").instance() 
 	player.connect("NOTIFY", get_node("/root/Main/QuestManager"), "_on_notification")
+	get_node("/root/Main/MobileTouch").connect("Action", player, "_on_player_action")
 	player.global_position = PlayerSpawnPosition.position
 	add_child(player)
 
