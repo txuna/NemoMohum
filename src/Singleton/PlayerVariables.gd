@@ -64,6 +64,10 @@ var inventory = {
 		0xA005: {
 			"code" : 0xA005,
 			"numberof" : 1,
+		},
+		0xA030:{
+			"code" : 0xA030,
+			"numberof" : 1,
 		}
 	},
 	"consumption" : {
@@ -248,14 +252,14 @@ func check_player_coin(coin_value):
 	else:
 		return false
 		
-# 장착중인 무기를 판매하려는것과 구매하려는 것이 현재 무기 인벤에 존재하는지
+# 장착중인 장비를 판매하려는것과 구매하려는 것이 현재 장비 인벤에 존재하는지
 func check_already_wear_equipment(new_item_code):
 	for equipment in current_equipment:
 		if current_equipment[equipment]["item"] == null:
 			continue
 		else:
 			# 현재 착용중인 장비라면 
-			var equipment_code = current_equipment[equipment]["item"].get_weapon_code()
+			var equipment_code = current_equipment[equipment]["item"].get_code()
 			if equipment_code == new_item_code:
 				return true
 				

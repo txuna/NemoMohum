@@ -28,10 +28,10 @@ func minus_weapon_state_to_player():
 func set_weapon(code):
 	weapon_code = code
 
-func get_weapon_code():
+func get_code():
 	return weapon_info["code"]
 	
-func get_weapon_type():
+func get_type():
 	return weapon_info["weapon_type"]
 
 

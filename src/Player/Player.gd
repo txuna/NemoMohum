@@ -34,13 +34,14 @@ onready var player_animated_sprite = $AnimatedSprite
 onready var player_attack_delay = $AttackDelay
 onready var InvincibleTimer = $InvincibleTimer
 onready var damage_position = $DamagePosition
+onready var player_shirt_position = $ShirtSpawnPosition
 
 signal NOTIFY
 
+var equipment_position_list = {
 
-# 퀘스트 목록을 기반으로 플레이어가 생성될 떄마다 다시 불러오기?
-func load_subject():
-	pass
+}
+
 
 func set_camera_limit():
 	var map_limits = get_parent().get_node("TileMap").get_used_rect()
@@ -56,7 +57,13 @@ func _ready():
 	items = get_node("/root/Items").Items
 	set_camera_limit()
 	setup_player()
-
+	load_position()
+	
+func load_position():
+	equipment_position_list["Sword"] = player_weapon_position
+	equipment_position_list["Gun"] = player_weapon_position
+	equipment_position_list["Bow"] = player_weapon_position
+	equipment_position_list["shirt"] = player_shirt_position
 	
 func _physics_process(delta):
 	get_input()
@@ -135,13 +142,13 @@ func player_move(left, right):
 
 	
 # 플레이어가 소환될 때 장착중이였던 무기들 다시 착용
-func setup_player():
-	var item = player_variable.get_current_equipment()["weapon"]["item"]
-	if item == null:
-		return 
-		
-	var item_code = item.get_weapon_code()
-	wear_equipment(item_code)
+func setup_player():	
+	var current_equipment = player_variable.get_current_equipment()
+	for equipment in current_equipment:
+		if current_equipment[equipment]["item"] != null:
+			var item = current_equipment[equipment]["item"]
+			var item_code = item.get_code()
+			wear_equipment(item_code)
 	
 func open_questbox():
 	var questbox_node = player_variable.get_questbox_node()
@@ -191,7 +198,7 @@ func set_direction(direction):
 		if sign(player_weapon_position.position.x) == -1:
 			set_position_of_player()
 			
-	set_weapon_direction(direction)
+	set_equipment_direction(direction)
 			
 # 무기와 스킬의 위치를 지정한다. 
 func set_position_of_player():
@@ -209,17 +216,38 @@ func wear_equipment(code:int):
 	if detail_type == "weapon":
 		wear_weapon(item)
 		
-	elif detail_type == "shirt":
-		pass
+	elif detail_type == "armor":
+		wear_armor(item)
+
 	
 # 무기의 방향과 무기가 있어야 할 위치를 설정한다. 
-func set_weapon_direction(direction):
-	var current_weapon = player_variable.get_current_equipment()["weapon"]
-	if current_weapon["item"] == null:
-		return 
+func set_equipment_direction(direction):
+	var current_equipment = player_variable.get_current_equipment()
+	for equipment in current_equipment:
+		if current_equipment[equipment]["item"] != null:
+			var item = current_equipment[equipment]["item"]	
+			item.set_direction(direction)
+			var equipment_type = item.get_type()
+			item.position = equipment_position_list[equipment_type].position
 
-	current_weapon["item"].set_direction(direction)
-	current_weapon["item"].position = player_weapon_position.position
+
+#먼저 해당 item의 armor_type을 가져옴 
+#해당 armor_type을 현재 착용중인지 확인
+#착용중이라면 free 
+#그렇지 않다면 객체생성후 set_direction후 ShirtSpawnPosition에 설정
+func wear_armor(item):
+	var current_armor = null
+	var armor_type = item["armor_type"]
+	current_armor = player_variable.get_current_equipment()[armor_type]
+	if current_armor["item"] != null:
+		current_armor["item"].minus_armor_state_to_player()
+		current_armor["item"].queue_free()
+		player_variable.set_current_equipment(armor_type, null)
+	
+	player_variable.set_current_equipment(armor_type, item["item_scene"])
+	current_armor["item"].set_direction(get_equipment_direction())
+	current_armor["item"].position = equipment_position_list[armor_type].position
+	add_child(current_armor["item"])
 	
 func wear_weapon(item):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
@@ -230,7 +258,7 @@ func wear_weapon(item):
 	
 	
 	player_variable.set_current_equipment("weapon", item["item_scene"])
-	current_weapon["item"].set_direction(get_weapon_direction())
+	current_weapon["item"].set_direction(get_equipment_direction())
 	current_weapon["item"].position = player_weapon_position.position
 	current_weapon["item"].get_node("AnimationPlayer").connect("animation_finished", self, "_on_attack_motion_finished")
 	add_child(current_weapon["item"])
@@ -272,7 +300,7 @@ func skill_attack(current_weapon:Dictionary, code:int):
 	pass
 	
 func normal_attack(current_weapon:Dictionary):
-	var weapon_type = current_weapon["item"].get_weapon_type()
+	var weapon_type = current_weapon["item"].get_type()
 	var skill_code = null
 	# 각 각의 맞는 weapon_type을 기반으로 기본공격 스킬 생성
 	if weapon_type == "Sword":
@@ -298,19 +326,19 @@ func set_ready_attack(current_weapon:Dictionary, skill_type:bool, skill_code:int
 	var skill_instance = skills[skill_code]["skill_scene"].instance()
 	skill_instance.position = player_skill_position.global_position
 	get_parent().add_child(skill_instance)
-	skill_instance.set_direction(get_weapon_direction())
+	skill_instance.set_direction(get_equipment_direction())
 	skill_instance.set_skill(skill_code, skill_type)
 	
 	is_attack = true
 	is_delay = true
 	player_attack_delay.start()
-	if get_weapon_direction() == RIGHT:
+	if get_equipment_direction() == RIGHT:
 		current_weapon["item"].get_node("AnimationPlayer").play("right_attack")
 	else:
 		current_weapon["item"].get_node("AnimationPlayer").play("left_attack")
 
 # 플레이어의 좌우방향을 얻는 함수
-func get_weapon_direction():
+func get_equipment_direction():
 	if sign(player_weapon_position.position.x) == 1:
 		return RIGHT
 	else:
@@ -367,7 +395,7 @@ func use_item(code, numberof):
 
 
 func _on_attack_motion_finished(anim_name:String):
-	set_weapon_direction(get_weapon_direction())
+	set_equipment_direction(get_equipment_direction())
 	is_attack = false
 	
 
