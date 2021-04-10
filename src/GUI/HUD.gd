@@ -41,7 +41,10 @@ func change_progressbar2(new_value, bar, textvalue, max_value_name, value_name):
 	level.text = str(player_state["level"])
 	textvalue.text = "[" + str(player_state[value_name]) + "/" + str(player_state[max_value_name]) + "]"
 	bar.max_value = player_state[max_value_name]
-	bar.value = new_value	
+	var current_value = bar.value
+	update_tween.interpolate_property(bar, "value", current_value, new_value, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
+	update_tween.start()
+	yield(update_tween, "tween_all_completed")
 		
 	
 func change_progressbar(value, bar, textvalue, max_value_name, value_name):
