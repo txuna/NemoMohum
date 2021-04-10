@@ -205,6 +205,32 @@ func set_position_of_player():
 	player_weapon_position.position.x *= -1
 	player_skill_position.position.x *= -1
 
+# 장비를 벗는다.
+func take_off_equipment(code:int):
+	var detail_type = items[code]["detail_type"]
+	var item_type
+	if detail_type == "weapon":
+		item_type = detail_type
+		
+	elif detail_type == "armor":
+		item_type = items[code]["armor_type"]
+	else:
+		return 
+	
+	var current_equipment = player_variable.get_current_equipment()[item_type]
+	# 벗어야할 아이템이 이미 null이라면
+	if current_equipment["item"] == null:
+		return
+		
+	if item_type == "weapon":
+		current_equipment["item"].minus_weapon_state_to_player()
+	else:
+		current_equipment["item"].minus_armor_state_to_player()
+		
+	current_equipment["item"].queue_free()
+	player_variable.set_current_equipment(item_type, null)
+		
+
 # 해당 코드를 기반으로 어떤 아이템인지 체크 한다. 또한 존재하는 키인지도 확인
 func wear_equipment(code:int):
 	if not items.has(code):
@@ -376,11 +402,14 @@ func use_item(code, numberof):
 	var item = items[code]
 	var item_type = item["type"]
 	if item_type == "equipment":
-	#해당 아이템이 착용중이라면
+		#해당 아이템이 착용중이라면 벗게 한다.
 		if player_variable.check_already_wear_equipment(item["code"]):
-			return	
+			take_off_equipment(code)
+			return
+		# 그렇지 않다면 입는다. 
 		wear_equipment(code)
-	# wear!
+		return
+
 	elif item_type == "consumption":
 		# 해당 아이템이 존재하는치 체크 
 		if not player_variable.check_inventory_item_numberof(item_type, code):

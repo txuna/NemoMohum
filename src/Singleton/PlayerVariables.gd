@@ -9,7 +9,7 @@ var current_equipment = {
 	"shirt" : {
 		"item" : null,
 	},
-	"pants" : {
+	"gloves" : {
 		"item" : null,
 	},
 	"shoes" : {
