@@ -185,6 +185,9 @@ position = Vector2( -2, 14 )
 
 [node name="HatSpawnPosition" type="Position2D" parent="."]
 position = Vector2( -7, -38 )
+
+[node name="EffectPosition" type="Position2D" parent="."]
+position = Vector2( -0.44545, -51.2267 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]

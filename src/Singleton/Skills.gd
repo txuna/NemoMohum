@@ -10,8 +10,15 @@ var BasicSkills = {
 		"enemy_number" : 1,
 		"damage_percent" : 100,
 		"skill_scene" : preload("res://src/Skill/BasicSword/BasicSword.tscn"),
-		"skill_effect" : "",
+		"skill_effect" : null,
 		"skill_hit_effect" : "",
+		"skill_type" : "Active",
+		"acquire" : true, 
+		"skill_level" : 1, 
+		"master_level" : 1,
+		"level_effect" : {
+			"damage_percent" : 0,
+		},
 		"mp" : 0,
 	},
 	0xE001 : {
@@ -21,8 +28,15 @@ var BasicSkills = {
 		"enemy_number" : 1,
 		"damage_percent" : 100,		
 		"skill_scene" : preload("res://src/Skill/BasicArrow/BasicArrow.tscn"),
-		"skill_effect" : "",
+		"skill_effect" : null,
 		"skill_hit_effect" : "",
+		"skill_type" : "Active",
+		"acquire" : true, 
+		"skill_level" : 1, 
+		"master_level" : 1,
+		"level_effect" : {
+			"damage_percent" : 0,
+		},
 		"mp" : 0,
 	},
 	0xE002 : {
@@ -32,8 +46,15 @@ var BasicSkills = {
 		"enemy_number" : 1,
 		"damage_percent" : 100,		
 		"skill_scene" :preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
-		"skill_effect" : "",
+		"skill_effect" : null,
 		"skill_hit_effect" : "",
+		"skill_type" : "Active",
+		"acquire" : true, 
+		"skill_level" : 0, 
+		"master_level" : 10,
+		"level_effect" : {
+			"damage_percent" : 0,
+		},
 		"mp" : 0,
 	},
 }
@@ -44,28 +65,70 @@ var BasicSkills = {
 var Skills = {
 	0xE003: {
 		"skill_name" : "폭탄 총알",
-		"skil_code" : 0xE003,
+		"skill_code" : 0xE003,
 		"hit_number" : 1, 
 		"enemy_number" : 1,
 		"damage_percent" : 200,
 		"skill_type" : "Active",
-		"skill_scene" : "",
-		"skill_effect" : "",
-		"skill_hit_effect" : "",
+		"skill_scene" : preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
+		"skill_effect" : preload("res://src/Effect/HitEffect.tscn"),
+		"skill_hit_effect" : preload("res://src/Effect/HitEffect.tscn"),
 		"mp" : 0,
-		"accquire" : false, 
+		"acquire" : false, 
 		"precedence_skill_code" : [],
 		"skill_level" : 0, 
+		"master_level" : 10,
 		"level_effect" : {
 			"damage_percent" : 30,
 		},
 		"type" : "Gun",
 		"image" : load("res://assets/art/player/player.png"),
-	}
+	},
+	0xE004: {
+		"skill_name" : "피지컬 업그레이드",
+		"skil_code" : 0xE004,
+		"skill_type" : "Passive",
+		"mp" : 0,
+		"acquire" : false, 
+		"precedence_skill_code" : [],
+		"skill_level" : 0, 
+		"master_level" : 1,
+		"level_effect" : {
+			"max_hp" : 3000,
+		},
+		"type" : "Gun",
+		"image" : load("res://assets/art/player/player.png"),
+	},
+	0xE005: {
+		"skill_name" : "벌크업",
+		"skill_code" : 0xE005,
+		"skill_type" : "Buff",
+		"buff_duration" : 10, # Second
+		"skill_scene" : "",
+		"skill_effect" : preload("res://src/Effect/HitEffect.tscn"),
+		"mp" : 20,
+		"acquire" : false, 
+		"precedence_skill_code" : [],
+		"skill_level" : 0, 
+		"master_level" : 1,
+		"level_effect" : {
+			"max_hp" : 5000,
+			"crit_damage" : 100,
+			"crit" : 50,
+		},
+		"type" : "Gun",
+		"image" : load("res://assets/art/player/player.png"),
+	},
 }
 
+func check_master_level(code):
+	if  Skills[code]["skill_level"] < Skills[code]["master_level"]:
+		return true 
+	else:
+		return false
+
 func check_accquire_skill(code):
-	if Skills[code]["accquire"] == true:
+	if Skills[code]["acquire"] == true:
 		return true
 	else:
 		return false
@@ -81,6 +144,9 @@ func check_precedence(code):
 
 func upgrade_skill(code):
 	Skills[code]["skill_level"] +=1
-	Skills[code]["accquire"] = true
-	for level_effect in Skills[code]["level_effect"]:
-		Skills[code][level_effect] += Skills[code]["level_effect"][level_effect]
+	if Skills[code]["acquire"] == false:
+		Skills[code]["acquire"] = true
+		
+	if Skills[code]["skill_type"] == "Passive":
+		var player_variables = get_node("/root/PlayerVariables")
+		player_variables.increase_state_from_effect(Skills[code]["level_effect"], 1)

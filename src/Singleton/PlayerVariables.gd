@@ -40,10 +40,11 @@ var state = {
 	"level" : 1,
 	"current_exp" : 0, 
 	"max_exp" : 1000,
-	"upgrade_point" : 0,
+	"upgrade_point" : 10,
 	"def" : 100,
 	"image" : load("res://assets/art/player/player_new.png"),
-	"skill_point" : 0,
+	"skill_point" : 50,
+	"buff_code_list" : [], #현재 적용받고 있는 버프 스킬 코드
 }
 
 var inventory = {
@@ -92,6 +93,41 @@ var inventory = {
 }
 
 var player_node_path = null
+
+# skill_code에 대한 버프가 현재 적용받고 있는 상태인지 아닌지 확인한다. 
+func check_buff(skill_code:int):
+	if skill_code in state["buff_code_list"]:
+		return true
+	else:
+		return false
+
+# increase_state_from_effect(effects, mask)	
+# 각 버프를 더할 때 버프의 능력치만큼 스탯에 더함
+func add_buff_to_state(skill_code:int):
+	if check_buff(skill_code):
+		return 
+	
+	var skill = get_node("/root/Skills").Skills[skill_code]
+	var skill_level = skill["skill_level"]
+	var skill_effect = skill["level_effect"]
+	increase_state_from_effect(skill_effect, 1)
+	state["buff_code_list"].append(skill_code)
+	
+func remove_buff_to_state(skill_code:int):
+	if not check_buff(skill_code):
+		return
+
+	var skill = get_node("/root/Skills").Skills[skill_code]
+	var skill_level = skill["skill_level"]
+	var skill_effect = skill["level_effect"]
+	increase_state_from_effect(skill_effect, -1)
+	state["buff_code_list"].erase(skill_code)
+
+func check_mp(mp:int):
+	if state["current_mp"] - mp >= 0:
+		return true 
+	else:
+		return false
 
 func exist_key_check(dict, key):
 	if dict.has(key):

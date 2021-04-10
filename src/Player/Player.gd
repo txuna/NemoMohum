@@ -36,6 +36,7 @@ onready var InvincibleTimer = $InvincibleTimer
 onready var damage_position = $DamagePosition
 onready var player_shirt_position = $ShirtSpawnPosition
 onready var player_hat_position = $HatSpawnPosition
+onready var player_skill_effect_position = $EffectPosition
 
 signal NOTIFY
 
@@ -92,10 +93,8 @@ func _on_player_action(type:String):
 	if type == "Jump" and is_on_floor():
 		velocity.y -= jump_speed
 		player_animated_sprite.play("jump")
-		
 	if type == "Attack" and not is_delay and not is_attack:
-		attack()
-	
+		attack(false)
 	if type == "Stop":
 		player_move(false, false)
 	
@@ -112,6 +111,7 @@ func get_input():
 	var state = Input.is_action_just_pressed("open_state")
 	var skill = Input.is_action_just_pressed("open_skill")
 	var questbox = Input.is_action_just_pressed("open_questbox")
+	var test_skill = Input.is_action_just_pressed("test_skill")
 
 	if left or right:
 		player_move(left, right)
@@ -128,8 +128,11 @@ func get_input():
 		velocity.y -= jump_speed
 		player_animated_sprite.play("jump")
 
-	if attack and not is_delay and not is_attack:
-		attack()
+	if not is_delay and not is_attack:
+		if attack:
+			attack(false)
+		elif test_skill:
+			attack(true, 0xE005)
 		
 func player_move(left, right):	
 	if is_on_floor() and not is_attack:
@@ -291,7 +294,8 @@ func wear_weapon(item):
 	current_weapon["item"].position = player_weapon_position.position
 	current_weapon["item"].get_node("AnimationPlayer").connect("animation_finished", self, "_on_attack_motion_finished")
 	add_child(current_weapon["item"])
-	$AttackDelay.wait_time = current_weapon["item"].get_attack_delay()
+	#$AttackDelay.wait_time = current_weapon["item"].get_attack_delay()
+	player_attack_delay.wait_time = current_weapon["item"].get_attack_delay()
 
 func take_damage(damage):
 	damage = player_variable.calc_def(damage)
@@ -314,23 +318,30 @@ func show_damage(damage):
 
 # 기본공격의 코드는 0xE000 딕셔너리로 무기마다의 기본공격 체크 
 # 해당 어택은 기본 공격
-func attack(code=false):
+func attack(is_skill, code=0):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	if current_weapon["item"] == null:
 		return
 	# 무기타입에 따른 공격
-	if code == false:
-		normal_attack(current_weapon)	
+	if is_skill == false:
+		normal_attack()	
 	# 스킬공격 
 	else:
-		skill_attack(current_weapon, code)
+		skill_attack(code)
 		
 
-func skill_attack(current_weapon:Dictionary, code:int):
-	var skill = skills[code]
+func skill_attack(code:int):
+	var current_weapon = player_variable.get_current_equipment()["weapon"]
+	var skill = get_node("/root/Skills").Skills[code]
+	# 자신이 착용하고 있는 무기와 스킬의 타입과 비교
+	if current_weapon["item"].get_type() != skill["type"]:
+		return
+	else:
+		set_ready_attack(SKILL_ATTACK, code)
+	return
 	
-	
-func normal_attack(current_weapon:Dictionary):
+func normal_attack():
+	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	var weapon_type = current_weapon["item"].get_type()
 	var skill_code = null
 	# 각 각의 맞는 weapon_type을 기반으로 기본공격 스킬 생성
@@ -345,28 +356,71 @@ func normal_attack(current_weapon:Dictionary):
 		
 	else:
 		return
-	set_ready_attack(current_weapon, NORMAL_ATTACK, skill_code)
+	set_ready_attack(NORMAL_ATTACK, skill_code)
 	
-func set_ready_attack(current_weapon:Dictionary, skill_type:bool, skill_code:int):
+# 기본공격이랑 Active 스킬은 이펙트 씬과  스킬 씬을 갖는다.
+# 버프는 이펙트 씬만 출력한다. 공격 씬은 존재 X 
+# 패시브 스킬은 스킬 업그레이드할 때 적용
+# 또한 마나 체크
+func set_ready_attack(skill_type:bool, skill_code:int):
 	var skills = null
 	if skill_type == NORMAL_ATTACK:
 		skills = get_node("/root/Skills").BasicSkills
 	elif skill_type == SKILL_ATTACK:
-		skills = get_node("/root/SKills").Skills
+		skills = get_node("/root/Skills").Skills
 	
-	var skill_instance = skills[skill_code]["skill_scene"].instance()
-	skill_instance.position = player_skill_position.global_position
-	get_parent().add_child(skill_instance)
-	skill_instance.set_direction(get_equipment_direction())
-	skill_instance.set_skill(skill_code, skill_type)
+	var skill = skills[skill_code]
+	# 해당 스킬을 배웠는지 확인
+	if skill["acquire"] == false:
+		return
+	#MP 체크
+	if not player_variable.check_mp(skill["mp"]):
+		return
+
 	
+	#Active의 경우 스킬 인스턴스를 만든다. 몬스터가 맞을 때는 스킬 데미지에 스킬 레벨만큼 곱해서 함
+	if skill["skill_type"] == "Active":
+		var skill_instance = skill["skill_scene"].instance()
+		skill_instance.position = player_skill_position.global_position
+		get_parent().add_child(skill_instance)
+		skill_instance.set_direction(get_equipment_direction())
+		skill_instance.set_skill(skill_code, skill_type)
+		
+	#그리고 현재 이미 버프 수행중이라면 ~~ 체크 필수
+	elif skill["skill_type"] == "Buff":
+		# 해당 버프가 이미 진행중이라면 
+		if player_variable.check_buff(skill["skill_code"]):
+			return 
+			
+		var buff_duration_node = Timer.new()
+		buff_duration_node.connect("timeout", self, "_on_buff_duration_finished", [skill["skill_code"]])
+		buff_duration_node.one_shot = true 
+		buff_duration_node.wait_time = skill["buff_duration"]
+		# 플레이어의 해당 버프 진행중임을 알린다. 
+		player_variable.add_buff_to_state(skill["skill_code"])
+		add_child(buff_duration_node)
+		buff_duration_node.start()
+	
+	#MP 소모 
+	player_variable.increase_state_from_effect({"current_mp" : skill["mp"]}, -1)
+		
+	# 스킬 이펙트 설정
+	var skill_effect = skill["skill_effect"]
+	if skill_effect != null:
+		var skill_effect_instance = skill["skill_effect"].instance()
+		skill_effect_instance.position = player_skill_effect_position.position
+		add_child(skill_effect_instance)
+
 	is_attack = true
 	is_delay = true
 	player_attack_delay.start()
+	
+	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	if get_equipment_direction() == RIGHT:
 		current_weapon["item"].get_node("AnimationPlayer").play("right_attack")
 	else:
 		current_weapon["item"].get_node("AnimationPlayer").play("left_attack")
+
 
 # 플레이어의 좌우방향을 얻는 함수
 func get_equipment_direction():
@@ -427,6 +481,10 @@ func use_item(code, numberof):
 		
 	return
 
+# 버프의 지속시간이 끝나면
+func _on_buff_duration_finished(skill_code:int):
+	player_variable.remove_buff_to_state(skill_code)
+	#queue_free()
 
 func _on_attack_motion_finished(anim_name:String):
 	set_equipment_direction(get_equipment_direction())
@@ -477,6 +535,10 @@ func upgrade_skill(code):
 	if not player_variable.check_skill_point():
 		return
 		
+	# 이미 해당 스킬이 만렙인지 확인
+	if not skills.check_master_level(code):
+		return
+	
 	# 배울려는 스킬의 선행스킬을 찍었는지 
 	if not skills.check_precedence(code):
 		return
@@ -546,3 +608,4 @@ func _on_AnimatedSprite_animation_finished() -> void:
 		player_animated_sprite.play("idle")
 	else:
 		player_animated_sprite.play("jump")
+

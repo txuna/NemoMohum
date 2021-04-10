@@ -35,6 +35,7 @@ func update_hud(value, type):
 	elif type == "exp":
 		bar = expbar 
 		textvalue = expvalue
+		
 	change_progressbar2(value, bar, textvalue, max_name, value_name)
 	
 func change_progressbar2(new_value, bar, textvalue, max_value_name, value_name):

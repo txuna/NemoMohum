@@ -47,7 +47,7 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 			for i in range(skill["hit_number"]):
 				var crit
 				var damage = int(rand_range(player_state["min_attack"], player_state["max_attack"]))
-				damage = int(damage * skill["damage_percent"] / 100)
+				damage = int(damage * (skill["damage_percent"] + (skill["level_effect"]["damage_percent"]) * skill["skill_level"]) / 100)
 				var temp = rand_range(0, 10000)
 				if temp <= (player_state["crit"] * 100):
 					crit = true
