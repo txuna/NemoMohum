@@ -13,8 +13,10 @@ signal upgrade_skill
 
 onready var SkillContainer = $skill_background/ScrollContainer/VBoxContainer
 onready var skill_point = $skill_background/skill_point
+onready var skill_detail = $skill_background/Detail
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	skill_detail.visible = false
 	skill_list = get_node("/root/Skills").Skills
 	player_state = get_node("/root/PlayerVariables").state
 	open_skill()
@@ -46,6 +48,7 @@ func update_skill():
 	
 func make_skill_container(code)->TextureRect:
 	var texture_rect = TextureRect.new()
+	texture_rect.connect("gui_input", self, "_on_skill_detail_gui_input", [code])
 	texture_rect.texture = load("res://assets/art/skill_gui/skill_slot.png") 
 	
 	var panel = make_panel(code)
@@ -125,3 +128,10 @@ func make_dynamic_font(font_size:int)->DynamicFont:
 func _on_change_skill_type(extra_arg_0: String) -> void:
 	current_skill_type = extra_arg_0
 	update_skill()
+
+# 스킬 상세 설명
+func _on_skill_detail_gui_input(event: InputEvent, code:int) -> void:
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		skill_detail.visible = true
+		skill_detail.get_node("skill_name").text = skill_list[code]["skill_name"]
+		skill_detail.get_node("skill_description").text = skill_list[code]["skill_description"]

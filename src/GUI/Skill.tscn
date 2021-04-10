@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://src/GUI/Skill.gd" type="Script" id=1]
 [ext_resource path="res://assets/art/skill_gui/skill_background.png" type="Texture" id=2]
@@ -30,6 +30,18 @@ size = 32
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -180,6 +192,59 @@ margin_bottom = 457.451
 custom_fonts/font = SubResource( 7 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "32"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Detail" type="Control" parent="skill_background"]
+margin_left = 279.0
+margin_top = -502.0
+margin_right = 904.0
+margin_bottom = 506.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Label" parent="skill_background/Detail"]
+margin_left = 7.0
+margin_top = 57.0
+margin_right = 100.0
+margin_bottom = 128.0
+custom_fonts/font = SubResource( 8 )
+text = "스킬 이름"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="skill_name" type="Label" parent="skill_background/Detail"]
+margin_left = 217.278
+margin_top = 56.2929
+margin_right = 405.278
+margin_bottom = 127.293
+custom_fonts/font = SubResource( 8 )
+text = "폭탄총알"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="description" type="Label" parent="skill_background/Detail"]
+margin_left = 89.0498
+margin_top = 134.752
+margin_right = 277.05
+margin_bottom = 205.752
+custom_fonts/font = SubResource( 8 )
+text = "스킬 설명"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="skill_description" type="RichTextLabel" parent="skill_background/Detail"]
+margin_left = 25.0
+margin_top = 200.0
+margin_right = 455.0
+margin_bottom = 662.0
+custom_fonts/mono_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
