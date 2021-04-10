@@ -55,9 +55,10 @@ func _ready():
 	player_variable = get_node("/root/PlayerVariables")
 	player_variable.set_player_node_path(self.get_path())
 	items = get_node("/root/Items").Items
+	load_position()
 	set_camera_limit()
 	setup_player()
-	load_position()
+	
 	
 func load_position():
 	equipment_position_list["Sword"] = player_weapon_position
