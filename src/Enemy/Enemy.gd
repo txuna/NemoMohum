@@ -108,6 +108,7 @@ func take_damage(player_damage, crit, index):
 	else:
 		EnemySprite.play("hit")
 		enemy_info["state"]["current_hp"] -= damage
+	HealthBar.show_damage(enemy_info["state"]["current_hp"])
 		
 	var particle = preload("res://src/Effect/HitEffect.tscn").instance()
 	particle.position = HitEffectPosition.position

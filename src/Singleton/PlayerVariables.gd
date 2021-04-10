@@ -9,6 +9,9 @@ var current_equipment = {
 	"shirt" : {
 		"item" : null,
 	},
+	"hat" : {
+		"item" : null,
+	},
 	"gloves" : {
 		"item" : null,
 	},
@@ -67,6 +70,10 @@ var inventory = {
 		},
 		0xA030:{
 			"code" : 0xA030,
+			"numberof" : 1,
+		},
+		0xA031:{
+			"code" : 0xA031,
 			"numberof" : 1,
 		}
 	},
@@ -241,7 +248,7 @@ func calc_exp(exp_value):
 			continue
 		else:
 			state["current_exp"] += exp_value
-			update_hud(exp_value, "exp")
+			update_hud(state["current_exp"], "exp")
 			update_state()
 			break
 		return
@@ -317,13 +324,13 @@ func change_upgrade_point(value):
 func increase_max_hp():
 	var value = 40
 	state["max_hp"] += value
-	update_hud(0, "hp")
+	update_hud(state["current_hp"], "hp")
 	return true
 	
 func increase_max_mp():
 	var value = 30
 	state["max_mp"] += value
-	update_hud(0, "mp")
+	update_hud(state["current_ep"], "mp")
 	return true
 	
 func increase_crit():
@@ -351,14 +358,15 @@ func increase_attack():
 	return true
 
 # 여기서 mask는 무기를 착용함과 뻄에 있어서 되돌릴 때 쓰는 값이다.
+# 장비에 max_hp나 max_ep값을 올려주는 장비를 입었다가 뺄 때current_hp가 더 높으면 안됨
 func increase_state_from_effect(effects, mask):
 	for effect in effects:
 			state[effect] += (effects[effect] * mask)
 			check_overflow_state()
 			if effect == "current_hp" or effect == "max_hp":
-				update_hud((effects[effect] * mask), "hp")
+				update_hud(state["current_hp"], "hp")
 			elif effect == "current_mp" or effect == "max_mp":
-				update_hud((effects[effect] * mask), "mp")
+				update_hud(state["current_mp"], "mp")
 	update_state()
 	
 func get_current_hp():
@@ -367,12 +375,14 @@ func get_current_hp():
 func check_overflow_state():
 	if state["current_hp"] >= state["max_hp"]:
 		state["current_hp"] = state["max_hp"]
-	
+
 	if state["current_mp"] >= state["max_mp"]:
 		state["current_mp"] = state["max_mp"]
 		
 	if state["crit"] >= 100:
 		state["crit"] = 100
+
+		
 
 
 

@@ -84,6 +84,8 @@ func load_slot_from_inventory():
 	init_slot()
 	var index:int = 0
 	var player_inventory = player_variables.inventory
+	if not player_inventory.has(current_inven_type):
+		return
 	for player_item_code in player_inventory[current_inven_type]:
 		var slot = make_slot(index, player_item_code)
 		inventory_slot_dict[index] = {
@@ -113,6 +115,8 @@ func _on_Slot_gui_input(event: InputEvent, extra_arg_0: int) -> void:
 			return
 	
 func show_item_detail(index):
+	if not inventory_slot_dict.has(index):
+		return
 	var code = inventory_slot_dict[index]["code"]
 	var item = items[code]
 	item_name.text = item["item_name"]
@@ -125,6 +129,8 @@ func show_item_detail(index):
 		item_effect.text = "효과없음"
 
 func _on_use_item(index):
+	if not inventory_slot_dict.has(index):
+		return
 	var code = inventory_slot_dict[index]["code"]
 	var numberof = 1
 	emit_signal("use_item", code, numberof)

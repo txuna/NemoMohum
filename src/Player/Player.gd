@@ -35,6 +35,7 @@ onready var player_attack_delay = $AttackDelay
 onready var InvincibleTimer = $InvincibleTimer
 onready var damage_position = $DamagePosition
 onready var player_shirt_position = $ShirtSpawnPosition
+onready var player_hat_position = $HatSpawnPosition
 
 signal NOTIFY
 
@@ -65,6 +66,7 @@ func load_position():
 	equipment_position_list["Gun"] = player_weapon_position
 	equipment_position_list["Bow"] = player_weapon_position
 	equipment_position_list["shirt"] = player_shirt_position
+	equipment_position_list["hat"] = player_hat_position
 	
 func _physics_process(delta):
 	get_input()
@@ -311,6 +313,7 @@ func show_damage(damage):
 	damage_skin.show_value(damage, false, false)		
 
 # 기본공격의 코드는 0xE000 딕셔너리로 무기마다의 기본공격 체크 
+# 해당 어택은 기본 공격
 func attack(code=false):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	if current_weapon["item"] == null:
@@ -324,7 +327,8 @@ func attack(code=false):
 		
 
 func skill_attack(current_weapon:Dictionary, code:int):
-	pass
+	var skill = skills[code]
+	
 	
 func normal_attack(current_weapon:Dictionary):
 	var weapon_type = current_weapon["item"].get_type()

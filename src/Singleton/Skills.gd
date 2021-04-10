@@ -40,6 +40,7 @@ var BasicSkills = {
 #precedence_skill_code
 # level_effect는 레벨업당 증가하는 스탯
 # 공격 스킬들 
+# Active and Passive and Buff
 var Skills = {
 	0xE003: {
 		"skill_name" : "폭탄 총알",
@@ -47,6 +48,7 @@ var Skills = {
 		"hit_number" : 1, 
 		"enemy_number" : 1,
 		"damage_percent" : 200,
+		"skill_type" : "Active",
 		"skill_scene" : "",
 		"skill_effect" : "",
 		"skill_hit_effect" : "",

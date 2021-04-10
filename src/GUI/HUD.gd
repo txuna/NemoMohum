@@ -35,7 +35,14 @@ func update_hud(value, type):
 	elif type == "exp":
 		bar = expbar 
 		textvalue = expvalue
-	change_progressbar(value, bar, textvalue, max_name, value_name)
+	change_progressbar2(value, bar, textvalue, max_name, value_name)
+	
+func change_progressbar2(new_value, bar, textvalue, max_value_name, value_name):
+	level.text = str(player_state["level"])
+	textvalue.text = "[" + str(player_state[value_name]) + "/" + str(player_state[max_value_name]) + "]"
+	bar.max_value = player_state[max_value_name]
+	bar.value = new_value	
+		
 	
 func change_progressbar(value, bar, textvalue, max_value_name, value_name):
 	level.text = str(player_state["level"])

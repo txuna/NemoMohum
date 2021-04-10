@@ -146,7 +146,7 @@ position = Vector2( -20, 1.2 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 18 )
 animation = "walk"
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -182,6 +182,9 @@ shape = SubResource( 20 )
 
 [node name="ShirtSpawnPosition" type="Position2D" parent="."]
 position = Vector2( -2, 14 )
+
+[node name="HatSpawnPosition" type="Position2D" parent="."]
+position = Vector2( -7, -38 )
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]

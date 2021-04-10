@@ -9,12 +9,16 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
+# health is enemy current health
 func show_damage(health):
+	health_bar.value = health
+	"""
 	var current_hp = health_bar.value
 	health_bar.value -= health
 	update_tween.interpolate_property(health_bar, "value", current_hp, health_bar.value, 0.4, Tween.TRANS_SINE, Tween.EASE_IN_OUT)
 	update_tween.start()
 	yield(update_tween, "tween_all_completed")
+	"""
 
 func set_health(health):
 	health_bar.max_value = health

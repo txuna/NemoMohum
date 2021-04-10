@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Armor/Armor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/armor/hat/basic_hat.png" type="Texture" id=2]
+[ext_resource path="res://src/Armor/Hat/BasicHat.gd" type="Script" id=3]
+
+[node name="BasicHat" instance=ExtResource( 1 )]
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 2 )
