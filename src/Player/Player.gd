@@ -70,7 +70,7 @@ func load_position():
 	equipment_position_list["hat"] = player_hat_position
 	
 func _physics_process(delta):
-	get_input()
+	#get_input()
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 			jumping = false
@@ -97,6 +97,18 @@ func _on_player_action(type:String):
 		attack(false)
 	if type == "Stop":
 		player_move(false, false)
+		
+	if type == "A":
+		check_quick_slot(true, false, false, false)
+		
+	if type == "B":
+		check_quick_slot(false, true, false, false)
+		
+	if type == "C":
+		check_quick_slot(false, false, true, false)
+		
+	if type == 'D':
+		check_quick_slot(false, false, false, true)
 	
 
 func get_input():

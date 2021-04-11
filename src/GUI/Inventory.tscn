@@ -24,7 +24,7 @@ font_data = ExtResource( 2 )
 script = ExtResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 1403.78, 482.806 )
+position = Vector2( 1405.19, 483.513 )
 scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 1 )
 
@@ -62,10 +62,10 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Sprite"]
-margin_left = -221.0
-margin_top = -356.0
-margin_right = 234.0
-margin_bottom = -23.0
+margin_left = -227.0
+margin_top = -362.0
+margin_right = 228.0
+margin_bottom = -77.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -77,13 +77,23 @@ __meta__ = {
 }
 
 [node name="UseButton" type="Button" parent="Sprite"]
-margin_left = -122.0
-margin_top = -12.0
-margin_right = 129.0
-margin_bottom = 111.0
+margin_left = -125.146
+margin_top = -60.2424
+margin_right = 125.854
+margin_bottom = 26.7576
 custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "USE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuickSlot" type="HBoxContainer" parent="Sprite"]
+margin_left = -117.0
+margin_top = 44.0
+margin_right = 126.0
+margin_bottom = 84.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

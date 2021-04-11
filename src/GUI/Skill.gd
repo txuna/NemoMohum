@@ -154,7 +154,6 @@ func _on_set_skill_quickslot(slot_key:String, code:int):
 	if not quick_slot.has(slot_key):
 		return
 		
-	print("REG")
 	player_variable.set_quick_slot(slot_key, code, "skill")
 
 func _on_change_skill_type(extra_arg_0: String) -> void:

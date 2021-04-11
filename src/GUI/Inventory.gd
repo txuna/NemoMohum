@@ -14,6 +14,8 @@ onready var item_description = $Sprite/DetailContainer/ItemDescription
 onready var item_effect = $Sprite/DetailContainer/ItemEffect
 onready var coin_value = $Sprite/CoinValue
 onready var use_button = $Sprite/UseButton
+
+onready var quick_slots = $Sprite/QuickSlot
 # 인벤토리 클릭시 어떤 것인지 알 수 있도록 아이템코드 등록
 # code + type + slot 
 
@@ -26,11 +28,11 @@ func _ready() -> void:
 	player_variables = get_node("/root/PlayerVariables")
 	load_slot_from_inventory()
 
-func make_dynamic_font()->DynamicFont:
+func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
 	dynamic_font.font_data = load("res://assets/fonts/NanumSquareRoundB.ttf")
-	dynamic_font.size = 20
+	dynamic_font.size = font_size
 	return dynamic_font
 	
 func init_slot():
@@ -63,7 +65,7 @@ func make_slot(index:int, code:int)->Panel:
 	var label = Label.new()
 	if current_inven_type != "equipment":
 		label.text = str(player_inventory[current_inven_type][code]["numberof"])
-	label.set("custom_fonts/font", make_dynamic_font())
+	label.set("custom_fonts/font", make_dynamic_font(20))
 	label.rect_position.x = 30
 	label.rect_position.y = 80
 	label.rect_size.x = 35
@@ -106,7 +108,7 @@ func _on_Slot_gui_input(event: InputEvent, extra_arg_0: int) -> void:
 		if current_inven_type == "consumption":
 			use_button.disabled = false
 			current_index = extra_arg_0
-			#_on_open_quick_slot(extra_arg_0)
+			_on_open_quick_slot(extra_arg_0)
 	
 		elif current_inven_type == "equipment":
 			use_button.disabled = false
@@ -140,6 +142,30 @@ func _on_change_inven_type(extra_arg_0: String) -> void:
 	use_button.disabled = true
 	load_slot_from_inventory()
 
+func init_quick_slot():
+	for slot in quick_slots.get_children():
+		slot.queue_free()
+
+func make_quick_slot(index:int):
+	init_quick_slot()
+	for slot_key in player_variables.get_quick_slot():
+		if not inventory_slot_dict[index]:
+			return
+		var code = inventory_slot_dict[index]["code"]
+		var button = Button.new()
+		button.connect("pressed", self, "_on_set_inventory_quickslot", [slot_key, code])
+		button.text = slot_key
+		button.set("custom_fonts/font", make_dynamic_font(48))
+		quick_slots.add_child(button)
+	
+	
+func _on_open_quick_slot(index:int):
+	make_quick_slot(index)
+
+func _on_set_inventory_quickslot(slot_key:String, code:int):
+	player_variables.set_quick_slot(slot_key, code, "consumption")
 
 func _on_UseButton_pressed() -> void:
 	_on_use_item(current_index)
+	
+
