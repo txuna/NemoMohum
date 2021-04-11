@@ -83,7 +83,7 @@ var Skills = {
 			"damage_percent" : 30,
 		},
 		"type" : "Gun",
-		"image" : load("res://assets/art/player/player.png"),
+		"image" : load("res://assets/art/icon/skill_bomb_bullet_icon.png"),
 	},
 	0xE004: {
 		"skill_name" : "피지컬 업그레이드",
@@ -99,7 +99,7 @@ var Skills = {
 			"max_hp" : 3000,
 		},
 		"type" : "Gun",
-		"image" : load("res://assets/art/player/player.png"),
+		"image" : load("res://assets/art/icon/skill_physical_training_icon.png"),
 	},
 	0xE005: {
 		"skill_name" : "벌크업",
@@ -120,7 +120,7 @@ var Skills = {
 			"crit" : 50,
 		},
 		"type" : "Gun",
-		"image" : load("res://assets/art/player/player.png"),
+		"image" : load("res://assets/art/icon/skill_bulkup_icon.png"),
 	},
 }
 

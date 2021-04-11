@@ -161,6 +161,7 @@ var Items = {
 		"item_description" : "배고플때 먹는 포션이다.\n체력을 100올려준다.",
 		"buy" : 50,
 		"sell" : 25,
+		"icon" : load("res://assets/art/icon/red_potion_icon.png"),
 	},
 	0xB001 : {
 		"code" : 0xB001, 
@@ -174,6 +175,7 @@ var Items = {
 		"item_description" : "목마를때 마시는 포션이다.\n마나를 100올려준다.",
 		"buy" : 50,
 		"sell" : 25,
+		"icon" : load("res://assets/art/icon/blue_potion_icon.png"),
 	},
 	0xC000 : {
 		"code" : 0xC000, 

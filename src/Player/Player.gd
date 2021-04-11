@@ -111,7 +111,10 @@ func get_input():
 	var state = Input.is_action_just_pressed("open_state")
 	var skill = Input.is_action_just_pressed("open_skill")
 	var questbox = Input.is_action_just_pressed("open_questbox")
-	var test_skill = Input.is_action_just_pressed("test_skill")
+	var a_button = Input.is_action_just_pressed("A_Button")
+	var b_button = Input.is_action_just_pressed("B_Button")
+	var c_button = Input.is_action_just_pressed("C_Button")
+	var d_button = Input.is_action_just_pressed("D_Button")
 
 	if left or right:
 		player_move(left, right)
@@ -131,8 +134,8 @@ func get_input():
 	if not is_delay and not is_attack:
 		if attack:
 			attack(false)
-		elif test_skill:
-			attack(true, 0xE005)
+			
+	check_quick_slot(a_button, b_button, c_button, d_button)
 		
 func player_move(left, right):	
 	if is_on_floor() and not is_attack:
@@ -146,6 +149,33 @@ func player_move(left, right):
 		set_direction(LEFT)
 		velocity.x -= run_speed
 
+# type을 보고 consumption이라면 그냥쓰고, skill이라면 is_attack이랑 is_delay체크
+func check_quick_slot(a_button, b_button, c_button, d_button):
+	if a_button:
+		do_quick_slot("A")
+		
+	if b_button:
+		do_quick_slot("B")
+		
+	if c_button:
+		do_quick_slot("C")
+		
+	if d_button:
+		do_quick_slot("D")
+		
+func do_quick_slot(input_value:String):
+	var quick_slot_value = player_variable.quick_slot[input_value]
+	if quick_slot_value["use"] == false:
+		return 
+		
+	if quick_slot_value["type"] == "consumption":
+		use_item(quick_slot_value["code"], 1)
+		
+	elif quick_slot_value["type"] == "skill":
+		if not is_attack and not is_delay:
+			attack(true, quick_slot_value["code"])
+		else:
+			return
 	
 # 플레이어가 소환될 때 장착중이였던 무기들 다시 착용
 func setup_player():	

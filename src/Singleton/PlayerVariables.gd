@@ -92,7 +92,53 @@ var inventory = {
 	},
 }
 
+var quick_slot = {
+	"A" : {
+		"use" : false, 
+		"type" : null,
+		"code" : null, 
+	},
+	"B" : {
+		"use" : false, 
+		"type" : null,
+		"code" : null, 
+	},
+	"C" : {
+		"use" : false, 
+		"type" : null,
+		"code" : null, 
+	},
+	"D" : {
+		"use" : false, 
+		"type" : null,
+		"code" : null, 
+	},
+}
+
 var player_node_path = null
+
+func get_mobile_touch_node():
+	var mobile_touch_instance = get_node_or_null("/root/Main/MobileTouch")
+	return mobile_touch_instance
+		
+func mobile_touch_update():
+	var mobile_touch_instance =  get_mobile_touch_node()
+	if mobile_touch_instance == null:
+		return 
+	else:
+		mobile_touch_instance.update_screen()
+
+func get_quick_slot():
+	return quick_slot
+	
+#터치 부분 업데이트 
+func set_quick_slot(slot_key:String, code:int, type:String):
+	quick_slot[slot_key]["code"] = code 
+	quick_slot[slot_key]["use"] = true 
+	quick_slot[slot_key]["type"] = type 
+
+	#quick slot node Update
+	mobile_touch_update()
 
 # skill_code에 대한 버프가 현재 적용받고 있는 상태인지 아닌지 확인한다. 
 func check_buff(skill_code:int):

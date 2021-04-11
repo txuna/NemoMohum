@@ -197,6 +197,7 @@ __meta__ = {
 }
 
 [node name="Detail" type="Control" parent="skill_background"]
+visible = false
 margin_left = 279.0
 margin_top = -502.0
 margin_right = 904.0
@@ -205,46 +206,34 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="name" type="Label" parent="skill_background/Detail"]
-margin_left = 7.0
-margin_top = 57.0
-margin_right = 100.0
-margin_bottom = 128.0
-custom_fonts/font = SubResource( 8 )
-text = "스킬 이름"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="skill_name" type="Label" parent="skill_background/Detail"]
-margin_left = 217.278
-margin_top = 56.2929
-margin_right = 405.278
-margin_bottom = 127.293
+margin_left = 131.779
+margin_top = 42.466
+margin_right = 319.779
+margin_bottom = 113.466
 custom_fonts/font = SubResource( 8 )
 text = "폭탄총알"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="description" type="Label" parent="skill_background/Detail"]
-margin_left = 89.0498
-margin_top = 134.752
-margin_right = 277.05
-margin_bottom = 205.752
-custom_fonts/font = SubResource( 8 )
-text = "스킬 설명"
+[node name="skill_description" type="RichTextLabel" parent="skill_background/Detail"]
+margin_left = 19.4565
+margin_top = 120.847
+margin_right = 449.457
+margin_bottom = 582.847
+custom_fonts/mono_font = SubResource( 9 )
+custom_fonts/normal_font = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="skill_description" type="RichTextLabel" parent="skill_background/Detail"]
-margin_left = 25.0
-margin_top = 200.0
-margin_right = 455.0
-margin_bottom = 662.0
-custom_fonts/mono_font = SubResource( 9 )
-custom_fonts/normal_font = SubResource( 10 )
+[node name="QuickSlots" type="HBoxContainer" parent="skill_background/Detail"]
+margin_left = 49.0475
+margin_top = 611.836
+margin_right = 389.048
+margin_bottom = 651.836
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

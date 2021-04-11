@@ -7,18 +7,19 @@ var skill_dict = {
 var current_skill_type = "Gun"
 
 var skill_list = null
-var player_state = null
+var player_variable = null
 
 signal upgrade_skill
 
 onready var SkillContainer = $skill_background/ScrollContainer/VBoxContainer
 onready var skill_point = $skill_background/skill_point
 onready var skill_detail = $skill_background/Detail
+onready var quick_slots = $skill_background/Detail/QuickSlots
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	skill_detail.visible = false
 	skill_list = get_node("/root/Skills").Skills
-	player_state = get_node("/root/PlayerVariables").state
+	player_variable = get_node("/root/PlayerVariables")
 	open_skill()
 
 func init_skill():
@@ -27,7 +28,7 @@ func init_skill():
 		skill.queue_free()
 
 func update_skill_point():
-	skill_point.text = str(player_state["skill_point"])
+	skill_point.text = str(player_variable.state["skill_point"])
 
 func open_skill():
 	update_skill()
@@ -45,11 +46,14 @@ func update_skill():
 			continue
 		var container = make_skill_container(skill_code)
 		SkillContainer.add_child(container)	
-	
+
+# 해당 스킬으 Active거나 Buff라면 퀵슬롯 등록창을 연다. 
 func make_skill_container(code)->TextureRect:
 	var texture_rect = TextureRect.new()
 	texture_rect.connect("gui_input", self, "_on_skill_detail_gui_input", [code])
 	texture_rect.texture = load("res://assets/art/skill_gui/skill_slot.png") 
+	if skill_list[code]["skill_type"] != "Passive":
+		texture_rect.connect("gui_input", self, "_on_open_skill_quickslot", [code])
 	
 	var panel = make_panel(code)
 	var skill_name = make_skill_name_label(code)
@@ -124,6 +128,34 @@ func make_dynamic_font(font_size:int)->DynamicFont:
 	dynamic_font.size = font_size
 	return dynamic_font
 
+func _on_open_skill_quickslot(event:InputEvent, code:int):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		make_quick_slot_button(code)
+
+func init_quick_slot_button():
+	for slot_button in quick_slots.get_children():
+		slot_button.queue_free()
+
+func make_quick_slot_button(code:int):
+	init_quick_slot_button()
+	skill_detail.get_node("skill_name").text = skill_list[code]["skill_name"]
+	for slot_key in player_variable.get_quick_slot():
+		var button = Button.new()
+		button.connect("pressed", self, "_on_set_skill_quickslot", [slot_key, code])
+		button.text = slot_key
+		button.set("custom_fonts/font", make_dynamic_font(48))
+		quick_slots.add_child(button)
+		
+func _on_set_skill_quickslot(slot_key:String, code:int):
+	if skill_list[code]["acquire"] == false:
+		return 
+		
+	var quick_slot = player_variable.get_quick_slot()
+	if not quick_slot.has(slot_key):
+		return
+		
+	print("REG")
+	player_variable.set_quick_slot(slot_key, code, "skill")
 
 func _on_change_skill_type(extra_arg_0: String) -> void:
 	current_skill_type = extra_arg_0
@@ -135,3 +167,7 @@ func _on_skill_detail_gui_input(event: InputEvent, code:int) -> void:
 		skill_detail.visible = true
 		skill_detail.get_node("skill_name").text = skill_list[code]["skill_name"]
 		skill_detail.get_node("skill_description").text = skill_list[code]["skill_description"]
+
+# 퀵슬롯 등록
+func _on_register_quick_slot(extra_arg_0: String) -> void:
+	pass # Replace with function body.
