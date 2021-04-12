@@ -438,7 +438,8 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 			return 
 			
 		var buff_duration_node = Timer.new()
-		buff_duration_node.connect("timeout", self, "_on_buff_duration_finished", [skill["skill_code"]])
+		buff_duration_node.name = skill["skill_name"]
+		buff_duration_node.connect("timeout", self, "_on_buff_duration_finished", [skill["skill_code"], skill["skill_name"]])
 		buff_duration_node.one_shot = true 
 		buff_duration_node.wait_time = skill["buff_duration"]
 		# 플레이어의 해당 버프 진행중임을 알린다. 
@@ -528,8 +529,9 @@ func use_item(code, numberof):
 	return
 
 # 버프의 지속시간이 끝나면
-func _on_buff_duration_finished(skill_code:int):
+func _on_buff_duration_finished(skill_code:int, timer_name:String):
 	player_variable.remove_buff_to_state(skill_code)
+	get_node(timer_name).queue_free()
 	#queue_free()
 
 func _on_attack_motion_finished(anim_name:String):
