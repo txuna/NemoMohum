@@ -117,6 +117,17 @@ var quick_slot = {
 
 var player_node_path = null
 
+func get_msg_log_node():
+	var msg_log_instance = get_node_or_null("/root/Main/MsgLog")
+	return msg_log_instance
+	
+func msg_log_update(msg:String):
+	var msg_log_instance = get_msg_log_node()
+	if msg_log_instance == null:
+		return
+	else:
+		msg_log_instance.add_message(msg)
+
 func get_mobile_touch_node():
 	var mobile_touch_instance = get_node_or_null("/root/Main/MobileTouch")
 	return mobile_touch_instance
@@ -133,6 +144,7 @@ func get_quick_slot():
 	
 #터치 부분 업데이트 
 func set_quick_slot(slot_key:String, code:int, type:String):
+	msg_log_update("퀵슬롯에 등록했습니다")
 	quick_slot[slot_key]["code"] = code 
 	quick_slot[slot_key]["use"] = true 
 	quick_slot[slot_key]["type"] = type 
@@ -284,6 +296,7 @@ func update_shop():
 		
 func get_coin(coin):
 	state["coin"] += coin
+	msg_log_update(str(coin) + "코인을 얻었습니다.")
 	update_inventory()
 	update_shop()
 
@@ -304,6 +317,7 @@ func get_exp(exp_value):
 	
 
 func player_level_up():
+	msg_log_update("플레이어가 레벨업을 했습니다")
 	state["upgrade_point"] += 5
 	state["skill_point"] += 5
 	state["level"] += 1
@@ -321,7 +335,7 @@ func calc_def(damage):
 		
 	
 func calc_exp(exp_value):
-	#add_message_to_chatbox("경험치를 얻었습니다 : " + str(enemy_exp))
+	msg_log_update("경험치를 얻었습니다 : " + str(exp_value))
 	while true:
 		var temp = (state["max_exp"] - state["current_exp"])
 		if exp_value - temp >= 0:
@@ -365,15 +379,17 @@ func check_already_has_equipment(item_code):
 ## SIGNAL 
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
-	if check_already_has_equipment(item["code"]):
-		return
-		
-	#var item_name = get_node("/root/Items").Items[item["code"]]["item_name"]
 	var numberof = item["numberof"]
 	var type = item["type"]
 	var code = item["code"]
+	var item_name = get_node("/root/Items").Items[code]["item_name"]
+	
+	if check_already_has_equipment(item["code"]):
+		msg_log_update("이미 해당 " + str(item_name) + " 장비를 가지고 있습니다")
+		return
 	change_inventory_item_number(type, code, numberof, +1)
-	#add_message_to_chatbox("아이템을 얻었습니다 : " + str(item_name) + " " + str(numberof) + "개")	
+	#add_message_to_chatbox("아이템을 얻었습니다 : " + str(item_name) + " " + str(numberof) + "개"ㄷ)	
+	msg_log_update("아이템을 얻었습니다 : " + str(item_name) + " " + str(numberof) + "개")
 	update_inventory()
 	
 func get_spoil(item):

@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/GUI/MsgLog.gd" type="Script" id=2]
+
+[node name="MsgLog" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 1190.0
+margin_top = 6.0
+margin_right = 1916.0
+margin_bottom = 245.0
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MsgContainer" type="VBoxContainer" parent="ScrollContainer"]
+__meta__ = {
+"_edit_use_anchors_": false
+}

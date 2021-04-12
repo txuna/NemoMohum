@@ -363,6 +363,7 @@ func show_damage(damage):
 func attack(is_skill, code=0):
 	var current_weapon = player_variable.get_current_equipment()["weapon"]
 	if current_weapon["item"] == null:
+		player_variable.msg_log_update("무기를 착용하고 있지 않습니다.")
 		return
 	# 무기타입에 따른 공격
 	if is_skill == false:
@@ -377,6 +378,7 @@ func skill_attack(code:int):
 	var skill = get_node("/root/Skills").Skills[code]
 	# 자신이 착용하고 있는 무기와 스킬의 타입과 비교
 	if current_weapon["item"].get_type() != skill["type"]:
+		player_variable.msg_log_update("스킬타입과 무기 종류가 일치하지 않습니다.")
 		return
 	else:
 		set_ready_attack(SKILL_ATTACK, code)
@@ -417,6 +419,7 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 		return
 	#MP 체크
 	if not player_variable.check_mp(skill["mp"]):
+		player_variable.msg_log_update("스킬을 사용하기 위한 MP가 부족합니다.")
 		return
 
 	
@@ -474,6 +477,7 @@ func get_equipment_direction():
 func upgrade_state(state_type):
 	var value
 	if not player_variable.check_upgrade_point():
+		player_variable.msg_log_update("스탯을 찍기위한 포인트가 부족합니다.")
 		return
 	if state_type == "attack":
 		value = player_variable.increase_attack()
@@ -552,6 +556,7 @@ func _on_sell_item(item):
 
 	#해당 아이템이 착용중이라면
 	if player_variable.check_already_wear_equipment(item["code"]):
+		player_variable.msg_log_update("해당 장비를 착용중이기에 판매할 수 없습니다.")
 		return	
 
 	if not player_variable.check_inventory_item_numberof(item_type, item_code):
@@ -564,9 +569,11 @@ func _on_sell_item(item):
 func _on_buy_item(item):
 	var item_price = items[item["code"]]["buy"]
 	if not player_variable.check_player_coin(item_price):
+		player_variable.msg_log_update("돈이 부족합니다")
 		return
 	# 해당 아이템이 이미 있다면
 	if player_variable.check_already_has_equipment(item["code"]):
+		player_variable.msg_log_update("이미 해당 아이템을 가지고 있습니다.")
 		return
 	player_variable.get_coin(-item_price)
 	player_variable.get_item(item)
@@ -579,10 +586,12 @@ func upgrade_skill(code):
 		
 	# 이미 해당 스킬이 만렙인지 확인
 	if not skills.check_master_level(code):
+		player_variable.msg_log_update("이미 해당 스킬은 최대레벨입니다.")
 		return
 	
 	# 배울려는 스킬의 선행스킬을 찍었는지 
 	if not skills.check_precedence(code):
+		player_variable.msg_log_update("해당 스킬의 선행스킬을 배우지 않았습니다.")
 		return
 			
 	# 스킬을 배운다. 
@@ -618,6 +627,7 @@ func send_notifination_to_quest(type:int, code:int, numberof:int):
 	player_variable.update_questbox()
 
 func get_quest_reward(reward:Dictionary):
+	player_variable.msg_log_update("퀘스트를 달성했습니다.")
 	var reward_exp = reward["state"]["current_exp"]
 	var reward_coin = reward["state"]["coin"]
 	var items = reward["item"]

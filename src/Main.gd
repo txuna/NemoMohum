@@ -5,6 +5,7 @@ const Title = preload("res://src/GUI/Title.tscn")
 const QuestManager = preload("res://src/quest/QuestManager.tscn")
 const Hud = preload("res://src/GUI/HUD.tscn")
 const MobileTouch = preload("res://src/GUI/MobileTouch.tscn")
+const MsgLog = preload("res://src/GUI/MsgLog.tscn")
 
 var map_list = {
 	0x8000 : {
@@ -30,8 +31,10 @@ func _on_game_start():
 	get_node("/root/Main/Title").queue_free()
 	var mobile_touch = MobileTouch.instance()
 	var quest_manager = QuestManager.instance()
+	var msg_log = MsgLog.instance()
 	var hud = Hud.instance()
 	
+	call_deferred("add_child", msg_log)
 	call_deferred("add_child", mobile_touch)
 	call_deferred("add_child", quest_manager)
 	call_deferred("add_child", hud)
