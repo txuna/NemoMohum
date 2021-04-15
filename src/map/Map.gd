@@ -25,5 +25,6 @@ func set_enemy_signal():
 	var enemies = $Enemies.get_children()
 	for enemy in enemies:
 		enemy.connect("EnemyDeath", player, "_on_enemy_death")
+		enemy.connect("EnemyAttack", player, "_on_take_damage_from_enemy")
 		get_tree().call_group("enemies", "connect", enemy)
 		

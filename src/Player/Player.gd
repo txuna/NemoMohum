@@ -70,7 +70,7 @@ func load_position():
 	equipment_position_list["hat"] = player_hat_position
 	
 func _physics_process(delta):
-	#get_input()
+	get_input()
 	velocity.y += gravity * delta
 	if jumping and is_on_floor():
 			jumping = false
@@ -604,19 +604,19 @@ func upgrade_skill(code):
 func _on_InvincibleTimer_timeout() -> void:
 	invincible = false
 
-
+## 원래는 몬스터 접근과 전리품 흭득을 여기서 했으나 각 각 spoil와 enemy에서 접근
 func _on_Area2D_body_entered(body: Node) -> void:
 	if is_death:
 		return
-	if body.is_in_group("enemies"):
-		if invincible == true:
-			return
-		take_damage(body.collision_attack())
+	#if body.is_in_group("enemies"):
+	#	if invincible == true:
+	#		return
+	#	take_damage(body.collision_attack())
 			
-	elif body.is_in_group("spoils"):
-		var item = body.get_item()
-		body.queue_free()
-		get_spoil(item)
+	#if body.is_in_group("spoils"):
+	#	var item = body.get_item()
+	#	body.queue_free()
+	#	get_spoil(item)
 		
 	
 func get_spoil(item):
@@ -662,4 +662,15 @@ func _on_AnimatedSprite_animation_finished() -> void:
 		player_animated_sprite.play("idle")
 	else:
 		player_animated_sprite.play("jump")
+
+func _on_take_damage_from_enemy(enemy_damage:int)->void:
+	if is_death or invincible:
+		return
+	else:
+		take_damage(enemy_damage)
+	
+func _on_get_spoil(item)->void:
+	if is_death:
+		return
+	get_spoil(item)
 

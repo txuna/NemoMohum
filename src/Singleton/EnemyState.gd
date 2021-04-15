@@ -20,21 +20,25 @@ var EnemyList = {
 					"code" : 0xB000,
 					"numberof" : 1,
 					"percentage" : 100, 
+					"type" : "consumption",
 				},
 				{
 					"code" : 0xB001,
 					"numberof" : 1,
 					"percentage" : 100, 
+					"type" : "consumption",
 				},
 				{
 					"code" : 0xC000,
 					"numberof" : 1,
 					"percentage" : 100,
+					"type" : "etc",
 				},
 				{
 					"code" : 0xC001,
 					"numberof" : 1,
 					"percentage" : 100,
+					"type" : "etc",
 				}
 			]
 		}
@@ -58,16 +62,19 @@ var EnemyList = {
 					"code" : 0xB000,
 					"numberof" : 1,
 					"percentage" : 100, 
+					"type" : "consumption",
 				},
 				{
 					"code" : 0xB001,
 					"numberof" : 1,
 					"percentage" : 100, 
+					"type" : "consumption",
 				},
 				{
 					"code" : 0xC002,
 					"numberof" : 1,
 					"percentage" : 100,
+					"type" : "etc",
 				},
 			]
 		}
@@ -91,16 +98,19 @@ var EnemyList = {
 					"code" : 0xB000,
 					"numberof" : 1,
 					"percentage" : 100, 
+					"type" : "consumption",
 				},
 				{
 					"code" : 0xB001,
 					"numberof" : 1,
 					"percentage" : 100, 
+					"type" : "consumption",
 				},
 				{
 					"code" : 0xC003,
 					"numberof" : 1,
 					"percentage" : 100,
+					"type" : "etc",
 				},
 			]
 		}

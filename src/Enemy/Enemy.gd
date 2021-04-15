@@ -20,6 +20,7 @@ var is_enemy_death = false
 var is_attack = false
 
 signal EnemyDeath
+signal EnemyAttack
 
 onready var HitEffectPosition = $HitEffectPosition
 onready var EnemyCollision = $CollisionShape2D
@@ -167,12 +168,19 @@ func give_spoil():
 			spoil_instance.position.x = SpoilPosition.global_position.x + index
 			get_parent().call_deferred("add_child", spoil_instance)
 			get_tree().call_group("spoils", "connect", spoil_instance)
-			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"])
+			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"], enemy_item["type"])
+			spoil_instance.connect("GiveSpoil", get_node(get_node("/root/PlayerVariables").get_player_node_path()), "_on_get_spoil")
 			index += 40
+			
 
+# 스킬 발동시 player노드와 시그널 Connect
 func skill_attack():
 	is_attack = true
 	AttackDelay.start()
 
 func _on_AttackDelay_timeout() -> void:
 	is_attack = false
+
+# 플레이어가 접근했을 때 
+func _on_Area2D_body_entered(body: Node) -> void:
+	emit_signal("EnemyAttack", collision_attack())

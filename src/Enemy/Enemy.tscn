@@ -57,5 +57,6 @@ __meta__ = {
 wait_time = 5.0
 one_shot = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="respawn"]
