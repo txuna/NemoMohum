@@ -14,7 +14,6 @@ const ENEMY = 2
 const ITEM = 3
 
 var velocity = Vector2()
-var jumping = false
 
 var invincible = false # 현재 플레이어가 무적상태인가 
 var is_attack = false # 플레이어의 공격 모션이 끝났는가
@@ -70,10 +69,8 @@ func load_position():
 	equipment_position_list["hat"] = player_hat_position
 	
 func _physics_process(delta):
-	get_input()
+	#get_input()
 	velocity.y += gravity * delta
-	if jumping and is_on_floor():
-			jumping = false
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
 func _on_player_action(type:String):

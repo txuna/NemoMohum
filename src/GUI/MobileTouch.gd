@@ -92,8 +92,8 @@ func update_screen():
 				
 			elif player_slot[slot_key]["type"] == "skill":
 				slot_touch_dict[slot_key].normal = skills[player_slot[slot_key]["code"]]["image"]
+				
 ## 클릭되면 is_attack true하고 시그널 보내고 false
-
 func _on_Inventory_pressed() -> void:
 	is_inventory = true
 	
