@@ -168,7 +168,7 @@ func give_spoil():
 			spoil_instance.position.x = SpoilPosition.global_position.x + index
 			get_parent().call_deferred("add_child", spoil_instance)
 			get_tree().call_group("spoils", "connect", spoil_instance)
-			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"], enemy_item["type"])
+			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"], item["type"])
 			spoil_instance.connect("GiveSpoil", get_node(get_node("/root/PlayerVariables").get_player_node_path()), "_on_get_spoil")
 			index += 40
 			
@@ -183,4 +183,6 @@ func _on_AttackDelay_timeout() -> void:
 
 # 플레이어가 접근했을 때 
 func _on_Area2D_body_entered(body: Node) -> void:
+	if is_enemy_death:
+		return
 	emit_signal("EnemyAttack", collision_attack())

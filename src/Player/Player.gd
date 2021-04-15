@@ -422,14 +422,13 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 		player_variable.msg_log_update("스킬을 사용하기 위한 MP가 부족합니다.")
 		return
 
-	
 	#Active의 경우 스킬 인스턴스를 만든다. 몬스터가 맞을 때는 스킬 데미지에 스킬 레벨만큼 곱해서 함
 	if skill["skill_type"] == "Active":
 		var skill_instance = skill["skill_scene"].instance()
 		skill_instance.position = player_skill_position.global_position
 		get_parent().add_child(skill_instance)
 		skill_instance.set_direction(get_equipment_direction())
-		skill_instance.set_skill(skill_code, skill_type)
+		skill_instance.set_skill(skill_code, skill_type, player_variable.state)
 		
 	#그리고 현재 이미 버프 수행중이라면 ~~ 체크 필수
 	elif skill["skill_type"] == "Buff":

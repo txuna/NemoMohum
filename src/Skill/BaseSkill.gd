@@ -17,16 +17,17 @@ var enemy_number:int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	player_state = get_node("/root/PlayerVariables").state
+	pass
 
 # 여기서 type은 기본 공격이냐 스킬공격이냐 결정짓는 파라미터 true: skill attack \ false : normal attack
-func set_skill(code:int, type:bool):
+func set_skill(code:int, type:bool, state:Dictionary):
 	if type == SKILL_ATTACK:
 		skill = get_node("/root/Skills").Skills[code]
 		
 	elif type == NORMAL_ATTACK:
 		skill = get_node("/root/Skills").BasicSkills[code]
 	
+	player_state = state
 	animation_player.play("shot")
 
 func set_direction(direction):
@@ -58,5 +59,3 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 			enemy_number+=1
 			if enemy_number >= skill["enemy_number"]:
 				queue_free()
-		#else:
-		#	queue_free()
