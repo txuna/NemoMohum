@@ -1,22 +1,13 @@
 extends Node
 
 
-const Title = preload("res://src/GUI/Title.tscn")
+var Title = load("res://src/GUI/Title.tscn")
 const QuestManager = preload("res://src/quest/QuestManager.tscn")
 const Hud = preload("res://src/GUI/HUD.tscn")
 const MobileTouch = preload("res://src/GUI/MobileTouch.tscn")
 const MsgLog = preload("res://src/GUI/MsgLog.tscn")
 
-var map_list = {
-	0x8000 : {
-		"scene" : preload("res://src/map/mountain/Mountain.tscn"),
-		"map_name" : "Mountain",
-	},
-	0x8001 : {
-		"scene" : preload("res://src/map/Jungle/Jungle.tscn"),
-		"map_name" : "Jungle",
-	}
-}
+
 
 var current_map_code = 0x8000
 
@@ -55,6 +46,11 @@ func change_map(map_node_name, map_code):
 	load_map()
 
 func load_map():
-	var map_instance = map_list[current_map_code]["scene"].instance()
+	var map_instance = null
+	if current_map_code == 0x8000:
+		map_instance = load("res://src/map/mountain/Mountain.tscn").instance()
+	
+	elif current_map_code == 0x8001:
+		map_instance = load("res://src/map/Jungle/Jungle.tscn").instance()
 	map_instance.connect("change_map", self, "change_map")
 	call_deferred("add_child", map_instance)

@@ -69,7 +69,7 @@ func load_position():
 	equipment_position_list["hat"] = player_hat_position
 	
 func _physics_process(delta):
-	#get_input()
+	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 
@@ -200,7 +200,7 @@ func open_questbox():
 	if questbox_node != null:
 		questbox_node.queue_free()
 		return 
-	questbox_node = preload("res://src/GUI/QuestListBox.tscn").instance()
+	questbox_node = load("res://src/GUI/QuestListBox.tscn").instance()
 	get_node("/root/Main").add_child(questbox_node)
 	
 
@@ -209,7 +209,7 @@ func open_skill():
 	if skill_instance != null:
 		skill_instance.queue_free()
 		return 
-	skill_instance = preload("res://src/GUI/Skill.tscn").instance()
+	skill_instance = load("res://src/GUI/Skill.tscn").instance()
 	skill_instance.connect("upgrade_skill", self, "upgrade_skill")
 	get_node("/root/Main").add_child(skill_instance)
 
@@ -218,7 +218,7 @@ func open_state():
 	if state_instance != null:
 		state_instance.queue_free()
 		return 
-	state_instance = preload("res://src/GUI/State.tscn").instance()
+	state_instance = load("res://src/GUI/State.tscn").instance()
 	state_instance.connect("upgrade_state", self, "upgrade_state")
 	get_node("/root/Main").add_child(state_instance)
 
@@ -227,7 +227,7 @@ func open_inventory():
 	if inventory_instance != null:
 		inventory_instance.queue_free()
 		return 
-	inventory_instance = preload("res://src/GUI/Inventory.tscn").instance()
+	inventory_instance = load("res://src/GUI/Inventory.tscn").instance()
 	inventory_instance.connect("use_item", self, "use_item")
 	get_node("/root/Main").add_child(inventory_instance)
 

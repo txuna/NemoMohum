@@ -111,7 +111,7 @@ func take_damage(player_damage, crit, index):
 		enemy_info["state"]["current_hp"] -= damage
 	HealthBar.show_damage(enemy_info["state"]["current_hp"])
 		
-	var particle = preload("res://src/Effect/HitEffect.tscn").instance()
+	var particle = load("res://src/Effect/HitEffect.tscn").instance()
 	particle.position = HitEffectPosition.position
 	add_child(particle)
 	
@@ -162,7 +162,7 @@ func give_spoil():
 		var percentage = rand_range(0, 100)
 		if percentage <= enemy_item["percentage"]:
 			var item = items[enemy_item["code"]]
-			var spoil_instance = preload("res://src/Spoil/Spoil.tscn").instance()
+			var spoil_instance = load("res://src/Spoil/Spoil.tscn").instance()
 			spoil_instance.get_node("Sprite").texture = item["item_image"]
 			spoil_instance.position = SpoilPosition.global_position
 			spoil_instance.position.x = SpoilPosition.global_position.x + index
