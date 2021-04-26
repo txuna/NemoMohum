@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Reference",
+"class": "EnchantList",
+"language": "GDScript",
+"path": "res://src/Enchant/EnchantList.gd"
+}, {
+"base": "Reference",
 "class": "EnemyState",
 "language": "GDScript",
 "path": "res://src/Singleton/EnemyState.gd"
@@ -35,6 +40,7 @@ _global_script_classes=[ {
 "path": "res://src/quest/QuestManager.gd"
 } ]
 _global_script_class_icons={
+"EnchantList": "",
 "EnemyState": "",
 "NpcScene": "",
 "Npcs": "",

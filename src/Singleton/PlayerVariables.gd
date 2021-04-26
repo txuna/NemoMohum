@@ -480,7 +480,8 @@ func check_overflow_state():
 	if state["crit"] >= 100:
 		state["crit"] = 100
 
-		
+	if state["min_attack"] > state["max_attack"]:
+		state["min_attack"] = state["max_attack"]
 
 
 
