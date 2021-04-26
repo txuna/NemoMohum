@@ -99,19 +99,19 @@ __meta__ = {
 }
 
 [node name="DetailContainer" type="Control" parent="Sprite"]
-margin_left = -228.0
+margin_left = -225.775
 margin_top = 138.0
-margin_right = 232.0
+margin_right = 234.225
 margin_bottom = 421.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Name" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 16.0
-margin_top = 25.0
-margin_right = 164.0
-margin_bottom = 64.0
+margin_left = 13.7754
+margin_top = 9.42682
+margin_right = 161.775
+margin_bottom = 48.4268
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "아이템 이름"
@@ -120,10 +120,10 @@ __meta__ = {
 }
 
 [node name="ItemName" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 190.0
-margin_top = 25.0
-margin_right = 338.0
-margin_bottom = 64.0
+margin_left = 188.517
+margin_top = 6.46063
+margin_right = 336.517
+margin_bottom = 45.4606
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -131,10 +131,10 @@ __meta__ = {
 }
 
 [node name="Description" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 17.5714
-margin_top = 107.863
-margin_right = 165.571
-margin_bottom = 146.863
+margin_left = 15.3465
+margin_top = 59.6605
+margin_right = 163.346
+margin_bottom = 98.6605
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "아이템 설명"
@@ -143,10 +143,10 @@ __meta__ = {
 }
 
 [node name="ItemDescription" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 190.0
-margin_top = 107.0
-margin_right = 338.0
-margin_bottom = 146.0
+margin_left = 191.483
+margin_top = 56.5727
+margin_right = 339.483
+margin_bottom = 95.5727
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
@@ -154,10 +154,10 @@ __meta__ = {
 }
 
 [node name="Effect" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 27.1426
-margin_top = 194.926
-margin_right = 83.1426
-margin_bottom = 233.926
+margin_left = 20.4685
+margin_top = 125.218
+margin_right = 76.4685
+margin_bottom = 164.218
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "효과"
@@ -166,10 +166,10 @@ __meta__ = {
 }
 
 [node name="ItemEffect" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 190.0
-margin_top = 195.0
-margin_right = 427.0
-margin_bottom = 276.0
+margin_left = 147.0
+margin_top = 130.0
+margin_right = 455.0
+margin_bottom = 288.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true

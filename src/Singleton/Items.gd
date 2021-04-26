@@ -239,11 +239,12 @@ var Items = {
 	},
 	0xC006 : {
 		"code" : 0xC006, 
-		"item_name" : '소울스톤',
+		"item_name" : '얼어붙은 영원석[D]',
 		"affect_player" : false,
 		"type" : "etc",
+		"detail_type" : "soulstone",
 		"item_image" : load("res://assets/art/spoil/etc/soul_stone.png"),	
-		"item_description" : "무장봉 영혼석이다....\n가치있는 곳에 쓰여야할것 같다.",
+		"item_description" : "얼어붙은 영원석이다...\n신비함 힘을 가지고 있다....",
 		"buy" : 10,
 		"sell" : 5,
 	}

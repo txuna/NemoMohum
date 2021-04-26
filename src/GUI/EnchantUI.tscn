@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://src/GUI/EnchantUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/art/enchant_gui/enchant_ui.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/inventory/inventory_slot.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="EnchantUI" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 647.955
+margin_top = 131.058
+margin_right = 1247.96
+margin_bottom = 899.058
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title" type="Label" parent="TextureRect"]
+margin_left = 204.025
+margin_top = 31.139
+margin_right = 380.025
+margin_bottom = 85.139
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "장비강화"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="description" type="Label" parent="TextureRect"]
+margin_left = 30.8979
+margin_top = 99.1225
+margin_right = 563.898
+margin_bottom = 232.122
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.392157, 0.0196078, 0.12549, 1 )
+text = "영원석을 이용해서 이전의 강화되지 않은 무기를 강화합니다. "
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="upgrade_button" type="Button" parent="TextureRect"]
+margin_left = 199.798
+margin_top = 656.64
+margin_right = 387.798
+margin_bottom = 716.64
+custom_fonts/font = SubResource( 2 )
+text = "강화하기"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EquipSlot" type="Panel" parent="TextureRect"]
+margin_left = 57.4487
+margin_top = 216.898
+margin_right = 226.449
+margin_bottom = 367.898
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StoneSlot" type="Panel" parent="TextureRect"]
+margin_left = 362.758
+margin_top = 216.898
+margin_right = 531.758
+margin_bottom = 367.898
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GetEquip" type="Button" parent="TextureRect"]
+margin_left = 47.1434
+margin_top = 388.372
+margin_right = 241.143
+margin_bottom = 431.372
+custom_fonts/font = SubResource( 5 )
+text = "장비 가져오기"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GetStone" type="Button" parent="TextureRect"]
+margin_left = 342.351
+margin_top = 387.249
+margin_right = 565.351
+margin_bottom = 430.249
+custom_fonts/font = SubResource( 5 )
+text = "영원석 가져오기"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit" type="Button" parent="TextureRect"]
+margin_left = 557.864
+margin_top = 7.85722
+margin_right = 590.864
+margin_bottom = 50.8572
+custom_fonts/font = SubResource( 6 )
+text = "X"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="TextureRect/upgrade_button" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="TextureRect/Exit" to="." method="_on_Exit_pressed"]
