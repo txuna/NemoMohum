@@ -21,4 +21,21 @@ func _on_upgrade_button_pressed() -> void:
 	if soulstone_type != "soulstone":
 		return
 		
+	var option_line_number = get_option_line()	
+		
+		
+# 한줄일지 두줄일지 결정짓는 함수
+func get_option_line()->int:
+	var option_line:int
+	var enchant_list = EnchantList.new() 
+	var rank = enchant_list.get_rank(soulston_code)
+	var rank_percent = enchant_list.get_upgrade_percent(rank)
 	
+	randomize()
+	var percent = rand_range(0, 100)
+	if percent <= rank_percent["plus_option_percent"]:
+		option_line = 2
+	else:
+		option_line = 1
+	
+	return option_line

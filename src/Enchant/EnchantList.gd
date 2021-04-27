@@ -41,6 +41,12 @@ var upgrade_percent = {
 	},
 }
 
+
+var rank_list = {
+	0x3000 : "D",
+	0x3001 : "D",
+}
+
 ### code : enchant code 0x1000~ player state upgrade
 ### code : ehcnat code 0x200 0~ player inherent skill
 var state_enchant_list = {
@@ -65,6 +71,12 @@ var skill_enchant_list = {
 		
 	},
 }
+
+func get_rank(code:int):
+	return rank_list[code]
+
+func get_upgrade_percent(rank:String):
+	return upgrade_percent[rank]
 
 func get_enchant(code:int):
 	if code >= 0x1000 and code <= 0x1FFF:

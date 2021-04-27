@@ -238,7 +238,7 @@ var Items = {
 		"sell" : 5,
 	},
 	0xC006 : {
-		"code" : 0xC006, 
+		"code" : 0x3000, 
 		"item_name" : '얼어붙은 영원석[D]',
 		"affect_player" : false,
 		"type" : "etc",

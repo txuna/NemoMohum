@@ -80,6 +80,7 @@ func _on_Timer_timeout() -> void:
 
 # 움직일지 가만히 있을지 결정
 func choice_stand_or_move():
+	randomize()
 	current_state = stand_list[randi() % stand_list.size()]
 	if current_state == STAND:
 		EnemySprite.play("idle")
@@ -88,6 +89,7 @@ func choice_stand_or_move():
 	
 # 오른쪽으로 갈지 왼쪽으로 갈지 결정
 func get_direction():
+	randomize()
 	var direction = direction_list[randi() % direction_list.size()]
 	return direction
 	
@@ -159,6 +161,7 @@ func give_coin():
 func give_spoil():
 	var index = 1
 	for enemy_item in enemy_info["spoil"]["item"]:
+		randomize()
 		var percentage = rand_range(0, 100)
 		if percentage <= enemy_item["percentage"]:
 			var item = items[enemy_item["code"]]
