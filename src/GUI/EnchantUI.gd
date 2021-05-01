@@ -4,6 +4,15 @@ extends CanvasLayer
 var equipment_code:int=0
 var soulston_code:int=0
 
+onready var EquipTexture = $TextureRect/EquipSlot/TextureRect
+onready var SoulStonTexture = $TextureRect/StoneSlot/TextureRect
+onready var ItemContainer = $item_list
+onready var ItemGrid = $item_list/ScrollContainer/GridContainer
+
+
+func _ready() -> void:
+	ItemContainer.visible = false
+
 func _on_Exit_pressed() -> void:
 	queue_free()
 
@@ -22,6 +31,7 @@ func _on_upgrade_button_pressed() -> void:
 		return
 		
 	var option_line_number = get_option_line()	
+	print("Option Line Number : " + str(option_line_number))
 		
 		
 # 한줄일지 두줄일지 결정짓는 함수
@@ -39,3 +49,71 @@ func get_option_line()->int:
 		option_line = 1
 	
 	return option_line
+
+
+# 장비를 가지고 오는 버튼 누를 시 옆에 목록 생성 
+func _on_GetEquip_pressed() -> void:
+	load_item_list("equipment")
+
+
+# 영원석을 가지고 오는 버튼 누를 시 옆에 목록 생성
+func _on_GetStone_pressed() -> void:
+	load_item_list("etc")
+
+
+func init_item_container():
+	for slot in ItemGrid.get_children():
+		slot.queue_free()
+
+func load_item_list(type:String):
+	init_item_container()
+	ItemContainer.visible = true
+	var player_inventory = get_node("/root/PlayerVariables").inventory
+	var items = get_node("/root/Items").Items
+	for item_code in player_inventory[type]:
+		if items[item_code]["detail_type"] in ["armor", "weapon", "soulstone"]:
+			var panel = make_panel(item_code)
+			ItemGrid.add_child(panel)
+
+func make_panel(item_code:int)->Panel:
+	var slot = Panel.new() 
+	slot.rect_size = Vector2(64, 64)
+	slot.rect_min_size = Vector2(64, 64)
+	
+	slot.connect("gui_input", self, "_on_Slot_gui_input", [item_code])
+	slot.get_stylebox("panel", "").set_texture(load("res://assets/art/inventory/inventory_slot.png"))
+	
+	var texture_rect = make_texture(item_code)
+	slot.add_child(texture_rect)
+	
+	return slot
+
+func make_texture(item_code)->TextureRect:
+	var texture_rect = TextureRect.new()
+	texture_rect.expand = true 
+	texture_rect.rect_position = Vector2(2,2)
+	texture_rect.rect_size = Vector2(60, 60)
+	texture_rect.texture = get_node("/root/Items").Items[item_code]["item_image"]
+	return texture_rect
+
+func _on_Slot_gui_input(event:InputEvent, item_code:int):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		var items = get_node("/root/Items").Items
+		var detail_type = items[item_code]["detail_type"] 
+		
+		if detail_type in ["weapon", "armor"]:
+			EquipTexture.texture = items[item_code]["item_image"]
+			equipment_code = item_code
+			
+		elif detail_type in ["soulstone"]:
+			SoulStonTexture.texture = items[item_code]["item_image"]
+			soulston_code = item_code
+		else:
+			return
+			
+		ItemContainer.visible = false
+		return
+
+
+
+

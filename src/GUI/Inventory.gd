@@ -5,7 +5,7 @@ signal use_item
 var items = null
 var player_variables = null
 
-var current_inven_type = "consumption" #equipment, etc, consumption
+var current_inven_type = "consumption" #equipment, etc(soulstone), consumption
 var current_index:int
 
 onready var slot_grid = $Sprite/ScrollContainer/GridContainer

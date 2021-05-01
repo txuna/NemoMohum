@@ -52,8 +52,8 @@ var NpcList = {
 	0x9006:{
 		"code" : 0x9006,
 		"name" : "aemerican",
-		"description" : "npc",
-		"type" : "quest",
+		"description" : "Enchant Girl",
+		"type" : "enchant",
 		"image" : load("res://assets/art/npc/american/american.png"),
 		"base_msg" : "HI",
 	}

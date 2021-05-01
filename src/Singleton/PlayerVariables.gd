@@ -89,6 +89,10 @@ var inventory = {
 			"code" : 0xC000,
 			"numberof" : 1,
 		},
+		0x3000 : {
+			"code" : 0x3000,
+			"numberof" : 1,
+		}
 	},
 }
 

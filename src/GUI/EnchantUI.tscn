@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/GUI/EnchantUI.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=2]
@@ -9,11 +9,11 @@
 size = 48
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 48
 font_data = ExtResource( 2 )
 
@@ -28,6 +28,14 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=6]
 size = 32
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=8]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 128, 128 )
 
 [node name="EnchantUI" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -60,7 +68,7 @@ margin_left = 30.8979
 margin_top = 99.1225
 margin_right = 563.898
 margin_bottom = 232.122
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.392157, 0.0196078, 0.12549, 1 )
 text = "영원석을 이용해서 이전의 강화되지 않은 무기를 강화합니다. "
 autowrap = true
@@ -73,7 +81,7 @@ margin_left = 199.798
 margin_top = 656.64
 margin_right = 387.798
 margin_bottom = 716.64
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "강화하기"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,28 +90,42 @@ __meta__ = {
 [node name="EquipSlot" type="Panel" parent="TextureRect"]
 margin_left = 57.4487
 margin_top = 216.898
-margin_right = 226.449
-margin_bottom = 367.898
+margin_right = 207.449
+margin_bottom = 366.898
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect/EquipSlot"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 145.0
+margin_bottom = 145.0
+expand = true
 
 [node name="StoneSlot" type="Panel" parent="TextureRect"]
 margin_left = 362.758
 margin_top = 216.898
-margin_right = 531.758
-margin_bottom = 367.898
+margin_right = 512.758
+margin_bottom = 366.898
 custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureRect" type="TextureRect" parent="TextureRect/StoneSlot"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 145.0
+margin_bottom = 145.0
+expand = true
+
 [node name="GetEquip" type="Button" parent="TextureRect"]
-margin_left = 47.1434
-margin_top = 388.372
-margin_right = 241.143
-margin_bottom = 431.372
+margin_left = 44.765
+margin_top = 387.183
+margin_right = 238.765
+margin_bottom = 430.183
 custom_fonts/font = SubResource( 5 )
 text = "장비 가져오기"
 __meta__ = {
@@ -131,5 +153,64 @@ text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="item_list" type="TextureRect" parent="."]
+margin_left = 1250.0
+margin_top = 349.0
+margin_right = 1515.0
+margin_bottom = 899.0
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="item_list"]
+margin_left = 60.0154
+margin_top = 18.0295
+margin_right = 213.015
+margin_bottom = 55.0295
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0.121569, 0.121569, 0.121569, 1 )
+text = "보유 아이템"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="item_list"]
+margin_left = 10.4773
+margin_top = 58.1137
+margin_right = 255.477
+margin_bottom = 529.114
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="item_list/ScrollContainer"]
+margin_left = 20.0
+margin_right = 64.0
+margin_bottom = 64.0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="item_list/ScrollContainer/GridContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 64 )
+custom_styles/panel = SubResource( 8 )
+
+[node name="TextureRect" type="TextureRect" parent="item_list/ScrollContainer/GridContainer/Panel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 62.0
+margin_bottom = 62.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="TextureRect/upgrade_button" to="." method="_on_upgrade_button_pressed"]
+[connection signal="pressed" from="TextureRect/GetEquip" to="." method="_on_GetEquip_pressed"]
+[connection signal="pressed" from="TextureRect/GetStone" to="." method="_on_GetStone_pressed"]
 [connection signal="pressed" from="TextureRect/Exit" to="." method="_on_Exit_pressed"]

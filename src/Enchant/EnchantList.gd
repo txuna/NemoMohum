@@ -5,7 +5,7 @@ class_name EnchantList
 
 var upgrade_percent = {
 	"D" : {
-		"plus_option_percent" : 1, 
+		"plus_option_percent" : 5, 
 		"option_percent" : [
 			{
 				"code" : 0x1001,
@@ -18,7 +18,7 @@ var upgrade_percent = {
 		],
 	},
 	"C" : {
-		"plus_option_percent" : 5, 
+		"plus_option_percent" : 10, 
 		"option_percent" : [
 			{
 				"code" : 0x1001,

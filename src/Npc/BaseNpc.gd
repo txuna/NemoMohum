@@ -33,13 +33,24 @@ func _on_BaseNpc_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			
 		elif npc["type"] == "quest": #대화상자 오픈
 			open_chatbox(npc["code"], npc["base_msg"], npc["name"])
+			
+		elif npc["type"] == "enchant":
+			open_enchant()
+
+func open_enchant():
+	var enchant_node = get_node_or_null("/root/Main/EnchantUI")
+	if enchant_node != null:
+		enchant_node.queue_free()
+	
+	enchant_node = load("res://src/GUI/EnchantUI.tscn").instance()
+	get_node("/root/Main").add_child(enchant_node)
 
 func open_chatbox(npc_code:int, base_msg:String, name:String):
 	var chatbox_node = get_node_or_null("/root/Main/Chatbox")
 	if chatbox_node != null:
 		chatbox_node.queue_free()
 
-	chatbox_node = preload("res://src/GUI/Chatbox.tscn").instance()
+	chatbox_node = load("res://src/GUI/Chatbox.tscn").instance()
 	get_node("/root/Main").add_child(chatbox_node)
 	chatbox_node.load_possible_quest(npc_code, base_msg, name)
 	
@@ -51,7 +62,7 @@ func open_shop(npc_code):
 		
 	var player_node_path = player_variable.get_player_node_path()
 	var player_node = get_node(player_node_path)
-	shop_node = preload("res://src/GUI/Shop.tscn").instance()
+	shop_node = load("res://src/GUI/Shop.tscn").instance()
 	shop_node.connect("sell_item", player_node, "_on_sell_item")
 	shop_node.connect("buy_item", player_node, "_on_buy_item")
 	get_node("/root/Main").add_child(shop_node)
