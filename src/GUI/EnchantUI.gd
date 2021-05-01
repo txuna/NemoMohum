@@ -24,14 +24,18 @@ func _on_upgrade_button_pressed() -> void:
 		return 
 	var equip_slot_type = items[equipment_code]["type"]
 	if equip_slot_type != "equipment":
+		get_node("/root/PlayerVariables").msg_log_update("장비를 선택해주세요.")
 		return
 
 	var soulstone_type = items[soulston_code]["detail_type"]
 	if soulstone_type != "soulstone":
+		get_node("/root/PlayerVariables").msg_log_update("영원석을 선택해주세요.")
 		return
 		
 	var option_line_number = get_option_line()	
-	print("Option Line Number : " + str(option_line_number))
+	# option의 line 갯수 만큼 
+	for line in option_line_number:
+		pass
 		
 		
 # 한줄일지 두줄일지 결정짓는 함수
@@ -52,6 +56,7 @@ func get_option_line()->int:
 
 
 # 장비를 가지고 오는 버튼 누를 시 옆에 목록 생성 
+# 장착중인 장비인지 확인
 func _on_GetEquip_pressed() -> void:
 	load_item_list("equipment")
 
@@ -95,13 +100,38 @@ func make_texture(item_code)->TextureRect:
 	texture_rect.rect_size = Vector2(60, 60)
 	texture_rect.texture = get_node("/root/Items").Items[item_code]["item_image"]
 	return texture_rect
+	
+	
+func check_already_equip(detail_type, item_code):
+	var items = get_node("/root/Items").Items
+	var player_equipment_state = get_node("/root/PlayerVariables").current_equipment
+	if detail_type == "weapon":
+		if player_equipment_state["weapon"]["item"] != null:
+			var current_weapon_code = player_equipment_state["weapon"]["item"].get_code()
+			if current_weapon_code == item_code:
+				get_node("/root/PlayerVariables").msg_log_update("해당 장비는 장착중이므로 강화가 불가능합니다.")
+				return false	
+	else:
+		var armor_type = items[item_code]["armor_type"]
+		if player_equipment_state[armor_type]["item"] != null:
+			var current_armor_code = player_equipment_state[armor_type]["item"].get_code()
+			if current_armor_code == item_code:
+				get_node("/root/PlayerVariables").msg_log_update("해당 장비는 장착중이므로 강화가 불가능합니다.")
+				return false
+				
+	return true
 
 func _on_Slot_gui_input(event:InputEvent, item_code:int):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		var items = get_node("/root/Items").Items
 		var detail_type = items[item_code]["detail_type"] 
-		
+		var player_equipment_state = get_node("/root/PlayerVariables").current_equipment
+		# 해당 장비가 장착중인 장비인지 체크 한다. 만약 착용중인 장비라면 강화가 불가능하다. 
+	
 		if detail_type in ["weapon", "armor"]:
+			if not check_already_equip(detail_type, item_code):
+				return
+						
 			EquipTexture.texture = items[item_code]["item_image"]
 			equipment_code = item_code
 			
@@ -109,6 +139,7 @@ func _on_Slot_gui_input(event:InputEvent, item_code:int):
 			SoulStonTexture.texture = items[item_code]["item_image"]
 			soulston_code = item_code
 		else:
+			get_node("/root/PlayerVariables").msg_log_update("영원석 또는 장비만을 선택할 수 있습니다.")
 			return
 			
 		ItemContainer.visible = false
