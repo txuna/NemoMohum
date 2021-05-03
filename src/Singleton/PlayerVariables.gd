@@ -250,12 +250,14 @@ func use_item(type, code, numberof, mark, affect_player):
 		var effect = get_node("/root/Items").Items[code]["effect"]
 		increase_state_from_effect(effect, 1)
 		# 해당 아이템이 장비 이면서 인챈트 되어 있다면 
-		if inventory[type][code]["is_enchant"] == true:
-			if enchant_table.has(code):
-				enchant_table.erase(code)
-			inventory[type][code]["is_enchant"] = false
 
+	if inventory[type][code]["is_enchant"] == true:
+		if enchant_table.has(code):
+			enchant_table.erase(code)
+		inventory[type][code]["is_enchant"] = false
+		
 	change_inventory_item_number(type, code, numberof, mark)
+		
 		
 func check_skill_point():
 	if state["skill_point"] <= 0:
