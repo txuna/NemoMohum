@@ -108,7 +108,7 @@ var inventory = {
 		},
 		0x3000 : {
 			"code" : 0x3000,
-			"numberof" : 1,
+			"numberof" : 3,
 			"is_enchant" : false,
 		}
 	},
