@@ -57,8 +57,8 @@ var state_enchant_list = {
 			"max_attack" :10, 
 		},
 	},
-	0x1002 : {
-		"code" : 0x1002, 
+	0x1001 : {
+		"code" : 0x1001, 
 		"name" : "최대 공격력 2단계 증가",
 		"effect" : {
 			"max_attack" :20, 
@@ -79,6 +79,7 @@ var skill_enchant_list = {
 
 func get_rank(code:int):
 	return rank_list[code]
+
 
 func get_upgrade_percent(rank:String):
 	return upgrade_percent[rank]

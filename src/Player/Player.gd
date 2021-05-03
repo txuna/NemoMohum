@@ -520,7 +520,9 @@ func use_item(code, numberof):
 		player_variable.use_item(item_type, code, numberof, -1, item["affect_player"])
 		send_notifination_to_quest(ITEM, code, numberof * -1)
 	elif item_type == "etc":
-		return
+		if not player_variable.check_inventory_item_numberof(item_type, code):
+			return 
+		player_variable.use_item(item_type, code, numberof, -1, false)
 		
 	return
 

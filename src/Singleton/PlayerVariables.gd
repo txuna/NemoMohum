@@ -50,7 +50,7 @@ var state = {
 
 var enchant_table = {
 	0xA001 : {
-		"state_option" : [0x1000, 0x1002],
+		"state_option" : [0x1000, 0x1001],
 		"skill_option" : [0x2000],
 	}
 }
@@ -253,6 +253,7 @@ func use_item(type, code, numberof, mark, affect_player):
 		if inventory[type][code]["is_enchant"] == true:
 			if enchant_table.has(code):
 				enchant_table.erase(code)
+			inventory[type][code]["is_enchant"] = false
 
 	change_inventory_item_number(type, code, numberof, mark)
 		

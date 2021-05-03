@@ -103,6 +103,9 @@ margin_top = 5.0
 margin_right = 145.0
 margin_bottom = 145.0
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StoneSlot" type="Panel" parent="TextureRect"]
 margin_left = 362.758
@@ -156,6 +159,9 @@ text = "X"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SuccessParticle" type="Position2D" parent="TextureRect"]
+position = Vector2( 297.669, 309.683 )
 
 [node name="item_list" type="TextureRect" parent="."]
 margin_left = 1250.0

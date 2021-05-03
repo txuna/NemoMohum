@@ -43,6 +43,9 @@ func open_enchant():
 		enchant_node.queue_free()
 	
 	enchant_node = load("res://src/GUI/EnchantUI.tscn").instance()
+	var player_node_path = get_node("/root/PlayerVariables").get_player_node_path()
+	var player_node = get_node(player_node_path)
+	enchant_node.connect("use_item", player_node, "use_item")
 	get_node("/root/Main").add_child(enchant_node)
 
 func open_chatbox(npc_code:int, base_msg:String, name:String):

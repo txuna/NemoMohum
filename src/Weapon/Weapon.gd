@@ -33,7 +33,7 @@ func set_enchant_state(mask):
 	var enchant_list = EnchantList.new()
 	var state_options = player_variable.enchant_table[weapon_code]["state_option"]
 	for option in state_options:
-		player_variable.increase_state_from_effect(enchant_list.state_enchant_list[option]["effect"], 1)
+		player_variable.increase_state_from_effect(enchant_list.state_enchant_list[option]["effect"], mask)
 	
 	
 func set_weapon(code):
