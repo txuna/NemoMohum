@@ -564,6 +564,7 @@ func _on_sell_item(item):
 	player_variable.get_coin(item_price)
 	send_notifination_to_quest(ITEM, item_code, numberof * -1)
 	
+
 func _on_buy_item(item):
 	var item_price = items[item["code"]]["buy"]
 	if not player_variable.check_player_coin(item_price):

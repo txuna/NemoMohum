@@ -120,6 +120,9 @@ margin_top = 5.0
 margin_right = 145.0
 margin_bottom = 145.0
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GetEquip" type="Button" parent="TextureRect"]
 margin_left = 44.765
@@ -188,7 +191,6 @@ __meta__ = {
 }
 
 [node name="GridContainer" type="GridContainer" parent="item_list/ScrollContainer"]
-margin_left = 20.0
 margin_right = 64.0
 margin_bottom = 64.0
 columns = 3

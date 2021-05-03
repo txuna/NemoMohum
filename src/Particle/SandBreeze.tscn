@@ -16,7 +16,6 @@ orbit_velocity_random = 0.0
 [node name="Particles2D" type="Particles2D" parent="."]
 position = Vector2( 3.1748, 2.98602 )
 rotation = -0.795455
-amount = 100000
 lifetime = 25.0
 speed_scale = 3.0
 draw_order = 1

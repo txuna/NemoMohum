@@ -52,23 +52,28 @@ var rank_list = {
 var state_enchant_list = {
 	0x1000 : {
 		"code" : 0x1000, 
-		"name" : "최대 공격력 1단계",
+		"name" : "최대 공격력 1단계 증가",
 		"effect" : {
 			"max_attack" :10, 
 		},
 	},
 	0x1002 : {
 		"code" : 0x1002, 
-		"name" : "최대 공격력 2단계",
+		"name" : "최대 공격력 2단계 증가",
 		"effect" : {
 			"max_attack" :20, 
 		},
 	},
 }
 
+# 공격 대상에게 effect를 전한다. 
 var skill_enchant_list = {
 	0x2000 : {
-		
+		"code" : 0x2000,
+		"name" : "적 공격시 5초간 이동속도 20% 감소",
+		"effect" : {
+			"speed" : -70
+		}
 	},
 }
 

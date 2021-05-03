@@ -163,14 +163,18 @@ func give_spoil():
 	for enemy_item in enemy_info["spoil"]["item"]:
 		randomize()
 		var percentage = rand_range(0, 100)
+		
 		if percentage <= enemy_item["percentage"]:
 			var item = items[enemy_item["code"]]
 			var spoil_instance = load("res://src/Spoil/Spoil.tscn").instance()
 			spoil_instance.get_node("Sprite").texture = item["item_image"]
+			
 			spoil_instance.position = SpoilPosition.global_position
 			spoil_instance.position.x = SpoilPosition.global_position.x + index
+			
 			get_parent().call_deferred("add_child", spoil_instance)
 			get_tree().call_group("spoils", "connect", spoil_instance)
+			
 			spoil_instance.setup_item(enemy_item["code"], enemy_item["numberof"], item["type"])
 			spoil_instance.connect("GiveSpoil", get_node(get_node("/root/PlayerVariables").get_player_node_path()), "_on_get_spoil")
 			index += 40

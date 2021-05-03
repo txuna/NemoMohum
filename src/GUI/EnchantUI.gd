@@ -21,6 +21,7 @@ func _on_Exit_pressed() -> void:
 func _on_upgrade_button_pressed() -> void:
 	var items = get_node("/root/Items").Items
 	if not items.has(equipment_code) or not items.has(soulston_code):
+		get_node("/root/PlayerVariables").msg_log_update("장비 또는 영원석을 선택해주세요. ")
 		return 
 	var equip_slot_type = items[equipment_code]["type"]
 	if equip_slot_type != "equipment":

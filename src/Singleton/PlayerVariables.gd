@@ -47,51 +47,69 @@ var state = {
 	"buff_code_list" : [], #현재 적용받고 있는 버프 스킬 코드
 }
 
+
+var enchant_table = {
+	0xA001 : {
+		"state_option" : [0x1000, 0x1002],
+		"skill_option" : [0x2000],
+	}
+}
+
 var inventory = {
 	"equipment" : {
 		0xA001:{
 			"code" : 0xA001,
 			"numberof" : 1,
+			"is_enchant" : true,
 		},
 		0xA002:{
 			"code" : 0xA002,
 			"numberof" : 1,
+			"is_enchant" : false,
 		},
 		0xA003:{
 			"code" : 0xA003,
 			"numberof" : 1,
+			"is_enchant" : false,
 		},
 		0xA004:{
 			"code" : 0xA004,
 			"numberof" : 1,
+			"is_enchant" : false,
 		},
 		0xA005: {
 			"code" : 0xA005,
 			"numberof" : 1,
+			"is_enchant" : false,
 		},
 		0xA030:{
 			"code" : 0xA030,
 			"numberof" : 1,
+			"is_enchant" : false,
 		},
 		0xA031:{
 			"code" : 0xA031,
 			"numberof" : 1,
+			"is_enchant" : false,
 		}
 	},
 	"consumption" : {
 		0xB000:{
 			"code" : 0xB000,
 			"numberof" : 20,
+			"is_enchant" : false,
 		},
 	},
 	"etc" : {
 		0xC000:{
 			"code" : 0xC000,
 			"numberof" : 1,
+			"is_enchant" : false,
 		},
 		0x3000 : {
 			"code" : 0x3000,
 			"numberof" : 1,
+			"is_enchant" : false,
 		}
 	},
 }
@@ -220,15 +238,22 @@ func change_inventory_item_number(type, code, numberof, mark):
 		else:
 			inventory[type][code] = {
 				"code" : code,
-				"numberof" : numberof
+				"numberof" : numberof,
+				"is_enchant" : false,
 			}
+				
 	update_inventory()
 	update_shop()
 	
 func use_item(type, code, numberof, mark, affect_player):
 	if affect_player == true:
-		 var effect = get_node("/root/Items").Items[code]["effect"]
-		 increase_state_from_effect(effect, 1)
+		var effect = get_node("/root/Items").Items[code]["effect"]
+		increase_state_from_effect(effect, 1)
+		# 해당 아이템이 장비 이면서 인챈트 되어 있다면 
+		if inventory[type][code]["is_enchant"] == true:
+			if enchant_table.has(code):
+				enchant_table.erase(code)
+
 	change_inventory_item_number(type, code, numberof, mark)
 		
 func check_skill_point():
@@ -380,12 +405,14 @@ func check_already_has_equipment(item_code):
 	else:
 		return false
 	
-## SIGNAL 
+## SIGNAL
+## 장비 무기의 경우 is_echant라는 키가 없으면 is_enchant = false, enchant = null로 설정
 func get_item(item:Dictionary):
 	# 무기의 경우 이미 가지고 있다면
 	var numberof = item["numberof"]
 	var type = item["type"]
 	var code = item["code"]
+		
 	var item_name = get_node("/root/Items").Items[code]["item_name"]
 	
 	if check_already_has_equipment(item["code"]):

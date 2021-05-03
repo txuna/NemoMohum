@@ -20,10 +20,21 @@ func get_attack_delay():
 
 func plus_weapon_state_to_player():
 	player_variable.increase_state_from_effect(weapon_info["effect"], 1)
+	if player_variable.inventory["equipment"][weapon_code]["is_enchant"] == true:
+		set_enchant_state(1)
 
 func minus_weapon_state_to_player():
 	player_variable.increase_state_from_effect(weapon_info["effect"], -1)
+	if player_variable.inventory["equipment"][weapon_code]["is_enchant"] == true:
+		set_enchant_state(-1)
 
+# 옵션 부가 수치 증가 및 감소
+func set_enchant_state(mask):
+	var enchant_list = EnchantList.new()
+	var state_options = player_variable.enchant_table[weapon_code]["state_option"]
+	for option in state_options:
+		player_variable.increase_state_from_effect(enchant_list.state_enchant_list[option]["effect"], 1)
+	
 	
 func set_weapon(code):
 	weapon_code = code

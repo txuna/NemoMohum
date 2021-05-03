@@ -231,7 +231,7 @@ func _on_buy_item(index):
 	var item = {
 		"code" : item_code,
 		"numberof" : 1,
-		"type" : items[item_code]["type"]
+		"type" : items[item_code]["type"],
 	}
 	emit_signal("buy_item", item)
 
