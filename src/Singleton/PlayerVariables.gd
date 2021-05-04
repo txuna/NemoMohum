@@ -462,7 +462,7 @@ func increase_max_hp():
 func increase_max_mp():
 	var value = 30
 	state["max_mp"] += value
-	update_hud(state["current_ep"], "mp")
+	update_hud(state["current_mp"], "mp")
 	return true
 	
 func increase_crit():

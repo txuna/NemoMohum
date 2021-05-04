@@ -77,10 +77,10 @@ __meta__ = {
 }
 
 [node name="UseButton" type="Button" parent="Sprite"]
-margin_left = -125.146
-margin_top = -60.2424
-margin_right = 125.854
-margin_bottom = 26.7576
+margin_left = -125.613
+margin_top = -70.9872
+margin_right = 125.387
+margin_bottom = 16.0128
 custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "USE"
@@ -89,10 +89,10 @@ __meta__ = {
 }
 
 [node name="QuickSlot" type="HBoxContainer" parent="Sprite"]
-margin_left = -117.0
-margin_top = 44.0
-margin_right = 126.0
-margin_bottom = 84.0
+margin_left = -120.531
+margin_top = 23.3993
+margin_right = 122.469
+margin_bottom = 63.3993
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -204,10 +204,10 @@ __meta__ = {
 }
 
 [node name="CoinLabel" type="Label" parent="Sprite"]
-margin_left = -123.081
-margin_top = 60.7875
-margin_right = -55.0811
-margin_bottom = 99.7875
+margin_left = -122.109
+margin_top = 88.2289
+margin_right = -54.1094
+margin_bottom = 127.229
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Coin"
@@ -216,10 +216,10 @@ __meta__ = {
 }
 
 [node name="CoinValue" type="Label" parent="Sprite"]
-margin_left = -31.2206
-margin_top = 60.0875
-margin_right = 27.7797
-margin_bottom = 99.0875
+margin_left = -48.0
+margin_top = 88.0
+margin_right = 210.0
+margin_bottom = 127.0
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
