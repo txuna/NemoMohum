@@ -39,6 +39,8 @@ onready var player_skill_effect_position = $EffectPosition
 
 signal NOTIFY
 
+signal BUFF_SWITCH
+
 var equipment_position_list = {
 
 }
@@ -442,6 +444,9 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 		player_variable.add_buff_to_state(skill["skill_code"])
 		add_child(buff_duration_node)
 		buff_duration_node.start()
+		
+		# BuffList에게 Signal 전송
+		emit_signal("BUFF_SWITCH", true, skill_code) 
 	
 	#MP 소모 
 	player_variable.increase_state_from_effect({"current_mp" : skill["mp"]}, -1)
@@ -530,7 +535,8 @@ func use_item(code, numberof):
 func _on_buff_duration_finished(skill_code:int, timer_name:String):
 	player_variable.remove_buff_to_state(skill_code)
 	get_node(timer_name).queue_free()
-	#queue_free()
+	emit_signal("BUFF_SWITCH", false, skill_code) 
+	# BuffList에게 remove signal 전송
 
 func _on_attack_motion_finished(anim_name:String):
 	set_equipment_direction(get_equipment_direction())

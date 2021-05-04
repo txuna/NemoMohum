@@ -62,7 +62,7 @@ func do_enchant():
 	var option_percent = upgrade_percent["option_percent"]
 	for line in option_line_number:
 		randomize()
-		var percent  = rand_range(0, 100)
+		var percent = rand_range(0, 100)
 		for option in option_percent:
 			if percent <= option["cumulative_percent"]:
 				state_code_list.append(option["code"])
