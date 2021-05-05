@@ -52,7 +52,7 @@ func set_camera_limit():
 	$Camera2D.limit_left = map_limits.position.x * map_cellsize.x
 	$Camera2D.limit_right = map_limits.end.x * map_cellsize.x
 	#$Camera2D.limit_top = map_limits.position.y * map_cellsize.y
-	$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y
+	$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y + 64 + 32 + 16 + 8
 
 func _ready():
 	player_variable = get_node("/root/PlayerVariables")
