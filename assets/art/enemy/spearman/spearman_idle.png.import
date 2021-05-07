@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/walk3.png-a650955d28e84bb1bfd6433e7d937f2e.stex"
+path="res://.import/spearman_idle.png-2698c18f4a12a2c6bdb814b93b86dd49.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/enemy/robot/walk3.png"
-dest_files=[ "res://.import/walk3.png-a650955d28e84bb1bfd6433e7d937f2e.stex" ]
+source_file="res://assets/art/enemy/spearman/spearman_idle.png"
+dest_files=[ "res://.import/spearman_idle.png-2698c18f4a12a2c6bdb814b93b86dd49.stex" ]
 
 [params]
 

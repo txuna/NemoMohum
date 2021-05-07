@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rose1_die4.png-015cef9e4804fb1718b46a3b7de927b9.stex"
+path="res://.import/spearman_hit.png-d7a21133cb7eaabf206adc727c5ec05c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/enemy/rose1/rose1_die4.png"
-dest_files=[ "res://.import/rose1_die4.png-015cef9e4804fb1718b46a3b7de927b9.stex" ]
+source_file="res://assets/art/enemy/spearman/spearman_hit.png"
+dest_files=[ "res://.import/spearman_hit.png-d7a21133cb7eaabf206adc727c5ec05c.stex" ]
 
 [params]
 

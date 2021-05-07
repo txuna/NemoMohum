@@ -105,6 +105,34 @@ var EnemyList = {
 			]
 		}
 	},
+	0xF006 : {
+		"enemy_code" : 0xF006,
+		"enemy_name" : "Spearman",
+		"state" : {
+			"attack" : 20,
+			"def" : 70, 
+			"max_hp" : 250,
+			"current_hp" : 250,
+			"speed" : 90,
+			"level" : 5,
+		},
+		"spoil" : {
+			"coin" : 15,
+			"exp" : 2000,
+			"item" : [
+				{
+					"code" : 0xB000,
+					"numberof" : 1,
+					"percentage" : 100, 
+				},
+				{
+					"code" : 0xB001,
+					"numberof" : 1,
+					"percentage" : 100, 
+				},
+			]
+		}
+	},
 }
 #
 func get_enemy_info(enemy_code):

@@ -11,7 +11,7 @@ onready var sprite = $Sprite
 onready var animation_player = $AnimationPlayer
 var skill = null
 var player_state = null
-var skill_direction = null
+var skill_direction:int
 
 var enemy_number:int = 0
 

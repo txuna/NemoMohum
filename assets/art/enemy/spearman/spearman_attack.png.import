@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/die.png-d4e11f845781471163f229b9e4cc9295.stex"
+path="res://.import/spearman_attack.png-f7d18f45c830c8b8b326d4af33bd4b81.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/enemy/robot/die.png"
-dest_files=[ "res://.import/die.png-d4e11f845781471163f229b9e4cc9295.stex" ]
+source_file="res://assets/art/enemy/spearman/spearman_attack.png"
+dest_files=[ "res://.import/spearman_attack.png-f7d18f45c830c8b8b326d4af33bd4b81.stex" ]
 
 [params]
 

@@ -56,6 +56,13 @@ __meta__ = {
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+
+[node name="SkillPosition" type="Position2D" parent="."]
+[connection signal="animation_finished" from="EnemySprite" to="." method="_on_EnemySprite_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]
