@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/Enemy/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/art/enemy/spearman/spearman_attack.png" type="Texture" id=2]
@@ -130,13 +130,7 @@ animations = [ {
 extents = Vector2( 20.4661, 64.2703 )
 
 [sub_resource type="RectangleShape2D" id=21]
-extents = Vector2( 41.0865, 62.5566 )
-
-[sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 61.187, 58.4636 )
-
-[sub_resource type="Animation" id=23]
-resource_name = "die"
+extents = Vector2( 62.3926, 58.4636 )
 
 [node name="Spearman" instance=ExtResource( 1 )]
 script = ExtResource( 7 )
@@ -145,6 +139,7 @@ script = ExtResource( 7 )
 position = Vector2( 120.596, 117.418 )
 frames = SubResource( 19 )
 animation = "attack"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -166,26 +161,21 @@ margin_bottom = 39.0
 [node name="SpoilPosition" parent="." index="7"]
 position = Vector2( 151.964, -77.3977 )
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 150.562, 114.926 )
-shape = SubResource( 21 )
-
-[node name="EnemyInfo" parent="." index="11"]
+[node name="EnemyInfo" parent="." index="10"]
 margin_left = 36.567
 margin_top = 184.595
 margin_right = 186.567
 margin_bottom = 221.595
 
-[node name="AttackArea" parent="." index="13"]
+[node name="AttackArea" parent="." index="12"]
 collision_layer = 64
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
-position = Vector2( 68.3794, 121.299 )
-shape = SubResource( 22 )
+position = Vector2( 145.368, 120.505 )
+shape = SubResource( 21 )
 
-[node name="SkillPosition" parent="." index="14"]
+[node name="SkillPosition" parent="." index="13"]
 position = Vector2( 68.2582, 120.642 )
 
-[node name="AnimationPlayer" parent="." index="15"]
-anims/die = SubResource( 23 )
-[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[node name="CenterPosition" parent="." index="14"]
+position = Vector2( 151.321, 121.622 )

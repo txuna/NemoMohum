@@ -20,6 +20,8 @@ var is_enemy_death = false
 
 var is_delay = false # 다음 공격까지의 딜레이 
 var is_attack = false # 공격 애니메이션 시간
+var player_in = false
+var enemy_skill_scene:String
 
 signal EnemyDeath
 signal EnemyAttack
@@ -34,6 +36,7 @@ onready var AttackPosition = $AttackPosition
 onready var AttackDelay = $AttackDelay
 onready var EnemyInfo = $EnemyInfo
 onready var SkillPosition = $SkillPosition
+onready var CenterPosition = $CenterPosition
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -47,7 +50,11 @@ func _physics_process(delta: float) -> void:
 		return
 	velocity.y += GRAVITY
 	if is_attack:
-		return
+		return	
+		
+	if check_attack():
+		attack()
+	
 	if current_state == WALK:
 		velocity.x = current_direction * enemy_info["state"]["speed"]
 	else:
@@ -60,7 +67,6 @@ func show_enemy_info():
 # Enemy의 정보를 저장한다. 
 func set_enemy_info(enemy_code:int):
 	enemy_info = EnemyState.new().get_enemy_info(enemy_code)
-	
 	HealthBar.set_health(enemy_info["state"]["max_hp"])
 	show_enemy_info()
 	
@@ -104,6 +110,8 @@ func collision_attack():
 	if is_enemy_death:
 		return 0
 	return enemy_info["state"]["attack"]
+	
+	
 	
 func take_damage(player_damage, crit, index):
 	if is_enemy_death:
@@ -188,37 +196,40 @@ func give_spoil():
 
 func set_enemy_direction_to_player():
 	var player_position = get_node(get_node("/root/PlayerVariables").get_player_node_path()).global_position.x
-	var enemy_position = global_position.x 
+	var enemy_position = CenterPosition.global_position.x 
 	if enemy_position - player_position > 0:
 		EnemySprite.flip_h = false
+		return LEFT
 	else:
 		EnemySprite.flip_h = true
-
+		return RIGHT
+	
+func check_attack():
+	if is_delay or not player_in:
+		return false
+	else:
+		return true
+	
 # 스킬 발동시 player노드와 시그널 Connect
 # 플레이어의 방향 체크
-func skill_attack(skill_scene):
-	if is_delay:
-		return
+func attack():
 	is_attack = true
 	is_delay = true
 	AttackDelay.start()
-	set_enemy_direction_to_player()
+	var direction = set_enemy_direction_to_player()
 	EnemySprite.play("attack")
-	var skill_instance = load(skill_scene).instance()
+	var skill_instance = load(enemy_skill_scene).instance()
 	skill_instance.position = SkillPosition.global_position
-	skill_instance.init(enemy_info["state"]["attack"], current_direction)
+	skill_instance.init(enemy_info["state"]["attack"], direction)
 	skill_instance.connect("EnemyAttack", get_node(get_node("/root/PlayerVariables").get_player_node_path()), "_on_take_damage_from_enemy")
 	get_parent().get_parent().call_deferred("add_child", skill_instance)
+	
 
+func set_skill(skill_scene):
+	enemy_skill_scene = skill_scene
 
 func _on_AttackDelay_timeout() -> void:
 	is_delay = false
-
-# 플레이어가 접근했을 때 
-func _on_Area2D_body_entered(body: Node) -> void:
-	if is_enemy_death:
-		return
-	emit_signal("EnemyAttack", collision_attack())
 
 
 func _on_EnemySprite_animation_finished() -> void:
@@ -226,3 +237,16 @@ func _on_EnemySprite_animation_finished() -> void:
 		is_attack = false
 		set_direction()
 		choice_stand_or_move()
+		
+func _on_player_death():
+	player_in = false
+
+
+func _on_AttackArea_body_entered(body: Node) -> void:
+	if is_enemy_death:
+		return
+	player_in = true
+
+
+func _on_AttackArea_body_exited(body: Node) -> void:
+	player_in = false

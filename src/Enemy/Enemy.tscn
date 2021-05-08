@@ -34,11 +34,6 @@ autostart = true
 
 [node name="SpoilPosition" type="Position2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-
 [node name="AttackPosition" type="Position2D" parent="."]
 
 [node name="AttackDelay" type="Timer" parent="."]
@@ -58,12 +53,16 @@ wait_time = 5.0
 one_shot = true
 
 [node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 
 [node name="SkillPosition" type="Position2D" parent="."]
+
+[node name="CenterPosition" type="Position2D" parent="."]
 [connection signal="animation_finished" from="EnemySprite" to="." method="_on_EnemySprite_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="respawn"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]

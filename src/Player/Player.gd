@@ -41,6 +41,8 @@ signal NOTIFY
 
 signal BUFF_SWITCH
 
+signal PlayerDeath
+
 var equipment_position_list = {
 
 }
@@ -350,6 +352,7 @@ func take_damage(damage):
 	if player_variable.get_current_hp() <= 0:
 		is_death = true 
 		player_animated_sprite.play("die")
+		emit_signal("PlayerDeath")
 	
 func show_damage(damage):
 	var damage_skin = DAMAGE_SKIN.instance()

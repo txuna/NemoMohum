@@ -1,19 +1,23 @@
 extends Area2D
 
-const RIGHT = false
-const LEFT = true
+const RIGHT = 1
+const LEFT = -1
 
-var skill_direction:bool
+var skill_direction:int
 var damage:int
 onready var sprite = $Sprite
 onready var sprite_player = $AnimationPlayer
 signal EnemyAttack
 
 func _ready() -> void:
-	sprite.flip_h = skill_direction
+	if skill_direction == RIGHT:
+		sprite.flip_h = false
+	else:
+		sprite.flip_h = true
+		
 	sprite_player.play("shot")
 
-func init(dam:int, direction:bool) -> void:
+func init(dam:int, direction:int) -> void:
 	damage = dam 
 	skill_direction = direction
 
