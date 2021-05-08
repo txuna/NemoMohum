@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 
-var velocity = Vector2.ZERO
+var velocity:Vector2 = Vector2.ZERO
 const GRAVITY = 80
 
 signal GiveSpoil
@@ -39,3 +39,4 @@ func get_item():
 func _on_Area2D_body_entered(body: Node) -> void:
 	emit_signal("GiveSpoil", get_item())
 	queue_free()
+

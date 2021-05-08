@@ -153,10 +153,10 @@ position = Vector2( 151.964, -30.204 )
 position = Vector2( 151.02, 133.086 )
 
 [node name="HealthBar" parent="." index="6"]
-margin_left = 24.0
-margin_top = -1.0
-margin_right = 282.0
-margin_bottom = 39.0
+margin_left = 100.721
+margin_top = 25.163
+margin_right = 200.721
+margin_bottom = 43.163
 
 [node name="SpoilPosition" parent="." index="7"]
 position = Vector2( 151.964, -77.3977 )

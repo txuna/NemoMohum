@@ -22,7 +22,6 @@ func _physics_process(delta: float) -> void:
 
 func set_npc(npc_code):
 	npc = Npcs.new().NpcList[npc_code]
-	#npc = get_node("/root/Npcs").Npcs[npc_code]
 	sprite.texture = npc["image"]
 	npc_name.text = npc["name"] + "\n" + npc["description"]
 

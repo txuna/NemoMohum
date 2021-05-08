@@ -31,6 +31,7 @@ autostart = true
 [node name="HitEffectPosition" type="Position2D" parent="."]
 
 [node name="HealthBar" parent="." instance=ExtResource( 2 )]
+margin_bottom = 42.0
 
 [node name="SpoilPosition" type="Position2D" parent="."]
 

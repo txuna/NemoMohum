@@ -5,18 +5,20 @@
 [ext_resource path="res://src/GUI/HealthBar.gd" type="Script" id=3]
 
 [node name="HealthBar" type="Control"]
-margin_right = 258.0
-margin_bottom = 40.0
+margin_left = 1.0
+margin_right = 101.0
+margin_bottom = 17.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Bar" type="TextureProgress" parent="."]
-margin_top = 0.840897
-margin_right = 256.0
-margin_bottom = 80.8409
-rect_scale = Vector2( 1, 0.5 )
+margin_left = -2.77795
+margin_top = 1.0
+margin_right = 253.222
+margin_bottom = 81.0
+rect_scale = Vector2( 0.4, 0.2 )
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
 __meta__ = {
