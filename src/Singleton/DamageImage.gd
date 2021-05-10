@@ -29,14 +29,14 @@ var crit_image = {
 
 
 var get_hit_image = {
-	0 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.0.png"),
-	1 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.1.png"),
-	2 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.2.png"),
-	3 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.3.png"),
-	4 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.4.png"),
-	5 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.5.png"),
-	6 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.6.png"),
-	7 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.7.png"),
-	8 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.8.png"),
-	9 : load("res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.9.png"),
+	0 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_0.png"),
+	1 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_1.png"),
+	2 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_2.png"),
+	3 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_3.png"),
+	4 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_4.png"),
+	5 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_5.png"),
+	6 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_6.png"),
+	7 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_7.png"),
+	8 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_8.png"),
+	9 : load("res://assets/art/damage_skin/get_hit_damage_number/hit_9.png"),
 }

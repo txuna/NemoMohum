@@ -141,6 +141,7 @@ func enemy_death():
 	give_spoil()
 	emit_signal("EnemyDeath", give_exp(), give_coin(), enemy_info["enemy_code"])
 	EnemyCollision.set_deferred("disabled", true)
+	EnemySprite.stop()
 	EnemySprite.play("die")
 	yield(EnemySprite, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
 	visible = false;

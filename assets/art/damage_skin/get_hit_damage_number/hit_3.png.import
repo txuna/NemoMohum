@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/NoViolet0.3.png-9594a85b049824dae384bad64dabd50e.stex"
+path="res://.import/hit_3.png-a3ef45bb566f6f6f67d79d21128e4753.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/art/damage_skin/get_hit_damage_number/NoViolet0.3.png"
-dest_files=[ "res://.import/NoViolet0.3.png-9594a85b049824dae384bad64dabd50e.stex" ]
+source_file="res://assets/art/damage_skin/get_hit_damage_number/hit_3.png"
+dest_files=[ "res://.import/hit_3.png-a3ef45bb566f6f6f67d79d21128e4753.stex" ]
 
 [params]
 
