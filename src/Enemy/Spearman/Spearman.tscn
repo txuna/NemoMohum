@@ -139,6 +139,7 @@ script = ExtResource( 7 )
 position = Vector2( 120.596, 117.418 )
 frames = SubResource( 19 )
 animation = "attack"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -165,9 +166,6 @@ margin_left = 36.567
 margin_top = 184.595
 margin_right = 186.567
 margin_bottom = 221.595
-
-[node name="AttackArea" parent="." index="12"]
-collision_layer = 64
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
 position = Vector2( 145.368, 120.505 )

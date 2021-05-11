@@ -23,6 +23,8 @@ var is_attack = false # 공격 애니메이션 시간
 var player_in = false
 var enemy_skill_scene:String
 
+var current_buff_list = [] #현재 몬스터가 적용받고 있는 버프
+
 signal EnemyDeath
 signal EnemyAttack
 
@@ -37,6 +39,7 @@ onready var AttackDelay = $AttackDelay
 onready var EnemyInfo = $EnemyInfo
 onready var SkillPosition = $SkillPosition
 onready var CenterPosition = $CenterPosition
+onready var BuffContainer = $BuffContainer/HboxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -251,3 +254,18 @@ func _on_AttackArea_body_entered(body: Node) -> void:
 
 func _on_AttackArea_body_exited(body: Node) -> void:
 	player_in = false
+
+
+func add_buff(code:int):
+	var enchant_list = EnchantList.new() 
+	var skill = enchant_list.get_enchant(code)
+	
+	# 스킬이 버프형인지 즉발형인지 체크 
+	
+	# 버프형일 때 값이 고정값인지 퍼센트값인지 또한 Timer체크
+	
+func remove_buff(code:int):
+	pass
+
+
+

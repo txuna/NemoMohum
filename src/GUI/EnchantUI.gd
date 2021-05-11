@@ -57,8 +57,9 @@ func do_enchant():
 	
 	# option의 line 갯수 만큼 
 	var state_code_list = []
-	var skill_code_list = [0x2000] #추후에 기능 추가
+	var skill_code_list = [] #추후에 기능 추가
 	
+	# 스탯 설정 
 	var option_percent = upgrade_percent["option_percent"]
 	for line in option_line_number:
 		randomize()
@@ -67,6 +68,9 @@ func do_enchant():
 			if percent <= option["cumulative_percent"]:
 				state_code_list.append(option["code"])
 				break
+				
+	# 스킬 설정 - 영원석의 코드에 따라 나눠짐
+	skill_code_list.append(enchant_list.get_soulstone_to_skill(soulston_code))			
 				
 	set_enchant_to_equipment(state_code_list, skill_code_list)
 	

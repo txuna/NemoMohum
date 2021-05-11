@@ -24,6 +24,7 @@ tracks/0/keys = {
 }
 
 [node name="StingSkill" instance=ExtResource( 1 )]
+collision_layer = 64
 script = ExtResource( 3 )
 
 [node name="Sprite" parent="." index="0"]

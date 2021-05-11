@@ -41,6 +41,10 @@ var upgrade_percent = {
 	},
 }
 
+var soulstone_to_skill = {
+	0x3000 : 0x2000, 
+	0x3001 : 0x2001,
+}
 
 var rank_list = {
 	0x3000 : "D",
@@ -70,12 +74,44 @@ var state_enchant_list = {
 var skill_enchant_list = {
 	0x2000 : {
 		"code" : 0x2000,
-		"name" : "적 공격시 5초간 이동속도 20% 감소",
+		"name" : "적 공격시 5초간 이동속도 30% 감소",
+		"option" : {
+			"is_buff" : true,
+			"time" : 5,  
+		},
+		"percent" : true,
 		"effect" : {
-			"speed" : -70
-		}
+			"speed" : -30,
+		},
+	},
+	0x2001 : {
+		"code" : 0x2001,
+		"name" : "적 공격시 7초간 방어력 50% 감소",
+		"option" : {
+			"is_buff" : true,
+			"time" : 7,  
+		},
+		"percent" : true,
+		"effect" : {
+			"def" : 50,
+		},
+	},
+	0x2002 : {
+		"code" : 0x2002,
+		"name" : "적 공격시 추가 데미지 10",
+		"option" : {
+			"is_buff" : false, #false로 즉발형 스킬
+			"time" : 0,  
+		},
+		"percent" : false,
+		"effect" : {
+			"current_hp" : 20,
+		},
 	},
 }
+
+func get_soulstone_to_skill(code:int):
+	return soulstone_to_skill[code]
 
 func get_rank(code:int):
 	return rank_list[code]
