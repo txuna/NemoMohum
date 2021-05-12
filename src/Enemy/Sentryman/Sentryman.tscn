@@ -154,6 +154,7 @@ script = ExtResource( 7 )
 position = Vector2( 0, 0 )
 frames = SubResource( 22 )
 animation = "attack"
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
@@ -161,7 +162,7 @@ position = Vector2( -0.416687, 0.453644 )
 shape = SubResource( 23 )
 
 [node name="DamageSkin" parent="." index="4"]
-position = Vector2( 0.10693, -96.1833 )
+position = Vector2( 54.7951, -141.132 )
 
 [node name="HitEffectPosition" parent="." index="5"]
 position = Vector2( -1.1217, 2.82257 )
@@ -193,3 +194,9 @@ position = Vector2( -110, -0.333 )
 
 [node name="CenterPosition" parent="." index="14"]
 position = Vector2( 0.000762939, 1.51804 )
+
+[node name="BuffContainer" parent="." index="15"]
+margin_left = -88.4001
+margin_top = -148.088
+margin_right = 217.6
+margin_bottom = -84.0883

@@ -55,10 +55,7 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 					damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
 				else:
 					crit = false
-				if skill["option"]["is_debuff"] == false:
-					body.take_damage(damage, crit, i)
-				else:
-					body.take_damage(damage, crit, i, skill["option"]["effect"])
+				body.take_damage(damage, crit, i, skill["option"])
 			enemy_number+=1
 			if enemy_number >= skill["enemy_number"]:
 				queue_free()

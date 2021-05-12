@@ -42,8 +42,16 @@ onready var CenterPosition = $CenterPosition
 onready var BuffContainer = $BuffContainer/HboxContainer
 
 
+var texture_list = {
+	"def" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
+	#"current_hp" : load(""),
+	#"speed" : load(""),
+	#"attack" : load(""),
+}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	init_buff_container()
 	items = get_node("/root/Items").Items
 	set_direction()
 	choice_stand_or_move()
@@ -126,7 +134,7 @@ func collision_attack():
 	
 	
 	
-func take_damage(player_damage, crit, index, debuff={}):
+func take_damage(player_damage, crit, index, debuff_option):
 	if is_enemy_death:
 		return
 	var damage = calc_def(player_damage)
@@ -147,15 +155,65 @@ func take_damage(player_damage, crit, index, debuff={}):
 	add_child(particle)
 	
 	## debuff내용이 없다면 take_damage 끝
-	if debuff.empty():
+	if debuff_option["is_debuff"] == false:
 		return 
 
-	set_debuff(debuff)
+	# 현재 같은 타입의 디버프가 걸려있는지 확인  
+	if check_debuff(debuff_option["effect"]["type"]):
+		# 만약 걸려있다면 해제 
+		return #일단 걸리지 않게
+		#_on_debuff_timeout(debuff_option["effect"]["type"])
+
+	# 디버프 설정 
+	set_debuff(debuff_option)
+
+func check_debuff(type:String):
+	if get_node_or_null(type):
+		print("이미 이전에 같은 종류의 디버프를 건적이 있음")
+		# 현재 노드가 발견된다면 
+		return true 
+	else:
+		return false
 
 # 디버프 걸기
-func set_debuff(debuff:Dictionary):
-	pass	
+func set_debuff(debuff_option:Dictionary):
+	var duration = debuff_option["duration"]
+	var effect = debuff_option["effect"]
 	
+	current_buff_list.append(effect["type"])
+	add_buff_in_container(effect["type"])
+	
+	var timer = Timer.new()
+	timer.name = effect["type"] 
+	timer.connect("timeout", self, "_on_debuff_timeout", [effect["type"]])
+	timer.one_shot = true 
+	timer.wait_time = duration
+	add_child(timer)
+	timer.start()
+	
+	# def나 speed, attack은  지속시간동안 한번 
+	# current_hp는 지속시간동안 초당 데미지 들어감
+
+func add_buff_in_container(type):
+	var texture = make_texture(type)
+	BuffContainer.add_child(texture)
+	
+func remove_buff_in_container(node_name):
+	var buff_node = BuffContainer.get_node_or_null(node_name)
+	if buff_node:
+		buff_node.queue_free()
+	
+	
+func init_buff_container():
+	for buff in BuffContainer.get_children():
+		buff.queue_free()	
+
+
+func make_texture(type:String)->TextureRect:
+	var texture_rect = TextureRect.new()
+	texture_rect.name = type
+	texture_rect.texture = texture_list[type]
+	return texture_rect
 	
 func calc_def(damage):
 	var def_percent = float(enemy_info["state"]["def"]) / (float(enemy_info["state"]["def"]) + DEF_VALUE) * 100.0
@@ -170,7 +228,7 @@ func enemy_death():
 	EnemySprite.stop()
 	EnemySprite.play("die")
 	yield(EnemySprite, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
-	visible = false;
+	visible = false
 	$SpawnTimer.start()
 	#queue_free()
 
@@ -289,18 +347,15 @@ func _on_AttackArea_body_entered(body: Node) -> void:
 func _on_AttackArea_body_exited(body: Node) -> void: 
 	if body.name == "Player":
 		player_in = false
+		
 
-
-func add_buff(code:int):
-	var enchant_list = EnchantList.new() 
-	var skill = enchant_list.get_enchant(code)
-	
-	# 스킬이 버프형인지 즉발형인지 체크 
-	
-	# 버프형일 때 값이 고정값인지 퍼센트값인지 또한 Timer체크
-	
-func remove_buff(code:int):
-	pass
-
+func _on_debuff_timeout(timer_name:String):
+	var timer_node = get_node_or_null(timer_name)
+	if timer_node:
+		timer_node.queue_free()
+		current_buff_list.erase(timer_name)
+		remove_buff_in_container(timer_name)
+	else:
+		print("ERROR _on_debuff_timeout : Can't found debuff about " + timer_name)
 
 

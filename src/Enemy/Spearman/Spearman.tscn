@@ -146,7 +146,7 @@ position = Vector2( -4.37874, 0.896095 )
 shape = SubResource( 20 )
 
 [node name="DamageSkin" parent="." index="4"]
-position = Vector2( -1.07915, -102.521 )
+position = Vector2( 56.8772, -156.068 )
 
 [node name="HitEffectPosition" parent="." index="5"]
 position = Vector2( -1.18227, 1.06528 )
@@ -178,3 +178,9 @@ position = Vector2( -110, -1.288 )
 
 [node name="CenterPosition" parent="." index="14"]
 position = Vector2( -0.881271, -0.307991 )
+
+[node name="BuffContainer" parent="." index="15"]
+margin_left = -86.3046
+margin_top = -151.151
+margin_right = 219.695
+margin_bottom = -87.1508

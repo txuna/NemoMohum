@@ -16,6 +16,11 @@ var BasicSkills = {
 		"acquire" : true, 
 		"skill_level" : 1, 
 		"master_level" : 1,
+		"option" : {
+			"is_debuff" : false,
+			"duration" : 0,
+			"effect" : null,
+		},
 		"level_effect" : {
 			"damage_percent" : 0,
 		},
@@ -34,6 +39,11 @@ var BasicSkills = {
 		"acquire" : true, 
 		"skill_level" : 1, 
 		"master_level" : 1,
+		"option" : {
+			"is_debuff" : false,
+			"duration" : 0,
+			"effect" : null,
+		},
 		"level_effect" : {
 			"damage_percent" : 0,
 		},
@@ -50,8 +60,13 @@ var BasicSkills = {
 		"skill_hit_effect" : "",
 		"skill_type" : "Active",
 		"acquire" : true, 
-		"skill_level" : 0, 
-		"master_level" : 10,
+		"skill_level" : 1, 
+		"master_level" : 1,
+		"option" : {
+			"is_debuff" : false,
+			"duration" : 0,
+			"effect" : null,
+		},
 		"level_effect" : {
 			"damage_percent" : 0,
 		},
@@ -82,6 +97,7 @@ var Skills = {
 		"master_level" : 10,
 		"option" : {
 			"is_debuff" : false,
+			"duration" : 0,
 			"effect" : null,
 		},
 		"level_effect" : {
@@ -135,26 +151,28 @@ var Skills = {
 		"enemy_number" : 1,
 		"damage_percent" : 20,
 		"skill_type" : "Active",
-		"cooldown" : 10,
+		"cooldown" : 2,
 		"skill_scene" : preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
 		"skill_effect" : preload("res://src/Effect/HitEffect.tscn"),
 		"skill_hit_effect" : preload("res://src/Effect/HitEffect.tscn"),
-		"mp" : 50,
+		"mp" : 10,
 		"acquire" : false, 
 		"precedence_skill_code" : [0xE003],
 		"skill_level" : 0, 
 		"master_level" : 1,
 		"option" : {  
 			"is_debuff" : true,
+			"duration" : 6,
 			"effect" : {
-				"def" : 50, ## 고정값 50이 아닌 50% 감소다.  
-			}
+				"type" : "def",
+				"percent" : 50,
+			},
 		},
 		"level_effect" : { 
-			"damamge_percent" : 50,
+			"damage_percent" : 50,
 		},
 		"type" : "Gun",
-		"image" : load("res://assets/art/icon/skill_bomb_bullet_icon.png"),
+		"image" : load("res://assets/art/icon/skill_weakness_bullet.png"),
 	},
 }
 
@@ -171,12 +189,9 @@ func check_accquire_skill(code):
 		return false
 
 func check_precedence(code):
-	for skill_code in Skills[code]["precedence_skill_code"]:
-		if check_accquire_skill(code):
-			continue
-		else:
+	for precedence_code in Skills[code]["precedence_skill_code"]:
+		if not check_accquire_skill(precedence_code):
 			return false
-			
 	return true
 
 func upgrade_skill(code):
