@@ -126,7 +126,7 @@ func collision_attack():
 	
 	
 	
-func take_damage(player_damage, crit, index):
+func take_damage(player_damage, crit, index, debuff={}):
 	if is_enemy_death:
 		return
 	var damage = calc_def(player_damage)
@@ -146,10 +146,21 @@ func take_damage(player_damage, crit, index):
 	particle.position = HitEffectPosition.position
 	add_child(particle)
 	
+	## debuff내용이 없다면 take_damage 끝
+	if debuff.empty():
+		return 
+
+	set_debuff(debuff)
+
+# 디버프 걸기
+func set_debuff(debuff:Dictionary):
+	pass	
+	
 	
 func calc_def(damage):
 	var def_percent = float(enemy_info["state"]["def"]) / (float(enemy_info["state"]["def"]) + DEF_VALUE) * 100.0
 	return int(float(damage) * (1.0 - (def_percent / 100.0)))
+	
 	
 func enemy_death():
 	is_enemy_death = true
@@ -163,6 +174,7 @@ func enemy_death():
 	$SpawnTimer.start()
 	#queue_free()
 
+
 func respawn():
 	is_enemy_death = false
 	visible = true
@@ -171,6 +183,7 @@ func respawn():
 	set_enemy_info(enemy_code)
 	#pass
 
+
 func show_damage(damage, crit, index):
 	var damage_skin = DAMAGE_SKIN.instance()
 	damage_skin.position = EnemyDamagePosition.position
@@ -178,14 +191,18 @@ func show_damage(damage, crit, index):
 	add_child(damage_skin)
 	damage_skin.show_value(damage, crit, true)	
 
+
 func get_hit_position():
 	return HitEffectPosition.position
+	
 	
 func give_exp():
 	return enemy_info["spoil"]["exp"]
 	
+	
 func give_coin():
 	return enemy_info["spoil"]["coin"]
+	
 	
 # Spoil Instance 생성
 func give_spoil():

@@ -38,11 +38,9 @@ func set_direction(direction):
 	
 	sprite.flip_h = direction
 
-
 # Enemy와의 접촉
 func _on_BaseSkill_body_entered(body: Node) -> void:
 	if body.is_in_group("enemies"):
-		#enemy_number+=1
 		# hit effect 를 몬스터 객체에 넣기
 		if enemy_number < skill["enemy_number"]:
 			for i in range(skill["hit_number"]):
@@ -57,7 +55,10 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 					damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
 				else:
 					crit = false
-				body.take_damage(damage, crit, i)
+				if skill["option"]["is_debuff"] == false:
+					body.take_damage(damage, crit, i)
+				else:
+					body.take_damage(damage, crit, i, skill["option"]["effect"])
 			enemy_number+=1
 			if enemy_number >= skill["enemy_number"]:
 				queue_free()

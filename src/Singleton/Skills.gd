@@ -80,6 +80,10 @@ var Skills = {
 		"precedence_skill_code" : [],
 		"skill_level" : 0, 
 		"master_level" : 10,
+		"option" : {
+			"is_debuff" : false,
+			"effect" : null,
+		},
 		"level_effect" : {
 			"damage_percent" : 30,
 		},
@@ -116,12 +120,41 @@ var Skills = {
 		"skill_level" : 0, 
 		"master_level" : 1,
 		"level_effect" : {
-			"max_hp" : 5000,
+			"max_hp" : 5000, #퍼센트가 아닌 고정값이다. 
 			"crit_damage" : 100,
 			"crit" : 50,
 		},
 		"type" : "Gun",
 		"image" : load("res://assets/art/icon/skill_bulkup_icon.png"),
+	},
+	0xE006: {
+		"skill_name" : "쇠약구",
+		"skill_description" : "몬스터의 방어력을 6초간 50% 감소 시킨다.\n레벨업당 방어력 감소를 3%증가\n마스터 레벨은 1이다.\n50의 MP를 소모한다.",
+		"skill_code" : 0xE006,
+		"hit_number" : 1,
+		"enemy_number" : 1,
+		"damage_percent" : 20,
+		"skill_type" : "Active",
+		"cooldown" : 10,
+		"skill_scene" : preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
+		"skill_effect" : preload("res://src/Effect/HitEffect.tscn"),
+		"skill_hit_effect" : preload("res://src/Effect/HitEffect.tscn"),
+		"mp" : 50,
+		"acquire" : false, 
+		"precedence_skill_code" : [0xE003],
+		"skill_level" : 0, 
+		"master_level" : 1,
+		"option" : {  
+			"is_debuff" : true,
+			"effect" : {
+				"def" : 50, ## 고정값 50이 아닌 50% 감소다.  
+			}
+		},
+		"level_effect" : { 
+			"damamge_percent" : 50,
+		},
+		"type" : "Gun",
+		"image" : load("res://assets/art/icon/skill_bomb_bullet_icon.png"),
 	},
 }
 
