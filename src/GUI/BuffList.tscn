@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/art/icon/skill_bulkup_icon.png" type="Texture" id=1]
 [ext_resource path="res://src/GUI/BuffList.gd" type="Script" id=2]
 [ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/art/icon/skill_bomb_bullet_icon.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -61,3 +62,33 @@ text = "버프 리스트"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 81.7326
+margin_top = 423.562
+margin_right = 263.733
+margin_bottom = 460.562
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "쿨다운 리스트"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CooldownContainer" type="ScrollContainer" parent="."]
+margin_left = 75.2929
+margin_top = 349.707
+margin_right = 682.293
+margin_bottom = 418.707
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CooldownContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+
+[node name="TextureRect" type="TextureRect" parent="CooldownContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )

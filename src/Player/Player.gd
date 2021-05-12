@@ -6,6 +6,8 @@ export (int) var run_speed = 300
 export (int) var jump_speed = 700
 export (int) var gravity = 1200
 
+const BUFF = 1
+const COOLDOWN = 2
 const LEFT = true
 const RIGHT = false
 
@@ -404,6 +406,14 @@ func normal_attack():
 		return
 	set_ready_attack(NORMAL_ATTACK, skill_code)
 	
+	
+func check_skill_cooldown(skill_name):
+	# 노드가 존재하면 == 쿨다운 노드
+	if get_node_or_null(skill_name):
+		return true
+	else:
+		return false
+			
 # 기본공격이랑 Active 스킬은 이펙트 씬과  스킬 씬을 갖는다.
 # 버프는 이펙트 씬만 출력한다. 공격 씬은 존재 X 
 # 패시브 스킬은 스킬 업그레이드할 때 적용
@@ -425,12 +435,27 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 		return
 
 	#Active의 경우 스킬 인스턴스를 만든다. 몬스터가 맞을 때는 스킬 데미지에 스킬 레벨만큼 곱해서 함
+	# cooldown을 사용 - 사용전 체크
 	if skill["skill_type"] == "Active":
+		if check_skill_cooldown(skill["skill_name"]):
+			player_variable.msg_log_update("스킬의 쿨다운이 남아있습니다.")
+			return
+			
 		var skill_instance = skill["skill_scene"].instance()
 		skill_instance.position = player_skill_position.global_position
 		get_parent().add_child(skill_instance)
 		skill_instance.set_direction(get_equipment_direction())
 		skill_instance.set_skill(skill_code, skill_type, player_variable.state)
+		
+		var cooldown_node = Timer.new()
+		cooldown_node.name = skill["skill_name"]
+		cooldown_node.connect("timeout", self, "_on_skill_cooldown_finished", [skill["skill_code"], skill["skill_name"]])
+		cooldown_node.one_shot = true 
+		cooldown_node.wait_time = skill["cooldown"]
+		add_child(cooldown_node)
+		cooldown_node.start()
+		
+		emit_signal("BUFF_SWITCH", true, skill_code, COOLDOWN) 
 		
 	#그리고 현재 이미 버프 수행중이라면 ~~ 체크 필수
 	elif skill["skill_type"] == "Buff":
@@ -449,7 +474,7 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 		buff_duration_node.start()
 		
 		# BuffList에게 Signal 전송
-		emit_signal("BUFF_SWITCH", true, skill_code) 
+		emit_signal("BUFF_SWITCH", true, skill_code, BUFF) 
 	
 	#MP 소모 
 	player_variable.increase_state_from_effect({"current_mp" : skill["mp"]}, -1)
@@ -538,8 +563,12 @@ func use_item(code, numberof):
 func _on_buff_duration_finished(skill_code:int, timer_name:String):
 	player_variable.remove_buff_to_state(skill_code)
 	get_node(timer_name).queue_free()
-	emit_signal("BUFF_SWITCH", false, skill_code) 
+	emit_signal("BUFF_SWITCH", false, skill_code, BUFF) 
 	# BuffList에게 remove signal 전송
+	
+func _on_skill_cooldown_finished(skill_code:int, timer_name:String):
+	get_node(timer_name).queue_free()
+	emit_signal("BUFF_SWITCH", false, skill_code, COOLDOWN) 
 
 func _on_attack_motion_finished(anim_name:String):
 	set_equipment_direction(get_equipment_direction())

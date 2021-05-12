@@ -71,6 +71,7 @@ var Skills = {
 		"enemy_number" : 1,
 		"damage_percent" : 200,
 		"skill_type" : "Active",
+		"cooldown" : 3,
 		"skill_scene" : preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
 		"skill_effect" : preload("res://src/Effect/HitEffect.tscn"),
 		"skill_hit_effect" : preload("res://src/Effect/HitEffect.tscn"),
