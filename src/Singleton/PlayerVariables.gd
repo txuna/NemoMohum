@@ -51,7 +51,6 @@ var state = {
 var enchant_table = {
 	0xA001 : {
 		"state_option" : [0x1000, 0x1001],
-		"skill_option" : [0x2000],
 	}
 }
 

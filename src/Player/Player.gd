@@ -447,15 +447,16 @@ func set_ready_attack(skill_type:bool, skill_code:int):
 		skill_instance.set_direction(get_equipment_direction())
 		skill_instance.set_skill(skill_code, skill_type, player_variable.state)
 		
-		var cooldown_node = Timer.new()
-		cooldown_node.name = skill["skill_name"]
-		cooldown_node.connect("timeout", self, "_on_skill_cooldown_finished", [skill["skill_code"], skill["skill_name"]])
-		cooldown_node.one_shot = true 
-		cooldown_node.wait_time = skill["cooldown"]
-		add_child(cooldown_node)
-		cooldown_node.start()
+		if skill_type == SKILL_ATTACK:
+			var cooldown_node = Timer.new()
+			cooldown_node.name = skill["skill_name"]
+			cooldown_node.connect("timeout", self, "_on_skill_cooldown_finished", [skill["skill_code"], skill["skill_name"]])
+			cooldown_node.one_shot = true 
+			cooldown_node.wait_time = skill["cooldown"]
+			add_child(cooldown_node)
+			cooldown_node.start()
 		
-		emit_signal("BUFF_SWITCH", true, skill_code, COOLDOWN) 
+			emit_signal("BUFF_SWITCH", true, skill_code, COOLDOWN) 
 		
 	#그리고 현재 이미 버프 수행중이라면 ~~ 체크 필수
 	elif skill["skill_type"] == "Buff":

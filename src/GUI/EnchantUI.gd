@@ -57,7 +57,6 @@ func do_enchant():
 	
 	# option의 line 갯수 만큼 
 	var state_code_list = []
-	var skill_code_list = [] #추후에 기능 추가
 	
 	# 스탯 설정 
 	var option_percent = upgrade_percent["option_percent"]
@@ -67,24 +66,20 @@ func do_enchant():
 		for option in option_percent:
 			if percent <= option["cumulative_percent"]:
 				state_code_list.append(option["code"])
-				break
+				break	
 				
-	# 스킬 설정 - 영원석의 코드에 따라 나눠짐
-	skill_code_list.append(enchant_list.get_soulstone_to_skill(soulston_code))			
-				
-	set_enchant_to_equipment(state_code_list, skill_code_list)
+	set_enchant_to_equipment(state_code_list)
 	
 	var particle = load("res://src/Effect/HitEffect.tscn").instance()
 	particle.position = SuccessParticle.position
 	get_node("TextureRect").add_child(particle)
 
-func set_enchant_to_equipment(state_code_list:Array, skill_code_list:Array): 
+func set_enchant_to_equipment(state_code_list:Array): 
 	var player_enchant_table = get_node("/root/PlayerVariables").enchant_table
 	var player_inventory = get_node("/root/PlayerVariables").inventory
 	player_inventory["equipment"][equipment_code]["is_enchant"] = true
 	player_enchant_table[equipment_code] = {
 		"state_option" : state_code_list,
-		"skill_option" : skill_code_list,
 	}
 		
 # 한줄일지 두줄일지 결정짓는 함수

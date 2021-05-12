@@ -73,19 +73,24 @@ func set_enemy_info(enemy_code:int):
 	HealthBar.set_health(enemy_info["state"]["max_hp"])
 	show_enemy_info()
 	
-# Enemy의 방향을 결정짓는다
-func set_direction():
+# Enemy의 방향을 결정짓는다 
+# fixed_direction = Eneny가 player방향으로 바라보아야 할때 고정값으로 수정
+func set_direction(fixed_direction:int=0):
 	if is_attack:
 		return
-	current_direction = get_direction()
+	if fixed_direction == 0:
+		current_direction = get_direction()
+	else:
+		current_direction = fixed_direction
+		
 	if current_direction == LEFT:
 		EnemySprite.flip_h = false
-		if sign(AttackPosition.position.x) == 1:
-			AttackPosition.position.x *= -1
+		if sign(SkillPosition.position.x) == 1:
+			SkillPosition.position.x *= -1
 	else:
 		EnemySprite.flip_h = true
-		if sign(AttackPosition.position.x) == -1:
-			AttackPosition.position.x *= -1
+		if sign(SkillPosition.position.x) == -1:
+			SkillPosition.position.x *= -1
 			
 	choice_stand_or_move()
 
@@ -202,9 +207,11 @@ func set_enemy_direction_to_player():
 	var player_position = get_node(get_node("/root/PlayerVariables").get_player_node_path()).global_position.x
 	var enemy_position = CenterPosition.global_position.x 
 	if enemy_position - player_position > 0:
+		set_direction(LEFT)
 		EnemySprite.flip_h = false
 		return LEFT
 	else:
+		set_direction(RIGHT)
 		EnemySprite.flip_h = true
 		return RIGHT
 	
@@ -217,10 +224,10 @@ func check_attack():
 # 스킬 발동시 player노드와 시그널 Connect
 # 플레이어의 방향 체크
 func attack():
-	is_attack = true
-	is_delay = true
 	AttackDelay.start()
 	var direction = set_enemy_direction_to_player()
+	is_attack = true
+	is_delay = true
 	EnemySprite.play("attack")
 	var skill_instance = load(enemy_skill_scene).instance()
 	skill_instance.position = SkillPosition.global_position

@@ -119,13 +119,8 @@ func show_item_enchant(code:int, type:String):
 		item_enchant.text = "인챈트 효과 없음" 
 		
 	else:
-		for enchant in enchant_table[code]:
-			for option in enchant_table[code][enchant]:
-				if enchant == "state_option":
-					item_enchant.text += enchant_list.state_enchant_list[option]["name"] + "\n"
-				else:
-					item_enchant.text += enchant_list.skill_enchant_list[option]["name"] + "\n"
-			#item_enchant.text += "====================\n"
+		for option in enchant_table[code]["state_option"]:
+			item_enchant.text += enchant_list.state_enchant_list[option]["name"] + "\n"
 			
 	return
 	

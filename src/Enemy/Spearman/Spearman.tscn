@@ -35,68 +35,68 @@ region = Rect2( 576, 0, 192, 128 )
 
 [sub_resource type="AtlasTexture" id=6]
 flags = 4
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=7]
 flags = 4
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=8]
 flags = 4
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=9]
 flags = 4
-atlas = ExtResource( 4 )
+atlas = ExtResource( 5 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=10]
 flags = 4
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 128, 128 )
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=11]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 128, 0, 128, 128 )
+region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 256, 0, 128, 128 )
+region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
 atlas = ExtResource( 3 )
-region = Rect2( 384, 0, 128, 128 )
+region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 128, 128 )
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
 flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 128, 0, 128, 128 )
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 256, 0, 128, 128 )
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
 flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 384, 0, 128, 128 )
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
-atlas = ExtResource( 5 )
-region = Rect2( 512, 0, 128, 128 )
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=19]
 animations = [ {
@@ -110,19 +110,19 @@ animations = [ {
 "name": "attack",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
-"name": "hit",
+"name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ) ],
 "loop": true,
 "name": "die",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
 "loop": true,
-"name": "walk",
+"name": "hit",
 "speed": 5.0
 } ]
 
@@ -136,43 +136,45 @@ extents = Vector2( 62.3926, 58.4636 )
 script = ExtResource( 7 )
 
 [node name="EnemySprite" parent="." index="0"]
-position = Vector2( 120.596, 117.418 )
+position = Vector2( 0, 0 )
 frames = SubResource( 19 )
-animation = "attack"
-frame = 3
+animation = "idle"
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( 152.028, 115.258 )
+position = Vector2( -4.37874, 0.896095 )
 shape = SubResource( 20 )
 
 [node name="DamageSkin" parent="." index="4"]
-position = Vector2( 151.964, -30.204 )
+position = Vector2( -1.07915, -102.521 )
 
 [node name="HitEffectPosition" parent="." index="5"]
-position = Vector2( 151.02, 133.086 )
+position = Vector2( -1.18227, 1.06528 )
 
 [node name="HealthBar" parent="." index="6"]
-margin_left = 100.721
-margin_top = 25.163
-margin_right = 200.721
-margin_bottom = 43.163
+margin_left = -50.6404
+margin_top = -85.8353
+margin_right = 49.3596
+margin_bottom = -67.8353
 
 [node name="SpoilPosition" parent="." index="7"]
-position = Vector2( 151.964, -77.3977 )
+position = Vector2( 0.602646, -127.851 )
+
+[node name="AttackPosition" parent="." index="8"]
+position = Vector2( -68.9535, -0.840912 )
 
 [node name="EnemyInfo" parent="." index="10"]
-margin_left = 36.567
-margin_top = 184.595
-margin_right = 186.567
-margin_bottom = 221.595
+margin_left = -75.2722
+margin_top = 67.7104
+margin_right = 74.7278
+margin_bottom = 104.71
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
-position = Vector2( 145.368, 120.505 )
+position = Vector2( -5.15245, 1.09769 )
 shape = SubResource( 21 )
 
 [node name="SkillPosition" parent="." index="13"]
-position = Vector2( 68.2582, 120.642 )
+position = Vector2( -110, -1.288 )
 
 [node name="CenterPosition" parent="." index="14"]
-position = Vector2( 151.321, 121.622 )
+position = Vector2( -0.881271, -0.307991 )
