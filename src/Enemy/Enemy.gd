@@ -41,6 +41,7 @@ onready var SkillPosition = $SkillPosition
 onready var CenterPosition = $CenterPosition
 onready var BuffContainer = $BuffContainer/HboxContainer
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	items = get_node("/root/Items").Items
@@ -52,20 +53,20 @@ func _physics_process(delta: float) -> void:
 	if is_enemy_death:
 		return
 	velocity.y += GRAVITY
-	if is_attack:
-		return	
 		
 	if check_attack():
 		attack()
-	
-	if current_state == WALK:
-		velocity.x = current_direction * enemy_info["state"]["speed"]
-	else:
-		velocity.x = 0
+		
+	velocity.x = 0
+	if not is_attack:
+		if current_state == WALK:
+			velocity.x = current_direction * enemy_info["state"]["speed"]
 	velocity = move_and_slide(velocity, Vector2.UP)
+
 
 func show_enemy_info():
 	EnemyInfo.text = "Lv." + str(enemy_info["state"]["level"]) + " " + enemy_info["enemy_name"]
+
 
 # Enemy의 정보를 저장한다. 
 func set_enemy_info(enemy_code:int):
@@ -93,10 +94,12 @@ func set_direction(fixed_direction:int=0):
 			SkillPosition.position.x *= -1
 			
 	choice_stand_or_move()
+	
 
 # 3초 마다 왼쪽 또는 오른쪽으로 갈지 결정한다. 또한 Area2d를 자식으로 두고 플레이어의 움직임 감지
 func _on_Timer_timeout() -> void:
 	set_direction()
+	
 
 # 움직일지 가만히 있을지 결정
 func choice_stand_or_move():
@@ -107,11 +110,13 @@ func choice_stand_or_move():
 	else:
 		EnemySprite.play("walk")
 	
+	
 # 오른쪽으로 갈지 왼쪽으로 갈지 결정
 func get_direction():
 	randomize()
 	var direction = direction_list[randi() % direction_list.size()]
 	return direction
+	
 	
 #Enemy의 공격이 아닌 플레이어와 몸통 박치기 
 func collision_attack():
@@ -128,11 +133,13 @@ func take_damage(player_damage, crit, index):
 	#$HitAudio.play()
 	HealthBar.show_damage(damage)
 	show_damage(damage, crit, index)
+	
 	if enemy_info["state"]["current_hp"] - damage <= 0:
 		enemy_death()
 	else:
 		EnemySprite.play("hit")
 		enemy_info["state"]["current_hp"] -= damage
+	
 	HealthBar.show_damage(enemy_info["state"]["current_hp"])
 		
 	var particle = load("res://src/Effect/HitEffect.tscn").instance()
@@ -214,12 +221,14 @@ func set_enemy_direction_to_player():
 		set_direction(RIGHT)
 		EnemySprite.flip_h = true
 		return RIGHT
+
 	
 func check_attack():
-	if is_delay or not player_in:
+	if is_attack or is_delay or not player_in:
 		return false
 	else:
 		return true
+	
 	
 # 스킬 발동시 player노드와 시그널 Connect
 # 플레이어의 방향 체크
@@ -244,7 +253,7 @@ func _on_AttackDelay_timeout() -> void:
 
 
 func _on_EnemySprite_animation_finished() -> void:
-	if EnemySprite.animation == "attack":
+	if EnemySprite.animation == "attack" or EnemySprite.animation == "hit":
 		is_attack = false
 		set_direction()
 		choice_stand_or_move()
@@ -256,11 +265,13 @@ func _on_player_death():
 func _on_AttackArea_body_entered(body: Node) -> void:
 	if is_enemy_death:
 		return
-	player_in = true
+	if body.name == "Player":
+		player_in = true
 
 
-func _on_AttackArea_body_exited(body: Node) -> void:
-	player_in = false
+func _on_AttackArea_body_exited(body: Node) -> void: 
+	if body.name == "Player":
+		player_in = false
 
 
 func add_buff(code:int):

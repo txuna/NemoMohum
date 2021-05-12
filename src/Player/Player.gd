@@ -75,6 +75,8 @@ func load_position():
 	equipment_position_list["hat"] = player_hat_position
 	
 func _physics_process(delta):
+	if is_death:
+		return
 	get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
@@ -116,8 +118,6 @@ func _on_player_action(type:String):
 
 func get_input():
 	velocity.x = 0
-	if is_death:
-		return
 	var right = Input.is_action_pressed('RIGHT')
 	var left = Input.is_action_pressed('LEFT')
 	var jump = Input.is_action_just_pressed('JUMP')

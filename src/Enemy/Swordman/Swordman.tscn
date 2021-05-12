@@ -140,7 +140,7 @@ animations = [ {
 extents = Vector2( 25, 63 )
 
 [sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 57, 64 )
+extents = Vector2( 57, 61.854 )
 
 [node name="Swordman" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -180,7 +180,7 @@ margin_right = 54.7828
 margin_bottom = 100.999
 
 [node name="CollisionShape2D" parent="AttackArea" index="0"]
-position = Vector2( -3.89273, -1.33908 )
+position = Vector2( -3.93021, -2.86124 )
 shape = SubResource( 23 )
 
 [node name="SkillPosition" parent="." index="13"]

@@ -154,11 +154,10 @@ script = ExtResource( 7 )
 position = Vector2( 0, 0 )
 frames = SubResource( 22 )
 animation = "attack"
-frame = 4
 playing = true
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( -0.416687, -1.04466 )
+position = Vector2( -0.416687, 0.453644 )
 shape = SubResource( 23 )
 
 [node name="DamageSkin" parent="." index="4"]
