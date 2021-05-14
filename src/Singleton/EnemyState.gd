@@ -138,7 +138,7 @@ var EnemyList = {
 		"enemy_name" : "Swordman",
 		"state" : {
 			"attack" : 50,
-			"def" : 40, 
+			"def" : 100, 
 			"max_hp" : 250,
 			"current_hp" : 250,
 			"speed" : 130,

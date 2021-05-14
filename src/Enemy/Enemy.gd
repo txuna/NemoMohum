@@ -9,7 +9,7 @@ const STAND = true
 const WALK = false
 const direction_list = [LEFT, RIGHT]
 const stand_list = [STAND, WALK]
-const DEF_VALUE = 1000
+const DEF_VALUE = 500
 const DAMAGE_SKIN = preload("res://src/GUI/DamageSkin.tscn")
 
 var current_direction = null
@@ -44,9 +44,9 @@ onready var BuffContainer = $BuffContainer/HboxContainer
 
 var texture_list = {
 	"def" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
-	#"current_hp" : load(""),
-	#"speed" : load(""),
-	#"attack" : load(""),
+	"current_hp" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
+	"speed" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
+	"attack" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -179,17 +179,17 @@ func check_debuff(type:String):
 		#print("이미 이전에 같은 종류의 디버프를 건적이 없습니다.")
 		return false
 
-# 디버프 걸기
+# 디버프 걸기  
 func set_debuff(debuff_option:Dictionary):
 	var duration = debuff_option["duration"]
-	var effect = debuff_option["effect"]
-	
-	current_buff_list.append(effect["type"])
-	add_buff_in_container(effect["type"])
+	var percent = debuff_option["effect"]["percent"]
+	var type = debuff_option["effect"]["type"]
+	current_buff_list.append(type)
+	add_buff_in_container(type)
 	
 	var timer = Timer.new()
-	timer.name = effect["type"] 
-	timer.connect("timeout", self, "_on_debuff_timeout", [effect["type"]])
+	timer.name = type 
+	timer.connect("timeout", self, "_on_debuff_timeout", [type, percent])
 	timer.one_shot = true 
 	timer.wait_time = duration
 	add_child(timer)
@@ -197,6 +197,18 @@ func set_debuff(debuff_option:Dictionary):
 	
 	# def나 speed, attack은  지속시간동안 한번 
 	# current_hp는 지속시간동안 초당 데미지 들어감
+	if type == "current_hp": # 1초마다 데미지가 들어간다. 
+		pass
+		
+	elif type in ["def", "speed", "attack"]:
+		var value = enemy_info["state"][type] 
+		value = value - (value * percent / 100)
+		enemy_info["state"][type] = value
+		#print("Start Debuff Enemy Def : " + str(value))
+		
+	else:
+		print("Isn't exist effect about " + type)
+		return
 
 func add_buff_in_container(type):
 	var texture = make_texture(type)
@@ -209,13 +221,21 @@ func remove_buff_in_container(node_name):
 		buff_node.queue_free()
 
 
-func _on_debuff_timeout(timer_name:String):
+func _on_debuff_timeout(timer_name:String, percent:int):
 	var timer_node = get_node_or_null(timer_name)
 	if timer_node:
 		timer_node.queue_free()
 		current_buff_list.erase(timer_name)
 		#print("디버프 타이머 노드를 정상적으로 해제 했습니다.")
 		remove_buff_in_container("icon"+timer_name)
+		
+		#실질적인 디버프 해제 부분 
+		if timer_name in ["def", "speed", "attack"]:
+			var value = enemy_info["state"][timer_name]
+			var origin_value = (100 * value) / (100 - percent)
+			enemy_info["state"][timer_name] = origin_value
+			#print("Fin Debuff Enemy Def : " + str(origin_value))
+					
 	else:
 		print("ERROR _on_debuff_timeout : Can't found debuff about " + timer_name)
 			
