@@ -159,20 +159,24 @@ func take_damage(player_damage, crit, index, debuff_option):
 		return 
 
 	# 현재 같은 타입의 디버프가 걸려있는지 확인  
+	# queue_free()하는데 걸리는 시간때문에 기존의 이름을 못 쓰고 새로 추가하려는 노드의 이름에 @@숫자가 붙게 된다.
 	if check_debuff(debuff_option["effect"]["type"]):
 		# 만약 걸려있다면 해제 
 		return #일단 걸리지 않게
+		#print("이전의 디버프를 해제 합니다.")
 		#_on_debuff_timeout(debuff_option["effect"]["type"])
 
 	# 디버프 설정 
+	#print("디버프를 설정합니다.")
 	set_debuff(debuff_option)
 
 func check_debuff(type:String):
-	if get_node_or_null(type):
-		print("이미 이전에 같은 종류의 디버프를 건적이 있음")
-		# 현재 노드가 발견된다면 
+	#print("같은 종류의 디버프가 걸린적이 있는지 확인합니다. ")
+	if type in current_buff_list:
+		#print("이미 이전에 같은 종류의 디버프를 건적이 있습니다.")
 		return true 
 	else:
+		#print("이미 이전에 같은 종류의 디버프를 건적이 없습니다.")
 		return false
 
 # 디버프 걸기
@@ -198,12 +202,24 @@ func add_buff_in_container(type):
 	var texture = make_texture(type)
 	BuffContainer.add_child(texture)
 	
+	
 func remove_buff_in_container(node_name):
 	var buff_node = BuffContainer.get_node_or_null(node_name)
 	if buff_node:
 		buff_node.queue_free()
-	
-	
+
+
+func _on_debuff_timeout(timer_name:String):
+	var timer_node = get_node_or_null(timer_name)
+	if timer_node:
+		timer_node.queue_free()
+		current_buff_list.erase(timer_name)
+		#print("디버프 타이머 노드를 정상적으로 해제 했습니다.")
+		remove_buff_in_container("icon"+timer_name)
+	else:
+		print("ERROR _on_debuff_timeout : Can't found debuff about " + timer_name)
+			
+
 func init_buff_container():
 	for buff in BuffContainer.get_children():
 		buff.queue_free()	
@@ -211,9 +227,10 @@ func init_buff_container():
 
 func make_texture(type:String)->TextureRect:
 	var texture_rect = TextureRect.new()
-	texture_rect.name = type
+	texture_rect.name = "icon"+type
 	texture_rect.texture = texture_list[type]
 	return texture_rect
+	
 	
 func calc_def(damage):
 	var def_percent = float(enemy_info["state"]["def"]) / (float(enemy_info["state"]["def"]) + DEF_VALUE) * 100.0
@@ -297,7 +314,7 @@ func set_enemy_direction_to_player():
 		EnemySprite.flip_h = true
 		return RIGHT
 
-	
+
 func check_attack():
 	if is_attack or is_delay or not player_in:
 		return false
@@ -349,13 +366,6 @@ func _on_AttackArea_body_exited(body: Node) -> void:
 		player_in = false
 		
 
-func _on_debuff_timeout(timer_name:String):
-	var timer_node = get_node_or_null(timer_name)
-	if timer_node:
-		timer_node.queue_free()
-		current_buff_list.erase(timer_name)
-		remove_buff_in_container(timer_name)
-	else:
-		print("ERROR _on_debuff_timeout : Can't found debuff about " + timer_name)
+
 
 

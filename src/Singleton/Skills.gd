@@ -162,7 +162,7 @@ var Skills = {
 		"master_level" : 1,
 		"option" : {  
 			"is_debuff" : true,
-			"duration" : 6,
+			"duration" : 10,
 			"effect" : {
 				"type" : "def",
 				"percent" : 50,

@@ -33,7 +33,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
-margin_top = -38.0
+margin_top = -42.0
 margin_right = 1920.0
 margin_bottom = 120.0
 texture = ExtResource( 1 )

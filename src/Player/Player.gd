@@ -53,10 +53,11 @@ var equipment_position_list = {
 func set_camera_limit():
 	var map_limits = get_parent().get_node("TileMap").get_used_rect()
 	var map_cellsize = get_parent().get_node("TileMap").cell_size
-	$Camera2D.limit_left = map_limits.position.x * map_cellsize.x
-	$Camera2D.limit_right = map_limits.end.x * map_cellsize.x
-	#$Camera2D.limit_top = map_limits.position.y * map_cellsize.y
-	$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y + 64 + 32 + 16 + 8
+	$Camera2D.limit_left = map_limits.position.x * map_cellsize.x + 64
+	$Camera2D.limit_right = map_limits.end.x * map_cellsize.x - 64
+	$Camera2D.limit_top = map_limits.position.y * map_cellsize.y
+	#$Camera2D.limit_bottom = map_limits.end.y * map_cellsize.y
+	$Camera2D.limit_bottom = 1080
 
 func _ready():
 	player_variable = get_node("/root/PlayerVariables")
