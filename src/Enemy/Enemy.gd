@@ -23,7 +23,7 @@ var is_attack = false # 공격 애니메이션 시간
 var player_in = false
 var enemy_skill_scene:String
 
-var current_buff_list = [] #현재 몬스터가 적용받고 있는 버프
+var current_buff_list = {} #현재 몬스터가 적용받고 있는 버프
 
 signal EnemyDeath
 signal EnemyAttack
@@ -172,7 +172,7 @@ func take_damage(player_damage, crit, index, debuff_option):
 
 func check_debuff(type:String):
 	#print("같은 종류의 디버프가 걸린적이 있는지 확인합니다. ")
-	if type in current_buff_list:
+	if current_buff_list.has(type):
 		#print("이미 이전에 같은 종류의 디버프를 건적이 있습니다.")
 		return true 
 	else:
@@ -184,7 +184,7 @@ func set_debuff(debuff_option:Dictionary):
 	var duration = debuff_option["duration"]
 	var percent = debuff_option["effect"]["percent"]
 	var type = debuff_option["effect"]["type"]
-	current_buff_list.append(type)
+	current_buff_list[type] = percent
 	add_buff_in_container(type)
 	
 	var timer = Timer.new()
@@ -198,7 +198,14 @@ func set_debuff(debuff_option:Dictionary):
 	# def나 speed, attack은  지속시간동안 한번 
 	# current_hp는 지속시간동안 초당 데미지 들어감
 	if type == "current_hp": # 1초마다 데미지가 들어간다. 
-		pass
+		var damage_per_second_list = get_node("/root/PlayerVariables").get_player_attack()
+		var damage_timer = Timer.new() 
+		damage_timer.name = "per_second"+"current_hp"
+		damage_timer.connect("timeout", self, "_on_damage_per_second", [damage_per_second_list, percent])
+		damage_timer.wait_time = 0.1
+		add_child(damage_timer)
+		damage_timer.start() 
+		
 		
 	elif type in ["def", "speed", "attack"]:
 		var value = enemy_info["state"][type] 
@@ -220,6 +227,18 @@ func remove_buff_in_container(node_name):
 	if buff_node:
 		buff_node.queue_free()
 
+func _on_damage_per_second(damage_per_second_list:Array, percent:int):
+	randomize()
+	var damage = rand_range(damage_per_second_list[0], damage_per_second_list[1]) 
+	damage = damage + (damage * percent / 100)
+	var option = {
+		"option" : {
+			"is_debuff" : false,
+			"duration" : 0,
+			"effect" : null,
+		},
+	}
+	take_damage(damage, false, 1, option["option"])
 
 func _on_debuff_timeout(timer_name:String, percent:int):
 	var timer_node = get_node_or_null(timer_name)
@@ -236,9 +255,20 @@ func _on_debuff_timeout(timer_name:String, percent:int):
 			enemy_info["state"][timer_name] = origin_value
 			#print("Fin Debuff Enemy Def : " + str(origin_value))
 					
+		elif timer_name == "current_hp":
+			var damage_timer_node = get_node_or_null("per_second"+timer_name)
+			if damage_timer_node == null:
+				print("ERROR damage timer node is NULL") 
+				return 
+			else:
+				damage_timer_node.queue_free()
+					
 	else:
 		print("ERROR _on_debuff_timeout : Can't found debuff about " + timer_name)
-			
+	
+func enemy_death_and_remove_debuff():
+	for debuff_name in current_buff_list:
+		_on_debuff_timeout(debuff_name, current_buff_list[debuff_name])
 
 func init_buff_container():
 	for buff in BuffContainer.get_children():
@@ -256,7 +286,7 @@ func calc_def(damage):
 	var def_percent = float(enemy_info["state"]["def"]) / (float(enemy_info["state"]["def"]) + DEF_VALUE) * 100.0
 	return int(float(damage) * (1.0 - (def_percent / 100.0)))
 	
-	
+# 지금까지 몬스터에 걸린 디버프 해제
 func enemy_death():
 	is_enemy_death = true
 	give_spoil()
@@ -267,6 +297,7 @@ func enemy_death():
 	yield(EnemySprite, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
 	visible = false
 	$SpawnTimer.start()
+	enemy_death_and_remove_debuff()
 	#queue_free()
 
 

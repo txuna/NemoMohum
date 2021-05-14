@@ -28,8 +28,8 @@ var current_equipment = {
 
 var state = {
 	"nickname" : "스페셜땡스루",
-	"min_attack" : 5, 
-	"max_attack" : 12, 
+	"min_attack" : 5000, 
+	"max_attack" : 12000, 
 	"current_hp" : 1000, 
 	"max_hp" : 1000, 
 	"current_mp" : 100,
@@ -137,6 +137,9 @@ var quick_slot = {
 }
 
 var player_node_path = null
+
+func get_player_attack():
+	return [state["min_attack"], state["max_attack"]]
 
 func get_msg_log_node():
 	var msg_log_instance = get_node_or_null("/root/Main/MsgLog")

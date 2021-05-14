@@ -164,8 +164,8 @@ var Skills = {
 			"is_debuff" : true,
 			"duration" : 10,
 			"effect" : {
-				"type" : "speed", #current_hp의 경우 아래 percent는 플레이어 공격력의 percent만큼 곱한거다.
-				"percent" : 90,
+				"type" : "current_hp", #current_hp의 경우 아래 percent는 플레이어 공격력의 percent만큼 곱한거다.
+				"percent" : 230,
 			},
 		},
 		"level_effect" : { 
