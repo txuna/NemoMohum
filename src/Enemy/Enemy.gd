@@ -309,11 +309,10 @@ func respawn():
 	set_enemy_info(enemy_code)
 	#pass
 
-
 func show_damage(damage, crit, index):
 	var damage_skin = DAMAGE_SKIN.instance()
 	damage_skin.position = EnemyDamagePosition.position
-	damage_skin.position.y = EnemyDamagePosition.position.y - (index * 30)
+	damage_skin.position.y = EnemyDamagePosition.position.y - (index * 70)
 	add_child(damage_skin)
 	damage_skin.show_value(damage, crit, true)	
 
