@@ -43,6 +43,7 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 	if body.is_in_group("enemies"):
 		# hit effect 를 몬스터 객체에 넣기
 		if enemy_number < skill["enemy_number"]:
+			var damage_list = []
 			for i in range(skill["hit_number"]):
 				var crit
 				randomize()
@@ -55,7 +56,13 @@ func _on_BaseSkill_body_entered(body: Node) -> void:
 					damage = int(damage * (player_state["crit_damage"] + 100) / 100) 
 				else:
 					crit = false
-				body.take_damage(damage, crit, i, skill["option"])
+				damage_list.append({
+					"damage" : damage,
+					"crit" : crit, 
+					"index" : i, 
+				})
+				#body.take_damage(damage, crit, i, skill["option"])
+			body.take_damage(damage_list, skill["option"])
 			enemy_number+=1
 			if enemy_number >= skill["enemy_number"]:
 				queue_free()

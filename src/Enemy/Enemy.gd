@@ -124,22 +124,83 @@ func get_direction():
 	randomize()
 	var direction = direction_list[randi() % direction_list.size()]
 	return direction
+
+
+"""
+[
+	{
+		"damage" : value, 
+		"crit" : value,
+		"index" : value,  
+	}
+]
+"""
+
+func calc_damage_using_def(damage_list):
+	var index=0
+	var calc_damage_list = []
+	for value in damage_list:
+		calc_damage_list.append(
+			{
+				"damage" : calc_def(value["damage"]),
+				"crit" : value["crit"],
+				"index" : value["index"]
+			}
+		)
+		index+=1
+	return calc_damage_list
 	
 	
-#Enemy의 공격이 아닌 플레이어와 몸통 박치기 
-func collision_attack():
+func take_damage(damage_list, debuff_option):
 	if is_enemy_death:
-		return 0
-	return enemy_info["state"]["attack"]
+		return 
+		
+	#$HitAudio.play()
+	EnemySprite.play("hit")
+	var particle = load("res://src/Effect/HitEffect.tscn").instance()
+	particle.position = HitEffectPosition.position
+	add_child(particle)
 	
+	var calc_damage_list = calc_damage_using_def(damage_list)
+	show_damage(calc_damage_list)
 	
+	for value in calc_damage_list:
+		var damage = value["damage"]
+		var crit = value["crit"]
+		var index = value["index"]
+		
+		#show_damage(damage, crit, index)
+		if enemy_info["state"]["current_hp"] - damage <= 0:
+			enemy_death()
+			return
+		else:
+			enemy_info["state"]["current_hp"] -= damage
+			
+		HealthBar.show_damage(enemy_info["state"]["current_hp"])
 	
+	## debuff내용이 없다면 take_damage 끝
+	if debuff_option["is_debuff"] == false:
+		return 
+
+	# 현재 같은 타입의 디버프가 걸려있는지 확인  
+	# queue_free()하는데 걸리는 시간때문에 기존의 이름을 못 쓰고 새로 추가하려는 노드의 이름에 @@숫자가 붙게 된다.
+	if check_debuff(debuff_option["effect"]["type"]):
+		# 만약 걸려있다면 해제 
+		return #일단 걸리지 않게
+		#print("이전의 디버프를 해제 합니다.")
+		#_on_debuff_timeout(debuff_option["effect"]["type"])
+
+	# 디버프 설정 
+	#print("디버프를 설정합니다.")
+	set_debuff(debuff_option)	
+		
+"""
 func take_damage(player_damage, crit, index, debuff_option):
 	if is_enemy_death:
 		return
 	var damage = calc_def(player_damage)
 	#$HitAudio.play()
-	HealthBar.show_damage(damage)
+	#HealthBar.show_damage(damage)
 	show_damage(damage, crit, index)
 	
 	if enemy_info["state"]["current_hp"] - damage <= 0:
@@ -169,7 +230,7 @@ func take_damage(player_damage, crit, index, debuff_option):
 	# 디버프 설정 
 	#print("디버프를 설정합니다.")
 	set_debuff(debuff_option)
-
+"""
 func check_debuff(type:String):
 	#print("같은 종류의 디버프가 걸린적이 있는지 확인합니다. ")
 	if current_buff_list.has(type):
@@ -202,7 +263,7 @@ func set_debuff(debuff_option:Dictionary):
 		var damage_timer = Timer.new() 
 		damage_timer.name = "per_second"+"current_hp"
 		damage_timer.connect("timeout", self, "_on_damage_per_second", [damage_per_second_list, percent])
-		damage_timer.wait_time = 0.1
+		damage_timer.wait_time = 1
 		add_child(damage_timer)
 		damage_timer.start() 
 		
@@ -238,7 +299,12 @@ func _on_damage_per_second(damage_per_second_list:Array, percent:int):
 			"effect" : null,
 		},
 	}
-	take_damage(damage, false, 1, option["option"])
+	#take_damage(damage, false, 1, option["option"])
+	take_damage([{
+		"damage" : damage,
+		"crit" : false, 
+		"index" : 1, 
+	}], option["option"])
 
 func _on_debuff_timeout(timer_name:String, percent:int):
 	var timer_node = get_node_or_null(timer_name)
@@ -308,15 +374,23 @@ func respawn():
 	var enemy_code = enemy_info["enemy_code"]
 	set_enemy_info(enemy_code)
 	#pass
-
+"""
 func show_damage(damage, crit, index):
 	var damage_skin = DAMAGE_SKIN.instance()
 	damage_skin.position = EnemyDamagePosition.position
 	damage_skin.position.y = EnemyDamagePosition.position.y - (index * 70)
 	add_child(damage_skin)
 	damage_skin.show_value(damage, crit, true)	
+"""
 
 
+func show_damage(damage_list):
+	var damage_skin = DAMAGE_SKIN.instance()
+	damage_skin.position = EnemyDamagePosition.position
+	add_child(damage_skin)
+	damage_skin.show_value2(damage_list)
+	
+	
 func get_hit_position():
 	return HitEffectPosition.position
 	

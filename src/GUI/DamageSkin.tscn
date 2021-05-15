@@ -16,5 +16,14 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
-one_shot = true
+wait_time = 1.5
 autostart = true
+
+[node name="Control" type="Control" parent="."]
+margin_top = -16.0
+margin_right = 73.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

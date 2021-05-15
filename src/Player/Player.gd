@@ -361,7 +361,11 @@ func show_damage(damage):
 	var damage_skin = DAMAGE_SKIN.instance()
 	damage_skin.position = damage_position.position
 	add_child(damage_skin)
-	damage_skin.show_value(damage, false, false)		
+	damage_skin.show_value2([{
+		"damage" : damage,
+		"crit" : false,
+		"index" : 1,
+	}], false)		
 
 # 기본공격의 코드는 0xE000 딕셔너리로 무기마다의 기본공격 체크 
 # 해당 어택은 기본 공격
