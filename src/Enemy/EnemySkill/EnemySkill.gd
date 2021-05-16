@@ -25,3 +25,5 @@ func init(dam:int, direction:int) -> void:
 func _on_EnemySkill_body_entered(body: Node) -> void:
 	emit_signal("EnemyAttack", damage)
 	queue_free()
+
+

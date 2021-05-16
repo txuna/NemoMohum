@@ -162,10 +162,41 @@ var Skills = {
 		"master_level" : 1,
 		"option" : {  
 			"is_debuff" : true,
-			"duration" : 10,
+			"duration" : 20,
+			"effect" : {
+				"type" : "def", #current_hp의 경우 아래 percent는 플레이어 공격력의 percent만큼 곱한거다.
+				"percent" : 90,
+			},
+		},
+		"level_effect" : { 
+			"damage_percent" : 50,
+		},
+		"type" : "Gun",
+		"image" : load("res://assets/art/icon/skill_weakness_bullet.png"),
+	},
+	0xE007: {
+		"skill_name" : "은빛 탄환",
+		"skill_description" : "몬스터에게 독을 걸어 을 6초간 도트데미지 130%를 입힌다.\n마스터 레벨은 1이다.\n10의 MP를 소모한다.",
+		"skill_code" : 0xE007,
+		"hit_number" : 1,
+		"enemy_number" : 1,
+		"damage_percent" : 20,
+		"skill_type" : "Active",
+		"cooldown" : 4,
+		"skill_scene" : preload("res://src/Skill/BasicBullet/BasicBullet.tscn"),
+		"skill_effect" : preload("res://src/Effect/HitEffect.tscn"),
+		"skill_hit_effect" : preload("res://src/Effect/HitEffect.tscn"),
+		"mp" : 10,
+		"acquire" : false, 
+		"precedence_skill_code" : [],
+		"skill_level" : 0, 
+		"master_level" : 1,
+		"option" : {  
+			"is_debuff" : true,
+			"duration" : 20,
 			"effect" : {
 				"type" : "current_hp", #current_hp의 경우 아래 percent는 플레이어 공격력의 percent만큼 곱한거다.
-				"percent" : 230,
+				"percent" : 130,
 			},
 		},
 		"level_effect" : { 

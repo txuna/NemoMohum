@@ -65,48 +65,48 @@ region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=12]
 flags = 4
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=13]
 flags = 4
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=14]
 flags = 4
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=15]
 flags = 4
-atlas = ExtResource( 3 )
+atlas = ExtResource( 7 )
 region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=16]
 flags = 4
 atlas = ExtResource( 7 )
-region = Rect2( 0, 0, 128, 128 )
+region = Rect2( 512, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=17]
 flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 128, 0, 128, 128 )
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=18]
 flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 256, 0, 128, 128 )
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=19]
 flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 384, 0, 128, 128 )
+atlas = ExtResource( 3 )
+region = Rect2( 256, 0, 128, 128 )
 
 [sub_resource type="AtlasTexture" id=20]
 flags = 4
-atlas = ExtResource( 7 )
-region = Rect2( 512, 0, 128, 128 )
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 128, 128 )
 
 [sub_resource type="SpriteFrames" id=21]
 animations = [ {
@@ -125,14 +125,14 @@ animations = [ {
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "die",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ) ],
 "loop": true,
 "name": "hit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
+"loop": true,
+"name": "die",
 "speed": 5.0
 } ]
 
@@ -156,7 +156,7 @@ position = Vector2( -1.7305, -1.62291 )
 shape = SubResource( 22 )
 
 [node name="DamageSkin" parent="." index="4"]
-position = Vector2( 27.8438, -125.44 )
+position = Vector2( -25.1648, -123.658 )
 
 [node name="HitEffectPosition" parent="." index="5"]
 position = Vector2( -2.5, 0.5 )

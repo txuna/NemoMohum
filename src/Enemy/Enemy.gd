@@ -30,6 +30,8 @@ signal EnemyAttack
 
 onready var HitEffectPosition = $HitEffectPosition
 onready var EnemyCollision = $CollisionShape2D
+onready var PlayerDetectionCollision = $AttackArea/CollisionShape2D
+
 onready var EnemySprite = $EnemySprite
 onready var HealthBar = $HealthBar
 onready var EnemyDamagePosition = $DamageSkin
@@ -44,9 +46,9 @@ onready var BuffContainer = $BuffContainer/HboxContainer
 
 var texture_list = {
 	"def" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
-	"current_hp" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
-	"speed" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
-	"attack" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
+	"current_hp" : load("res://assets/art/icon/enemy_debuff_current_hp.png"),
+	"speed" : load("res://assets/art/icon/enemy_debuff_decrease_speed.png"),
+	"attack" : load("res://assets/art/icon/enemy_debuff_decrease_attack.png"),
 }
 
 # Called when the node enters the scene tree for the first time.
@@ -333,7 +335,8 @@ func _on_debuff_timeout(timer_name:String, percent:int):
 		print("ERROR _on_debuff_timeout : Can't found debuff about " + timer_name)
 	
 func enemy_death_and_remove_debuff():
-	for debuff_name in current_buff_list:
+	var temp_current_buff_list = current_buff_list.duplicate()
+	for debuff_name in temp_current_buff_list:
 		_on_debuff_timeout(debuff_name, current_buff_list[debuff_name])
 
 func init_buff_container():
@@ -354,16 +357,19 @@ func calc_def(damage):
 	
 # 지금까지 몬스터에 걸린 디버프 해제
 func enemy_death():
+	is_attack = false
+	is_delay = false
 	is_enemy_death = true
 	give_spoil()
 	emit_signal("EnemyDeath", give_exp(), give_coin(), enemy_info["enemy_code"])
+	enemy_death_and_remove_debuff()
+	PlayerDetectionCollision.set_deferred("disabled", true)
 	EnemyCollision.set_deferred("disabled", true)
 	EnemySprite.stop()
 	EnemySprite.play("die")
 	yield(EnemySprite, "animation_finished") #EnemyPlayer의 animation_finished 시그널을 받으면 다시 실행
 	visible = false
 	$SpawnTimer.start()
-	enemy_death_and_remove_debuff()
 	#queue_free()
 
 
@@ -371,9 +377,11 @@ func respawn():
 	is_enemy_death = false
 	visible = true
 	EnemyCollision.set_deferred("disabled", false)
+	PlayerDetectionCollision.set_deferred("disabled", false)
 	var enemy_code = enemy_info["enemy_code"]
 	set_enemy_info(enemy_code)
-	#pass
+
+	
 """
 func show_damage(damage, crit, index):
 	var damage_skin = DAMAGE_SKIN.instance()
