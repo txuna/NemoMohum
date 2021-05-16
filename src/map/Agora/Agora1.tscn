@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/map/Agora/Agora1.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/art/map/Agora/tile/agora_tile_8.png" type="Texture" id=11]
 [ext_resource path="res://src/Enemy/Sentryman/Sentryman.tscn" type="PackedScene" id=12]
 [ext_resource path="res://src/Enemy/Swordman/Swordman.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/Enemy/GD003/GD003.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Npc/American.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -232,6 +233,9 @@ position = Vector2( 510.281, 596.032 )
 
 [node name="Sentryman" parent="Enemies" index="1" instance=ExtResource( 12 )]
 position = Vector2( 1266.56, 799.05 )
+
+[node name="GD003" parent="Enemies" index="2" instance=ExtResource( 14 )]
+position = Vector2( 1942.8, 483.81 )
 
 [node name="American" parent="." index="5" instance=ExtResource( 15 )]
 position = Vector2( 228.479, 598.753 )

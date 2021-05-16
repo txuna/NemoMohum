@@ -1,0 +1,237 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://src/Enemy/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/art/enemy/gd003/gd003_attack.png" type="Texture" id=2]
+[ext_resource path="res://assets/art/enemy/gd003/gd003_die.png" type="Texture" id=3]
+[ext_resource path="res://assets/art/enemy/gd003/gd003_hit.png" type="Texture" id=4]
+[ext_resource path="res://assets/art/enemy/gd003/gd003_idle.png" type="Texture" id=5]
+[ext_resource path="res://assets/art/enemy/gd003/gd003_walk.png" type="Texture" id=6]
+[ext_resource path="res://src/Enemy/GD003/GD003.gd" type="Script" id=7]
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=21]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=22]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=23]
+flags = 4
+atlas = ExtResource( 5 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 2 )
+region = Rect2( 768, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=24]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=25]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=26]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=27]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=28]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=29]
+flags = 4
+atlas = ExtResource( 6 )
+region = Rect2( 640, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 4 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 256, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 384, 0, 128, 128 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 3 )
+region = Rect2( 512, 0, 128, 128 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "hit",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ],
+"loop": true,
+"name": "die",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=30]
+extents = Vector2( 53.9559, 54.5666 )
+
+[sub_resource type="RectangleShape2D" id=31]
+extents = Vector2( 365.686, 28.3938 )
+
+[node name="GD003" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
+
+[node name="EnemySprite" parent="." index="0"]
+position = Vector2( 0, 0 )
+frames = SubResource( 8 )
+animation = "walk"
+frame = 4
+playing = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 6.34048, 6.34047 )
+shape = SubResource( 30 )
+
+[node name="DamageSkin" parent="." index="4"]
+position = Vector2( 14.6301, -87.3084 )
+
+[node name="HitEffectPosition" parent="." index="5"]
+position = Vector2( 0, -1.41583 )
+
+[node name="HealthBar" parent="." index="6"]
+margin_left = -27.9932
+margin_top = -72.622
+margin_right = 72.0068
+margin_bottom = -54.622
+
+[node name="SpoilPosition" parent="." index="7"]
+position = Vector2( 19.3494, -85.4206 )
+
+[node name="AttackPosition" parent="." index="8"]
+position = Vector2( -74.0941, 2.35971 )
+
+[node name="EnemyInfo" parent="." index="10"]
+margin_left = -34.4514
+margin_top = 67.487
+margin_right = 5.54858
+margin_bottom = 104.487
+
+[node name="CollisionShape2D" parent="AttackArea" index="0"]
+position = Vector2( 2.5199, 3.14981 )
+shape = SubResource( 31 )
+
+[node name="SkillPosition" parent="." index="13"]
+position = Vector2( -75.5099, 2.83163 )
+
+[node name="CenterPosition" parent="." index="14"]
+position = Vector2( 0.471939, -0.943878 )
+
+[node name="BuffContainer" parent="." index="15"]
+margin_left = -120.719
+margin_top = -142.447
+margin_right = 185.281
+margin_bottom = -78.4474
