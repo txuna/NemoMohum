@@ -28,22 +28,22 @@ var current_equipment = {
 
 var state = {
 	"nickname" : "스페셜땡스루",
-	"min_attack" : 5, 
-	"max_attack" : 20, 
-	"current_hp" : 1000, 
-	"max_hp" : 1000, 
-	"current_mp" : 1000,
+	"min_attack" : 2, 
+	"max_attack" : 7, 
+	"current_hp" : 200, 
+	"max_hp" : 200, 
+	"current_mp" : 100,
 	"max_mp" : 100,
-	"crit" : 60, 
+	"crit" : 1, 
 	"crit_damage" : 30, 
-	"coin" : 3000,
+	"coin" : 0,
 	"level" : 1,
 	"current_exp" : 0, 
-	"max_exp" : 1000,
-	"upgrade_point" : 10,
-	"def" : 100,
+	"max_exp" : 100,
+	"upgrade_point" : 3,
+	"def" : 50,
 	"image" : load("res://assets/art/player/player_new.png"),
-	"skill_point" : 50,
+	"skill_point" : 10,
 	"buff_code_list" : [], #현재 적용받고 있는 버프 스킬 코드
 }
 
@@ -352,7 +352,7 @@ func get_exp(exp_value):
 
 func player_level_up():
 	msg_log_update("플레이어가 레벨업을 했습니다")
-	state["upgrade_point"] += 5
+	state["upgrade_point"] += 3
 	state["skill_point"] += 5
 	state["level"] += 1
 	state["max_exp"] += int(state["max_exp"] * 1.2)
@@ -456,13 +456,13 @@ func change_upgrade_point(value):
 	state["upgrade_point"] += value
 
 func increase_max_hp():
-	var value = 40
+	var value = 100
 	state["max_hp"] += value
 	update_hud(state["current_hp"], "hp")
 	return true
 	
 func increase_max_mp():
-	var value = 30
+	var value = 50
 	state["max_mp"] += value
 	update_hud(state["current_mp"], "mp")
 	return true
@@ -480,13 +480,13 @@ func increase_crit_damage():
 	return true
 	
 func increase_def():
-	var value = 11
+	var value = 45
 	state["def"] += value
 	return true
 	
 func increase_attack():
-	var min_value = 4
-	var max_value = 9
+	var min_value = 2
+	var max_value = 7
 	state["min_attack"] += min_value 
 	state["max_attack"] += max_value
 	return true

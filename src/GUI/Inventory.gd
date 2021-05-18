@@ -33,7 +33,7 @@ func _ready() -> void:
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
-	dynamic_font.font_data = load("res://assets/fonts/NanumSquareRoundB.ttf")
+	dynamic_font.font_data = load("res://assets/fonts/NanumBarunpenR.ttf")
 	dynamic_font.size = font_size
 	return dynamic_font
 	
@@ -62,7 +62,7 @@ func make_slot(index:int, code:int)->Panel:
 	var label = Label.new()
 	if current_inven_type != "equipment":
 		label.text = str(player_inventory[current_inven_type][code]["numberof"])
-	label.set("custom_fonts/font", make_dynamic_font(20))
+	label.set("custom_fonts/font", make_dynamic_font(24))
 	label.rect_position = Vector2(30, 80)
 	label.rect_size = Vector2(35, 15)
 	label.set("custom_colors/font_color",Color(0,0,0))
