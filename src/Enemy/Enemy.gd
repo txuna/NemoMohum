@@ -43,6 +43,7 @@ onready var SkillPosition = $SkillPosition
 onready var CenterPosition = $CenterPosition
 onready var BuffContainer = $BuffContainer/HboxContainer
 
+var SpawnPosition = Vector2.ZERO
 
 var texture_list = {
 	"def" : load("res://assets/art/icon/enemy_debuff_decrease_def.png"),
@@ -53,6 +54,7 @@ var texture_list = {
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SpawnPosition = position #리스폰시 태어날 위치
 	init_buff_container()
 	items = get_node("/root/Items").Items
 	set_direction()
@@ -376,6 +378,7 @@ func enemy_death():
 func respawn():
 	is_enemy_death = false
 	visible = true
+	position = SpawnPosition
 	EnemyCollision.set_deferred("disabled", false)
 	PlayerDetectionCollision.set_deferred("disabled", false)
 	var enemy_code = enemy_info["enemy_code"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://src/map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/map/Agora/Agora1.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/art/map/Agora/tile/agora_tile_4.png" type="Texture" id=9]
 [ext_resource path="res://assets/art/map/Agora/tile/agora_tile_1.png" type="Texture" id=10]
 [ext_resource path="res://assets/art/map/Agora/tile/agora_tile_8.png" type="Texture" id=11]
+[ext_resource path="res://src/Enemy/Swordman/Swordman.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Npc/American.tscn" type="PackedScene" id=15]
 [ext_resource path="res://src/Npc/Stan.tscn" type="PackedScene" id=16]
 [ext_resource path="res://src/Npc/Mia.tscn" type="PackedScene" id=17]
@@ -226,6 +227,24 @@ tile_data = PoolIntArray( -786433, 0, 0, -851916, 1, 0, -720897, 0, 0, -786380, 
 
 [node name="PlayerSpawnPosition" parent="." index="2"]
 position = Vector2( 89.3214, 547.012 )
+
+[node name="Swordman6" parent="Enemies" index="0" instance=ExtResource( 13 )]
+position = Vector2( 482.046, 291.795 )
+
+[node name="Swordman" parent="Enemies" index="1" instance=ExtResource( 13 )]
+position = Vector2( 286.046, 285.795 )
+
+[node name="Swordman2" parent="Enemies" index="2" instance=ExtResource( 13 )]
+position = Vector2( 2631.43, 26.835 )
+
+[node name="Swordman3" parent="Enemies" index="3" instance=ExtResource( 13 )]
+position = Vector2( 2415.06, 26.3152 )
+
+[node name="Swordman4" parent="Enemies" index="4" instance=ExtResource( 13 )]
+position = Vector2( 1239.74, 277.579 )
+
+[node name="Swordman5" parent="Enemies" index="5" instance=ExtResource( 13 )]
+position = Vector2( 125.269, 287.795 )
 
 [node name="American" parent="." index="5" instance=ExtResource( 15 )]
 position = Vector2( 228.479, 598.753 )
