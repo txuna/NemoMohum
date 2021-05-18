@@ -158,6 +158,11 @@ var EnemyList = {
 					"numberof" : 1,
 					"percentage" : 100, 
 				},
+				{
+					"code" : 0xC003,
+					"numberof" : 1, 
+					"percentage" : 100,
+				}
 			]
 		}
 	},

@@ -181,9 +181,9 @@ __meta__ = {
 
 [node name="enchant" type="Label" parent="Sprite/DetailContainer"]
 margin_left = 10.0
-margin_top = 222.803
+margin_top = 206.947
 margin_right = 76.0
-margin_bottom = 261.803
+margin_bottom = 245.947
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "인챈트"
@@ -199,6 +199,29 @@ margin_bottom = 344.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="quest" type="Label" parent="Sprite/DetailContainer"]
+margin_left = 10.0
+margin_top = 300.0
+margin_right = 76.0
+margin_bottom = 339.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "아이템 종류 "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ItemQuest" type="Label" parent="Sprite/DetailContainer"]
+margin_left = 200.0
+margin_top = 300.0
+margin_right = 322.0
+margin_bottom = 339.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

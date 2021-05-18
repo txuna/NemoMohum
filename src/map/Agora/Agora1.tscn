@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://src/map/Map.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/map/Agora/Agora1.gd" type="Script" id=2]
@@ -15,6 +15,8 @@
 [ext_resource path="res://src/Enemy/Swordman/Swordman.tscn" type="PackedScene" id=13]
 [ext_resource path="res://src/Enemy/GD003/GD003.tscn" type="PackedScene" id=14]
 [ext_resource path="res://src/Npc/American.tscn" type="PackedScene" id=15]
+[ext_resource path="res://src/Npc/Stan.tscn" type="PackedScene" id=16]
+[ext_resource path="res://src/Npc/Mia.tscn" type="PackedScene" id=17]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -229,13 +231,19 @@ tile_data = PoolIntArray( -851916, 1, 0, -720897, 0, 0, -786380, 1, 0, -655361, 
 position = Vector2( 89.3214, 547.012 )
 
 [node name="Swordman" parent="Enemies" index="0" instance=ExtResource( 13 )]
-position = Vector2( 510.281, 596.032 )
+position = Vector2( 1387.19, 742.183 )
 
 [node name="Sentryman" parent="Enemies" index="1" instance=ExtResource( 12 )]
-position = Vector2( 1266.56, 799.05 )
+position = Vector2( 2614.68, 766.292 )
 
 [node name="GD003" parent="Enemies" index="2" instance=ExtResource( 14 )]
 position = Vector2( 1942.8, 483.81 )
 
 [node name="American" parent="." index="5" instance=ExtResource( 15 )]
 position = Vector2( 228.479, 598.753 )
+
+[node name="Mia" parent="." index="6" instance=ExtResource( 17 )]
+position = Vector2( 645.08, 713.116 )
+
+[node name="Stan" parent="." index="7" instance=ExtResource( 16 )]
+position = Vector2( 456.092, 604.762 )

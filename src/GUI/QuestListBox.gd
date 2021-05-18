@@ -49,6 +49,7 @@ func make_label(text:String)->Label:
 	label.text = text
 	label.set("custom_colors/font_color",Color(0,0,0))
 	label.set("custom_fonts/font", make_dynamic_font())
+	label.rect_size.y = 45
 	return label
 	
 func make_hbox(quest_code:int)->HBoxContainer:

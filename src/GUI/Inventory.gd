@@ -15,7 +15,7 @@ onready var item_effect = $Sprite/DetailContainer/ItemEffect
 onready var coin_value = $Sprite/CoinValue
 onready var use_button = $Sprite/UseButton
 onready var item_enchant = $Sprite/DetailContainer/ItemEnchant
-
+onready var item_quest = $Sprite/DetailContainer/ItemQuest
 
 onready var quick_slots = $Sprite/QuickSlot
 # 인벤토리 클릭시 어떤 것인지 알 수 있도록 아이템코드 등록
@@ -138,6 +138,11 @@ func show_item_detail(index):
 			item_effect.text += (str(effect) + ":" + str(item["effect"][effect]))  + "\n"
 	else:
 		item_effect.text = "효과없음"
+		
+	if item["is_quest_item"]:
+		item_quest.text = "퀘스트 아이템"
+	else:
+		item_quest.text = "일반 아이템"
 	
 	show_item_enchant(code, type)
 

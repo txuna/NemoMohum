@@ -12,7 +12,7 @@ var QuestList = {
 		"quest_goal" : {
 			"item" : [
 				{
-					"code" : 0xC000,
+					"code" : 0xC003,
 					"numberof" : 10,
 					"player_count" : 0, #플레이어의 진행상태
 				}
@@ -62,12 +62,12 @@ var QuestList = {
 	},
 	0xD001 : {
 		"quest_code" : 0xD001, 
-		"quest_name" : "빨간포션 공짜로 매입",
+		"quest_name" : "기사들이 뻇어간 도토리를 구해줘!",
 		"quest_goal" : {
 			"item" : [
 				{
-					"code" : 0xB000,
-					"numberof" : 10,
+					"code" : 0xC003,
+					"numberof" : 3,
 					"player_count" : 0, #플레이어의 진행상태
 				}
 			],

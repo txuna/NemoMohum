@@ -134,8 +134,11 @@ func get_quest_progress(quest_code)->Array:
 			status.append(dict)
 	return status
 
-
-
-
-
-
+## 아이템코드를 기반으로 해당 아이템이 현재 진행중인 퀘스트의 요건에 필요한 템인지 체크
+func check_item_in_progress_quest(item_code:int):
+	for quest_code in quest_in_progress:
+		var quest = get_quest(quest_code)
+		for quest_goal in quest["quest_goal"]["item"]:
+			if quest_goal["code"] == item_code:
+				return true #해당 아이템 코드가 플레이어가 진행중인 퀘스트에 포함되는 퀘스트 아이템이라면! 
+	return false

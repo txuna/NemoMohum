@@ -412,12 +412,18 @@ func give_coin():
 	
 	
 # Spoil Instance 생성
+# 퀘스트 아이템의 경우 체크
 func give_spoil():
 	var index = 1
+	var quest_manager = get_node("/root/Main/QuestManager")
 	for enemy_item in enemy_info["spoil"]["item"]:
+		# 해당 아이템이 퀘스트 아이템이면서
+		if items[enemy_item["code"]]["is_quest_item"]:
+			# 플레이어가 진행중인 퀘스트에 필요하지 않는 퀘스트 아이템이라면 넘긴다. 
+			if not quest_manager.check_item_in_progress_quest(enemy_item["code"]):
+				continue
 		randomize()
 		var percentage = rand_range(0, 100)
-		
 		if percentage <= enemy_item["percentage"]:
 			var item = items[enemy_item["code"]]
 			var spoil_instance = load("res://src/Spoil/Spoil.tscn").instance()

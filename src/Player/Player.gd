@@ -592,6 +592,7 @@ func _on_AttackDelay_timeout() -> void:
 	is_delay = false
 	
 # 현재 장착중인 무기는 판매가 금지된다. 
+# 퀘스트 아이템도 판매가 불가능하다.
 func _on_sell_item(item):
 	var item_type = item["type"]
 	var item_code = item["code"]
@@ -602,6 +603,12 @@ func _on_sell_item(item):
 	if player_variable.check_already_wear_equipment(item["code"]):
 		player_variable.msg_log_update("해당 장비를 착용중이기에 판매할 수 없습니다.")
 		return	
+
+	#만약 퀘스트 아이템이라면
+	if items[item_code]["is_quest_item"]:
+		player_variable.msg_log_update("퀘스트 아이템은 판매가 불가능 합니다.")
+		return
+
 
 	if not player_variable.check_inventory_item_numberof(item_type, item_code):
 		return
