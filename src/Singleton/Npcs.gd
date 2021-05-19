@@ -15,7 +15,7 @@ var NpcList = {
 		"description" : "npc",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/stan/stan2.png"),
-		"base_msg" : "HI",
+		"base_msg" : "늅ㅎㅇㅎㅇ ㅋㅋ",
 	},
 	0x9002:{
 		"code" : 0x9002,
@@ -23,7 +23,7 @@ var NpcList = {
 		"description" : "npc",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/kale/kale.png"),
-		"base_msg" : "HI",
+		"base_msg" : "도토리 축제가 한창이란 말이지 ...",
 	},
 	0x9003:{
 		"code" : 0x9003,
@@ -31,7 +31,7 @@ var NpcList = {
 		"description" : "npc",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/alex/alex.png"),
-		"base_msg" : "HI",
+		"base_msg" : "노숙중, 말걸면 물음",
 	},
 	0x9004:{
 		"code" : 0x9004,
@@ -39,7 +39,7 @@ var NpcList = {
 		"description" : "hi",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/juho/juho.png"),
-		"base_msg" : "HI",
+		"base_msg" : "방가방가",
 	},
 	0x9005:{
 		"code" : 0x9005,
@@ -47,7 +47,7 @@ var NpcList = {
 		"description" : "npc",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/muyaho/muyaho.png"),
-		"base_msg" : "HI",
+		"base_msg" : "방가방가",
 	},
 	0x9006:{
 		"code" : 0x9006,
@@ -55,7 +55,7 @@ var NpcList = {
 		"description" : "Enchant Girl",
 		"type" : "enchant",
 		"image" : load("res://assets/art/npc/american/american.png"),
-		"base_msg" : "HI",
+		"base_msg" : "강화해드림!",
 	}
 }
 

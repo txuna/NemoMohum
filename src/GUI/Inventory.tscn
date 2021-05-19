@@ -169,10 +169,10 @@ __meta__ = {
 }
 
 [node name="ItemEffect" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 102.0
-margin_top = 153.0
-margin_right = 411.0
-margin_bottom = 228.0
+margin_left = 104.8
+margin_top = 148.1
+margin_right = 413.8
+margin_bottom = 223.1
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true
@@ -194,7 +194,7 @@ __meta__ = {
 
 [node name="ItemEnchant" type="Label" parent="Sprite/DetailContainer"]
 margin_left = 113.0
-margin_top = 223.0
+margin_top = 234.0
 margin_right = 422.0
 margin_bottom = 298.0
 custom_fonts/font = SubResource( 3 )

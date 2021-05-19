@@ -98,7 +98,6 @@ func show_quester(quest_code:int):
 	Quester.text =  "NPC : " + npc_name + "\n[사전조건]" + "Lv." + str(quest_level)  + " " + quest_name
 	
 	
-	
 func show_detail_quest(event:InputEvent, quest_code:int):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
 		current_quest_code = quest_code
