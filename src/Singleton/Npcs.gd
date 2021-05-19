@@ -11,7 +11,7 @@ var NpcList = {
 	},
 	0x9001:{
 		"code" : 0x9001,
-		"name" : "Stan",
+		"name" : "스탄",
 		"description" : "npc",
 		"type" : "quest",
 		"image" : load("res://assets/art/npc/stan/stan2.png"),
@@ -63,7 +63,7 @@ var NpcList = {
 var ShopKeepers = {
 	0x9000 : [
 		{
-			"code" : 0xA000
+			"code" : 0xC001
 		},
 		{
 			"code" : 0xB000

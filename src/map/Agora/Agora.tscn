@@ -207,6 +207,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 7/z_index = 0
 
 [node name="Agora" instance=ExtResource( 1 )]
+position = Vector2( 2.11893, 46.6163 )
 script = ExtResource( 2 )
 
 [node name="ParallaxBackground" parent="." index="0"]

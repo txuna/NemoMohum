@@ -53,63 +53,22 @@ var enchant_table = {
 		"state_option" : [0x1000, 0x1001],
 	}
 }
-
-var inventory = {
-	"equipment" : {
+"""
 		0xA001:{
 			"code" : 0xA001,
 			"numberof" : 1,
 			"is_enchant" : true,
 		},
-		0xA002:{
-			"code" : 0xA002,
-			"numberof" : 1,
-			"is_enchant" : false,
-		},
-		0xA003:{
-			"code" : 0xA003,
-			"numberof" : 1,
-			"is_enchant" : false,
-		},
-		0xA004:{
-			"code" : 0xA004,
-			"numberof" : 1,
-			"is_enchant" : false,
-		},
-		0xA005: {
-			"code" : 0xA005,
-			"numberof" : 1,
-			"is_enchant" : false,
-		},
-		0xA030:{
-			"code" : 0xA030,
-			"numberof" : 1,
-			"is_enchant" : false,
-		},
-		0xA031:{
-			"code" : 0xA031,
-			"numberof" : 1,
-			"is_enchant" : false,
-		}
+"""
+var inventory = {
+	"equipment" : {
+
 	},
 	"consumption" : {
-		0xB000:{
-			"code" : 0xB000,
-			"numberof" : 20,
-			"is_enchant" : false,
-		},
+
 	},
 	"etc" : {
-		0xC000:{
-			"code" : 0xC000,
-			"numberof" : 1,
-			"is_enchant" : false,
-		},
-		0x3000 : {
-			"code" : 0x3000,
-			"numberof" : 3,
-			"is_enchant" : false,
-		}
+
 	},
 }
 

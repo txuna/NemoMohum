@@ -11,8 +11,11 @@ script = ExtResource( 3 )
 [node name="Background" parent="ParallaxBackground" index="0"]
 texture = ExtResource( 4 )
 
+[node name="TileMap" parent="." index="1"]
+position = Vector2( 0, 10 )
+
 [node name="PlayerSpawnPosition" parent="." index="2"]
 position = Vector2( 249.683, 748.355 )
 
 [node name="ToAgora2" parent="Portals" index="0" instance=ExtResource( 1 )]
-position = Vector2( 67.4932, 804.576 )
+position = Vector2( 69.0806, 779.178 )

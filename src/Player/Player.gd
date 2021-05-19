@@ -605,9 +605,9 @@ func _on_sell_item(item):
 		return	
 
 	#만약 퀘스트 아이템이라면
-	if items[item_code]["is_quest_item"]:
-		player_variable.msg_log_update("퀘스트 아이템은 판매가 불가능 합니다.")
-		return
+	#if items[item_code]["is_quest_item"]:
+	#	player_variable.msg_log_update("퀘스트 아이템은 판매가 불가능 합니다.")
+	#	return
 
 
 	if not player_variable.check_inventory_item_numberof(item_type, item_code):
@@ -678,8 +678,10 @@ func send_notifination_to_quest(type:int, code:int, numberof:int):
 	emit_signal("NOTIFY", type, code , numberof)
 	player_variable.update_questbox()
 
-func get_quest_reward(reward:Dictionary):
-	player_variable.msg_log_update("퀘스트를 달성했습니다.")
+func get_quest_reward(reward:Dictionary, type:String):
+	if type == "Reward":
+		player_variable.msg_log_update("퀘스트를 달성했습니다.")
+		
 	var reward_exp = reward["state"]["current_exp"]
 	var reward_coin = reward["state"]["coin"]
 	var items = reward["item"]

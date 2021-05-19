@@ -70,6 +70,15 @@ func get_npc_quest(npc_code):
 func get_quest(quest_code):
 	return quest_list.QuestList[quest_code]
 
+func give_supplies_to_player(supplies):
+	var player_node_path = get_node("/root/PlayerVariables").get_player_node_path()
+	var player_node = get_node_or_null(player_node_path)
+	if player_node == null:
+		print("Error, Player is NULL! So, Can't give supplies to player")
+		return 
+	player_node.get_quest_reward(supplies, "Supplies")
+	
+
 func check_player_item():
 	var player_node_path = get_node("/root/PlayerVariables").get_player_node_path()
 	var player_node = get_node_or_null(player_node_path)
@@ -82,10 +91,11 @@ func check_player_item():
 func set_quest_state(quest_code, current_state):
 	var quest = get_quest(quest_code)
 	if current_state == NOT_START:
-		#퀘스트 수락 / 플레이어의 인벤토리 검사 함수 호출
+		#퀘스트 수락 / 플레이어의 인벤토리 검사 함수 호출, #사전 지급품 제공
 		quest["quest_state"] = PROGRESS
 		_on_add_quest_in_progress(quest_code)
 		check_player_item()
+		give_supplies_to_player(quest["quest_supplies"])
 		
 	elif current_state == CAN_COMPLETE:
 		var is_player = give_reward_to_player(quest_code)
@@ -102,7 +112,7 @@ func give_reward_to_player(quest_code)->bool:
 	if player_node == null:
 		return false
 	player_node.give_item_to_quest(quest["quest_goal"]["item"])
-	player_node.get_quest_reward(quest["quest_reward"])
+	player_node.get_quest_reward(quest["quest_reward"], "Reward")
 	return true
 
 func get_quest_name(quest_code):
