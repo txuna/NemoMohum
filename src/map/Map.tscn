@@ -19,3 +19,5 @@ format = 1
 [node name="EnemySpawnPosition" type="Position2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Portals" type="Node2D" parent="."]

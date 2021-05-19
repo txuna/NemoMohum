@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://src/map/Agora/Agora.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/map/Agora/Agora_stage2.gd" type="Script" id=2]
+[ext_resource path="res://src/map/Portal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/art/map/Agora/new_agora2.png" type="Texture" id=4]
+
+[node name="Agora_stage2" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Background" parent="ParallaxBackground" index="0"]
+texture = ExtResource( 4 )
+
+[node name="PlayerSpawnPosition" parent="." index="2"]
+position = Vector2( 207.688, 740.294 )
+
+[node name="ToAgora1" parent="Portals" index="0" instance=ExtResource( 3 )]
+position = Vector2( 78.4779, 806.574 )
+
+[node name="ToAgora3" parent="Portals" index="1" instance=ExtResource( 3 )]
+position = Vector2( 3246.26, 805.045 )

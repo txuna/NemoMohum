@@ -4,3 +4,5 @@ extends "res://src/map/Map.gd"
 func _ready() -> void:
 	set_map()
 	set_enemy_signal()
+	
+

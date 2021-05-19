@@ -2,16 +2,21 @@ extends Node2D
 
 var player = null
 
-signal change_map
+#signal change_map
 
 onready var EnemySpawnPosition = $EnemySpawnPosition
 onready var PlayerSpawnPosition = $PlayerSpawnPosition
+onready var Portals = $Portals
 
 func _ready() -> void:
 	pass
 
+func portal_connect_signal():
+	for portal in Portals.get_children():
+		portal.connect("change_map", get_node("/root/Main"), "change_map") 
 
 func set_map():
+	portal_connect_signal()
 	spawn_player()
 	
 func spawn_player():

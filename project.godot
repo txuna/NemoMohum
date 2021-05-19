@@ -185,6 +185,7 @@ D_Button={
 2d_physics/layer_5="skill"
 2d_physics/layer_6="npc"
 2d_physics/layer_7="enemy_skill"
+2d_physics/layer_8="portal"
 
 [rendering]
 

@@ -51,9 +51,12 @@ func change_map(map_node_name, map_code):
 func load_map():
 	var map_instance = null
 	if current_map_code == 0x8000:
-		map_instance = load("res://src/map/Agora/Agora1.tscn").instance()
+		map_instance = load("res://src/map/Agora/Agora_stage1.tscn").instance()
 	
 	elif current_map_code == 0x8001:
-		map_instance = load("res://src/map/mountain/Mountain.tscn").instance()
-	map_instance.connect("change_map", self, "change_map")
+		map_instance = load("res://src/map/Agora/Agora_stage2.tscn").instance()
+		
+	elif current_map_code == 0x8002:
+		map_instance = load("res://src/map/Agora/Agora_stage3.tscn").instance()
+		
 	call_deferred("add_child", map_instance)
