@@ -17,14 +17,24 @@ var EnemyList = {
 			"exp" : 22,
 			"item" : [
 				{
-					"code" : 0xB001,
+					"code" : 0xB001, #파란포션
 					"numberof" : 1,
 					"percentage" : 30, 
 				},
 				{
-					"code" : 0xC006,
+					"code" : 0xC006, #신분증 조각
 					"numberof" : 1,
 					"percentage" : 30, 
+				},
+				{
+					"code" : 0xC008, #부러진 창
+					"numberof" : 1, 
+					"percentage" : 50,
+				},
+				{
+					"code" : 0xC003, #도토리
+					"numberof" : 1, 
+					"percentage" : 30,
 				},
 			]
 		}
@@ -53,6 +63,16 @@ var EnemyList = {
 					"code" : 0xC006,
 					"numberof" : 1,
 					"percentage" : 30, 
+				},
+				{
+					"code" : 0xC007,
+					"numberof" : 1, 
+					"percentage" : 50,
+				},
+				{
+					"code" : 0xC003,
+					"numberof" : 1, 
+					"percentage" : 30,
 				},
 			]
 		}

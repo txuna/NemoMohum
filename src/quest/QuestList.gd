@@ -287,13 +287,80 @@ var QuestList = {
 		},
 		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
 	},
+	0xD004 : {
+		"quest_code" : 0xD004, 
+		"quest_name" : "도토리 축제 준비하기1",
+		"quest_supplies" : { ##퀘스트 시작시 받는 물품
+			"item" : {
+				"equipment" : [
+				],
+				"etc" : [
+					
+				]
+			},
+			"state" : {
+				"coin" : 0,
+				"current_exp" : 0,
+			}
+		},
+		"quest_goal" : {
+			"item" : [
+				{
+					"code" : 0xC003,
+					"numberof" : 10,
+					"player_count" : 0,
+				}
+			],
+			"enemy" : [
+
+			],
+			# 특장 NPC에게 대화걸기
+			"talk_to" : [
+				# 성공여부는 false and true
+			]
+		},
+		"quest_reward" : {
+			"state" : {
+				"coin" : 500, 
+				"current_exp" : 80, 
+			},
+			"item" : {
+				"consumption" : [
+					{
+						"code" : 0xB002, 
+						"numberof" : 2,
+						"type" : "consumption",
+					},
+					{
+						"code" : 0xB003,
+						"numberof" : 2,
+						"type" : "consumption",
+					}
+				],
+			}
+		},
+		"quest_not_started_msg" : [
+			"도와주세요.....", "마을밖에 기사단의 창병과 검병들이....", "도토리 축제에 사용할 도토리를 훔쳐갔어요....",
+			"그들로 부터 도토리 10개만 구해주세요..."
+		],
+		"quest_progress_msg" : ["사람 잘못 찾았나보네용ㅎㅎ 다른사람 쓸게요"],
+		"quest_complete_msg" : ["감사합니다!", "작은 보상이지만 받아주세요!"],
+		"quest_before_summary_msg" : "카일이 엄청난 고민에 빠져있는 것 같다. 그의 고민을 들어주자.", 
+		"quest_summary_msg" : "도토리 축제에 사용할 도토리를 마을밖에 있는 기사단의 검병과 창병이 훔쳐갔다는데....",
+		"npc_code" : 0x9002,
+		"condition" : {
+			"level" : 3, 
+			"quest_list" : [0xD003],
+		},
+		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
+	},
 }
 
-var all_quest = [0xD000, 0xD001, 0xD002, 0xD003]
+var all_quest = [0xD000, 0xD001, 0xD002, 0xD003, 0xD004]
 
 var NpcQuest = {
 	0x9001 : [0xD000, 0xD001, 0xD002, 0xD003], #stan
-	0x9002 : [], #kale
+	0x9002 : [0xD004], #kale
 	0x9003 : [], #alex
 	0x9004 : [], #juho
 	0x9005 : [], #muyaho

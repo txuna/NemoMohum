@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/Enemy/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://src/GUI/HealthBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/fonts/NanumSquareRoundB.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://assets/art/icon/enemy_debuff_decrease_def.png" type="Texture" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -46,6 +45,7 @@ one_shot = true
 margin_right = 40.0
 margin_bottom = 14.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -72,16 +72,9 @@ __meta__ = {
 }
 
 [node name="HboxContainer" type="HBoxContainer" parent="BuffContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="TextureRect" type="TextureRect" parent="BuffContainer/HboxContainer"]
-margin_right = 64.0
-margin_bottom = 64.0
-texture = ExtResource( 4 )
 [connection signal="animation_finished" from="EnemySprite" to="." method="_on_EnemySprite_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="AttackDelay" to="." method="_on_AttackDelay_timeout"]
