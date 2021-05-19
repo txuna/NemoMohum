@@ -113,7 +113,9 @@ func update_progress_state(quest_code):
 		# 진행 상태 표시
 		
 	#진행중이 아니라면
-	if quest_manager.get_quest_state(quest_code) != PROGRESS:
+	var quest_state = quest_manager.get_quest_state(quest_code)
+	if  not quest_state in [PROGRESS, CAN_COMPLETE]:
+		ProgessContainer.visible = false
 		return
 		
 	var status = quest_manager.get_quest_progress(quest_code)
