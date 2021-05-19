@@ -78,7 +78,7 @@ func load_position():
 func _physics_process(delta):
 	if is_death:
 		return
-	get_input()
+	#get_input()
 	velocity.y += gravity * delta
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 

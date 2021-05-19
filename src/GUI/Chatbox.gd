@@ -25,14 +25,14 @@ func _ready() -> void:
 func make_dynamic_font(font_size)->DynamicFont:
 	# font 설정
 	var dynamic_font = DynamicFont.new()
-	dynamic_font.font_data = load("res://assets/fonts/NanumBarunpenR.ttf")
+	dynamic_font.font_data = load("res://assets/fonts/NanumSquareRoundB.ttf")
 	dynamic_font.size = font_size
 	return dynamic_font
 
-func make_label(quest, count:int)->Button:
+func make_label(quest, count:int, color:Color)->Button:
 	var label = Button.new()
 	label.set("custom_fonts/font", make_dynamic_font(24))
-	label.set("custom_colors/font_color",Color(0,0,0))
+	label.set("custom_colors/font_color",color)
 	label.text = str(count) + ") " + quest["quest_name"]
 	return label
 
@@ -55,7 +55,7 @@ func load_possible_quest(npc_code:int, base_msg:String, name:String):
 			continue
 				
 		## 최종적으로 불러와지는 퀘스트
-		var label = make_label(quest, count)
+		var label = make_label(quest, count, Color(255, 255, 255))
 		QuestContainer.add_child(label)
 		label.connect("gui_input", self, "_on_quest_click", [quest_code])
 		count+=1
