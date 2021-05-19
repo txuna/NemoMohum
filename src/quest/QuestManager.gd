@@ -66,6 +66,9 @@ func _on_notification(type:int, code:int, numberof:int=0):
 func get_npc_quest(npc_code):
 	return quest_list.NpcQuest[npc_code]
 
+func get_all_quest():
+	return quest_list.get_all_quest()
+
 # 퀘스트 코드를 기반으로 해당 퀘스트 객체 반환
 func get_quest(quest_code):
 	return quest_list.QuestList[quest_code]
@@ -124,9 +127,22 @@ func get_quest_state(quest_code):
 func get_quest_in_progress():
 	return quest_in_progress
 
+func get_quest_before_summary(quest_code):
+	return get_quest(quest_code)["quest_before_summary_msg"]
+
 func get_quest_summary(quest_code):
 	return get_quest(quest_code)["quest_summary_msg"]
 
+
+func get_quest_condition(quest_code):
+	return get_quest(quest_code)["condition"]
+
+func get_quest_npc_name(quest_code):
+	var npc_code = get_quest(quest_code)["npc_code"]
+	var npcs = Npcs.new() 
+	var npc_name = npcs.NpcList[npc_code]["name"]
+	return npc_name
+	
 
 # 현재 진행상태를 확인
 func get_quest_progress(quest_code)->Array:
