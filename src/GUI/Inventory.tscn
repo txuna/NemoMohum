@@ -78,10 +78,10 @@ __meta__ = {
 }
 
 [node name="UseButton" type="Button" parent="Sprite"]
-margin_left = -125.613
-margin_top = -70.9872
-margin_right = 125.387
-margin_bottom = 16.0128
+margin_left = -123.515
+margin_top = -86.7184
+margin_right = 127.485
+margin_bottom = 0.28157
 custom_fonts/font = SubResource( 2 )
 disabled = true
 text = "USE"
@@ -145,10 +145,10 @@ __meta__ = {
 }
 
 [node name="ItemDescription" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 140.0
+margin_left = 145.0
 margin_top = 46.0
-margin_right = 417.0
-margin_bottom = 85.0
+margin_right = 422.0
+margin_bottom = 132.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 autowrap = true
@@ -157,10 +157,10 @@ __meta__ = {
 }
 
 [node name="Effect" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 10.0
-margin_top = 120.233
-margin_right = 66.0
-margin_bottom = 159.233
+margin_left = 15.191
+margin_top = 157.312
+margin_right = 71.191
+margin_bottom = 199.312
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "효과"
@@ -181,10 +181,10 @@ __meta__ = {
 }
 
 [node name="enchant" type="Label" parent="Sprite/DetailContainer"]
-margin_left = 10.0
-margin_top = 206.947
-margin_right = 76.0
-margin_bottom = 245.947
+margin_left = 11.4832
+margin_top = 223.262
+margin_right = 86.4832
+margin_bottom = 265.262
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "인챈트"
@@ -228,10 +228,10 @@ __meta__ = {
 }
 
 [node name="CoinLabel" type="Label" parent="Sprite"]
-margin_left = -122.109
-margin_top = 88.2289
-margin_right = -54.1094
-margin_bottom = 127.229
+margin_left = -126.781
+margin_top = 89.1632
+margin_right = -58.7806
+margin_bottom = 128.163
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Coin"

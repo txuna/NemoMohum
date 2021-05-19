@@ -41,7 +41,7 @@ var QuestList = {
 		"quest_reward" : {
 			"state" : {
 				"coin" : 300, 
-				"current_exp" : 30, 
+				"current_exp" : 16, 
 			},
 			"item" : {
 				"consumption" : [
@@ -113,7 +113,7 @@ var QuestList = {
 		"quest_reward" : {
 			"state" : {
 				"coin" : 300, 
-				"current_exp" : 50, 
+				"current_exp" : 20, 
 			},
 			"item" : {
 				"consumption" : [
@@ -142,10 +142,151 @@ var QuestList = {
 		},
 		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
 	},
+	0xD002 : {
+		"quest_code" : 0xD002, 
+		"quest_name" : "게임세계 이해하기2",
+		"quest_supplies" : { ##퀘스트 시작시 받는 물품
+			"item" : {
+				"equipment" : [
+				],
+				"etc" : [
+					
+				]
+			},
+			"state" : {
+				"coin" : 0,
+				"current_exp" : 0,
+			}
+		},
+		"quest_goal" : {
+			"item" : [
+			],
+			"enemy" : [
+				{
+					"code" : 0xF006,
+					"numberof" : 10,
+					"player_count" : 0,
+				}
+			],
+			# 특장 NPC에게 대화걸기
+			"talk_to" : [
+				# 성공여부는 false and true
+			]
+		},
+		"quest_reward" : {
+			"state" : {
+				"coin" : 300, 
+				"current_exp" : 30, 
+			},
+			"item" : {
+				"consumption" : [
+					{
+						"code" : 0xB002, 
+						"numberof" : 2,
+						"type" : "consumption",
+					},
+					{
+						"code" : 0xB003,
+						"numberof" : 2,
+						"type" : "consumption",
+					}
+				]
+			}
+		},
+		"quest_not_started_msg" : [
+			"반갑네!", ".....", "게임세계 이해하는 것이 힘들었다고?", "그럼 이제 쉬운 과제를 주마!", "U를 눌러 스탯창을 누르고 원하는 스탯을 찍어보게!",
+			"그럼 강해지고 몬스터를 잡기 쉬울걸세", "아! 한번 찍은 스탯은 되돌리기 어렵다네", "찍었다면 기사단의 창병10명만 잡아보게!"
+		],
+		"quest_progress_msg" : ["강하지 않구나! 아님 귀찮은가" ,"나는 자네에게 진심으로 실망했다네..."],
+		"quest_complete_msg" : ["역시 내 눈은 틀리지 않았다네", "자네 실력은 역시 믿음직하구만, 자 여기 보상일세", "그리고 다시 나에게 말을 걸어줘!"],
+		"quest_summary_msg" : "현지인으로 보이는 할아버지는 맵끝의 오른쪽에 존재하는 포탈을 타고 가면 기사단의 창병이 존재한다고 한다고 들었던것 같은데... 씨 어케 잡지(U를 눌러 스탯창을 오픈하고 원하는 스탯을 찍으세요!)",
+		"npc_code" : 0x9001,
+		"condition" : {
+			"level" : 2, 
+			"quest_list" : [0xD001],
+		},
+		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
+	},
+	0xD003 : {
+		"quest_code" : 0xD003, 
+		"quest_name" : "게임세계 이해하기3",
+		"quest_supplies" : { ##퀘스트 시작시 받는 물품
+			"item" : {
+				"equipment" : [
+				],
+				"etc" : [
+					
+				]
+			},
+			"state" : {
+				"coin" : 0,
+				"current_exp" : 0,
+			}
+		},
+		"quest_goal" : {
+			"item" : [
+				{
+					"code" : 0xC006,
+					"numberof" : 10,
+					"player_count" : 0,
+				}
+			],
+			"enemy" : [
+
+			],
+			# 특장 NPC에게 대화걸기
+			"talk_to" : [
+				# 성공여부는 false and true
+			]
+		},
+		"quest_reward" : {
+			"state" : {
+				"coin" : 300, 
+				"current_exp" : 50, 
+			},
+			"item" : {
+				"consumption" : [
+					{
+						"code" : 0xB002, 
+						"numberof" : 2,
+						"type" : "consumption",
+					},
+					{
+						"code" : 0xB003,
+						"numberof" : 2,
+						"type" : "consumption",
+					}
+				],
+				"equipment" : [
+					{
+						"code" : 0xA002,
+						"numberof" : 1, 
+						"type" : "equipment",
+					}
+				]
+			}
+		},
+		"quest_not_started_msg" : [
+			"오!...또 자네인가....", "자넨 지겹지도 않는가! 이 늙은이를 그만 괴롭히게", ".....",
+			"알았다네, 자네에게 마지막 스킬을 전수하지", "K를 눌러 스킬창에서 원하는 스킬을 찍어보게", 
+			"스킬 포인트는 3렙씩 오를떄마다 1포인트를 받을 거라네", "스킬을 찍고 자네가 이세계에 필요한 인재라는 것을 보여주게!",
+			"검병과 창병을 잡으면 신분증 조각이 나올걸세 10개를 모아오게!"
+		],
+		"quest_progress_msg" : ["자네는 역시 뭐든지 시원하게 말아먹는구만!"],
+		"quest_complete_msg" : ["역시 자네는 잘하는구만!", "이제 자네는 뭐든지 할 수 있다네!", "이제 다른 주민들의 퀘스트를 깨면서 강해지고 이 섬을 탈출하게!"
+								,"힌트를 주자면 레벨 4를 달성하면 Kale로 부터 퀘스트를 받을 수 있다네!"],
+		"quest_summary_msg" : "나를 위해 신분증 조각을 만들었다고 한다. 하지만 기사단들이 신분증을 훔쳐갔다고 하는데...(K를 눌러 원하는 스킬을 찍어보세요!)",
+		"npc_code" : 0x9001,
+		"condition" : {
+			"level" : 2, 
+			"quest_list" : [0xD002],
+		},
+		"quest_state" : NOT_START, #or PROGRSS or COMPLETE
+	},
 }
 
 var NpcQuest = {
-	0x9001 : [0xD000, 0xD001], #stan
+	0x9001 : [0xD000, 0xD001, 0xD002, 0xD003], #stan
 	0x9002 : [], #kale
 	0x9003 : [], #alex
 	0x9004 : [], #juho

@@ -62,7 +62,7 @@ func make_slot(index:int, code:int)->Panel:
 	var label = Label.new()
 	if current_inven_type != "equipment":
 		label.text = str(player_inventory[current_inven_type][code]["numberof"])
-	label.set("custom_fonts/font", make_dynamic_font(24))
+	label.set("custom_fonts/font", make_dynamic_font(20))
 	label.rect_position = Vector2(30, 80)
 	label.rect_size = Vector2(35, 15)
 	label.set("custom_colors/font_color",Color(0,0,0))

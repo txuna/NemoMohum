@@ -46,12 +46,14 @@ var state = {
 	"skill_point" : 10,
 	"buff_code_list" : [], #현재 적용받고 있는 버프 스킬 코드
 }
-
-
-var enchant_table = {
+"""
 	0xA001 : {
 		"state_option" : [0x1000, 0x1001],
 	}
+"""
+
+var enchant_table = {
+
 }
 """
 		0xA001:{
@@ -62,7 +64,11 @@ var enchant_table = {
 """
 var inventory = {
 	"equipment" : {
-
+		0xA003 : {
+			"code" : 0xA003,
+			"numberof" : 1,
+			"is_enchant" : false,
+		}
 	},
 	"consumption" : {
 

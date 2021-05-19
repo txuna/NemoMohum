@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/map/Agora/Agora.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/map/Agora/Agora_stage1.gd" type="Script" id=2]
 [ext_resource path="res://src/map/Portal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/Npc/Stan.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Npc/Mia.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Npc/Alex.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Npc/Kale.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/Npc/American.tscn" type="PackedScene" id=8]
 
 [node name="Agora_stage1" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
@@ -23,3 +26,12 @@ position = Vector2( 267.672, 790.497 )
 
 [node name="Mia" parent="Npcs" index="1" instance=ExtResource( 5 )]
 position = Vector2( 633.068, 715.008 )
+
+[node name="Alex" parent="Npcs" index="2" instance=ExtResource( 6 )]
+position = Vector2( 677.235, 268.197 )
+
+[node name="Kale" parent="Npcs" index="3" instance=ExtResource( 7 )]
+position = Vector2( 424.854, 264.197 )
+
+[node name="American" parent="Npcs" index="4" instance=ExtResource( 8 )]
+position = Vector2( 2752.39, 334.122 )

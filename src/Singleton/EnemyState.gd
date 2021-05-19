@@ -21,6 +21,11 @@ var EnemyList = {
 					"numberof" : 1,
 					"percentage" : 30, 
 				},
+				{
+					"code" : 0xC006,
+					"numberof" : 1,
+					"percentage" : 30, 
+				},
 			]
 		}
 	},
@@ -43,6 +48,11 @@ var EnemyList = {
 					"code" : 0xB000,
 					"numberof" : 1,
 					"percentage" : 40, 
+				},
+				{
+					"code" : 0xC006,
+					"numberof" : 1,
+					"percentage" : 30, 
 				},
 			]
 		}
