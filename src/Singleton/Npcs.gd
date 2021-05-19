@@ -71,5 +71,8 @@ var ShopKeepers = {
 		{
 			"code" : 0xB001
 		},
+		{
+			"code" : 0xA000
+		}
 	],
 }

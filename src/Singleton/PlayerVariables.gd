@@ -64,11 +64,7 @@ var enchant_table = {
 """
 var inventory = {
 	"equipment" : {
-		0xA003 : {
-			"code" : 0xA003,
-			"numberof" : 1,
-			"is_enchant" : false,
-		}
+
 	},
 	"consumption" : {
 
