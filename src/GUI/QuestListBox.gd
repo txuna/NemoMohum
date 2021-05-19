@@ -67,7 +67,10 @@ func make_hbox(quest_code:int)->HBoxContainer:
 	elif state == WAS_COMPLETE:
 		state_text = "[완료]"
 	elif state == NOT_START: # 시작 가능인지, 조건미달인지 체크
-		state_text = "[시작 가능]"
+		if quest_manager.check_can_start_quest(quest_code):
+			state_text = "[시작 가능]"
+		else:
+			state_text = "[시작 불가능]"
 	
 	var state_label = make_label(state_text)
 	var name_label = make_label(name_text)

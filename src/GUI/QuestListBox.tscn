@@ -122,6 +122,7 @@ margin_right = 675.5
 margin_bottom = 717.684
 
 [node name="Progress" type="Label" parent="TextureRect/ProgressContainer"]
+visible = false
 margin_right = 112.0
 margin_bottom = 39.0
 custom_fonts/font = SubResource( 6 )
@@ -132,6 +133,7 @@ __meta__ = {
 }
 
 [node name="Container" type="VBoxContainer" parent="TextureRect/ProgressContainer"]
+visible = false
 margin_left = 10.0
 margin_top = 46.0
 margin_right = 415.0

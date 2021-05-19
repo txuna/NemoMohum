@@ -168,3 +168,29 @@ func check_item_in_progress_quest(item_code:int):
 			if quest_goal["code"] == item_code:
 				return true #해당 아이템 코드가 플레이어가 진행중인 퀘스트에 포함되는 퀘스트 아이템이라면! 
 	return false
+	
+#시작가능인지 조건미달인치 체크
+func check_can_start_quest(quest_code):
+	var player_level = get_node("/root/PlayerVariables").get_player_level()
+	var quest_condition = get_quest_condition(quest_code)
+
+	# 플레이어 레벨이 미달이라면
+	if player_level < quest_condition["level"]:
+		return false
+		
+	# 플레이어가 사전 퀘스트를 달성하지 못했다면
+	for pre_quest_code in quest_condition["quest_list"]:
+		if get_quest_state(pre_quest_code) != WAS_COMPLETE:
+			return false
+			
+	return true
+	 
+	
+	
+	
+	
+	
+	
+
+	
+	

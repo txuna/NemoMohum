@@ -106,6 +106,9 @@ var player_node_path = null
 func get_player_attack():
 	return [state["min_attack"], state["max_attack"]]
 
+func get_player_level():
+	return state["level"]
+
 func get_msg_log_node():
 	var msg_log_instance = get_node_or_null("/root/Main/MsgLog")
 	return msg_log_instance
