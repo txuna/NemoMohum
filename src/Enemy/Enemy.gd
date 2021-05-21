@@ -505,8 +505,9 @@ func _on_AttackArea_body_entered(body: Node) -> void:
 func _on_AttackArea_body_exited(body: Node) -> void: 
 	if body.name == "Player":
 		player_in = false
-		
 
-
-
-
+func _on_CollisionArea_body_entered(body: Node) -> void:
+	if is_enemy_death:
+		return 
+	if check_attack():
+		emit_signal("EnemyAttack", enemy_info["state"]["attack"])
